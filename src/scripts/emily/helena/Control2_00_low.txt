@@ -1,0 +1,328 @@
+H	CenSus version 0.963
+H	Created by 
+H	John Venable jvenable@scripps.edu
+H	Robin, Sung Kyu Park rpark@scripps.edu
+H	Michael J. MacCoss
+H	The Scripps Research Institute, La Jolla, CA
+H	created date	Thu Nov 30 18:22:52 PST 2006
+H	Determination Factor : 0.0
+H	Outlier pValue : 0.1
+H	Filter Fragment Ions on MS/MS pValue : true
+H	Correction Factor Value : 0.0
+H	Unique Peptide only : true
+H	PLINE	LOCUS	AVERAGE_RATIO	STANDARD_DEVIATION	WEIGHTED_AVERAGE	PEPTIDE_NUM	SPEC_COUNT	DESCRIPTION
+H	SLINE	UNIQUE	SEQUENCE	RATIO	REGRESSION_FACTOR	DETERMINANT_FACTOR	SAM_INT	REF_INT	FILE_NAME
+H	Total peptides	4204
+H	Quantified peptides	3611
+H	Quantification efficiency	85.89 %
+H	Correction Factor (Ln)	0.0
+P	pfa3D7|chr8|MAL8P1.17|Pf	1.221	0.202	1.236	37	740	Annotation|Plasmodium_falciparum_Sanger|(protein coding) disulfide isomerase precursor, putative Location= chr8 complement(join(1209291..1209466, 1207860..1209135)) 
+&S	U	K.VEYDEKTPLEEFVTSESFPLFGEINTENYR.F	0.846	0.598	0.358	1.0881891E7	4773741.0	PARC_Control_200mM_rep2_03_itms.10442.10442.2	2.279531084740458
+P	pfa3D7|chr9|PFI0875w|Pf	0.722		0.722	1	2056	Annotation|Plasmodium_falciparum_Sanger|(protein coding) Heat shock protein Location= chr9 join(737975..738050, 738384..740266) 
+&S	U	R.IINEPTAAALAYGLDK.K	0.722	0.074	0.005	1.9522264E7	875508.0	PARC_Control_FT_rep1_02_itms.08142.08142.1	22.298213151678798
+P	pfa3D7|chr11|PF11_0164|Pf	1.075	0.126	1.094	10	360	Annotation|Plasmodium_falciparum_TIGR|(protein coding) peptidyl-prolyl cis-trans isomerase Location= chr11 complement(join(590382..590459, 590617..590628, 589706..590203)) 
+&S	U	K.TYFDITIDDKPLGR.I	1.081	0.504	0.254	5.87903774E8	1.64170138E8	PARC_Control_FT_8steps_15_itms.07356.07356.2	3.5810640178666353
+P	pfa3D7|chr3|PFC0295c|Pf	0.754	0.394	0.991	4	42	Annotation|Plasmodium_falciparum_Sanger|(protein coding) 40S ribosomal protein S12, putative Location= chr3 complement(join(309936..310016, 309367..309711)) 
+&S	U	K.AVFDNVTAIQK.V	0.790	0.635	0.403	1.27350533E8	4.1815321E8	PARC_Control_200mM_rep2_09_itms.06946.06946.1	0.30455471811396595
+P	pfa3D7|chr14|PF14_0517|Pf	1.169	0.172	1.180	28	282	Annotation|Plasmodium_falciparum_TIGR|(protein coding) peptidase, putative Location= chr14 2234118..2236412 
+&S	U	K.EITDTTEYLSFDDLTMYPYEK.K	1.237	0.404	0.164	5.6456076E7	1.680403E7	PARC_Control_200mM_rep1_12_itms.08744.08744.2	3.3596747922968477
+P	pfa3D7|chr13|PF13_0328|Pf	0.912	0.382	1.049	8	60	Annotation|Plasmodium_falciparum_Sanger|(protein coding) proliferating cell nuclear antigen Location= chr13 complement(2478805..2479629) 
+&S	U	R.NLSEFSDTVFIEIDSNCIK.F	0.225	0.367	0.135	7.2614162E7	1.98451973E8	PARC_Control_500mM_rep2_06_itms.15170.15170.2	0.36590294821609054
+P	pfa3D7|chr12|PFL2095w|Pf	1.257	0.067	1.250	3	6	Annotation|Plasmodium_falciparum_Sanger|(protein coding) Translation initiation factor SUI1, putative Location= chr12 join(1825946..1826045, 1826400..1826500, 1826725..1826871) 
+&S	U	R.NNVKEFLIR.E	1.247	0.494	0.244	1.68602779E8	5.8992562E7	PARC_Control_FT_rep2_10_itms.06647.06647.1	2.858034526454369
+P	pfa3D7|chr8|PF08_0131|Pf	0.782	0.605	1.206	5	87	Annotation|Plasmodium_falciparum_Sanger|(protein coding) 1-cys peroxidoxin Location= chr8 166536..167198 
+&S	U	K.IMDEKEKDIK.G	0.271	0.077	0.006	7.6961236E7	2.8254477E7	PARC_Control_FT_rep2_08_itms.04895.04895.1	2.7238598682962705
+&S	U	K.FYGNLDKWDIPMVCDESR.E	0.011	0.028	0.001	1.4811739E7	5.7160147E7	PARC_Control_200mM_rep1_02_itms.07284.07284.2	0.2591270277873848
+P	pfa3D7|chr13|MAL13P1.337|Pf	1.064	0.612	0.847	5	31	Annotation|Plasmodium_falciparum_Sanger|(protein coding) Skp1 family protein, putative Location= chr13 complement(join(2675926..2676066, 2676166..2676261, 2676416..2676558, 2676657..2676759, 2675749..2675784)) 
+&S	U	K.NTASMSTVIMNILEVMTAEEDTIPLPNIK.T	2.089	0.175	0.031	5.8405067E7	1.4504217E7	PARC_Control_500mM_rep3_10_itms.10833.10833.2	4.026764560954928
+P	pfa3D7|chr10|PF10_0203|Pf	0.901	0.346	0.982	6	55	Annotation|Plasmodium_falciparum_TIGR|(protein coding) ADP-ribosylation factor Location= chr10 complement(join(845293..845443, 845592..845679, 845810..845880, 846044..846191, 845085..845172)) 
+&S	U	R.MINEEELKDAIILVFANK.Q	0.216	0.673	0.453	3.7591778E7	8.1701379E7	PARC_Control_500mM_rep3_03_itms.09672.09672.2	0.4601119156140559
+P	pfa3D7|chr8|MAL8P1.81|Pf	0.686	0.453	0.994	2	6	Annotation|Plasmodium_falciparum_Sanger|(protein coding) hypothetical protein, conserved Location= chr8 join(749776..750093, 750250..750375, 750520..750562, 750676..750746) 
+&S	U	K.ILACGEYGMGALPHVENVVFEIMK.Y	0.365	0.298	0.089	4.73784311E8	6.1708233E7	PARC_Control_200mM_rep1_11_itms.08922.08922.2	7.677813607140558
+P	pfa3D7|chr11|PF11_0061|Pf	1.392	0.285	1.295	2	2	Annotation|Plasmodium_falciparum_TIGR|(protein coding) histone H4, putative Location= chr11 complement(221819..222130) 
+&S	U	K.TVTAMDIVYSLK.R	1.593	0.560	0.314	1.2509284E7	2949211.0	PARC_Control_FT_8steps_08_itms.07906.07906.2	4.241569694403012
+P	pfa3D7|chr11|PF11_0332|Pf	0.990	0.416	1.113	6	20	Annotation|Plasmodium_falciparum_TIGR|(protein coding) hypothetical protein Location= chr11 1253071..1253892 
+&S	U	K.ELCVPVTIK.L	0.188	0.545	0.297	4.4918101E7	2.11933646E8	PARC_Control_500mM_rep2_02_itms.07089.07089.1	0.21194417143184524
+P	pfa3D7|chr12|PFL0280c|Pf	0.913	0.295	0.882	9	27	Annotation|Plasmodium_falciparum_Sanger|(protein coding) hypothetical protein Location= chr12 complement(join(249572..249904, 250119..250277, 250381..250448, 250576..250700, 250877..250991, 251159..251224, 251390..251396, 249333..249461)) 
+&S	U	R.LGDINLLNHFFFEALKEYEK.C	1.487	0.425	0.181	1.320795581E9	2.91535718E8	PARC_Control_500mM_rep1_10_itms.09925.09925.2	4.5304760255825665
+P	pfa3D7|chr5|PFE0630c|Pf	0.915	0.278	0.985	4	15	Annotation|Plasmodium_falciparum_Sanger|(protein coding) orotate phosphoribosyltransferase, putative Location= chr5 complement(546732..547577) 
+&S	U	K.NVIVGNLDDDDKDILNLK.K	0.576	0.663	0.440	6879714.0	1.5271277E7	PARC_Control_200mM_rep2_11_itms.07640.07640.2	0.45050024303795944
+P	pfa3D7|chr5|PFE0040c|Pf	0.961	0.117	0.970	31	201	Annotation|Plasmodium_falciparum_Sanger|(protein coding) Mature parasite-infected erythrocyte surface antigen (MESA) or PfEMP2 Location= chr5 complement(join(47612..47761, 43327..47481)) 
+&S	U	K.LIGQEIITEEVK.E	0.848	0.429	0.184	4.4828671E7	1.7109984E7	PARC_Control_200mM_rep1_03_itms.07178.07178.1	2.6200299778187985
+P	pfa3D7|chr11|PF11_0272|Pf	1.233	0.262	1.332	6	80	Annotation|Plasmodium_falciparum_TIGR|(protein coding) ribosomal protein S18, putative Location= chr11 complement(join(1024292..1024495, 1023789..1024055)) 
+&S	U	K.NIHVIANQLDSYLREDLER.M	0.715	0.407	0.166	4.2168914E7	1.9036145E7	PARC_Control_FT_8steps_04_itms.08233.08233.2	2.215202395232858
+P	pfa3D7|chr9|PFI0645w|Pf	0.905	0.291	1.047	5	113	Annotation|Plasmodium_falciparum_Sanger|(protein coding) EF-1B Location= chr9 575670..576500 
+&S	U	K.IENIDLDNEEDKK.K	0.391	0.146	0.021	1.35555631E8	2.4103533E7	PARC_Control_500mM_rep1_08_itms.04954.04954.1	5.623890530902669
+P	pfa3D7|chr7|PF07_0033|Pf	1.084	0.173	1.079	28	468	Annotation|Plasmodium_falciparum_Sanger|(protein coding) Cg4 protein Location= chr7 451091..453712 
+&S	U	K.KEEIRDLIK.N	1.695	0.676	0.457	2.425983E7	8365408.0	PARC_Control_200mM_rep1_09_itms.05748.05748.1	2.900017548456692
+P	pfa3D7|chr5|PFE1285w|Pf	1.426	0.258	1.518	6	55	Annotation|Plasmodium_falciparum_Sanger|(protein coding) hypothetical protein Location= chr5 1071243..1072145 
+&S	U	K.SKDSGFPSIR.I	0.936	0.454	0.206	4.2705361E7	1.3418948E7	PARC_Control_500mM_rep3_03_itms.05919.05919.1	3.1824671352776686
+P	pfa3D7|chr7|MAL7P1.81|Pf	0.797	0.407	0.964	4	8	Annotation|Plasmodium_falciparum_Sanger|(protein coding) eukaryotic translation initiation factor 3 37.28 kDa subunit, putative Location= chr7 complement(join(788521..788566, 788785..788874, 787448..788295)) 
+&S	U	R.IYHFDNDYFIGKYD.-	0.225	0.319	0.102	2.8405496E7	9.8847817E7	PARC_Control_FT_8steps_02_itms.07671.07671.2	0.2873659415260531
+P	pfa3D7|chr5|PFE1195w|Pf	1.119	0.293	1.189	18	121	Annotation|Plasmodium_falciparum_Sanger|(protein coding) karyopherin beta Location= chr5 998748..1002119 
+&S	U	K.EKNENSIGNAEEENYWVLLPDNLK.N	0.153	0.695	0.483	9768445.0	4.9359975E7	PARC_Control_500mM_rep3_02_itms.07348.07348.2	0.19790214642531728
+P	pfa3D7|chr11|PF11_0224|Pf	1.465	0.129	1.477	20	511	Annotation|Plasmodium_falciparum_TIGR|(protein coding) circumsporozoite-related antigen Location= chr11 complement(join(815567..815886, 816201..816321, 815385..815432)) 
+&S	U	K.GSGEPLIDVHDLISDMIKK.E	1.201	0.670	0.448	1.709291147E9	7.68979465E8	PARC_Control_FT_8steps_10_itms.08967.08967.2	2.22280467138352
+P	pfa3D7|chr12|PFL2375c|Pf	0.957		0.957	1	1	Annotation|Plasmodium_falciparum_Sanger|(protein coding) cutA, putative Location= chr12 complement(join(2017611..2017643, 2017803..2017901, 2018005..2018097, 2018243..2018455, 2017350..2017391)) 
+&S	U	K.SNHPYEIPEVIAVPIEYGSKDYLDWVNNSVK.Q	0.957	0.617	0.381	6.9290008E7	3.3509051E7	PARC_Control_200mM_rep1_08_itms.08422.08422.3	2.0677997714706993
+P	pfa3D7|chr5|PFE0080c|Pf	1.015	0.375	1.161	7	58	Annotation|Plasmodium_falciparum_Sanger|(protein coding) rhoptry-associated protein 2, RAP2 Location= chr5 complement(84041..85237) 
+&S	U	K.SEYYGTPDDLITSFFSIIK.T	0.420	0.102	0.010	5.5129167E7	1.5113134E7	PARC_Control_FT_8steps_07_itms.10742.10742.2	3.6477653807608665
+P	pfa3D7|chr9|PFI1780w|Pf	0.863	0.282	1.018	8	33	Annotation|Plasmodium_falciparum_Sanger|(protein coding) hypothetical protein Location= chr9 join(1458380..1458484, 1458804..1459850) 
+&S	U	K.FIQSIVETYKIPDEYK.M	0.987	0.575	0.331	1.63678769E8	5.0772714E7	PARC_Control_500mM_rep3_08_itms.06508.06508.2	3.223754574159656
+&S	U	K.FIQSIVETYKIPDEYK.M	0.478	0.202	0.041	4.2803157E7	1.2941344E7	PARC_Control_500mM_rep3_10_itms.07153.07153.1	3.3074738605202056
+P	pfa3D7|chr8|PF08_0075|Pf	2.083	2.057	1.347	3	9	Annotation|Plasmodium_falciparum_Sanger|(protein coding) 60S ribosomal protein L13, putative Location= chr8 join(682078..682317, 682523..682930) 
+&S	U	K.IDKEFLAYK.T	4.446	0.605	0.366	4.48642872E8	3.5134888E7	PARC_Control_FT_rep3_08_itms.06793.06793.1	12.769156173203113
+P	pfa3D7|chr7|MAL7P1.13|Pf	0.546	0.425	0.730	2	8	Annotation|Plasmodium_falciparum_Sanger|(protein coding) hypothetical protein Location= chr7 join(199310..199315, 199757..199855, 199961..200050, 200239..200333, 200424..200517, 200632..200697, 200848..200984, 201101..201173, 201245..201331) 
+&S	U	R.LEREDTEETLVHLMEEALDKIGIPLA.-	0.246	0.619	0.384	1.973919E7	9.4863955E7	PARC_Control_500mM_rep3_02_itms.09835.09835.2	0.20807892734390002
+P	pfa3D7|chr9|PFI1170c|Pf	0.864	0.137	0.912	4	20	Annotation|Plasmodium_falciparum_Sanger|(protein coding) Thioredoxin reductase Location= chr9 complement(961923..963548) 
+&S	U	K.MDDKILVEFSDKTSELYDTVLYAIGR.K	0.797	0.701	0.492	1.1514582E7	5324775.0	PARC_Control_FT_rep2_05_itms.10917.10917.2	2.1624541882051354
+P	pfa3D7|chr7|MAL7P1.36|Pf	0.691	0.235	0.799	2	6	Annotation|Plasmodium_falciparum_Sanger|(protein coding) hypothetical protein Location= chr7 554716..555075 
+&S	U	K.YPNIQFK.-	0.524	0.595	0.354	4.6424471E7	9.9807812E7	PARC_Control_500mM_rep3_04_itms.06004.06004.1	0.4651386506699496
+P	pfa3D7|chr13|PF13_0014|Pf	1.382	1.703	1.558	4	8	Annotation|Plasmodium_falciparum_Sanger|(protein coding) 40S ribosomal protein S7 homologue, putative Location= chr13 complement(join(151419..151837, 150985..151150)) 
+&S	U	K.SNPSDLEKEIAQCLLDIELSSSSDIK.T	0.004	0.024	0.001	3.2893442E7	1.56917912E8	PARC_Control_FT_rep2_08_itms.10307.10307.2	0.20962197100863794
+P	pfa3D7|chr8|MAL8P1.103|Pf	0.672	0.332	0.811	7	38	Annotation|Plasmodium_falciparum_Sanger|(protein coding) hypothetical protein, conserved Location= chr8 join(577418..577492, 577548..578810, 579019..579137, 579301..579490) 
+&S	U	K.MFCQPCEIMIQYLK.S	0.216	0.623	0.388	8461519.0	1.9427669E7	PARC_Control_500mM_rep3_05_itms.07905.07905.1	0.4355395904675955
+&S	U	K.MFCQPCEIMIQYLK.S	0.188	0.612	0.374	1.795683E7	3.9792562E7	PARC_Control_500mM_rep3_04_itms.08153.08153.2	0.45126096681083266
+P	Reverse_pfa3D7|chr9|PFI1675w|Pf	1.146		1.146	1	1	Annotation|Plasmodium_falciparum_Sanger|(protein coding) hypothetical protein Location= chr9 join(1354570..1354653, 1354837..1355045, 1355211..1355484) 
+&S	U	K.DINNKKNMYKLILLIYKKNKLRLITK.G	1.146	0.096	0.009	2.2605224E7	881657.0	PARC_Control_200mM_rep1_05_itms.13023.13023.3	25.639476576491766
+P	pfa3D7|chr14|PF14_0439|Pf	0.988	0.164	1.073	7	71	Annotation|Plasmodium_falciparum_TIGR|(protein coding) leucine aminopeptidase, putative Location= chr14 complement(1893143..1894960) 
+&S	U	R.FKSTDKNVNMEYIK.H	0.864	0.258	0.067	1.6421074E7	7826832.0	PARC_Control_FT_8steps_04_itms.05786.05786.2	2.0980486102167517
+&S	U	K.GGCNVEEGLTIFLVNNPGKENGPVK.I	0.681	0.075	0.006	2.79317725E8	3.7720297E7	PARC_Control_FT_8steps_15_itms.07889.07889.2	7.404971519709933
+P	pfa3D7|chr13|PF13_0214|Pf	1.037	0.878	1.115	6	19	Annotation|Plasmodium_falciparum_Sanger|(protein coding) elongation factor 1-gamma, putative Location= chr13 join(1549043..1549120, 1549365..1550591) 
+&S	U	R.LPVLVTSHGSIFESNAVCK.Y	0.026	0.157	0.025	4.5059745E7	1.36870668E8	PARC_Control_500mM_rep1_11_itms.07092.07092.2	0.32921403583710135
+P	pfa3D7|chr12|PFL0960w|Pf	2.673	2.085	1.592	2	6	Annotation|Plasmodium_falciparum_Sanger|(protein coding) D-ribulose-5-phosphate 3-epimerase, putative Location= chr12 796493..797176 
+&S	U	K.EIRDNNLWCGISIKPK.T	4.147	0.555	0.308	1.09288193E8	5.3059274E7	PARC_Control_FT_rep2_06_itms.07087.07087.2	2.0597378132237543
+P	contaminant_INT-STD1	1.765	1.590	3.113	5	31	BSA 
+&S	U	K.LGEYGFQNALIVR.Y	2.033	0.160	0.026	2.1605938E7	2471603.0	PARC_Control_FT_8steps_04_itms.07854.07854.2	8.741670082128886
+&S	U	K.LGEYGFQNALIVR.Y	0.835	0.280	0.078	1.4960193E7	2734056.0	PARC_Control_200mM_rep1_06_itms.07786.07786.1	5.471794652340698
+&S	U	K.SHCIAEVEKDAIPENLPPLTADFAEDKDVCK.N	4.291	0.425	0.181	8.3600061E7	1.5146117E7	PARC_Control_200mM_rep2_02_itms.08829.08829.2	5.519570527548414
+P	pfa3D7|chr11|PF11_0048|Pf	0.811	0.279	1.089	3	18	Annotation|Plasmodium_falciparum_TIGR|(protein coding) casein kinase II beta chain, putative Location= chr11 160116..160853 
+&S	U	K.VHVYCPLCQEIYK.I	0.704	0.392	0.154	1.0469878E7	4426711.0	PARC_Control_500mM_rep3_11_itms.06210.06210.2	2.3651595959166976
+&S	U	K.VHVYCPLCQEIYK.I	0.602	0.387	0.150	1.7028896E7	8251120.0	PARC_Control_500mM_rep3_10_itms.06414.06414.1	2.063828425716751
+P	pfa3D7|chr9|PFI0755c|Pf	1.185	0.131	1.173	9	87	Annotation|Plasmodium_falciparum_Sanger|(protein coding) 6-phosphofructokinase, putative Location= chr9 complement(650576..654832) 
+&S	U	K.SKEVWDFLPPIIR.D	1.197	0.693	0.481	7180125.0	2869621.0	PARC_Control_500mM_rep3_06_itms.08121.08121.2	2.502116133106079
+P	pfa3D7|chr4|PFD0310w|Pf	0.015		0.015	1	5	Annotation|Plasmodium_falciparum_Sanger|(protein coding) sexual stage-specific protein precursor Location= chr4 335693..336166 
+&S	U	K.DSADKMPLETQLAIEEIK.S	0.015	0.029	0.001	5.0515883E7	1.21084773E8	PARC_Control_500mM_rep3_08_itms.06639.06639.2	0.41719434862383564
+P	pfa3D7|chr13|PF13_0282|Pf	0.576	0.771	1.120	2	4	Annotation|Plasmodium_falciparum_Sanger|(protein coding) proteasome subunit, putative Location= chr13 complement(join(2148176..2148706, 2147735..2147944)) 
+&S	U	K.YLTEKEIEELIK.L	0.030	0.103	0.011	1.2279094E7	1.27294169E8	PARC_Control_FT_rep3_02_itms.08393.08393.2	0.09646234463418352
+P	pfa3D7|chr13|PF13_0242|Pf	1.369	0.443	1.150	3	5	Annotation|Plasmodium_falciparum_Sanger|(protein coding) isocitrate dehydrogenase (NADP), mitochondrial precursor Location= chr13 complement(1824621..1826027) 
+&S	U	K.NVTEKDYIFTQDLINAINEK.L	1.855	0.391	0.153	5.9673147E7	1.5639425E7	PARC_Control_FT_rep2_08_itms.08926.08926.2	3.8155588840382557
+P	Reverse_pfa3D7|chr14|PF14_0669|Pf	0.009		0.009	1	1	Annotation|Plasmodium_falciparum_TIGR|(protein coding) hypothetical protein Location= chr14 complement(join(2878639..2878684, 2877963..2878366)) 
+&S	U	K.ENENDNEKQNIKNSVK.P	0.009	0.142	0.020	7918864.0	9.6410778E7	PARC_Control_FT_8steps_09_itms.05315.05315.2	0.08213670882315668
+P	pfa3D7|chr14|PF14_0075|Pf	1.001	0.578	1.313	6	39	Annotation|Plasmodium_falciparum_TIGR|(protein coding) plasmepsin, putative Location= chr14 283086..284435 
+&S	U	K.DLSIGSIDPVVVELKK.Q	0.021	0.076	0.006	1.1545404E7	6.0522794E7	PARC_Control_FT_rep3_02_itms.08409.08409.2	0.19076125269431546
+P	pfa3D7|chr1|PFA0335w|Pf	0.158		0.158	1	1	Annotation|Plasmodium_falciparum_Sanger|(protein coding) P. falciparum GTP binding protein RAB5 Location= chr1 join(287167..287266, 287485..287568, 287777..287846, 287995..288033, 288188..288300, 288430..288482, 288738..288831, 288928..288980, 289096..289134) 
+&S	U	R.ELAESFANSNNILFIETSAK.T	0.158	0.222	0.049	1.5813666E7	3.2951352E7	PARC_Control_FT_8steps_07_itms.07977.07977.2	0.47990947382067967
+P	pfa3D7|chr9|PFI0935w|Pf	0.944	0.035	0.968	2	2	Annotation|Plasmodium_falciparum_Sanger|(protein coding) DNAJ-like molecular chaperone protein, putative Location= chr9 join(786146..786236, 786792..786946, 787047..787164, 787296..787414, 787573..788202) 
+&S	U	K.IYHPDKNPDESANSSFIK.L	0.920	0.134	0.018	2.92155882E8	6.3117349E7	PARC_Control_FT_rep2_03_itms.06102.06102.2	4.628773017700728
+P	pfa3D7|pfal_chr2|PFB0915w|Pf	1.290	0.335	1.441	8	33	Annotation|Plasmodium_falciparum_TIGR|(protein coding) liver stage antigen 3 Location= pfal_chr2 join(796750..796947, 797106..801584) 
+&S	U	K.IDKEVDKEVSK.A	0.766	0.412	0.170	6.2639849E7	2.3212653E7	PARC_Control_FT_rep3_08_itms.04571.04571.2	2.6985217501851255
+P	pfa3D7|chr9|PFI1545c|Pf	0.453	0.617	0.991	3	15	Annotation|Plasmodium_falciparum_Sanger|(protein coding) proteasome precursor, putative Location= chr9 complement(1273072..1273920) 
+&S	U	K.NKYFYEDKFNDYNPLVENVAHITK.K	0.052	0.587	0.344	1.0060723E7	6.4835908E7	PARC_Control_200mM_rep1_06_itms.07975.07975.2	0.15517208458004475
+P	pfa3D7|chr9|PFI0355c|Pf	1.071	0.269	1.156	7	35	Annotation|Plasmodium_falciparum_Sanger|(protein coding) ATP-dependent heat shock protein, putative Location= chr9 complement(351948..354716) 
+&S	U	K.FTDDAIETIANAAHDMNFYVENIGVR.R	0.674	0.506	0.256	6.7287984E7	2.7155808E7	PARC_Control_FT_8steps_13_itms.09854.09854.2	2.4778487165618492
+P	pfa3D7|chr10|PF10_0351|Pf	0.411	0.440	0.717	2	2	Annotation|Plasmodium_falciparum_TIGR|(protein coding) hypothetical protein Location= chr10 1423980..1425680 
+&S	U	K.VVEEEGEKVLEEVIEEVVEEVAEEVAEK.V	0.100	0.140	0.020	1.0051325E7	2.340257E7	PARC_Control_500mM_rep3_08_itms.10643.10643.2	0.42949663220748835
+P	pfa3D7|chr14|PF14_0434|Pf	0.991	0.466	1.126	5	21	Annotation|Plasmodium_falciparum_TIGR|(protein coding) hypothetical protein Location= chr14 complement(join(1876008..1876360, 1876655..1876817, 1875364..1875903)) 
+&S	U	K.IIEVHDNIPSPIIKDYYNK.R	0.318	0.439	0.193	5.2527949E7	1.47802591E8	PARC_Control_500mM_rep2_03_itms.07498.07498.2	0.3553926128399197
+P	pfa3D7|chr6|PFF0785w|Pf	0.671	0.581	1.033	3	3	Annotation|Plasmodium_falciparum_Sanger|(protein coding) hypothetical protein, conserved Location= chr6 join(674114..675616, 675719..675748, 675864..675986, 676121..676173, 676306..676372) 
+&S	U	K.VEEIKNHMKENEELIKR.N	0.009	0.042	0.002	1.7873556E7	5.4220691E7	PARC_Control_FT_rep2_03_itms.05881.05881.2	0.3296445631797647
+P	pfa3D7|chr4|PFD1105w|Pf	1.163		1.163	1	1	Annotation|Plasmodium_falciparum_Sanger|(protein coding) hypothetical protein Location= chr4 1060105..1060758 
+&S	U	K.TNEEEEGKININNLKPIK.Q	1.163	0.436	0.190	1.63268939E8	6.42508E7	PARC_Control_FT_8steps_02_itms.06385.06385.2	2.5411191611621957
+P	pfa3D7|chr3|PFC0435w|Pf	1.094	0.063	1.119	7	17	Annotation|Plasmodium_falciparum_Sanger|(protein coding) hypothetical protein Location= chr3 444174..448058 
+&S	U	K.TSINTEEERIPHIK.N	0.993	0.569	0.324	3.2398764E7	1.5590533E7	PARC_Control_FT_rep2_09_itms.05733.05733.2	2.0781049628001815
+P	pfa3D7|chr13|PF13_0192|Pf	0.595	0.819	1.170	2	5	Annotation|Plasmodium_falciparum_Sanger|(protein coding) hypothetical protein Location= chr13 complement(join(1408108..1408127, 1405929..1407810)) 
+&S	U	K.NNQKHNQDLYNIKKNNDLPQYEESNK.T	0.016	0.163	0.027	1724157.0	2.9500917E7	PARC_Control_FT_rep2_12_itms.10119.10119.2	0.05844418327742151
+P	pfa3D7|pfal_chr2|PFB0335c|Pf	0.832	0.242	0.937	5	23	Annotation|Plasmodium_falciparum_TIGR|(protein coding) cysteine protease, putative Location= pfal_chr2 complement(join(301166..301300, 301403..301793, 298897..301052)) 
+&S	U	K.KVDTSGTLEEYELGNAEDIYNNLTR.L	0.415	0.328	0.107	1.01892302E8	3.7464038E7	PARC_Control_200mM_rep2_03_itms.09183.09183.2	2.7197362441283026
+P	pfa3D7|chr9|PFI1725w|Pf	28.652		28.652	1	1	Annotation|Plasmodium_falciparum_Sanger|(protein coding) hypothetical protein Location= chr9 join(1409188..1409283, 1409470..1409997) 
+&S	U	R.YKKIEMNSSSDLEKK.W	28.652	0.270	0.073	3601177.0	11864.0	PARC_Control_FT_8steps_03_itms.05107.05107.1	303.5381827376939
+P	pfa3D7|chr13|MAL13P1.228|Pf	1.145	0.626	1.361	2	2	Annotation|Plasmodium_falciparum_Sanger|(protein coding) hypothetical protein Location= chr13 join(1822749..1823354, 1823481..1823987) 
+&S	U	K.IEYMQVHPR.K	0.702	0.651	0.424	2.223892E7	4.5293593E7	PARC_Control_FT_rep2_04_itms.05988.05988.1	0.490994830107649
+P	Reverse_pfa3D7|chr9|PFI0010c|Pf	0.331		0.331	1	1	Annotation|Plasmodium_falciparum_Sanger|(protein coding) RIFIN Location= chr9 complement(join(31104..31157, 29797..30873)) 
+&S	U	K.AAGAALGKATGKAIAAKTAAAIAETK.W	0.331	0.101	0.010	1955325.0	168834.0	PARC_Control_500mM_rep1_04_itms.18230.18230.2	11.581346174348768
+P	pfa3D7|chr3|PFC0365w|Pf	0.345	0.404	0.397	3	6	Annotation|Plasmodium_falciparum_Sanger|(protein coding) conserved protein, putative Location= chr3 369307..370905 
+&S	U	R.KIDNVCSVEQWKDFK.N	0.067	0.366	0.134	1828841.0	1.0700435E7	PARC_Control_200mM_rep1_10_itms.07081.07081.2	0.17091277130322272
+P	pfa3D7|chr7|MAL7P1.38|Pf	0.614	0.429	0.803	3	15	Annotation|Plasmodium_falciparum_Sanger|(protein coding) regulator of chromosome condensation protein, putative Location= chr7 560625..562691 
+&S	U	K.TYSSGIKDLEHSPTLINFTFPSK.I	0.278	0.325	0.106	2.1676207E7	4.9695413E7	PARC_Control_500mM_rep3_12_itms.07271.07271.2	0.43618124272354875
+P	pfa3D7|chr13|PF13_0179|Pf	0.968	0.183	1.011	8	33	Annotation|Plasmodium_falciparum_Sanger|(protein coding) isoleucine--tRNA ligase, putative Location= chr13 complement(1350240..1354058) 
+&S	U	K.YWEDIDAFNLSNELSK.N	0.775	0.604	0.365	2.6943862E7	1.2769236E7	PARC_Control_200mM_rep2_03_itms.09134.09134.1	2.11006061756553
+P	pfa3D7|chr7|PF07_0098|Pf	0.117		0.117	1	1	Annotation|Plasmodium_falciparum_Sanger|(protein coding) dynactin 4, putative Location= chr7 complement(1040156..1040836) 
+&S	U	R.FNRSDYILTASGNK.V	0.117	0.490	0.240	6900221.0	3.6138873E7	PARC_Control_FT_8steps_11_itms.06258.06258.2	0.19093625304806822
+P	Reverse_pfa3D7|chr13|PF13_0021|Pf	94.715		94.715	1	3	Annotation|Plasmodium_falciparum_Sanger|(protein coding) small heat shock protein, putative Location= chr13 complement(236002..236637) 
+&S	U	K.KKDPIDKKPIDIK.L	94.715	0.439	0.193	1.1326733E8	184566.0	PARC_Control_FT_rep1_06_itms.07767.07767.1	613.6955343887823
+P	pfa3D7|chr14|PF14_0159|Pf	0.770	0.515	1.031	4	21	Annotation|Plasmodium_falciparum_TIGR|(protein coding) hypothetical protein, conserved Location= chr14 complement(join(645658..648453, 645499..645519)) 
+&S	U	K.TQIIDYDGNVIEDLKEWMIDNK.L	0.007	0.158	0.025	1.58423553E8	4.407502488E9	PARC_Control_200mM_rep2_03_itms.10182.10182.2	0.03594406433832511
+P	pfa3D7|pfal_chr2|PFB0260w|Pf	0.969	0.340	1.116	7	29	Annotation|Plasmodium_falciparum_TIGR|(protein coding) proteasome 26S regulatory subunit, putative Location= pfal_chr2 join(235237..235257, 235535..238219, 238482..238605, 238737..238816) 
+&S	U	K.IKKEELNEEEKK.K	0.675	0.656	0.430	1.1097882E7	4.368864E7	PARC_Control_FT_rep2_02_itms.04776.04776.1	0.2540221439715221
+P	pfa3D7|chr3|PFC0150w|Pf	0.841	0.306	0.993	4	4	Annotation|Plasmodium_falciparum_Sanger|(protein coding) hypothetical protein, conserved Location= chr3 join(166194..166222, 166465..169693, 169807..169907, 170093..170171, 170899..170976) 
+&S	U	R.EVIDKKPYIFK.I	0.386	0.104	0.011	6.9969421E7	1.5049372E7	PARC_Control_FT_rep3_04_itms.06503.06503.1	4.649324968510314
+P	pfa3D7|chr11|PF11_0383|Pf	0.104		0.104	1	1	Annotation|Plasmodium_falciparum_TIGR|(protein coding) hypothetical protein Location= chr11 complement(1463808..1465055) 
+&S	U	K.EEDIYRKFYGFDDAYFLNKLQLK.N	0.104	0.062	0.004	3.6308125E7	1.3114992E7	PARC_Control_500mM_rep1_03_itms.11634.11634.3	2.7684443116701862
+P	pfa3D7|chr8|MAL8P1.47|Pf	0.145		0.145	1	1	Annotation|Plasmodium_falciparum_Sanger|(protein coding) hypothetical protein Location= chr8 join(991623..992055, 992153..992287, 992435..992920, 993089..993264) 
+&S	U	K.NTTMKSEYSMENIKTSVKTENK.D	0.145	0.347	0.121	98797.0	550931.0	PARC_Control_FT_8steps_12_itms.16679.16679.2	0.17932735678333583
+P	pfa3D7|chr10|PF10_0297|Pf	2.047		2.047	1	1	Annotation|Plasmodium_falciparum_TIGR|(protein coding) hypothetical protein Location= chr10 complement(join(1242855..1242975, 1241765..1242480)) 
+&S	U	K.KEIDSLAYSLKKNIK.S	2.047	0.195	0.038	1.2836596E7	896002.0	PARC_Control_FT_rep1_06_itms.08979.08979.2	14.32652605686148
+P	pfa3D7|chr8|PF08_0132|Pf	1.537	1.766	1.965	4	9	Annotation|Plasmodium_falciparum_Sanger|(protein coding) glutamate dehydrogenase, putative Location= chr8 147210..151403 
+&S	U	K.ITHYCELEFESLWK.E	0.008	0.020	0.000	1.3908043E7	4.8123711E7	PARC_Control_FT_8steps_05_itms.08090.08090.1	0.28900603696169647
+P	pfa3D7|chr13|PF13_0350|Pf	0.302		0.302	1	1	Annotation|Plasmodium_falciparum_Sanger|(protein coding) signal recognition particle receptor alpha subunit, putative Location= chr13 complement(2659757..2661487) 
+&S	U	K.NKDVFDYDLPIDFEEHFLQIIENLDEHK.N	0.302	0.128	0.016	7.877005E8	7.5383169E7	PARC_Control_500mM_rep3_08_itms.09381.09381.3	10.449288753037166
+P	pfa3D7|chr11|PF11_0053|Pf	0.832	0.427	1.066	5	10	Annotation|Plasmodium_falciparum_TIGR|(protein coding) PfSNF2L Location= chr11 complement(join(182589..182708, 182841..183080, 183179..183262, 183430..187224, 182384..182425)) 
+&S	U	R.NIGNDTHVSYDDKRK.S	0.113	0.260	0.068	3253117.0	7388025.0	PARC_Control_500mM_rep3_09_itms.05016.05016.2	0.44032295505226365
+&S	U	K.KLNVSSNDITK.E	0.865	0.595	0.355	5.2377174E7	2.1245428E7	PARC_Control_500mM_rep1_09_itms.05549.05549.1	2.465338613088896
+P	pfa3D7|chr8|MAL8P1.146|Pf	0.776	0.248	0.880	3	3	Annotation|Plasmodium_falciparum_Sanger|(protein coding) hypothetical protein Location= chr8 complement(join(205832..207781, 205361..205597)) 
+&S	U	K.NENFQNFVLEEIATIK.N	0.568	0.438	0.192	1.1316142E7	4988402.0	PARC_Control_FT_8steps_07_itms.09266.09266.2	2.2684903903093616
+P	Reverse_pfa3D7|chr8|PF08_0014|Pf	70.721		70.721	1	4	Annotation|Plasmodium_falciparum_Sanger|(protein coding) plastid 50S ribosomal protein, putative Location= chr8 1187298..1188197 
+&S	U	K.VEEIVEPRKSLKK.T	70.721	0.490	0.240	8353274.0	13886.0	PARC_Control_500mM_rep3_06_itms.08308.08308.2	601.5608526573527
+P	pfa3D7|chr8|PF08_0081|Pf	0.779	0.513	1.034	4	11	Annotation|Plasmodium_falciparum_Sanger|(protein coding) hypothetical protein Location= chr8 complement(join(663058..663093, 661275..662972)) 
+&S	U	K.KSSLPFLPIEPK.K	0.011	0.020	0.000	2.2764024E7	6.6155515E7	PARC_Control_500mM_rep1_06_itms.07086.07086.1	0.3440986590460372
+P	pfa3D7|chr13|PF13_0133|Pf	0.370	0.342	0.601	2	4	Annotation|Plasmodium_falciparum_Sanger|(protein coding) aspartyl (acid) protease, putative Location= chr13 975604..977376 
+&S	U	K.KIENVGKK.I	0.128	0.238	0.056	4536530.0	1.6088525E7	PARC_Control_FT_rep3_05_itms.04561.04561.1	0.28197302114395195
+P	pfa3D7|pfal_chr2|PFB0640c|Pf	0.977	0.254	1.099	4	13	Annotation|Plasmodium_falciparum_TIGR|(protein coding) hypothetical protein, conserved Location= pfal_chr2 complement(join(569171..569259, 569376..573315, 568695..569048)) 
+&S	U	K.TISNLLNIYTSQESVK.K	0.837	0.589	0.347	3.9771052E7	1.3425209E7	PARC_Control_FT_8steps_11_itms.08180.08180.2	2.9624158551274697
+P	pfa3D7|chr5|PFE0885w|Pf	0.612	0.854	1.216	2	5	Annotation|Plasmodium_falciparum_Sanger|(protein coding) eukaryotic translation initiation factor 3 subunit, putative Location= chr5 743177..745327 
+&S	U	K.YSDKEALITLEVDFPK.I	0.008	0.007	0.000	1.74236785E8	7.1218514E7	PARC_Control_500mM_rep2_03_itms.10104.10104.1	2.446509695498561
+P	pfa3D7|chr10|PF10_0361|Pf	1.100	0.526	1.328	4	7	Annotation|Plasmodium_falciparum_TIGR|(protein coding) hypothetical protein Location= chr10 complement(join(1452801..1452995, 1453165..1458005, 1452598..1452607)) 
+&S	U	K.KIDQEELQNNESALIK.G	0.359	0.026	0.001	1.48344104E8	1.0958564E7	PARC_Control_FT_8steps_10_itms.05656.05656.2	13.536819605196447
+P	pfa3D7|chr6|PFF1345w|Pf	1.234	0.411	1.077	5	10	Annotation|Plasmodium_falciparum_Sanger|(protein coding) transportin Location= chr6 1108198..1111641 
+&S	U	K.KKDLIECSFDLLSR.I	1.959	0.455	0.207	5.5435887E7	2.5726019E7	PARC_Control_FT_8steps_14_itms.08078.08078.2	2.1548568008132154
+P	pfa3D7|chr9|PFI0730w|Pf	0.481	0.596	0.759	2	2	Annotation|Plasmodium_falciparum_Sanger|(protein coding) hypothetical protein Location= chr9 636612..638741 
+&S	U	R.SFRDSIQDKLNLLNNK.Y	0.060	0.471	0.222	3656168.0	5.2813239E7	PARC_Control_500mM_rep3_07_itms.08229.08229.2	0.06922824786413877
+P	pfa3D7|chr7|PF07_0071|Pf	0.078		0.078	1	1	Annotation|Plasmodium_falciparum_Sanger|(protein coding) queuine tRNA-ribosyltransferase; putative Location= chr7 807255..809510 
+&S	U	K.MMKSDKKHEQGSENLNMKSKNMIEELK.K	0.078	0.170	0.029	1.2465235E7	4.9000093E7	PARC_Control_200mM_rep2_09_itms.11918.11918.3	0.2543920681946461
+P	pfa3D7|chr9|PFI1340w|Pf	1.349		1.349	1	1	Annotation|Plasmodium_falciparum_Sanger|(protein coding) fumarate hydratase, putative Location= chr9 1113948..1115993 
+&S	U	K.DMGMEAVHLIDVVDFPAFIVIDNK.G	1.349	0.133	0.018	3.91625721E8	9.3810886E7	PARC_Control_FT_8steps_02_itms.10559.10559.2	4.174629807888181
+P	Reverse_pfa3D7|chr14|PF14_0227|Pf	5.219		5.219	1	1	Annotation|Plasmodium_falciparum_TIGR|(protein coding) calcium-dependent protein kinase, putative Location= chr14 join(955810..955910, 956196..956514, 956617..956673, 956800..956871, 957012..957076, 957214..957346, 957481..957543, 957761..957824, 957974..958011) 
+&S	U	K.KHKKKKKIIK.V	5.219	0.353	0.125	3.7520423E7	807373.0	PARC_Control_FT_rep2_04_itms.15842.15842.1	46.472229068844264
+P	pfa3D7|chr11|PF11_0091|Pf	0.894	0.534	1.201	3	16	Annotation|Plasmodium_falciparum_TIGR|(protein coding) hypothetical protein Location= chr11 complement(join(332578..335601, 329867..332329)) 
+&S	U	K.MGDGVINYK.K	0.277	0.085	0.007	6.4902588E7	2.0065675E7	PARC_Control_200mM_rep2_08_itms.06127.06127.1	3.234508084078906
+P	pfa3D7|chr12|PFL1925w|Pf	0.537	0.562	0.935	2	2	Annotation|Plasmodium_falciparum_Sanger|(protein coding) cell division protein FtsH, putative Location= chr12 1655475..1658117 
+&S	U	R.TAEEIVFGK.S	0.139	0.051	0.003	8.3780639E7	4.1502458E7	PARC_Control_FT_rep3_08_itms.04883.04883.1	2.0186910134334695
+P	pfa3D7|chr10|PF10_0213|Pf	1.247	0.290	1.182	6	28	Annotation|Plasmodium_falciparum_TIGR|(protein coding) 10b antigen, putative Location= chr10 complement(905471..912343) 
+&S	U	K.NKDFEVNHEIHK.F	1.608	0.518	0.268	1.1662689E7	3085197.0	PARC_Control_FT_rep2_04_itms.05013.05013.1	3.7802088489000862
+P	pfa3D7|chr9|PFI0975c|Pf	0.941	0.447	1.153	6	9	Annotation|Plasmodium_falciparum_Sanger|(protein coding) hypothetical protein Location= chr9 complement(809649..819794) 
+&S	U	K.YIINNISKPLDLDQKK.W	0.107	0.221	0.049	1.0237989E7	3.3522221E7	PARC_Control_FT_8steps_06_itms.06879.06879.2	0.30540903002817144
+P	pfa3D7|chr7|PF07_0101|Pf	1.144	0.975	1.505	3	10	Annotation|Plasmodium_falciparum_Sanger|(protein coding) hypothetical protein Location= chr7 join(1048610..1054798, 1055003..1055166, 1055295..1055365, 1055463..1055611) 
+&S	U	K.LSIDLLDEELDNLK.K	0.267	0.441	0.195	1.6583226E7	5.5639268E7	PARC_Control_200mM_rep1_03_itms.09082.09082.1	0.29804896067288306
+P	Reverse_pfa3D7|pfal_chr2|PFB0920w|Pf	1.345		1.345	1	2	Annotation|Plasmodium_falciparum_TIGR|(protein coding) hypothetical protein Location= pfal_chr2 join(804518..804823, 804941..807739) 
+&S	U	R.KLRIKKRVAK.D	1.345	0.289	0.084	8943396.0	334570.0	PARC_Control_FT_8steps_04_itms.05738.05738.2	26.731015930896376
+P	pfa3D7|chr14|PF14_0644|Pf	0.533	0.892	1.547	3	10	Annotation|Plasmodium_falciparum_TIGR|(protein coding) hypothetical protein Location= chr14 complement(join(2759601..2764086, 2757601..2759429)) 
+&S	U	K.FNIASIDEIVDNMIVDK.A	0.019	0.040	0.002	1.761629E7	3.6540177E7	PARC_Control_500mM_rep3_02_itms.08787.08787.1	0.4821074074162257
+&S	U	K.FNIASIDEIVDNMIVDK.A	0.016	0.240	0.058	1.0706886E7	5.9599516E7	PARC_Control_500mM_rep1_06_itms.09515.09515.2	0.1796471971349566
+P	pfa3D7|chr3|PFC0320w|Pf	0.036		0.036	1	1	Annotation|Plasmodium_falciparum_Sanger|(protein coding) hypothetical protein Location= chr3 join(322597..322705, 322804..322847, 322971..325058) 
+&S	U	K.YNTHQYNNYIHNKNDRLK.N	0.036	0.063	0.004	2.1374135E7	4.7987652E7	PARC_Control_FT_8steps_08_itms.08680.08680.2	0.44540906064751823
+P	Reverse_pfa3D7|chr11|PF11_0484|Pf	4.549		4.549	1	1	Annotation|Plasmodium_falciparum_TIGR|(protein coding) hypothetical protein Location= chr11 complement(join(1894071..1894160, 1894374..1895840, 1893467..1893907)) 
+&S	U	K.ICIFSINKTKIYKNK.I	4.549	0.097	0.009	1.5665253E7	96862.0	PARC_Control_500mM_rep3_05_itms.06956.06956.1	161.72754021184778
+P	Reverse_pfa3D7|chr6|PFF0465c|Pf	0.748		0.748	1	1	Annotation|Plasmodium_falciparum_Sanger|(protein coding) cardiolipin synthetase, putative Location= chr6 complement(399809..401620) 
+&S	U	K.RIDIVKKHIAEKVK.N	0.748	0.308	0.095	5521326.0	1493448.0	PARC_Control_500mM_rep2_08_itms.18150.18150.2	3.697032638565253
+P	pfa3D7|chr5|PFE0675c|Pf	0.492	0.135	0.512	2	8	Annotation|Plasmodium_falciparum_Sanger|(protein coding) deoxyribodipyrimidine photolyase (photoreactivating enzyme, DNA photolyase), putative Location= chr5 complement(join(575868..578503, 574939..575644)) 
+&S	U	K.NIIIINKEDIQKDNTNSNVINNHMR.Y	0.397	0.603	0.363	1.5191594E7	3.1771001E7	PARC_Control_FT_rep2_06_itms.06376.06376.2	0.47815912378712905
+P	pfa3D7|chr11|PF11_0463|Pf	0.099		0.099	1	1	Annotation|Plasmodium_falciparum_TIGR|(protein coding) coat protein, gamma subunit, putative Location= chr11 complement(1783354..1786560) 
+&S	U	K.EQIIASNDLNNKDYVSSPFINKK.N	0.099	0.314	0.099	1.6668698E7	9.49225E7	PARC_Control_FT_8steps_02_itms.06783.06783.2	0.17560323421738788
+P	pfa3D7|chr6|PFF0505c|Pf	0.001		0.001	1	1	Annotation|Plasmodium_falciparum_Sanger|(protein coding) hypothetical protein, conserved Location= chr6 complement(437658..440540) 
+&S	U	R.KMTNTEYENIKEGEQNIKK.K	0.001	0.004	0.000	5277036.0	3.1150786E7	PARC_Control_500mM_rep1_09_itms.05145.05145.2	0.1694029807145155
+P	pfa3D7|chr8|MAL8P1.104|Pf	0.672		0.672	1	1	Annotation|Plasmodium_falciparum_Sanger|(protein coding) hypothetical protein Location= chr8 568944..574268 
+&S	U	K.NELNNMGDHVGMENLNMLVQNMNIKRDEKYKDEK.I	0.672	0.170	0.029	2.72106583E8	1.01940713E8	PARC_Control_200mM_rep2_09_itms.13170.13170.3	2.6692630941280546
+P	pfa3D7|chr1|PFA0410w|Pf	0.694	0.811	1.425	3	3	Annotation|Plasmodium_falciparum_Sanger|(protein coding) hypothetical protein Location= chr1 338321..344986 
+&S	U	K.TPINDINVK.Y	0.006	0.100	0.010	5.1372724E7	5.17377778E8	PARC_Control_FT_rep2_02_itms.05659.05659.1	0.09929441538557925
+P	pfa3D7|chr13|PF13_0298|Pf	0.870		0.870	1	1	Annotation|Plasmodium_falciparum_Sanger|(protein coding) hypothetical protein Location= chr13 2215076..2219272 
+&S	U	K.ILKTDIKNNNNIDHTSNLYYKK.D	0.870	0.108	0.012	2.658196E7	2729493.0	PARC_Control_FT_8steps_08_itms.07674.07674.2	9.738790317469215
+P	Reverse_pfa3D7|chr14|PF14_0455|Pf	0.082		0.082	1	1	Annotation|Plasmodium_falciparum_TIGR|(protein coding) multidrug resistance protein 2 Location= chr14 complement(1954544..1957618) 
+&S	U	K.NLFSEKVDIKNDKSEK.H	0.082	0.158	0.025	9368895.0	5.4225651E7	PARC_Control_FT_rep1_08_itms.11705.11705.2	0.1727760723425893
+P	pfa3D7|chr12|PFL0835w|Pf	0.579		0.579	1	1	Annotation|Plasmodium_falciparum_Sanger|(protein coding) GTP-binding protein, putative Location= chr12 683091..685715 
+&S	U	K.YILLKHPQGKYINK.K	0.579	0.038	0.001	4.9568996E7	3528249.0	PARC_Control_500mM_rep2_03_itms.08283.08283.2	14.049177368150604
+P	pfa3D7|chr11|PF11_0232|Pf	12.842		12.842	1	1	Annotation|Plasmodium_falciparum_TIGR|(protein coding) hypothetical protein Location= chr11 join(849334..851374, 851471..851513, 851632..851779, 851865..851959, 852076..852130, 852247..852348, 852498..852569) 
+&S	U	R.KMSEEMITMKSTKK.L	12.842	0.483	0.234	7.9139869E7	4233991.0	PARC_Control_200mM_rep1_02_itms.06322.06322.2	18.691553430321417
+P	pfa3D7|chr8|MAL8P1.88|Pf	0.012		0.012	1	2	Annotation|Plasmodium_falciparum_Sanger|(protein coding) hypothetical protein Location= chr8 701497..703773 
+&S	U	R.FIQDDNRKKFIK.T	0.012	0.095	0.009	1639219.0	1.9528343E7	PARC_Control_500mM_rep2_11_itms.08473.08473.2	0.0839405063706634
+P	Reverse_pfa3D7|chr13|MAL13P1.41|Pf	0.121		0.121	1	1	Annotation|Plasmodium_falciparum_Sanger|(protein coding) hypothetical protein Location= chr13 complement(396937..401154) 
+&S	U	K.IVYLNDNGYSFNKAVNYYEEK.Q	0.121	0.225	0.051	1.97184823E8	6.33243572E8	PARC_Control_500mM_rep1_10_itms.13388.13388.2	0.31138858998161295
+P	pfa3D7|chr9|PFI0680c|Pf	0.149		0.149	1	1	Annotation|Plasmodium_falciparum_Sanger|(protein coding) hypothetical protein Location= chr9 complement(join(595816..597225, 594263..595684)) 
+&S	U	K.KNENNKPIIDVEQK.Q	0.149	0.049	0.002	2.111222045E9	7.2404901E7	PARC_Control_500mM_rep1_11_itms.08274.08274.1	29.15855164279556
+P	pfa3D7|chr8|MAL8P1.24|Pf	15.974		15.974	1	1	Annotation|Plasmodium_falciparum_Sanger|(protein coding) hypothetical protein Location= chr8 1110348..1113866 
+&S	U	K.EKEKEKEIKANKKLIK.E	15.974	0.363	0.132	1.89003955E8	6029107.0	PARC_Control_FT_8steps_02_itms.08901.08901.2	31.348581970762833
+P	Reverse_pfa3D7|chr12|PFL1495w|Pf	0.067		0.067	1	1	Annotation|Plasmodium_falciparum_Sanger|(protein coding) hypothetical protein Location= chr12 join(1271129..1271143, 1271243..1271302, 1271433..1271555, 1271640..1271701, 1271798..1271847, 1271948..1272090, 1272165..1272477, 1272644..1274844) 
+&S	U	K.EKNNLNLLINMPHK.K	0.067	0.561	0.315	2585627.0	2.1102466E7	PARC_Control_FT_rep1_12_itms.08542.08542.2	0.12252724397233954
+P	pfa3D7|chr6|PFF0655c|Pf	3.290		3.290	1	2	Annotation|Plasmodium_falciparum_Sanger|(protein coding) adapter-related protein, putative Location= chr6 complement(548275..552366) 
+&S	U	R.NFFNEHVDIYSIPLYFLK.D	3.290	0.565	0.320	1.4824631E7	4743454.0	PARC_Control_FT_rep3_11_itms.09962.09962.2	3.1252819148240922
+P	pfa3D7|chr11|PF11_0249|Pf	0.008		0.008	1	1	Annotation|Plasmodium_falciparum_TIGR|(protein coding) hypothetical protein Location= chr11 940526..944332 
+&S	U	K.KYLSIIKNENIENEEK.H	0.008	0.153	0.024	3.0733688E7	1.5601417E8	PARC_Control_FT_8steps_08_itms.06994.06994.2	0.19699292698861906
+P	pfa3D7|chr6|PFF0460w|Pf	0.057		0.057	1	1	Annotation|Plasmodium_falciparum_Sanger|(protein coding) hypothetical protein Location= chr6 join(396238..399065, 399150..399285) 
+&S	U	K.EYINIFEDMITSK.R	0.057	0.164	0.027	5055277.0	2.464339E7	PARC_Control_FT_8steps_13_itms.06313.06313.2	0.20513723964113703
+P	Reverse_pfa3D7|chr10|PF10_0190|Pf	0.570		0.570	1	1	Annotation|Plasmodium_falciparum_TIGR|(protein coding) hypothetical protein Location= chr10 complement(join(801653..803501, 800277..801241)) 
+&S	U	K.KKKREIKNYKQR.S	0.570	0.371	0.138	1393725.0	429837.0	PARC_Control_200mM_rep2_01_itms.07881.07881.1	3.2424500450170646
+P	Reverse_pfa3D7|chr4|PFD0440w|Pf	0.014		0.014	1	1	Annotation|Plasmodium_falciparum_Sanger|(protein coding) hypothetical protein Location= chr4 join(431197..431647, 431818..432670, 432959..433506, 433726..433819, 433956..434091) 
+&S	U	K.KNLHKNINK.V	0.014	0.472	0.223	7669924.0	1.42481616E8	PARC_Control_500mM_rep1_12_itms.06364.06364.1	0.053830972832312626
+P	pfa3D7|chr5|PFE0450w|Pf	0.163		0.163	1	1	Annotation|Plasmodium_falciparum_Sanger|(protein coding) chromosome condensation protein, putative Location= chr5 381077..386203 
+&S	U	K.GNKNEDGLLEYLEEIIGTNK.Y	0.163	0.297	0.088	1.1168611E7	2.240966E7	PARC_Control_FT_rep2_08_itms.10157.10157.2	0.4983837773531593
+P	pfa3D7|chr11|PF11_0456|Pf	0.800		0.800	1	1	Annotation|Plasmodium_falciparum_TIGR|(protein coding) hypothetical protein Location= chr11 1762253..1766647 
+&S	U	K.KKMNRNKILYLKGLKSK.E	0.800	0.296	0.088	1720066.0	467216.0	PARC_Control_FT_rep2_05_itms.13245.13245.2	3.681522036916544
+P	Reverse_pfa3D7|chr14|PF14_0195|Pf	0.003		0.003	1	2	Annotation|Plasmodium_falciparum_TIGR|(protein coding) hypothetical protein Location= chr14 complement(832330..836679) 
+&S	U	K.RIRIFEESNNENMCELK.K	0.003	0.059	0.003	4024772.0	5.3598898E7	PARC_Control_500mM_rep1_12_itms.10369.10369.2	0.07509057369052625
+P	pfa3D7|chr14|PF14_0473|Pf	0.083		0.083	1	1	Annotation|Plasmodium_falciparum_TIGR|(protein coding) 3'-5' exonuclease, putative Location= chr14 complement(2038069..2041479) 
+&S	U	K.IVYDLLHHSSNEMK.Q	0.083	0.155	0.024	1.0910367E7	3.364114E7	PARC_Control_FT_8steps_04_itms.07023.07023.2	0.3243162092604472
+P	pfa3D7|chr7|PF07_0004|Pf	12.061		12.061	1	1	Annotation|Plasmodium_falciparum_Sanger|(protein coding) hypothetical protein Location= chr7 complement(join(138208..138321, 135268..138048)) 
+&S	U	K.ENEVKKIDPLKK.E	12.061	0.702	0.493	3.8642589E7	6181356.0	PARC_Control_FT_8steps_01_itms.05986.05986.2	6.2514744337650185
+P	Reverse_pfa3D7|pfal_chr2|PFB0435c|Pf	2.975		2.975	1	3	Annotation|Plasmodium_falciparum_TIGR|(protein coding) hypothetical protein Location= pfal_chr2 complement(join(395969..396093, 396202..396284, 396412..396532, 396669..398745, 395439..395771)) 
+&S	U	R.KKINKCFKFDK.I	2.975	0.382	0.146	9.4458219E7	6565074.0	PARC_Control_FT_8steps_03_itms.07785.07785.2	14.387989990668803
+P	pfa3D7|chr9|PFI1300c|Pf	0.131		0.131	1	1	Annotation|Plasmodium_falciparum_Sanger|(protein coding) hypothetical protein Location= chr9 complement(1075905..1081673) 
+&S	U	-.MKREAVHVLVNDEIENDKIEK.T	0.131	0.195	0.038	3496147.0	1.2934714E7	PARC_Control_200mM_rep1_12_itms.14983.14983.2	0.2702917899846877
+P	pfa3D7|chr6|PFF0920c|Pf	0.313	0.035	0.296	2	3	Annotation|Plasmodium_falciparum_Sanger|(protein coding) hypothetical protein Location= chr6 complement(join(788714..788784, 788928..789030, 789179..789561, 789688..789799, 789939..790000, 790106..790173, 790289..790379, 790479..790553, 790723..794537, 794729..794834, 794959..795107, 795260..795344, 795501..795675, 795782..795909, 788220..788406)) 
+&S	U	K.ENENIGDIEK.N	0.338	0.527	0.278	1.7229557E7	4.654548E7	PARC_Control_500mM_rep1_02_itms.04806.04806.1	0.3701660612373103
+P	pfa3D7|chr14|PF14_0079|Pf	0.417		0.417	1	3	Annotation|Plasmodium_falciparum_TIGR|(protein coding) hypothetical protein Location= chr14 complement(300725..305833) 
+&S	U	K.RTDEIINEENDDYDKKKKK.N	0.417	0.059	0.003	5.8736252E7	1.0216465E7	PARC_Control_FT_rep3_02_itms.08939.08939.2	5.749175668883513
+P	Reverse_pfa3D7|chr13|PF13_0053|Pf	13.012		13.012	1	1	Annotation|Plasmodium_falciparum_Sanger|(protein coding) hypothetical protein Location= chr13 440467..445485 
+&S	U	K.IDKNLLDITHLNEKIEEKK.A	13.012	0.275	0.075	4.3974934E7	959328.0	PARC_Control_FT_rep1_02_itms.09121.09121.2	45.83931043397045
+P	pfa3D7|chr8|PF08_0086|Pf	0.729		0.729	1	1	Annotation|Plasmodium_falciparum_Sanger|(protein coding) hypothetical protein, conserved Location= chr8 complement(627189..630065) 
+&S	U	R.IHVDFCQSLSK.Y	0.729	0.358	0.128	2.5537838E7	9987660.0	PARC_Control_FT_8steps_05_itms.06831.06831.1	2.5569390628034996
+P	pfa3D7|chr12|PFL2280w|Pf	1.733		1.733	1	3	Annotation|Plasmodium_falciparum_Sanger|(protein coding) cyclin g-associated kinase, putative Location= chr12 1959598..1962327 
+&S	U	K.KKEDVLNINR.N	1.733	0.555	0.308	2.8956842E7	6012978.0	PARC_Control_500mM_rep2_10_itms.05422.05422.1	4.815723922488989
+P	pfa3D7|chr7|MAL7P1.29|Pf	0.009		0.009	1	2	Annotation|Plasmodium_falciparum_Sanger|(protein coding) hypothetical protein Location= chr7 complement(join(495246..497894, 498051..501261, 493937..495009)) 
+&S	U	K.KNILNVSKNGSFKNTNKLNDNK.K	0.009	0.226	0.051	4926366.0	4.4524678E7	PARC_Control_FT_8steps_14_itms.11622.11622.2	0.11064349527693385
+P	Reverse_pfa3D7|chr3|PFC0470w|Pf	3.185		3.185	1	2	Annotation|Plasmodium_falciparum_Sanger|(protein coding) valine --tRNA ligase, putative Location= chr3 join(471464..472376, 472572..475762) 
+&S	U	R.KCHNINKNINFSLK.R	3.185	0.130	0.017	6.7619693E7	2589353.0	PARC_Control_FT_rep1_04_itms.08995.08995.1	26.11451316216831
+P	pfa3D7|chr11|PF11_0246|Pf	0.952		0.952	1	4	Annotation|Plasmodium_falciparum_TIGR|(protein coding) hypothetical protein Location= chr11 complement(929353..933363) 
+&S	U	R.KILNDIINEDDIK.T	0.952	0.322	0.104	2.4710316E7	6478262.0	PARC_Control_500mM_rep3_02_itms.05978.05978.1	3.8143434149467867
+P	Reverse_pfa3D7|chr7|MAL7P1.115|Pf	2.445		2.445	1	1	Annotation|Plasmodium_falciparum_Sanger|(protein coding) hypothetical protein Location= chr7 983892..986231 
+&S	U	K.QYIHFKK.L	2.445	0.119	0.014	6.1521173E7	4749332.0	PARC_Control_200mM_rep1_03_itms.06031.06031.1	12.95364758665008
+P	pfa3D7|chr7|MAL7P1.126|Pf	0.655	0.797	1.199	2	3	Annotation|Plasmodium_falciparum_Sanger|(protein coding) hypothetical protein Location= chr7 complement(join(1056247..1056380, 1056491..1056588, 1056742..1060124, 1056079..1056132)) 
+&S	U	R.MQVIYGNYK.K	0.091	0.291	0.085	1990949.0	7808979.0	PARC_Control_500mM_rep3_10_itms.05780.05780.1	0.2549563777799889
+P	Reverse_pfa3D7|chr7|PF07_0120|Pf	0.015		0.015	1	2	Annotation|Plasmodium_falciparum_Sanger|(protein coding) hypothetical protein Location= chr7 1293824..1301566 
+&S	U	K.LVNNNNNNDNNNNIEKKK.K	0.015	0.351	0.123	4344208.0	4.5958653E7	PARC_Control_FT_rep3_08_itms.08189.08189.2	0.09452426727998316
+P	Reverse_pfa3D7|chr12|PFL1435c|Pf	1.894		1.894	1	5	Annotation|Plasmodium_falciparum_Sanger|(protein coding) myosin d Location= chr12 complement(join(1226208..1226454, 1219595..1226043)) 
+&S	U	K.GSGSHGSVVITQRKKK.Q	1.894	0.182	0.033	2.162041691E9	3.7326896E7	PARC_Control_500mM_rep1_04_itms.12358.12358.1	57.9218183853273
+P	Reverse_pfa3D7|chr11|PF11_0127|Pf	5.074		5.074	1	1	Annotation|Plasmodium_falciparum_TIGR|(protein coding) hypothetical protein Location= chr11 join(462290..463551, 463819..469672) 
+&S	U	R.KIKRKRKRKSKRKIK.I	5.074	0.159	0.025	5.1712417E7	2035747.0	PARC_Control_500mM_rep3_02_itms.13240.13240.1	25.402182589486806
+P	pfa3D7|chr14|PF14_0343|Pf	6.348		6.348	1	1	Annotation|Plasmodium_falciparum_TIGR|(protein coding) hypothetical protein Location= chr14 complement(1467572..1474381) 
+&S	U	R.DVIFKIFAVINSK.R	6.348	0.474	0.225	8.3075434E7	5974602.0	PARC_Control_500mM_rep2_04_itms.07143.07143.2	13.90476453494308
+P	Reverse_pfa3D7|chr12|PFL0555c|Pf	5.270		5.270	1	1	Annotation|Plasmodium_falciparum_Sanger|(protein coding) hypothetical protein Location= chr12 complement(491886..497381) 
+&S	U	K.KTQDSSIVNSK.D	5.270	0.611	0.373	6375178.0	1023847.0	PARC_Control_FT_rep2_03_itms.05062.05062.2	6.2266901206918615
+P	Reverse_pfa3D7|chr7|PF07_0086|Pf	0.109		0.109	1	1	Annotation|Plasmodium_falciparum_Sanger|(protein coding) hypothetical protein Location= chr7 join(959521..962682, 962922..970049) 
+&S	U	K.KGFREINHEDNKDGKDK.C	0.109	0.162	0.026	1.4619849E7	3.4160183E7	PARC_Control_500mM_rep1_10_itms.08671.08671.2	0.4279792353571408
+P	Reverse_pfa3D7|chr12|PFL1130c|Pf	0.021		0.021	1	1	Annotation|Plasmodium_falciparum_Sanger|(protein coding) hypothetical protein Location= chr12 complement(join(947391..947505, 947680..960960, 947038..947126)) 
+&S	U	K.LYLDPINKDVKDFINNVNK.I	0.021	0.303	0.092	1.3710883E7	1.44365651E8	PARC_Control_FT_8steps_11_itms.12330.12330.2	0.09497330497266278
+P	pfa3D7|chr10|PF10_0212|Pf	1.159	0.312	0.983	2	4	Annotation|Plasmodium_falciparum_TIGR|(protein coding) hypothetical protein Location= chr10 complement(join(894667..894858, 897436..897528, 897634..903606, 887414..894508)) 
+&S	U	K.INIIIIPNK.G	1.380	0.497	0.247	6.522769E7	1.9885806E7	PARC_Control_500mM_rep1_11_itms.06897.06897.1	3.280112960973269
+P	pfa3D7|chr6|PFF0200c|Pf	0.538		0.538	1	1	Annotation|Plasmodium_falciparum_Sanger|(protein coding) hypothetical protein Location= chr6 complement(171298..177237) 
+&S	U	K.YMINNDK.N	0.538	0.045	0.002	2882921.0	180712.0	PARC_Control_200mM_rep1_04_itms.05287.05287.1	15.953124308291647
+P	Reverse_pfa3D7|chr14|PF14_0326|Pf	0.026	0.028	0.046	2	6	Annotation|Plasmodium_falciparum_TIGR|(protein coding) hypothetical protein Location= chr14 complement(join(1392036..1402608, 1378291..1392002)) 
+&S	U	K.QLECLNNKIYNEK.G	0.046	0.563	0.317	1666015.0	2.2843699E7	PARC_Control_FT_rep2_08_itms.05841.05841.1	0.07293105201570026
+&S	U	K.QLECLNNKIYNEK.G	0.006	0.118	0.014	2375885.0	1.9644765E7	PARC_Control_FT_8steps_10_itms.06090.06090.2	0.12094239864920757
+P	pfa3D7|chr9|PFI0260c|Pf	0.254		0.254	1	1	Annotation|Plasmodium_falciparum_Sanger|(protein coding) hypothetical protein Location= chr9 complement(251351..269707) 
+&S	U	K.KEINEKREQYRSVALR.G	0.254	0.089	0.008	3035536.0	1277769.0	PARC_Control_200mM_rep1_06_itms.07836.07836.2	2.375653189269735
+P	Reverse_pfa3D7|chr13|MAL13P1.278|Pf	4.849		4.849	1	1	Annotation|Plasmodium_falciparum_Sanger|(protein coding) Ser/Thr protein kinase Location= chr13 2245920..2258054 
+&S	U	R.IYKKSVPKTVNK.N	4.849	0.422	0.178	2.3549458E7	2415706.0	PARC_Control_500mM_rep2_05_itms.05848.05848.2	9.748478498625246
+P	Reverse_pfa3D7|chr14|PF14_0334|Pf	0.004		0.004	1	1	Annotation|Plasmodium_falciparum_TIGR|(protein coding) NAD(P)H-dependent glutamate synthase, putative Location= chr14 complement(1421844..1431164) 
+&S	U	K.KKLHIKKKIK.K	0.004	0.006	0.000	2.6114424E7	1.32252279E8	PARC_Control_FT_rep2_09_itms.18492.18492.1	0.19745916060924742
+P	Reverse_pfa3D7|pfal_chr2|PFB0150c|Pf	2.252		2.252	1	1	Annotation|Plasmodium_falciparum_TIGR|(protein coding) protein kinase, putative Location= pfal_chr2 complement(join(158145..159660, 149524..156971)) 
+&S	U	K.YENINEENKK.E	2.252	0.476	0.227	3.0191321E7	9003029.0	PARC_Control_500mM_rep1_02_itms.04893.04893.1	3.353462595755273
+P	Reverse_pfa3D7|chr3|PFC0005w|Pf	9.674		9.674	1	1	Annotation|Plasmodium_falciparum_Sanger|(protein coding) PfEMP1 Location= chr3 join(33641..38959, 39848..41158) 
+&S	U	K.KIIEEMK.Q	9.674	0.185	0.034	1.51005544E8	7736267.0	PARC_Control_200mM_rep2_02_itms.06098.06098.1	19.51917429943925
+P	pfa3D7|chr14|PF14_0084|Pf	26.283		26.283	1	3	Annotation|Plasmodium_falciparum_TIGR|(protein coding) hypothetical protein Location= chr14 complement(join(325114..328827, 328867..335721, 335782..346468, 324754..324947)) 
+&S	U	K.KKHINNKKNNEHTFK.N	26.283	0.680	0.463	5291757.0	158082.0	PARC_Control_FT_rep2_04_itms.04644.04644.1	33.474759934717426
+P	pfa3D7|chr6|PFF1440w|Pf	0.527		0.527	1	1	Annotation|Plasmodium_falciparum_Sanger|(protein coding) SET-domain protein, putative Location= chr6 join(1221943..1241573, 1241750..1241888, 1241985..1242146, 1242302..1242472, 1242616..1242723, 1242851..1242925) 
+&S	U	K.RKLNSVSKKDMLIKK.E	0.527	0.113	0.013	1.3388406E7	1072741.0	PARC_Control_FT_8steps_05_itms.06905.06905.2	12.48055774879491
+P	pfa3D7|chr13|MAL13P1.296|Pf	0.146		0.146	1	1	Annotation|Plasmodium_falciparum_Sanger|(protein coding) hypothetical protein Location= chr13 2377498..2388594 
+&S	U	K.KKKIPLPIK.K	0.146	0.189	0.036	4.3577281E7	2.05586712E8	PARC_Control_FT_rep3_08_itms.18859.18859.1	0.21196545523817706
+P	Reverse_pfa3D7|chr7|MAL7P1.147|Pf	1.610		1.610	1	1	Annotation|Plasmodium_falciparum_Sanger|(protein coding) ubiquitin carboxyl-terminal hydrolase, putative Location= chr7 complement(join(1182152..1182320, 1182499..1182567, 1182698..1191955, 1181934..1181989)) 
+&S	U	K.KIDVIKK.K	1.610	0.074	0.005	9.8468766E7	2926620.0	PARC_Control_FT_rep1_05_itms.05910.05910.1	33.64590073190233

@@ -1,0 +1,8 @@
+
+parameter
+
+extract_method
+1 : whole isotope envelop m/z unit, low resolution
+2 : individual isotopes ppm unit, high resolution
+
+

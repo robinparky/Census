@@ -1,0 +1,13 @@
+Census new version 2.51
+
+Parsing /data/2/rpark/ip2_data/rpark/Demo_Project_c_elegance/D2_pPro_B_2009_12_09_15_462/quant/2019_03_26_10_17792/DTASelect-filter.txt...done.
+1/35 peptides, 2 % is complete2/35 peptides, 5 % is complete3/35 peptides, 8 % is complete4/35 peptides, 11 % is complete5/35 peptides, 14 % is complete6/35 peptides, 17 % is complete7/35 peptides, 20 % is complete8/35 peptides, 22 % is complete9/35 peptides, 25 % is complete10/35 peptides, 28 % is complete11/35 peptides, 31 % is complete12/35 peptides, 34 % is complete13/35 peptides, 37 % is complete14/35 peptides, 39 % is complete15/35 peptides, 42 % is complete16/35 peptides, 45 % is complete17/35 peptides, 48 % is complete18/35 peptides, 51 % is complete19/35 peptides, 54 % is complete20/35 peptides, 57 % is complete21/35 peptides, 59 % is complete22/35 peptides, 62 % is complete23/35 peptides, 65 % is complete24/35 peptides, 68 % is complete25/35 peptides, 71 % is complete26/35 peptides, 74 % is complete27/35 peptides, 77 % is complete28/35 peptides, 79 % is complete29/35 peptides, 82 % is complete30/35 peptides, 85 % is complete31/35 peptides, 88 % is complete32/35 peptides, 91 % is complete33/35 peptides, 94 % is complete34/35 peptides, 97 % is complete35/35 peptides, 100 % is complete
+100% complete
+2.484 seconds taken
+Census new version 2.51
+Report file was successfully created
+Total peptides : 35
+Quantified peptides : 30
+Quantified peptides including singletons : 30
+Quantification efficiency : 85.71 %
+Quantification efficiency including singletons : 85.71 %

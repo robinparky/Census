@@ -1,0 +1,497 @@
+package edu.scripps.pms.util.io;
+
+import java.io.BufferedReader;
+import java.util.*;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.FileReader;
+import java.io.RandomAccessFile;
+
+import edu.scripps.pms.util.dtaselect.Protein;
+import edu.scripps.pms.util.dtaselect.Peptide;
+
+import edu.scripps.pms.census.model.*;
+        
+/**
+ * @author  Robin Park
+ * @version $Id: DTASelectFilterReader.java.orig,v 1.1 2014/09/09 19:29:52 rpark Exp $
+ */
+public class DTASelectFilterReader extends BaseIdentificationReader
+{
+    private final long READ_FROM_THE_END = 500; //position from the end
+
+    private String dbFileName;
+//    private InputStreamReader reader;
+    private String fileName;
+    private BufferedReader br;
+    private String lastLine = "";
+    private String criteria;
+//    private int unfilteredProteinNum;
+    private int redundantProteinNum;
+//    private int nonRedundantProteinNum;
+    private int unfilteredPeptideNum;
+    private int redundantPeptideNum;
+//    private int nonRedundantPeptideNum;
+    private double confidence;
+    private double CONFIDENCE_THRESHOLD=0.05;
+
+    private boolean version2;  //DTASelect version
+    private Hashtable<String, Integer> proteinIndexHt = new Hashtable<String, Integer>();
+
+    //read total peptide number
+    public int getTotalPeptideNumber() throws IOException
+    {
+        int totalPeptideCount=0;
+        
+        DTASelectFilterReader dtaReader = new DTASelectFilterReader(fileName);
+
+        for (Iterator<Protein> itr1 = dtaReader.getProteins(); itr1.hasNext(); ) {
+            Protein protein = itr1.next();
+            
+            totalPeptideCount += protein.getPeptideSize();
+        }
+        
+        return totalPeptideCount;
+    }
+    
+    public static void main(String args[]) throws IOException
+    {
+        DTASelectFilterReader reader = new DTASelectFilterReader( args[0] );
+
+        Iterator<Protein> pitr = reader.getProteins();
+
+        Protein protein;
+	Peptide peptide;
+        ArrayList<Protein> aList = new ArrayList<Protein>();
+
+	HashSet set = new HashSet();
+
+        for (Iterator<Protein> itr = pitr; itr.hasNext(); )
+        {
+            protein = itr.next();
+
+            if( protein.getLocus().startsWith("Rever") || protein.getLocus().startsWith("contam") || protein.getLocus().startsWith("Contam") )
+                continue;
+
+
+	   /* 
+            String desc = protein.getDescription();
+            
+            if(desc.contains("Keratin") || desc.contains("keratin") || desc.contains("RNA poly"))                                    
+            {
+                truePepSize += protein.getPeptideSize();
+            }                                              
+            else
+                falsePepSize += protein.getPeptideSize();
+            */
+            
+                for(Iterator<Peptide> pepItr=protein.getPeptides(); pepItr.hasNext(); )
+                {
+                    peptide = pepItr.next();
+                }
+
+            if(protein.getPeptideSize()<=0)
+            {
+                aList.add(protein);
+
+                set.add(protein.getLocus());
+
+            }
+            else
+            {
+System.out.println(protein.getLocus());
+                aList.clear();
+            }
+        }
+/*
+            if(p.getPeptideSize()<=0)
+            {
+                aList.add(p);
+            }
+            else
+            {
+                for(Iterator<Protein> tempItr=aList.iterator(); tempItr.hasNext(); )
+                {
+                    Protein tempProtein = tempItr.next();
+
+  //                  System.out.print(tempProtein.getLocus());// + "\t" + tempProtein.getSeqCount() + "\t");
+
+                    int ii=0;
+                    for(Iterator<Peptide> itr2=p.getPeptides(); itr2.hasNext(); )
+                    {
+                        Peptide pep = itr2.next();
+
+                        //System.out.println("conf==>>" + pep.getConf() + "\t");
+
+                        ii++;
+                    }
+
+                    //System.out.println(ii);
+
+                }
+
+                aList.clear();
+
+            }
+*/
+
+        //System.out.println(reader.getDbFileName());
+        //System.out.println(reader.getCriteria());
+        //System.out.println(reader.getNonRedundantProteinNum());
+        //System.out.println(reader.getNonRedundantPeptideNum());
+    }
+
+    public DTASelectFilterReader(String fileName) throws IOException
+    {
+        this.fileName = fileName;
+//        this.reader = new FileReader(fileName);
+        init();
+    }
+
+    private void readSummary() throws IOException
+    {
+        RandomAccessFile file = new RandomAccessFile(fileName, "r");
+
+        file.seek(file.length()-500);
+
+        String eachLine;
+        eachLine=file.readLine();
+
+        while( (eachLine=file.readLine()) != null && !eachLine.startsWith("Filtered") );
+
+        String[] arr = eachLine.split("\t");
+        this.redundantProteinNum = Integer.parseInt(arr[1]);
+        this.redundantPeptideNum = Integer.parseInt(arr[2]);
+
+/*
+        this.unfilteredProteinNum = Integer.parseInt(arr[1]);
+        this.unfilteredPeptideNum = Integer.parseInt(arr[2]);
+
+        eachLine=file.readLine(); //Redundant line of DTASelect-filter.txt
+	System.out.println("===>>" + eachLine);
+        arr = eachLine.split("\t");
+        this.redundantProteinNum = Integer.parseInt(arr[1]);
+        this.redundantPeptideNum = Integer.parseInt(arr[2]);
+
+        eachLine=file.readLine(); //NonRedundant line of DTASelect-filter.txt
+	System.out.println("===>>" + eachLine);
+        arr = eachLine.split("\t");
+        this.nonRedundantProteinNum = Integer.parseInt(arr[1]);
+        this.nonRedundantPeptideNum = Integer.parseInt(arr[2]);
+*/
+
+        file.close();
+    }
+
+    private void init() throws IOException
+    {
+        br = new BufferedReader(new FileReader(fileName));
+
+        readHeader();
+
+/*
+        //Move line to parameters.  We assume parameters start after carriage return
+        while ((lastLine = br.readLine()) != null) {
+            if(lastLine.startsWith("ProLuCID") || lastLine.startsWith("SEQUEST")) {
+                break;
+            }
+        }
+
+        StringBuffer sb = new StringBuffer();
+        sb.append(lastLine=br.readLine());  //Read this line, which can be either empty or not
+
+        while (!(lastLine = br.readLine()).equals(""))
+        {
+            sb.append(lastLine);
+            sb.append("\n");
+        }
+
+        criteria = sb.toString();
+	*/
+
+        //Move line to parse protein
+        while (!(lastLine = br.readLine()).startsWith("Unique"));
+        //add setFeatureIndices here
+
+        Peptide.setFeatureIndices(lastLine);
+        lastLine = br.readLine();
+
+    }
+
+    private void readHeader() throws IOException
+    {
+        lastLine = br.readLine();
+
+        if(lastLine.startsWith("DTASelect v2.0"))
+            version2 = true;
+        else
+            version2 = false;
+
+        //whie (!(lastLine = br.readLine()).endsWith("fasta")); .startsWith("Unique"));
+        for(int i=0; i<2; i++)
+            lastLine = br.readLine();
+
+        //Remove directory name
+        this.dbFileName = lastLine.substring(lastLine.lastIndexOf("/")+1);
+
+        if(version2)
+        {
+
+            //Move line to parameters.  We assume parameters start after carriage return
+            while( !(lastLine = br.readLine()).startsWith("SEQUEST") && !lastLine.startsWith("ProLuCID") && !lastLine.startsWith("TurboS") && !lastLine.startsWith("?") && !lastLine.startsWith("Mascot") );
+            lastLine = br.readLine();
+
+            String tempLine = lastLine;
+            int tempIndex = tempLine.indexOf("fp");
+            if(tempIndex<0)
+            {
+                confidence = CONFIDENCE_THRESHOLD;
+            }
+            else
+            {
+                tempLine = tempLine.substring(tempIndex+3);
+
+                tempIndex = tempLine.indexOf(" ");
+                if(tempIndex>0)
+                    tempLine = tempLine.substring(0, tempIndex);
+                confidence = Double.parseDouble(tempLine);
+            }
+            
+            StringBuffer sb = new StringBuffer();
+            sb.append(lastLine=br.readLine());  //Read this line, which can be either empty or not
+            while (!(lastLine = br.readLine()).equals(""))
+            {
+                sb.append(lastLine);
+                sb.append("\n");
+            }
+
+            criteria = sb.toString();
+        }
+
+	while( !(lastLine = br.readLine()).startsWith("Locus"));
+
+	String[] arr = lastLine.split("\t");
+	for(int i=0;i<arr.length;i++) 
+		proteinIndexHt.put(arr[i], i);
+
+    }
+
+    public double getConfidence()
+    {
+        return confidence;
+    }
+    
+    public ArrayList<ChroProtein> getChroProteinList() throws IOException {
+        
+        ArrayList list = new ArrayList();
+        
+        for(Iterator<Protein> itr=getProteins(); itr.hasNext(); )
+        {
+            Protein protein = itr.next();
+            
+            list.add( ChroProtein.convertProtein(protein) );
+            
+        }
+        
+        return list;
+    }
+    
+    
+    public Iterator <Protein> getProteins() throws IOException {
+        return new Iterator<Protein>() {
+            private Protein protein;
+            private Peptide peptide;
+
+            public boolean hasNext() {
+                return lastLine != null && !lastLine.startsWith("\tProteins\t");
+            }
+
+            public Protein next() {
+
+                try {
+                    protein = getProtein(lastLine);
+                }
+                catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                return protein;
+            }
+
+            public void remove() {
+                throw new UnsupportedOperationException("Not supported");
+            }
+
+            //private Protein getProtein(String[] strArr) throws IOException {
+            private Protein getProtein(String proteinLine) throws IOException {
+
+//                String[] strArr = lastLine.split("\t");
+
+		try {
+
+		    String[] strArr = proteinLine.split("\t");
+
+		    protein = new Protein(proteinLine, proteinIndexHt);
+
+		    /*
+		       The format of the DTASelect-filter.txt file peptide line
+		       is the following:
+
+		       - a star if the peptide is unique to that protein (optional)
+		       - then an integer greater than 1 (optional)
+		       - then one of the characters 'M', 'Y', or 'N' (optional)
+		       - then tab (mandatory)
+		       - then the rest of the fields...
+
+		       Anything that comes until the first tab is optional. You can
+		       have a line that starts with "\t", or "*\t", or "2\t", or
+		       "*2\t", or "*2M\t", or "Y\t", or "2N\t", or "*Y\t", etc...
+
+		       Peptide line starts like (*)(int)(M||Y||N)\t
+		     */
+
+		    /*
+		     *  Some proteins does not have peptide lines, because those proteins
+		     *  are assumed to have identical peptides as following protein has.
+		     *
+		     **/
+
+
+		    while ( ((lastLine = br.readLine()) != null && !lastLine.equals(""))
+			    && !lastLine.startsWith("\tProteins\t"))
+		    {
+
+			strArr = lastLine.split("\t");
+
+			// If Spectrum Count position does not have a decimal point,
+			// it is not a peptide line
+			if(strArr[2].indexOf(".")<=0)
+			    break;
+
+/*
+			if(strArr.length<12)
+			{
+			}
+		*/	
+			peptide = new Peptide(strArr, version2);
+			protein.addPeptide(peptide);
+		    }
+
+		}
+		catch(Exception e)
+		{
+		    e.printStackTrace();
+		    //throw new IOException("Your DTASelect-filter.txt file is corrupted.  Please remove this line : " + proteinLine);
+		    throw new IOException("Your DTASelect-filter.txt file is corrupted.  Please remove this line : " + lastLine);
+		    
+		}	
+
+		return protein;
+            }
+        };
+    }
+
+    public void close() throws IOException
+    {
+        br.close();
+    }
+
+    public void setDbFileName(String dbFileName)
+    {
+        this.dbFileName = dbFileName;
+    }
+
+/*
+    public void setUnfilteredProteinNum(int unfilteredProteinNum)
+    {
+        this.unfilteredProteinNum = unfilteredProteinNum;
+    }
+*/
+
+    public void setRedundantProteinNum(int redundantProteinNum)
+    {
+        this.redundantProteinNum = redundantProteinNum;
+    }
+
+/*
+    public void setNonRedundantProteinNum(int nonRedundantProteinNum)
+    {
+        this.nonRedundantProteinNum = nonRedundantProteinNum;
+    }
+*/
+
+    public void setUnfilteredPeptideNum(int unfilteredPeptideNum)
+    {
+        this.unfilteredPeptideNum = unfilteredPeptideNum;
+    }
+
+    public void setRedundantPeptideNum(int redundantPeptideNum)
+    {
+        this.redundantPeptideNum = redundantPeptideNum;
+    }
+
+/*
+    public void setNonRedundantPeptideNum(int nonRedundantPeptideNum)
+    {
+        this.nonRedundantPeptideNum = nonRedundantPeptideNum;
+    }
+*/
+
+    public String getDbFileName()
+    {
+        return dbFileName;
+    }
+
+    public String getCriteria()
+    {
+        return criteria;
+    }
+
+/*
+    public int getUnfilteredProteinNum()
+    {
+        return unfilteredProteinNum;
+    }
+*/
+
+    public int getRedundantProteinNum()
+    {
+        return redundantProteinNum;
+    }
+
+/*
+    public int getNonRedundantProteinNum()
+    {
+        return nonRedundantProteinNum;
+    }
+*/
+
+    public int getUnfilteredPeptideNum()
+    {
+        return unfilteredPeptideNum;
+    }
+
+    public int getRedundantPeptideNum()
+    {
+        return redundantPeptideNum;
+    }
+
+/*
+    public int getNonRedundantPeptideNum()
+    {
+        return nonRedundantPeptideNum;
+    }
+*/
+
+    public boolean isVersion2() {
+        return version2;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
+}

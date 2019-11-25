@@ -1,0 +1,527 @@
+package scripts.labelfree;
+
+import java.util.*;
+import java.text.*;
+import java.io.*;
+import java.math.*;
+
+import edu.scripps.pms.util.stats.*;
+import edu.scripps.pms.census.model.ChroPeptide;
+import edu.scripps.pms.census.tools.Formatter;
+
+public class NormalizeLabelFreeIntensityBase
+{
+    private static List<Sample> sampleList = new ArrayList<Sample>();
+
+    public static void main(String[] args) throws IOException
+    {
+	if(args.length<1) {
+	    System.out.println("Usage: java NormalizeLabelFreeIntensityBase input_file num_of_min_id_per_replicates");
+	    System.exit(0);
+	}
+
+	//int experimentNum = Integer.parseInt(args[1]);
+	//NormalizeLabelFree q = new NormalizeLabelFree(args[0]);
+	
+
+	
+	NormalizeLabelFreeIntensityBase q = new NormalizeLabelFreeIntensityBase();
+	double[] correctArr = q.getNormalizeFactor(args[0]);
+	int numIdPerReplicates = Integer.parseInt(args[1]);
+
+	//for(double d:correctArr)
+	//    System.out.println("===" + d);
+
+	//    System.exit(0);
+
+	q.normalize("outputfilename", args[0], correctArr, numIdPerReplicates);
+    }
+
+    public int[] getIntensityIndexArr(int experimentNum, String sline) {
+	    
+	String[] arr = sline.split("\t");
+	int[] indexArr = new int[experimentNum];
+	int tmpIndex=0;
+
+	for(int i=0;i<arr.length;i++) {
+	    
+	    if("INTENSITY".equals(arr[i])) {
+		indexArr[tmpIndex++] = i;
+	    }
+	}
+
+	return indexArr;
+    }
+
+    public class Sample {
+
+        private int replicateCount;
+        
+        public Sample(int replicateCount) {
+            this.replicateCount = replicateCount;
+
+        }
+
+        public int getReplicateCount() {
+            return replicateCount;
+        }
+
+        public void setReplicateCount(int replicateCount) {
+            this.replicateCount = replicateCount;
+        }
+    }
+    
+    public double[] getNormalizeFactor(String fileName) throws IOException {
+
+        BufferedReader br = new BufferedReader(new FileReader(fileName));            
+
+	sampleList = new ArrayList<Sample>();
+
+        String eachLine; // = br.readLine();
+        int experimentNum=0;
+	while( (eachLine = br.readLine())!=null )
+	{
+            if(!eachLine.startsWith("H\tsample"))
+                break;
+
+            String[] headArr = eachLine.split("\t");
+            int tmpNum = headArr.length-3;
+            experimentNum += tmpNum;
+
+
+	    Sample s = new Sample(tmpNum);
+            sampleList.add(s);
+        }	
+
+	while( (eachLine = br.readLine())!=null && !eachLine.startsWith("S") );
+
+	int[] intensityIndexArr = getIntensityIndexArr(experimentNum, eachLine);
+
+	double[] totalRatio = new double[experimentNum];
+	//int intenseIndex=6;
+	//int increment=7;
+	gnu.trove.TDoubleArrayList[] intSumArr = new gnu.trove.TDoubleArrayList[experimentNum];
+
+	double[] tmpCorrectArr = new double[experimentNum];
+
+	for(int i=0;i<intSumArr.length;i++)
+	    intSumArr[i] = new gnu.trove.TDoubleArrayList();
+
+	while( (eachLine = br.readLine())!=null )
+	{
+
+	    if(!eachLine.startsWith("S\t")) {
+		continue;
+	    }
+
+	    String[] arr = eachLine.split("\t");
+
+	    int expCount = 0;
+	    //for(int i=intenseIndex;i<arr.length;i+=increment)
+	    for(int i:intensityIndexArr) {
+		String intenseCol = arr[i];
+
+		if("NA".equals(intenseCol)) {
+		    expCount++;
+		    continue;
+		}
+
+		double d = Double.parseDouble(intenseCol);
+
+		double logRatio = Math.log(d)/Math.log(2);
+
+		intSumArr[expCount].add(logRatio);
+		expCount++;
+                
+                if(expCount>=experimentNum)
+                    break;
+
+	    }
+	}
+
+	int count=0;
+	for(gnu.trove.TDoubleArrayList t:intSumArr) {
+
+	    edu.scripps.pms.util.stats.Histogram hist = new edu.scripps.pms.util.stats.Histogram(120, 1, 60);
+	    hist.setData( t.toNativeArray() );
+
+	    double[] bins = hist.getBins();
+	    int[] freqArr = hist.getFreqArr();
+
+	    double maxBin = 0;
+	    double maxValue = 0;
+
+	    for(int i=1;i<freqArr.length-2;i++) {
+		bins[i] = edu.scripps.pms.util.MathUtil.getScaled(bins[i], 3);
+
+		if(maxValue<freqArr[i]) {
+		    maxValue = freqArr[i];
+		    maxBin = bins[i];
+		}
+	    }
+
+	    int underFlow = hist.getUnderFlows()+ freqArr[0];
+
+	    tmpCorrectArr[count] = maxBin;
+
+
+	    count++;
+	}
+
+	StatCalc stat = new StatCalc(tmpCorrectArr);
+	double mean = stat.getMean();
+
+	double[] correctArr = new double[tmpCorrectArr.length];
+
+	for(int i=0;i<tmpCorrectArr.length;i++) {
+//	    double dmean = Math.pow(2, mean);
+//	    double dvalue = Math.pow(2, tmpCorrectArr[i]);
+
+	    correctArr[i] = mean - tmpCorrectArr[i];
+	}
+
+	return correctArr;
+    }
+
+    public NormalizeLabelFreeIntensityBase() {
+    }
+
+//    public static void normalize(String outputFilename, String fileName, double[] correctArr) throws IOException {
+
+//	normalize(outputFilename, fileName, correctArr, 0);
+  //  }
+
+    public static void normalize(String outputFilename, String fileName, double[] correctArr, int numIdPerReplicates) throws IOException {
+	int expSize = correctArr.length;
+
+	BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(outputFilename));
+	PrintStream p = new PrintStream(out);
+	p.print("H\tNormalization factor\t");
+	for(double d:correctArr) {
+	    p.print(d);
+	    p.print("\t");
+	}
+	p.println("");
+
+        BufferedReader br = new BufferedReader(new FileReader(fileName));
+
+        String eachLine = "";
+
+	while( (eachLine = br.readLine()) != null ) {
+	
+	    if(eachLine.startsWith("PLINE")) 
+		break;
+
+	    p.println(eachLine);
+	}
+
+        p.print(eachLine);
+        
+        for(int i=0;i<sampleList.size();i++) {
+
+            p.print("SAMPLE_GROUP_INTENSITY_AVG_");
+            p.print( (i+1) );
+            p.print("\t");
+        }
+
+        p.println("");
+
+	//sline
+	eachLine = br.readLine();
+	p.println(eachLine);
+
+
+	gnu.trove.TIntArrayList intIndexList = new gnu.trove.TIntArrayList();
+	String[] tmpArr = eachLine.split("\t");
+	for(int i=0;i<tmpArr.length;i++) {
+	    if(tmpArr[i].startsWith("INTENSITY"))
+		intIndexList.add(i);
+	}
+
+	int[] indexList = intIndexList.toNativeArray();
+
+	List<String> proteinList=new ArrayList<String>();
+	List<String> peptideList=new ArrayList<String>();
+
+	double[] pepNormRatioSumArr = new double[expSize];
+
+//	boolean prevProtein=false;
+
+//	while ( (eachLine = br.readLine()) != null && eachLine.startsWith("P\t"));
+
+	while( (eachLine = br.readLine())!=null )
+	{
+
+	    if(eachLine.startsWith("P\t")) { //protein line
+		//if(!prevProtein) {
+		proteinList.add(eachLine);
+
+		while ( (eachLine = br.readLine()) != null && eachLine.startsWith("P\t")) {
+		    proteinList.add(eachLine);
+		}
+
+		peptideList.add(eachLine);
+                
+		while ( (eachLine = br.readLine()) != null && eachLine.startsWith("S\t")) {
+		    peptideList.add(eachLine);
+		}
+
+		//List<String> newPepList = pepCalc(peptideList, pepNormRatioSumArr, correctArr, expSize);
+		//proteinCalc(indexList, newPepList, proteinList, correctArr, p, expSize, pepNormRatioSumArr);
+                proteinCalc(indexList, peptideList, proteinList, correctArr, p, expSize, pepNormRatioSumArr, numIdPerReplicates);
+		proteinList.clear();
+		peptideList.clear();
+
+		if(null != eachLine && eachLine.startsWith("P\t"))
+		    proteinList.add(eachLine);
+
+	    } else if(eachLine.startsWith("S\t")) {
+		peptideList.add(eachLine);
+		while ( (eachLine = br.readLine()) != null && eachLine.startsWith("S\t")) {
+		    peptideList.add(eachLine);
+		}
+
+		//List<String> newPepList = pepCalc(peptideList, pepNormRatioSumArr, correctArr, expSize);
+		//proteinCalc(indexList, newPepList, proteinList, correctArr, p, expSize, pepNormRatioSumArr);
+                proteinCalc(indexList, peptideList, proteinList, correctArr, p, expSize, pepNormRatioSumArr, numIdPerReplicates);
+
+		proteinList.clear();
+		peptideList.clear();
+
+		if(null != eachLine && eachLine.startsWith("P\t"))
+		    proteinList.add(eachLine);
+	    }
+	}
+
+	if(null != p)
+	    p.close();
+    }
+
+    private static void proteinCalc(
+	int[] indexList, 
+	List<String> peptideList, 
+	List<String> proteinList, 
+	double[] correctArr, 
+	PrintStream p, 
+	int expSize, 
+	double[] pepNormRatioSumArr,
+	int numIdPerReplicates
+	) {
+
+	StringBuffer sb = new StringBuffer();
+	double[] avgIntensity = new double[indexList.length];
+	int pepCount = 0;
+        
+
+	for(Iterator<String> pepItr=peptideList.iterator(); pepItr.hasNext(); ) {
+	    String pepLine = pepItr.next();
+
+	    sb.append(pepLine).append("\n");
+            
+	    String[] peplineArr = pepLine.split("\t");
+
+            boolean addToProtein = true;
+
+            int tmpCount=peplineArr.length-expSize;
+
+
+            for(Iterator<Sample> itr=sampleList.iterator(); itr.hasNext(); ) {
+                Sample s = itr.next();
+
+                int repCount = s.getReplicateCount();
+                boolean sampleValidation=false;
+
+		int numValidId=0;
+                for(int i=0;i<repCount;i++) {
+                    String eachv = peplineArr[tmpCount++];
+
+	    /*
+                    if(!"0".equals(eachv)) {
+                        sampleValidation = true;
+                      //  break;
+                    }
+		    */
+                    if(!"0".equals(eachv)) {
+			numValidId++;
+                      //  break;
+                    }
+                }
+
+		if(numValidId<numIdPerReplicates) {
+                    addToProtein = false;
+                    break;
+		}
+
+		    
+                /*if(!sampleValidation) {
+                    addToProtein = false;
+                    break;
+                }*/
+
+            }
+             
+            if(!addToProtein)
+                continue;
+
+	    for(int i=0;i<expSize;i++) {                
+		String eachv = peplineArr[peplineArr.length-expSize+i];                              
+
+		if(!"NA".equals(eachv)) {
+
+		    double d = Double.parseDouble(eachv);
+		    avgIntensity[i] += d;                    
+		}
+	    }
+
+            pepCount++;
+/*
+
+	    if(addToProtein) {
+		for(int i=0;i<indexList.length;i++) {
+		    int intIndex = indexList[i];
+		    double d = Double.parseDouble(peplineArr[intIndex]);
+
+		    avgIntensity[i] += d;
+		}
+	    }
+	    */
+	}
+
+	StringBuffer proteinRatioSb = new StringBuffer();
+
+	if(pepCount<=0) {
+	    for(int i=0;i<avgIntensity.length;i++) {
+		proteinRatioSb.append("\tNA");
+	    }
+
+            proteinRatioSb.append("\t");
+
+            for(Iterator<Sample> itr=sampleList.iterator(); itr.hasNext(); ) {
+                Sample s = itr.next();
+
+                proteinRatioSb.append("NA\t");
+            }
+
+	}
+	else {
+	    for(int i=0;i<avgIntensity.length;i++) {
+
+		avgIntensity[i] /= pepCount;
+                
+		proteinRatioSb.append("\t").append( Formatter.formatThreeDecimal(avgIntensity[i]) );
+	    }
+
+            proteinRatioSb.append("\t");
+
+            int tmpCount=0;
+            for(Iterator<Sample> itr=sampleList.iterator(); itr.hasNext(); ) {
+                Sample s = itr.next();
+
+                int repCount = s.getReplicateCount();
+
+                double tmpSum=0;
+                for(int i=0;i<repCount;i++) {
+
+                    tmpSum += avgIntensity[tmpCount];
+                    tmpCount++;
+
+                }
+
+                tmpSum /= repCount;
+                proteinRatioSb.append(tmpSum).append("\t");
+
+            }
+        }
+
+	/*
+	StringBuffer normProSb = new StringBuffer();
+	for(double d:pepNormRatioSumArr) {
+	    normProSb.append("\t").append(d/peptideList.size());
+	}
+	*/
+
+	for(Iterator<String> proItr=proteinList.iterator(); proItr.hasNext(); ) {
+	    p.print(proItr.next());
+	    p.println(proteinRatioSb.toString());
+	}
+
+	p.print(sb.toString());
+    }
+
+    private static List<String> pepCalc(List<String> peptideList, double[] pepNormRatioSumArr, double[] correctArr, int expNum) {
+
+	List<String> newPepList = new ArrayList<String>();
+
+	for(Iterator<String> itr=peptideList.iterator(); itr.hasNext(); ) {
+
+	    String eachLine = itr.next();
+            
+            
+	    String[] arr = eachLine.split("\t");
+
+	    int intIndex=6;
+	    int count=0;
+	    double totalIntSum = 0;
+
+	   // for(int i=intIndex;i<=arr.length-expNum;i+=intIndex) {
+
+	    double[] intArr = new double[expNum];
+
+	    for(int i=0;i<expNum;i++) {
+
+		int tmpIndex = intIndex + i*intIndex;
+
+		if("NA".equals(arr[tmpIndex])) {
+		    eachLine += "NA\t";
+		    count++;
+		    continue;
+		}
+
+		Double d = Double.parseDouble(arr[tmpIndex]);
+		double tmpValue = Math.log(d)/Math.log(2);
+
+		tmpValue += correctArr[count];
+
+		double tmpPow = Math.pow(2,tmpValue);
+		eachLine += tmpPow; 
+		eachLine += "\t";
+		intArr[i] = tmpPow;
+
+		pepNormRatioSumArr[count] += tmpPow;
+
+		totalIntSum += tmpPow; 
+
+		count++;
+	    }
+
+	    double averageIntensity = totalIntSum/expNum;
+
+	    for(int i=0;i<expNum;i++) {
+		double pepRatio = intArr[i]/averageIntensity;
+		eachLine += pepRatio;
+		eachLine += "\t";
+	    }
+
+
+	    newPepList.add(eachLine);
+	}
+
+	return newPepList;
+    }
+
+
+
+    // positive value only.
+    public double round(double value, int decimalPlace)
+    {
+	double power_of_ten = 1;
+	// floating point arithmetic can be very tricky.
+	// that's why I introduce a "fudge factor"
+	double fudge_factor = 0.05;
+	while (decimalPlace-- > 0) {
+	    power_of_ten *= 10.0d;
+	    fudge_factor /= 10.0d;
+	}
+	return Math.round((value + fudge_factor)* power_of_ten)  / power_of_ten;
+    }
+}

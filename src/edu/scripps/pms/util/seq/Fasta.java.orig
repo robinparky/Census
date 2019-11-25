@@ -1,0 +1,197 @@
+/**
+ * @file Fasta.java
+ * This is the source file for edu.scripps.pms.util.spectrum.Fasta
+ * @author Tao Xu
+ * @author Robin Park
+ * @date $Date: 2010/07/28 21:02:08 $
+ */
+
+
+
+package edu.scripps.pms.util.seq;
+
+import java.io.UnsupportedEncodingException;
+//import java.util.ArrayList;
+//import java.util.List;
+import java.util.regex.*;
+
+public class Fasta implements Comparable<Fasta> {
+
+    // description line of this Fasta sequence
+    protected String defline;
+    // the sequence string of this Fasta
+    protected byte [] sequence;
+    private String seq;
+    private String accession = null;
+    private static final Pattern pattern = Pattern.compile("(.*)\\d");
+
+    public Fasta(String defline, String sequence) {
+        this.defline = defline;
+        sequence = sequence.toUpperCase();
+        seq = sequence;
+        try {
+            this.sequence = sequence.getBytes("US-ASCII");
+        } catch (UnsupportedEncodingException e) {
+            System.err.println("Unknow charset");
+            System.exit(1);
+        }
+    }
+    // to order the sequence from long to short
+    public int compareTo(Fasta f) {
+        if(f == null) return -1;
+        return f.getLength() - getLength(); 
+    }
+    public String getSequence() {
+        return seq;
+        //return new String(sequence);
+    }
+    public byte [] getSequenceAsBytes() {
+        return sequence;
+    }
+    public String getDefline() {
+        return defline;
+    }
+
+    public byte byteAt(int index) {
+        return sequence[index];
+    }
+    public int getLength() {
+        return sequence.length;
+    }
+
+
+    // get accession without version
+    public String getAccession() {
+        if(accession == null) {
+            accession = getAccession(defline.substring(1));
+        }
+
+        return accession;
+    }
+
+    public static String getAccession(String accession)
+    {
+        //NCBI, IPI, or others such as UNIT_PROT, SGD, NCI
+//        accession = getDefline().substring( getDefline().indexOf('>')+1 );
+        //accession = getDefline();
+
+        //There are many corruptted sqt file.  Ignore it.
+        try
+        {
+            if( accession.startsWith("gi") && accession.contains("|") ) //NCBI
+            {
+                String[] arr = accession.split("\\|");
+
+		if( arr.length>=4 && ("gb".equals(arr[2]) || "ref".equals(arr[2]) || "emb".equals(arr[2]) || "dbj".equals(arr[2]) || "prf".equals(arr[2]) ||"sp".equals(arr[2])) || "tpd".equals(arr[2]) ||"tpg".equals(arr[2]) ||"tpe".equals(arr[2]) )
+		    accession = arr[3];
+                else
+                {
+                    arr = accession.split(" ");
+                    accession = arr[0];
+                }
+
+                //Accession # should end with digit.  If accession # does not end with digit,
+                //grap next string (We assume this next one ends with digit.)
+		/*
+                if( pattern.matcher(arr[3]).matches() )
+                    accession = arr[3];
+                else
+                    accession = arr[4].substring(0, arr[4].indexOf(" "));
+		*/
+
+            }
+            else if( accession.startsWith("IPI") ) //IPI
+            {
+                String arr[] = accession.split("\\|");
+                String subArr[] = arr[0].split(":");
+
+                if(subArr.length>1)
+                    accession = subArr[1];
+                else
+                    accession = subArr[0];
+            }
+            else if( accession.startsWith("Re") || accession.startsWith("contam") || accession.startsWith("Contam") || accession.startsWith("SP") || accession.startsWith("sp")) //Reverse database
+            {
+                int space = accession.indexOf(" ");
+                int tab = accession.indexOf("\t");
+
+                if(space<0) space = 40;
+                if(tab<0) tab = 40;
+
+                int index = (tab>space)?space:tab;
+
+                int end;
+
+                if(index<=0 || index>=40) //no space
+                {
+                    int length = accession.length();
+                    end = (length>40)?40:length;
+                }
+                else  //cut by the first space
+                    end = index;
+
+                accession = accession.substring(0, end);
+            }
+            else //UNIT_PROT, NCI or SGD
+            {
+
+                int spaceIndex = accession.indexOf(" ");
+                int tabIndex = accession.indexOf("\t");
+		if(spaceIndex>0 || tabIndex>0)
+			if(spaceIndex>tabIndex || spaceIndex<0)
+				if(tabIndex>0) spaceIndex = tabIndex;
+
+                int pipeIndex;
+                if(spaceIndex>0)
+                {
+                    pipeIndex = accession.indexOf("|");
+
+                    if(pipeIndex>0 && spaceIndex>pipeIndex)
+                        accession = accession.substring(0, pipeIndex);
+                    else
+                        accession = accession.substring(0, spaceIndex);
+                }
+            }
+        }
+        catch(Exception e)
+        {
+            //System.out.println("No Correct Accession found, but this will be handled by MSP system." + accession + " " +  e);
+
+            int i = accession.indexOf(" ");
+            if(i<0)
+                return accession;
+            else
+                return accession.substring(0, i);
+
+        }
+
+        return accession;
+    }
+
+    public static void main(String args[]) throws Exception
+    {
+
+	java.io.FileInputStream f = new java.io.FileInputStream(args[0]);
+
+	Fasta fasta=null;
+
+	try {
+	for(java.util.Iterator<Fasta> itr=edu.scripps.pms.util.io.FastaReader.getFastas(f); itr.hasNext(); )
+	{
+		fasta = itr.next();
+		fasta.getAccession();
+		System.out.println("===>>" + fasta.getAccession());
+//		System.out.println("===>>" + fasta.getDefline() + "<===");
+	}
+	}
+	catch(Exception e)
+	{
+		System.out.println("===>>" + fasta.getDefline() + "<===");
+
+	}
+
+
+//        System.out.println( "==>" + Fasta.getAccession("Reverse_IPI:IPI00\t Tax_Id=9606 Hypot") + "<==");
+//        System.out.println("==>>" + accession + "<==");
+    }
+}

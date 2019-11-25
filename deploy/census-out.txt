@@ -1,0 +1,27 @@
+H	Census version null
+H	Create by 
+H	Robin, Sung Kyu Park rpark@scripps.edu
+H	John Venable jvenable@scripps.edu
+H	Michael J. MacCoss
+H	The Scripps Research Institute, La Jolla, CA
+H	OL stands for outlier
+H	created date	Thu Jan 01 10:57:42 PST 2009
+H	Determination Factor : 0.5
+H	Outlier pValue : 0.1
+H	Correction Factor Value : 0.0
+H	allNoneLowerBound : 1.0
+H	allNoneUpperBound : 10.0
+H	allNoneCompositeScore : 0.5
+H	Unique Peptide only : false
+H	PLINE	Protein line
+H	SLINE	Peptide line
+H	&SLINE	Singleton Peptide line
+H	PLINE	LOCUS	AVERAGE_RATIO	STANDARD_DEVIATION	WEIGHTED_AVERAGE	PEPTIDE_NUM	SPEC_COUNT	AREA_RATIO	DESCRIPTION
+H	SLINE	UNIQUE	SEQUENCE	RATIO	REGRESSION_FACTOR	DETERMINANT_FACTOR	XCorr	deltaCN	SAM_INT	REF_INT	AREA_RATIO	ENRICHMENT	FILE_NAME	SCAN	CS
+H	&SLINE	UNIQUE	SEQUENCE	RATIO	REGRESSION_FACTOR	DETERMINANT_FACTOR	XCorr	deltaCN	SAM_INT	REF_INT	AREA_RATIO	SINGLETON_SCORE	FILE_NAME	SCAN	CS
+H	Total Redundant Proteins	0
+H	Total Unique Proteins	0
+H	Total peptides	11
+H	Quantified peptides	0
+H	Quantification efficiency	0.00 %
+H	Correction Factor (Ln)	0.0

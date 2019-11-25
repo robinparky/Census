@@ -1,0 +1,3 @@
+
+//expType 13: iTRAQ single spectrum
+//expType 14: iTRAQ multiple spectra

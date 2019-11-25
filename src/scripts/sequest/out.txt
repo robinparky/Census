@@ -1,0 +1,25 @@
+Check ms2 files
+4hSUP_fansidar_rep2_01.ms2	9802
+4hSUP_fansidar_rep2_02.ms2	13342
+4hSUP_fansidar_rep2_03.ms2	14600
+4hSUP_fansidar_rep2_04.ms2	13723
+4hSUP_fansidar_rep2_05.ms2	12291
+4hSUP_fansidar_rep2_06.ms2	13599
+4hSUP_fansidar_rep2_07.ms2	10443
+4hSUP_fansidar_rep2_08.ms2	10820
+4hSUP_fansidar_rep2_09.ms2	9837
+4hSUP_fansidar_rep2_10.ms2	8952
+4hSUP_fansidar_rep2_11.ms2	8709
+
+Check sqt files
+4hSUP_fansidar_rep2_01.sqt	7440
+4hSUP_fansidar_rep2_02.sqt	9532
+4hSUP_fansidar_rep2_03.sqt	11465
+4hSUP_fansidar_rep2_04.sqt	11441
+4hSUP_fansidar_rep2_05.sqt	10309
+4hSUP_fansidar_rep2_06.sqt	11577
+4hSUP_fansidar_rep2_07.sqt	8918
+4hSUP_fansidar_rep2_08.sqt	9335
+4hSUP_fansidar_rep2_09.sqt	8282
+4hSUP_fansidar_rep2_10.sqt	7194
+4hSUP_fansidar_rep2_11.sqt	6899

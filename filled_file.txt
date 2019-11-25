@@ -1,0 +1,5 @@
+package edu.scripps.pms.census.labelFree
+class : LabelfreeFilledParser
+arguments: 
+args[0]= path-of-configfile
+args[1]= path-of-filled file

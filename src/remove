@@ -1,0 +1,12 @@
+U edu/scripps/pms/util/io/BaseIdentificationReader.java
+U edu/scripps/pms/util/io/DTASelectFilterReader.java
+U edu/scripps/pms/util/io/FastaReader.java
+U edu/scripps/pms/util/io/FileFormatUnknownException.java
+U edu/scripps/pms/util/io/FileReaderUtil.java
+U edu/scripps/pms/util/io/FileUtil.java
+U edu/scripps/pms/util/io/IdentificationReader.java
+U edu/scripps/pms/util/io/MzxmlSpectrumReader.java
+U edu/scripps/pms/util/io/PepXmlReader.java
+U edu/scripps/pms/util/io/SQTParser.java
+U edu/scripps/pms/util/io/SpectrumIndexReader.java
+U edu/scripps/pms/util/io/SpectrumReader.java

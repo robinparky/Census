@@ -1,0 +1,1083 @@
+2710,2711d2709
+<                         peptideEle.setAttribute("report-ion-signal-noise", CensusHelper.format.format(CalcUtil.ReportIonSignalToNoise));
+< 
+2907a2906,3392
+> 
+>     public void createDIALabelfree() throws IOException, Exception {
+> 
+>       int[] keys;
+> 
+>       this.filePath = conf.getFilePath();
+> 
+>       //if( !filePath.endsWith(File.separator) )
+>       //    filePath += File.separator;
+>         /*
+>         //file could be generated from either linux or window
+>         if( !this.filePath.endsWith("/") && !this.filePath.endsWith("\\") ) {
+>             //for linux
+>             if(this.filePath.startsWith("/"))
+>                 this.filePath += "/";
+>             else //for window
+>                 this.filePath += "\\";
+>         }
+>          */
+>       Hashtable<String, IndexedFile> ht = createIndexedFiles(filePath, CensusConstants.MS2_FILE);
+> 
+>       IndexedFile iFile;
+>       BufferedOutputStream out = null;
+>       PrintStream p = null;
+> 
+>       long startTime = System.currentTimeMillis();
+>       String pepSequence = null;
+> 
+>       try {
+> 
+>         /**
+>          * ****************************************************************
+>          * Read DTASelect.txt file to find spectrum range for each peptide
+>          *****************************************************************
+>          */
+>         ChroProgressDialog.addMessageWithLine(progress, "");
+> 
+>         IsotopeReader isoReader = null;
+> 
+>         if (conf.isXmlConf()) {
+>           isoReader = new IsotopeReader(conf.getRootConfEle());
+>         } else {
+>           isoReader = new IsotopeReader(isotopeFile);
+>         }
+> 
+>         IdentificationReader idReader = BaseIdentificationReader.getIdentificationInst(isoReader);
+>         SpecRangeGenerator rangeGen = new SpecRangeGenerator();
+>         int redundantPeptideNum = idReader.getTotalPeptideNumber();
+> 
+>         TIntLongHashMap index;
+> 
+>         IsotopeTable<String, int[]> isoTable = isoReader.getIsotope();
+>         int[] sampleNterm = isoTable.get("sampleNTERM");
+>         int[] sampleCterm = isoTable.get("sampleCTERM");
+> 
+>         //int redundantPeptideNum = -1; //dtaReader.getRedundantPeptideNum();
+>         //int redundantPeptideNum = DTASelectFilterReader.getTotalPeptideNumber(conf.getIdFileName());
+>         //increase status bar
+>         double percent = 0.0;
+>         double eachSeg = 100.0 / redundantPeptideNum;
+>         int pepCount = 0;
+> 
+>         //IsotopeDist sampleDist;
+>         //IsotopeDist refDist;
+>         IsotopeDist sampleDist;
+>         Protein protein;
+>         Peptide peptide;
+> 
+>         Element rootEle = this.createXmlChroHeader(2, conf.getExpType());
+> 
+>         ElementComposition element;
+>         ElementComposition totalElement;
+> 
+>         //int[] elementSampleArr;
+>         int keyIndex;
+>         int start;
+>         int last;
+> 
+>         double samplePrecursor;
+> 
+>         double[][] bionSample;
+>         double[][] yionSample;
+> 
+>         Element proteinEle = null;
+>         Element peptideEle = null;
+> 
+>         for (Iterator<Protein> itr = idReader.getProteins(); itr.hasNext();) {
+>           protein = itr.next();
+> 
+>           proteinEle = new Element("protein");
+>           proteinEle.setAttribute("locus", protein.getLocus());
+>           proteinEle.setAttribute("seq_ct", protein.getSeqCount());
+>           proteinEle.setAttribute("spec_ct", protein.getSpectrumCount());
+>           proteinEle.setAttribute("seq_cov", protein.getSeqCoverage());
+>           proteinEle.setAttribute("length", protein.getLength());
+>           proteinEle.setAttribute("molwt", protein.getMolWt());
+>           proteinEle.setAttribute("pi", protein.getPI());
+>           proteinEle.setAttribute("val", protein.getValidation());
+> 
+>           try {
+>             proteinEle.setAttribute("desc", protein.getDescription());
+>           } catch (org.jdom.IllegalDataException ide) {
+>             proteinEle.setAttribute("desc", StringUtil.removeIsoControlChar(protein.getDescription()));
+>           }
+> 
+>           for (Iterator<Peptide> pepItr = protein.getPeptides(); pepItr.hasNext();) {
+>             peptide = pepItr.next();
+>             pepCount++;
+> 
+>             pepSequence = peptide.getSequence();
+> 
+>             //What is the purpose of hs???
+>             char[] ch = pepSequence.substring(2, peptide.getSequence().length() - 2).toCharArray();
+> 
+>             try {
+>               totalElement = new ElementComposition(ch, 0, ch.length, isoTable);
+>               totalElement.calculate();
+>             } catch (InvalidAAException ive) {
+>               System.out.println("Not Quantifiable peptide : " + pepSequence);
+> 
+>               percent += eachSeg;
+>               if (null != progress) {
+>                 ChroProgressDialog.addMessageWithLine(progress, "Not Quantifiable peptide : " + pepSequence);
+>                 progress.setProgress((int) percent);
+> 
+>               }
+>               continue;
+>             }
+> 
+>             int chargeState = Integer.parseInt(peptide.getChargeState());
+> 
+>             int pepLength = 0;
+> 
+>             for (int i = 0; i < ch.length; i++) {
+>               if (ch[i] == '*' || ch[i] == '@' || ch[i] == '#') {
+>                 continue;
+>               }
+> 
+>               pepLength++;
+>             }
+> 
+>             bionSample = new double[pepLength-1][chargeState * 3];
+>             //Yions
+>             yionSample = new double[pepLength-1][chargeState * 3];
+> 
+>             int pepIndex = 0;
+> 
+>             //System.out.println("aamass" + massTolerance + " " + conf.getMassTolerance());
+>             for (int i = 0; i < ch.length-1; i++) {
+>               if (ch[i] == '*' || ch[i] == '@' || ch[i] == '#') {
+>                 continue;
+>               }
+> 
+>               try {
+>                 element = new ElementComposition(ch, 0, i + 1, isoTable);
+>                 element.calculate();
+> 
+>               } catch (InvalidAAException ive) {
+>                 System.out.println("Not Quantifiable peptide : " + pepSequence);
+> 
+>                 percent += eachSeg;
+>                 if (null != progress) {
+>                   ChroProgressDialog.addMessageWithLine(progress, "Not Quantifiable peptide : " + pepSequence);
+>                   progress.setProgress((int) percent);
+> 
+>                 }
+>                 continue;
+>               }
+> 
+>               //Y ions
+>               sampleDist = new IsotopeDist(
+>                 getComplementaryComposition(totalElement.getElementSampleArr(), element.getElementSampleArr(), sampleNterm, sampleCterm), element.getModShift(), true);
+> 
+>               //System.out.println("s>||>==" + yionSample.length + " " + pepIndex + "\t" + chargeState + "\t" + sampleDist.getStartMass());
+> 
+>               for(int csIndex=0;csIndex<chargeState;csIndex++) {
+> 
+>                 int tempCs = csIndex + 1;
+>               //  System.out.println("s==" + csIndex + "\t" + (csIndex*3+2) + "\t" + sampleDist.getStartMass() + " " +  ((pepIndex + 1) % pepLength));
+>                 yionSample[(pepIndex) % pepLength][csIndex*3+2] = (sampleDist.getEndMass() + 3 * PROTON_MASS) / tempCs + massTolerance;
+>                 yionSample[(pepIndex) % pepLength][csIndex*3+1] = (sampleDist.getStartMass() + 3 * PROTON_MASS) / tempCs - massTolerance;
+>                 yionSample[(pepIndex) % pepLength][csIndex*3+0] = (sampleDist.getAvgMass() + 3 * PROTON_MASS) / tempCs;
+>               }
+> 
+> 
+> 
+>               /*
+>               switch (chargeState) {
+> 
+> 
+>                 case 3:
+>                   yionSample[(pepIndex + 1) % pepLength][8] = (sampleDist.getEndMass() + 3 * PROTON_MASS) / 3 + massTolerance;
+>                   yionSample[(pepIndex + 1) % pepLength][7] = (sampleDist.getStartMass() + 3 * PROTON_MASS) / 3 - massTolerance;
+>                   yionSample[(pepIndex + 1) % pepLength][6] = (sampleDist.getAvgMass() + 3 * PROTON_MASS) / 3;
+> 
+>                 case 2:
+>                   yionSample[(pepIndex + 1) % pepLength][5] = (sampleDist.getEndMass() + 2 * PROTON_MASS) / 2 + massTolerance;
+>                   yionSample[(pepIndex + 1) % pepLength][4] = (sampleDist.getStartMass() + 2 * PROTON_MASS) / 2 - massTolerance;
+>                   yionSample[(pepIndex + 1) % pepLength][3] = (sampleDist.getAvgMass() + 2 * PROTON_MASS) / 2;
+> 
+>                 case 1:
+>                   yionSample[(pepIndex + 1) % pepLength][2] = sampleDist.getEndMass() + 1 * PROTON_MASS + massTolerance; //add proton to give b fragment ion
+>                   yionSample[(pepIndex + 1) % pepLength][1] = sampleDist.getStartMass() + 1 * PROTON_MASS - massTolerance;
+>                   yionSample[(pepIndex + 1) % pepLength][0] = sampleDist.getAvgMass() + 1 * PROTON_MASS;
+> 
+>                 default:
+>                   break;
+>               }  */
+> 
+>               element.calculateBion();
+>               //element.printComposition();
+> 
+>               sampleDist = new IsotopeDist(element.getElementSampleArr(), element.getModShift(), true);
+> 
+> 
+>            //   System.out.println("s>>==" + pepIndex + "\t" + chargeState + "\t" + sampleDist.getStartMass());
+> 
+>               for(int csIndex=0;csIndex<chargeState;csIndex++) {
+> 
+>                 int tempCs = csIndex + 1;
+>                 bionSample[pepIndex][csIndex*3+2] = (sampleDist.getEndMass() + 2 * PROTON_MASS) / tempCs + massTolerance;
+>                 bionSample[pepIndex][csIndex*3+1] = (sampleDist.getStartMass() + 2 * PROTON_MASS) / tempCs - massTolerance;
+>                 bionSample[pepIndex][csIndex*3] = (sampleDist.getAvgMass() + 2 * PROTON_MASS) / tempCs;
+>               }
+> 
+>               pepIndex++;
+>             }
+> 
+> 
+> 
+>             try {
+>               element = new ElementComposition(ch, 0, ch.length, isoTable);
+>               element.calculate();
+>             } catch (InvalidAAException ive) {
+>               System.out.println("Not Quantifiable peptide : " + pepSequence);
+> 
+>               percent += eachSeg;
+>               if (null != progress) {
+>                 ChroProgressDialog.addMessageWithLine(progress, "Not Quantifiable peptide : " + pepSequence);
+>                 progress.setProgress((int) percent);
+> 
+>               }
+>               continue;
+>             }
+> 
+>             sampleDist = new IsotopeDist(element.getElementSampleArr(), element.getModShift(), true);
+> 
+> 
+> /*
+>             for(int i=0;i<bionSample.length;i++)
+>             {
+>               for(int j=0;j<bionSample[i].length;j++)
+>                 System.out.print(bionSample[i][j] + " ");
+> 
+>               System.out.println(" ");
+>             }
+>             System.out.println(" ");
+> 
+>             for(int i=0;i<yionSample.length;i++)
+>             {
+>               for(int j=0;j<yionSample[i].length;j++)
+>                 System.out.print(yionSample[i][j] + " ");
+> 
+>               System.out.println(" ");
+>             }
+>             System.out.println(" ");
+> */
+> 
+> 
+>             double calcSamMass = (sampleDist.getAvgMass() + chargeState * PROTON_MASS) / chargeState;
+> 
+>             conf.setCalcSamAvgMass(calcSamMass);
+> 
+>             //peptideEle.setAttribute("lightStartMass", String.valueOf(sampleDist.getStartMass()));
+>             //peptideEle.setAttribute("lightAvgMass", String.valueOf(conf.getCalcSamAvgMass()));
+> 
+>             peptideEle = new Element("peptide");
+> 
+>             peptideEle.setAttribute("lightStartMass", String.valueOf(0.0));
+>             peptideEle.setAttribute("lightAvgMass", String.valueOf(0.0));
+> 
+> 
+>             peptideEle = this.createXmlChroPeptideTitle(false, peptide);
+> 
+>             //String ms2FileName = peptide.getFileName().substring(0, peptide.getFileName().indexOf("."));
+>             String ms2FileName = peptide.getFileName();
+> 
+>             StringBuffer rangeKey = new StringBuffer();
+>             rangeKey.append(protein.getLocus());
+>             rangeKey.append(ms2FileName);
+>             rangeKey.append(peptide.getSequence().substring(2, peptide.getSequence().length() - 2));
+>             SpecRange range = rangeGen.getSpecRange(rangeKey.toString());
+> 
+>             if (null == range) {
+>               int tmpScanNum = Integer.parseInt(peptide.getScanNum());
+>               range = new SpecRange(tmpScanNum, tmpScanNum);
+>               peptideEle.setAttribute("start_scan", peptide.getScanNum());
+>               peptideEle.setAttribute("end_scan", peptide.getScanNum());
+>             } else {
+>               peptideEle.setAttribute("start_scan", String.valueOf(range.getMin()));
+>               peptideEle.setAttribute("end_scan", String.valueOf(range.getMax()));
+>             }
+> 
+>             //sb.append("\tStartScan\tEndScan\tDTAPeakStart\tDTAPeakEnd\n");
+>             Element chro = new Element("chro");
+>             //output.append("[CHROMATOGRAMS]\tSCAN\tSAMPLE\tREFERENCE\n");
+> 
+>             iFile = ht.get(this.filePath + ms2FileName + "." + "ms2");
+>             keys = iFile.getKeys();
+> 
+>             //samplePrecursor = conf.getPrecursor( (sampleDist.getAvgMass()+chargeState)/chargeState );
+>             //refPrecursor = conf.getPrecursor( (refDist.getAvgMass()+chargeState)/chargeState );
+>             keyIndex = Arrays.binarySearch(keys, Integer.parseInt(peptide.getScanNum()));
+> 
+>             if (keyIndex < 0) //Cannot find index
+>             {
+>               keyIndex = -(++keyIndex); //Math.abs(++keyIndex);
+>             }
+>             /**
+>              * Find start scan number same as a precursor of
+>              * sampleAvgMass Then, later the program will find following
+>              * scan # quicker.
+>              *
+>              */
+>                     /* End of finding start spectrum number */
+> 
+>             samplePrecursor = 1;
+> 
+>             TIntDoubleHashMap precursorMap = iFile.getPrecursorMap();
+> 
+>             // {
+>             //   System.out.println("Outside isowindow for sample precursor " + keys[keyIndex] + " " + (sampleDist.getAvgMass()+chargeState)/chargeState + " " + precursorMap.get(keys[keyIndex]) + " " + samplePrecursor);
+>             //}
+>             //if(precursorMap.get(keys[keyIndex+diff]) != refPrecursor)
+>             //   System.out.println("Outside isowindow for ref precursor " + keys[keyIndex+diff] + " " + (refDist.getAvgMass()+chargeState)/chargeState  + " " + precursorMap.get(keys[keyIndex+diff]) + " " + refPrecursor);
+>             //System.out.println("set text" + iFile + " " + range  + " " + keyIndex + " " + diff + " " + bionSample + " " + bionRef + " " + yionSample + " " + yionRef + " " + samplePrecursor + " " + refPrecursor + " " + conf + " " + chargeState);
+>             //chro.setText( CalcUtil.calculateMS2Mass( iFile, range, keyIndex, diff, bionSample, bionRef, yionSample, yionRef, samplePrecursor, refPrecursor, conf, chargeState) );
+>             try {
+>               //String outStr = CalcUtil.calculateMS2Mass(iFile, range, keyIndex, bionSample, bionRef, yionSample, yionRef, conf, chargeState);
+>               //String outStr = CalcUtil.calculateMS2Mass(iFile, range, keyIndex, bionSample, null, yionSample, null, conf, chargeState);
+>               String outStr = CalcUtil.calculateMS2Labelfree(iFile, range, keyIndex, bionSample, yionSample, conf, chargeState);
+> 
+>               if (outStr == null) {
+>                 continue;
+>               }
+> 
+>               chro.setText(outStr);
+>             } catch (PrecursorNotFoundException ive) {
+>               System.out.println("Precursor not found for " + pepSequence);
+> 
+>               if (null != progress) {
+>                 ChroProgressDialog.addMessageWithLine(progress, "Error : Precursor not found for " + pepSequence);
+>                 percent += eachSeg;
+>                 progress.setProgress((int) percent);
+>               }
+> 
+>               ive.printStackTrace();
+> 
+>               continue;
+>             } catch (Exception e) {
+>               System.out.println("Precursor not found for " + pepSequence);
+> 
+>               if (null != progress) {
+>                 ChroProgressDialog.addMessageWithLine(progress, "Error : Precursor not found for " + pepSequence);
+>                 percent += eachSeg;
+>                 progress.setProgress((int) percent);
+>               }
+>               e.printStackTrace();
+> 
+>               continue;
+>             }
+> 
+>             peptideEle.addContent(chro);
+> 
+>             Element fragEle = new Element("frag");
+> 
+>             Element bSample = new Element("bs");
+>             StringBuffer tempSb = new StringBuffer();
+>             for (int i = 0; i < bionSample.length; i++) {
+>               int j;
+>               for (j = 0; j < bionSample[i].length - 1; j++) {
+>                 tempSb.append(formatter.format(bionSample[i][j])).append(" ");
+>               }
+> 
+>               tempSb.append(formatter.format(bionSample[i][j])).append(",");
+>             }
+> 
+>             bSample.setText(tempSb.toString());
+>             fragEle.addContent(bSample);
+> 
+>             Element bRef = new Element("br");
+>             tempSb.delete(0, tempSb.length());
+> 
+>             bRef.setText(tempSb.toString());
+>             fragEle.addContent(bRef);
+> 
+>             Element ySample = new Element("ys");
+>             tempSb.delete(0, tempSb.length());
+>             for (int i = 0; i < yionSample.length; i++) {
+>               int j;
+>               for (j = 0; j < yionSample[i].length - 1; j++) {
+>                 tempSb.append(formatter.format(yionSample[i][j])).append(" ");
+>               }
+> 
+>               tempSb.append(formatter.format(yionSample[i][j])).append(",");
+>             }
+> 
+>             ySample.setText(tempSb.toString());
+>             fragEle.addContent(ySample);
+> 
+>             Element yRef = new Element("yr");
+>             tempSb.delete(0, tempSb.length());
+> 
+>             yRef.setText(tempSb.toString());
+>             fragEle.addContent(yRef);
+> 
+>             peptideEle.addContent(fragEle);
+> 
+>             percent += eachSeg;
+> 
+>             if (null != progress) {
+>               progress.setProgress((int) percent);
+>             }
+> 
+>             System.out.print(pepCount);
+>             System.out.print("/");
+>             System.out.print(redundantPeptideNum);
+>             System.out.print(" peptides, ");
+>             System.out.print((int) percent);
+>             //System.out.print(" % is complete\n");
+>             System.out.print(" % is complete\r");
+> 
+>             proteinEle.addContent(peptideEle);
+>           }
+> 
+>           if (proteinEle.getChildren().size() > 0) {
+>             rootEle.addContent(proteinEle);
+>           }
+>         }
+> 
+>         Document doc = new Document(rootEle);
+>         OutputStream os = new FileOutputStream(filePath + "census_chro.xml");
+>         XMLOutputter outputter = new XMLOutputter();
+>         outputter.setFormat(Format.getPrettyFormat());
+>         outputter.output(doc, os);
+>         os.close();
+> 
+>         System.out.println("\n100% complete");
+>         //System.out.println( System.out.println"\n100% complete");
+> 
+>         //Create relex.chro file
+>             /*
+>             out = new BufferedOutputStream(new FileOutputStream(filePath + "relex.chro"));
+>             p = new PrintStream(out);
+>             p.print(output.toString());
+>              */
+>       } catch (IOException e) {
+>         System.out.println("IO Error while generating msms chro file : " + pepSequence + e);
+>         e.printStackTrace();
+>         throw new IOException(e.toString());
+>       } catch (Exception e) {
+>         System.out.println("Error while generating msms chro file : " + pepSequence + e);
+>         e.printStackTrace();
+>         throw new Exception(e.toString());
+>       } finally {
+>         if (null != p) {
+>           p.close();
+>         }
+> 
+>         if (null != out) {
+>           out.close();
+>         }
+> 
+>         //Close all random files
+>         for (Enumeration e = ht.keys(); e.hasMoreElements();) {
+>           iFile = ht.get(e.nextElement());
+> 
+>           if (null != iFile) {
+>             iFile.close();
+>           }
+>         }
+> 
+>       }
+> 
+>     }
+> 
+> 
+3102a3588,4174
+>                       System.out.println("s==" + sampleDist.getStartMass());
+>                       System.out.println("r==" + refDist.getStartMass());
+>                         switch (chargeState) {
+> 
+> 
+>                             case 3:
+>                                 yionSample[(pepIndex + 1) % pepLength][8] = (sampleDist.getEndMass() + 3 * PROTON_MASS) / 3 + massTolerance;
+>                                 yionSample[(pepIndex + 1) % pepLength][7] = (sampleDist.getStartMass() + 3 * PROTON_MASS) / 3 - massTolerance;
+>                                 yionSample[(pepIndex + 1) % pepLength][6] = (sampleDist.getAvgMass() + 3 * PROTON_MASS) / 3;
+>                                 yionRef[(pepIndex + 1) % pepLength][8] = (refDist.getEndMass() + 3 * PROTON_MASS) / 3 + massTolerance;
+>                                 yionRef[(pepIndex + 1) % pepLength][7] = (refDist.getStartMass() + 3 * PROTON_MASS) / 3 - massTolerance;
+>                                 yionRef[(pepIndex + 1) % pepLength][6] = (refDist.getAvgMass() + 3 * PROTON_MASS) / 3;
+> 
+>                             case 2:
+>                                 yionSample[(pepIndex + 1) % pepLength][5] = (sampleDist.getEndMass() + 2 * PROTON_MASS) / 2 + massTolerance;
+>                                 yionSample[(pepIndex + 1) % pepLength][4] = (sampleDist.getStartMass() + 2 * PROTON_MASS) / 2 - massTolerance;
+>                                 yionSample[(pepIndex + 1) % pepLength][3] = (sampleDist.getAvgMass() + 2 * PROTON_MASS) / 2;
+>                                 yionRef[(pepIndex + 1) % pepLength][5] = (refDist.getEndMass() + 2 * PROTON_MASS) / 2 + massTolerance;
+>                                 yionRef[(pepIndex + 1) % pepLength][4] = (refDist.getStartMass() + 2 * PROTON_MASS) / 2 - massTolerance;
+>                                 yionRef[(pepIndex + 1) % pepLength][3] = (refDist.getAvgMass() + 2 * PROTON_MASS) / 2;
+> 
+>                             case 1:
+>                                 yionSample[(pepIndex + 1) % pepLength][2] = sampleDist.getEndMass() + 1 * PROTON_MASS + massTolerance; //add proton to give b fragment ion
+>                                 yionSample[(pepIndex + 1) % pepLength][1] = sampleDist.getStartMass() + 1 * PROTON_MASS - massTolerance;
+>                                 yionSample[(pepIndex + 1) % pepLength][0] = sampleDist.getAvgMass() + 1 * PROTON_MASS;
+>                                 yionRef[(pepIndex + 1) % pepLength][2] = refDist.getEndMass() + 1 * PROTON_MASS + massTolerance;
+>                                 yionRef[(pepIndex + 1) % pepLength][1] = refDist.getStartMass() + 1 * PROTON_MASS - massTolerance;
+>                                 yionRef[(pepIndex + 1) % pepLength][0] = refDist.getAvgMass() + 1 * PROTON_MASS;
+> 
+>                             default:
+>                                 break;
+>                         }
+> 
+>                         element.calculateBion();
+>                         //element.printComposition();
+> 
+>                         sampleDist = new IsotopeDist(element.getElementSampleArr(), element.getModShift(), true);
+>                         refDist = new IsotopeDist(element.getElementRefArr(), element.getModShift(), false);
+> 
+>                         switch (chargeState) {
+>                             case 3:
+>                                 bionSample[pepIndex][8] = (sampleDist.getEndMass() + 2 * PROTON_MASS) / 3 + massTolerance;
+>                                 bionSample[pepIndex][7] = (sampleDist.getStartMass() + 2 * PROTON_MASS) / 3 - massTolerance;
+>                                 bionSample[pepIndex][6] = (sampleDist.getAvgMass() + 2 * PROTON_MASS) / 3;
+>                                 bionRef[pepIndex][8] = (refDist.getEndMass() + 2 * PROTON_MASS) / 3 + massTolerance;
+>                                 bionRef[pepIndex][7] = (refDist.getStartMass() + 2 * PROTON_MASS) / 3 - massTolerance;
+>                                 bionRef[pepIndex][6] = (refDist.getAvgMass() + 2 * PROTON_MASS) / 3;
+> 
+>                             case 2:
+>                                 bionSample[pepIndex][5] = (sampleDist.getEndMass() + 1 * PROTON_MASS) / 2 + massTolerance;
+>                                 bionSample[pepIndex][4] = (sampleDist.getStartMass() + 1 * PROTON_MASS) / 2 - massTolerance;
+>                                 bionSample[pepIndex][3] = (sampleDist.getAvgMass() + 1 * PROTON_MASS) / 2;
+>                                 bionRef[pepIndex][5] = (refDist.getEndMass() + 1 * PROTON_MASS) / 2 + massTolerance;
+>                                 bionRef[pepIndex][4] = (refDist.getStartMass() + 1 * PROTON_MASS) / 2 - massTolerance;
+>                                 bionRef[pepIndex][3] = (refDist.getAvgMass() + 1 * PROTON_MASS) / 2;
+> 
+>                             case 1:
+>                                 bionSample[pepIndex][2] = sampleDist.getEndMass() + massTolerance;
+>                                 bionSample[pepIndex][1] = sampleDist.getStartMass() - massTolerance;
+>                                 bionSample[pepIndex][0] = sampleDist.getAvgMass();
+>                                 bionRef[pepIndex][2] = refDist.getEndMass() + massTolerance;
+>                                 bionRef[pepIndex][1] = refDist.getStartMass() - massTolerance;
+>                                 bionRef[pepIndex][0] = refDist.getAvgMass();
+> 
+>                             default:
+>                                 break;
+> 
+>                         }
+> 
+>                         pepIndex++;
+>                     }
+> 
+>                     try {
+>                         element = new ElementComposition(ch, 0, ch.length, isoTable);
+>                         element.calculate();
+>                     } catch (InvalidAAException ive) {
+>                         System.out.println("Not Quantifiable peptide : " + pepSequence);
+> 
+>                         percent += eachSeg;
+>                         if (null != progress) {
+>                             ChroProgressDialog.addMessageWithLine(progress, "Not Quantifiable peptide : " + pepSequence);
+>                             progress.setProgress((int) percent);
+> 
+>                         }
+>                         continue;
+>                     }
+> 
+>                     sampleDist = new IsotopeDist(element.getElementSampleArr(), element.getModShift(), true);
+> 
+>                     int[] tempA = element.getElementSampleArr();
+> 
+>                     refDist = new IsotopeDist(element.getElementRefArr(), element.getModShift(), false);
+> 
+>                     switch (chargeState) {
+>                         case 3:
+>                             yionSample[0][8] = (sampleDist.getEndMass() + 3 * PROTON_MASS) / 3 + massTolerance;
+>                             yionSample[0][7] = (sampleDist.getStartMass() + 3 * PROTON_MASS) / 3 - massTolerance;
+>                             yionSample[0][6] = (sampleDist.getAvgMass() + 3 * PROTON_MASS) / 3;
+>                             yionRef[0][8] = (refDist.getEndMass() + 3 * PROTON_MASS) / 3 + massTolerance;
+>                             yionRef[0][7] = (refDist.getStartMass() + 3 * PROTON_MASS) / 3 - massTolerance;
+>                             yionRef[0][6] = (refDist.getAvgMass() + 3 * PROTON_MASS) / 3;
+> 
+>                         case 2:
+>                             yionSample[0][5] = (sampleDist.getEndMass() + 2 * PROTON_MASS) / 2 + massTolerance;
+>                             yionSample[0][4] = (sampleDist.getStartMass() + 2 * PROTON_MASS) / 2 - massTolerance;
+>                             yionSample[0][3] = (sampleDist.getAvgMass() + 2 * PROTON_MASS) / 2;
+>                             yionRef[0][5] = (refDist.getEndMass() + 2 * PROTON_MASS) / 2 + massTolerance;
+>                             yionRef[0][4] = (refDist.getStartMass() + 2 * PROTON_MASS) / 2 - massTolerance;
+>                             yionRef[0][3] = (refDist.getAvgMass() + 2 * PROTON_MASS) / 2;
+> 
+>                         case 1:
+>                             yionSample[0][2] = sampleDist.getEndMass() + 1 * PROTON_MASS + massTolerance; //add proton to give b fragment ion
+>                             yionSample[0][1] = sampleDist.getStartMass() + 1 * PROTON_MASS - massTolerance;
+>                             yionSample[0][0] = sampleDist.getAvgMass() + 1 * PROTON_MASS;
+>                             yionRef[0][2] = refDist.getEndMass() + 1 * PROTON_MASS + massTolerance;
+>                             yionRef[0][1] = refDist.getStartMass() + 1 * PROTON_MASS - massTolerance;
+>                             yionRef[0][0] = refDist.getAvgMass() + 1 * PROTON_MASS;
+> 
+>                         default:
+>                             break;
+> 
+>                     }
+> 
+> 
+>                     for(int i=0;i<bionSample.length;i++)
+>                     {
+>                         for(int j=0;j<bionSample[i].length;j++)
+>                             System.out.print(bionSample[i][j] + " ");
+> 
+>                         System.out.println(" ");
+>                     }
+>                     System.out.println(" ");
+> 
+>                     for(int i=0;i<yionSample.length;i++)
+>                     {
+>                         for(int j=0;j<yionSample[i].length;j++)
+>                             System.out.print(yionSample[i][j] + " ");
+> 
+>                         System.out.println(" ");
+>                     }
+>                     System.out.println(" ");
+> 
+>                     for(int i=0;i<bionRef.length;i++)
+>                     {
+>                         for(int j=0;j<bionRef[i].length;j++)
+>                             System.out.print(bionRef[i][j] + " ");
+> 
+>                         System.out.println(" ");
+>                     }
+>                     System.out.println(" ");
+> 
+>                     for(int i=0;i<yionRef.length;i++)
+>                     {
+>                         for(int j=0;j<yionRef[i].length;j++)
+>                             System.out.print(yionRef[i][j] + " ");
+> 
+>                         System.out.println(" ");
+>                     }
+>                     System.out.println(" ");
+> 
+> 
+>                     System.exit(1);
+> 
+>                     double calcSamMass = (sampleDist.getAvgMass() + chargeState * PROTON_MASS) / chargeState;
+>                     double calcRefMass = (refDist.getAvgMass() + chargeState * PROTON_MASS) / chargeState;
+> 
+>                     conf.setCalcSamAvgMass(calcSamMass);
+>                     conf.setCalcRefAvgMass(calcRefMass);
+> 
+>                     peptideEle.setAttribute("lightStartMass", String.valueOf(sampleDist.getStartMass()));
+>                     peptideEle.setAttribute("heavyStartMass", String.valueOf(refDist.getStartMass()));
+>                     peptideEle.setAttribute("lightAvgMass", String.valueOf(conf.getCalcSamAvgMass()));
+>                     peptideEle.setAttribute("heavyAvgMass", String.valueOf(conf.getCalcRefAvgMass()));
+> 
+>                     peptideEle = this.createXmlChroPeptideTitle(false, peptide);
+> 
+>                     String ms2FileName = peptide.getFileName().substring(0, peptide.getFileName().indexOf("."));
+> 
+>                     StringBuffer rangeKey = new StringBuffer();
+>                     rangeKey.append(protein.getLocus());
+>                     rangeKey.append(ms2FileName);
+>                     rangeKey.append(peptide.getSequence().substring(2, peptide.getSequence().length() - 2));
+>                     SpecRange range = rangeGen.getSpecRange(rangeKey.toString());
+> 
+>                     if (null == range) {
+>                         int tmpScanNum = Integer.parseInt(peptide.getScanNum());
+>                         range = new SpecRange(tmpScanNum, tmpScanNum);
+>                         peptideEle.setAttribute("start_scan", peptide.getScanNum());
+>                         peptideEle.setAttribute("end_scan", peptide.getScanNum());
+>                     } else {
+>                         peptideEle.setAttribute("start_scan", String.valueOf(range.getMin()));
+>                         peptideEle.setAttribute("end_scan", String.valueOf(range.getMax()));
+>                     }
+> 
+>                     //sb.append("\tStartScan\tEndScan\tDTAPeakStart\tDTAPeakEnd\n");
+>                     Element chro = new Element("chro");
+>                     //output.append("[CHROMATOGRAMS]\tSCAN\tSAMPLE\tREFERENCE\n");
+> 
+>                     iFile = ht.get(this.filePath + ms2FileName + "." + "ms2");
+>                     keys = iFile.getKeys();
+> 
+>                     //samplePrecursor = conf.getPrecursor( (sampleDist.getAvgMass()+chargeState)/chargeState );
+>                     //refPrecursor = conf.getPrecursor( (refDist.getAvgMass()+chargeState)/chargeState );
+>                     keyIndex = Arrays.binarySearch(keys, Integer.parseInt(peptide.getScanNum()));
+> 
+>                     if (keyIndex < 0) //Cannot find index
+>                     {
+>                         keyIndex = -(++keyIndex); //Math.abs(++keyIndex);
+>                     }
+>                     /**
+>                      * Find start scan number same as a precursor of
+>                      * sampleAvgMass Then, later the program will find following
+>                      * scan # quicker.
+>                      *
+>                      */
+>                     /* End of finding start spectrum number */
+> 
+>                     samplePrecursor = 1;
+>                     refPrecursor = 1;
+> 
+>                     TIntDoubleHashMap precursorMap = iFile.getPrecursorMap();
+> 
+>                     // {
+>                     //   System.out.println("Outside isowindow for sample precursor " + keys[keyIndex] + " " + (sampleDist.getAvgMass()+chargeState)/chargeState + " " + precursorMap.get(keys[keyIndex]) + " " + samplePrecursor);
+>                     //}
+>                     //if(precursorMap.get(keys[keyIndex+diff]) != refPrecursor)
+>                     //   System.out.println("Outside isowindow for ref precursor " + keys[keyIndex+diff] + " " + (refDist.getAvgMass()+chargeState)/chargeState  + " " + precursorMap.get(keys[keyIndex+diff]) + " " + refPrecursor);
+>                     //System.out.println("set text" + iFile + " " + range  + " " + keyIndex + " " + diff + " " + bionSample + " " + bionRef + " " + yionSample + " " + yionRef + " " + samplePrecursor + " " + refPrecursor + " " + conf + " " + chargeState);
+>                     //chro.setText( CalcUtil.calculateMS2Mass( iFile, range, keyIndex, diff, bionSample, bionRef, yionSample, yionRef, samplePrecursor, refPrecursor, conf, chargeState) );
+>                     try {
+>                         String outStr = CalcUtil.calculateMS2Mass(iFile, range, keyIndex, bionSample, bionRef, yionSample, yionRef, conf, chargeState);
+> 
+>                         if (outStr == null) {
+>                             continue;
+>                         }
+> 
+>                         chro.setText(outStr);
+>                     } catch (PrecursorNotFoundException ive) {
+>                         System.out.println("Precursor not found for " + pepSequence);
+> 
+>                         if (null != progress) {
+>                             ChroProgressDialog.addMessageWithLine(progress, "Error : Precursor not found for " + pepSequence);
+>                             percent += eachSeg;
+>                             progress.setProgress((int) percent);
+>                         }
+> 
+>                         ive.printStackTrace();
+> 
+>                         continue;
+>                     } catch (Exception e) {
+>                         System.out.println("Precursor not found for " + pepSequence);
+> 
+>                         if (null != progress) {
+>                             ChroProgressDialog.addMessageWithLine(progress, "Error : Precursor not found for " + pepSequence);
+>                             percent += eachSeg;
+>                             progress.setProgress((int) percent);
+>                         }
+>                         e.printStackTrace();
+> 
+>                         continue;
+>                     }
+> 
+>                     peptideEle.addContent(chro);
+> 
+>                     Element fragEle = new Element("frag");
+> 
+>                     Element bSample = new Element("bs");
+>                     StringBuffer tempSb = new StringBuffer();
+>                     for (int i = 0; i < bionSample.length; i++) {
+>                         int j;
+>                         for (j = 0; j < bionSample[i].length - 1; j++) {
+>                             tempSb.append(formatter.format(bionSample[i][j])).append(" ");
+>                         }
+> 
+>                         tempSb.append(formatter.format(bionSample[i][j])).append(",");
+>                     }
+> 
+>                     bSample.setText(tempSb.toString());
+>                     fragEle.addContent(bSample);
+> 
+>                     Element bRef = new Element("br");
+>                     tempSb.delete(0, tempSb.length());
+>                     for (int i = 0; i < bionRef.length; i++) {
+>                         int j;
+>                         for (j = 0; j < bionRef[i].length - 1; j++) {
+>                             tempSb.append(formatter.format(bionRef[i][j])).append(" ");
+>                         }
+> 
+>                         tempSb.append(formatter.format(bionRef[i][j])).append(",");
+> 
+>                     }
+> 
+>                     bRef.setText(tempSb.toString());
+>                     fragEle.addContent(bRef);
+> 
+>                     Element ySample = new Element("ys");
+>                     tempSb.delete(0, tempSb.length());
+>                     for (int i = 0; i < yionSample.length; i++) {
+>                         int j;
+>                         for (j = 0; j < yionSample[i].length - 1; j++) {
+>                             tempSb.append(formatter.format(yionSample[i][j])).append(" ");
+>                         }
+> 
+>                         tempSb.append(formatter.format(yionSample[i][j])).append(",");
+>                     }
+> 
+>                     ySample.setText(tempSb.toString());
+>                     fragEle.addContent(ySample);
+> 
+>                     Element yRef = new Element("yr");
+>                     tempSb.delete(0, tempSb.length());
+>                     for (int i = 0; i < yionRef.length; i++) {
+>                         int j;
+>                         for (j = 0; j < yionRef[i].length - 1; j++) {
+>                             tempSb.append(formatter.format(yionRef[i][j])).append(" ");
+>                         }
+> 
+>                         tempSb.append(formatter.format(yionRef[i][j])).append(",");
+>                     }
+> 
+>                     yRef.setText(tempSb.toString());
+>                     fragEle.addContent(yRef);
+> 
+>                     peptideEle.addContent(fragEle);
+> 
+>                     percent += eachSeg;
+> 
+>                     if (null != progress) {
+>                         progress.setProgress((int) percent);
+>                     }
+> 
+>                     System.out.print(pepCount);
+>                     System.out.print("/");
+>                     System.out.print(redundantPeptideNum);
+>                     System.out.print(" peptides, ");
+>                     System.out.print((int) percent);
+>                     //System.out.print(" % is complete\n");
+>                     System.out.print(" % is complete\r");
+> 
+>                     proteinEle.addContent(peptideEle);
+>                 }
+> 
+>                 if (proteinEle.getChildren().size() > 0) {
+>                     rootEle.addContent(proteinEle);
+>                 }
+>             }
+> 
+>             Document doc = new Document(rootEle);
+>             OutputStream os = new FileOutputStream(filePath + "census_chro.xml");
+>             XMLOutputter outputter = new XMLOutputter();
+>             outputter.setFormat(Format.getPrettyFormat());
+>             outputter.output(doc, os);
+>             os.close();
+> 
+>             System.out.println("\n100% complete");
+>             //System.out.println( System.out.println"\n100% complete");
+> 
+>             //Create relex.chro file
+>             /*
+>             out = new BufferedOutputStream(new FileOutputStream(filePath + "relex.chro"));
+>             p = new PrintStream(out);
+>             p.print(output.toString());
+>              */
+>         } catch (IOException e) {
+>             System.out.println("IO Error while generating msms chro file : " + pepSequence + e);
+>             e.printStackTrace();
+>             throw new IOException(e.toString());
+>         } catch (Exception e) {
+>             System.out.println("Error while generating msms chro file : " + pepSequence + e);
+>             e.printStackTrace();
+>             throw new Exception(e.toString());
+>         } finally {
+>             if (null != p) {
+>                 p.close();
+>             }
+> 
+>             if (null != out) {
+>                 out.close();
+>             }
+> 
+>             //Close all random files
+>             for (Enumeration e = ht.keys(); e.hasMoreElements();) {
+>                 iFile = ht.get(e.nextElement());
+> 
+>                 if (null != iFile) {
+>                     iFile.close();
+>                 }
+>             }
+> 
+>         }
+> 
+>     }
+>     public void createMsmsXmlChroLFree() throws IOException, Exception {
+> 
+>         this.progress = progress;
+>         int[] keys;
+> 
+>         this.filePath = conf.getFilePath();
+> 
+>         //if( !filePath.endsWith(File.separator) )
+>         //    filePath += File.separator;
+>         /*
+>         //file could be generated from either linux or window
+>         if( !this.filePath.endsWith("/") && !this.filePath.endsWith("\\") ) {
+>             //for linux
+>             if(this.filePath.startsWith("/"))
+>                 this.filePath += "/";
+>             else //for window
+>                 this.filePath += "\\";
+>         }
+>          */
+>         Hashtable<String, IndexedFile> ht = createIndexedFiles(filePath, CensusConstants.MS2_FILE);
+> 
+>         IndexedFile iFile;
+>         BufferedOutputStream out = null;
+>         PrintStream p = null;
+> 
+>         long startTime = System.currentTimeMillis();
+>         String pepSequence = null;
+> 
+>         try {
+> 
+>             /**
+>              * ****************************************************************
+>              * Read DTASelect.txt file to find spectrum range for each peptide
+>              *****************************************************************
+>              */
+>             ChroProgressDialog.addMessageWithLine(progress, "");
+> 
+>             IsotopeReader isoReader = null;
+> 
+>             if (conf.isXmlConf()) {
+>                 isoReader = new IsotopeReader(conf.getRootConfEle());
+>             } else {
+>                 isoReader = new IsotopeReader(isotopeFile);
+>             }
+> 
+>             IdentificationReader idReader = BaseIdentificationReader.getIdentificationInst(isoReader);
+>             SpecRangeGenerator rangeGen = new SpecRangeGenerator();
+>             int redundantPeptideNum = idReader.getTotalPeptideNumber();
+> 
+>             /*
+>             System.out.print("Parsing DTASelect.txt...");
+>             ChroProgressDialog.addMessageWithLine(progress, "Parsing DTASelect.txt...");
+>             IdentificationReader idReader = BaseIdentificationReader.getIdentificationInst(filePath);
+>             int redundantPeptideNum = idReader.getTotalPeptideNumber();
+>             SpecRangeGenerator rangeGen = SpecRangeGenerator.getSpecRangeGenerator(idReader);
+>             Hashtable tempht = rangeGen.getTable();
+>             System.out.println("done.");
+>             ChroProgressDialog.addMessageWithLine(progress, "done");
+>              */
+>             TIntLongHashMap index;
+> 
+>             //IsotopeReader isoReader = new IsotopeReader(isotopeFile);
+>             IsotopeTable<String, int[]> isoTable = isoReader.getIsotope();
+>             int[] sampleNterm = isoTable.get("sampleNTERM");
+>             int[] sampleCterm = isoTable.get("sampleCTERM");
+>             int[] refNterm = isoTable.get("refNTERM");
+>             int[] refCterm = isoTable.get("refCTERM");
+> 
+>             //int redundantPeptideNum = -1; //dtaReader.getRedundantPeptideNum();
+>             //int redundantPeptideNum = DTASelectFilterReader.getTotalPeptideNumber(conf.getIdFileName());
+>             //increase status bar
+>             double percent = 0.0;
+>             double eachSeg = 100.0 / redundantPeptideNum;
+>             int pepCount = 0;
+> 
+>             //IsotopeDist sampleDist;
+>             //IsotopeDist refDist;
+>             IsotopeDist sampleDist;
+>             IsotopeDist refDist;
+>             Protein protein;
+>             Peptide peptide;
+> 
+>             Element rootEle = this.createXmlChroHeader(2, conf.getExpType());
+> 
+>             ElementComposition element;
+>             ElementComposition totalElement;
+> 
+>             //int[] elementSampleArr;
+>             int keyIndex;
+>             int start;
+>             int last;
+> 
+>             double samplePrecursor;
+>             double refPrecursor;
+> 
+>             double[][] bionSample;
+>             double[][] bionRef;
+>             double[][] yionSample;
+>             double[][] yionRef;
+> 
+>             Element proteinEle = null;
+>             Element peptideEle = null;
+> 
+>             for (Iterator<Protein> itr = idReader.getProteins(); itr.hasNext();) {
+>                 protein = itr.next();
+> 
+>                 proteinEle = new Element("protein");
+>                 proteinEle.setAttribute("locus", protein.getLocus());
+>                 proteinEle.setAttribute("seq_ct", protein.getSeqCount());
+>                 proteinEle.setAttribute("spec_ct", protein.getSpectrumCount());
+>                 proteinEle.setAttribute("seq_cov", protein.getSeqCoverage());
+>                 proteinEle.setAttribute("length", protein.getLength());
+>                 proteinEle.setAttribute("molwt", protein.getMolWt());
+>                 proteinEle.setAttribute("pi", protein.getPI());
+>                 proteinEle.setAttribute("val", protein.getValidation());
+> 
+>                 try {
+>                     proteinEle.setAttribute("desc", protein.getDescription());
+>                 } catch (org.jdom.IllegalDataException ide) {
+>                     proteinEle.setAttribute("desc", StringUtil.removeIsoControlChar(protein.getDescription()));
+>                 }
+> 
+>                 for (Iterator<Peptide> pepItr = protein.getPeptides(); pepItr.hasNext();) {
+>                     peptide = pepItr.next();
+>                     pepCount++;
+> 
+>                     pepSequence = peptide.getSequence();
+> 
+>                     //What is the purpose of hs???
+>                     char[] ch = pepSequence.substring(2, peptide.getSequence().length() - 2).toCharArray();
+> 
+>                     try {
+>                         totalElement = new ElementComposition(ch, 0, ch.length, isoTable);
+>                         totalElement.calculate();
+>                     } catch (InvalidAAException ive) {
+>                         System.out.println("Not Quantifiable peptide : " + pepSequence);
+> 
+>                         percent += eachSeg;
+>                         if (null != progress) {
+>                             ChroProgressDialog.addMessageWithLine(progress, "Not Quantifiable peptide : " + pepSequence);
+>                             progress.setProgress((int) percent);
+> 
+>                         }
+>                         continue;
+>                     }
+> 
+>                     int chargeState = Integer.parseInt(peptide.getChargeState());
+> 
+>                     int pepLength = 0;
+> 
+>                     for (int i = 0; i < ch.length; i++) {
+>                         if (ch[i] == '*' || ch[i] == '@' || ch[i] == '#') {
+>                             continue;
+>                         }
+> 
+>                         pepLength++;
+>                     }
+> 
+>                     bionSample = new double[pepLength][chargeState * 3];
+>                     bionRef = new double[pepLength][chargeState * 3];
+>                     //Yions
+>                     yionSample = new double[pepLength][chargeState * 3];
+>                     yionRef = new double[pepLength][chargeState * 3];
+> 
+>                     int pepIndex = 0;
+> 
+>                     //System.out.println("aamass" + massTolerance + " " + conf.getMassTolerance());
+>                     for (int i = 0; i < ch.length; i++) {
+>                         if (ch[i] == '*' || ch[i] == '@' || ch[i] == '#') {
+>                             continue;
+>                         }
+> 
+>                         try {
+>                             element = new ElementComposition(ch, 0, i + 1, isoTable);
+>                             element.calculate();
+> 
+>                         } catch (InvalidAAException ive) {
+>                             System.out.println("Not Quantifiable peptide : " + pepSequence);
+> 
+>                             percent += eachSeg;
+>                             if (null != progress) {
+>                                 ChroProgressDialog.addMessageWithLine(progress, "Not Quantifiable peptide : " + pepSequence);
+>                                 progress.setProgress((int) percent);
+> 
+>                             }
+>                             continue;
+>                         }
+> 
+>                         //Y ions
+>                         sampleDist = new IsotopeDist(
+>                                 getComplementaryComposition(totalElement.getElementSampleArr(), element.getElementSampleArr(), sampleNterm, sampleCterm), element.getModShift(), true);
+> 
+>                         refDist = new IsotopeDist(
+>                                 getComplementaryComposition(totalElement.getElementRefArr(), element.getElementRefArr(), refNterm, refCterm), element.getModShift(), false);   //fix this
+> 
+3615c4687
+<                     if (!"".equals(label) && !(peptide.getFileName().startsWith(label))) {
+---
+>                     if (null != label && !"".equals(label) && !(peptide.getFileName().startsWith(label))) {

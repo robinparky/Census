@@ -1,0 +1,78 @@
+public class CalcUtil
+    public static String calculateMS2Mass (            
+    public static IrisDataModel readSpectrumPeaks(IndexedFile iFile, int keyIndex, int[] keys) throws IOException
+    public static double[] readSpectrumSpecificPeaks(
+    public static double intensitySumForSinglePeak(double[] massArr, double[] intArr, double mass, double tolerance)
+    public static double[] readSpectrum(
+    public static double[] readSpectrum(
+    public static String calculateFullMS(
+    public static class ResultList extends ArrayList<double[][]>
+        public ResultList(int size, int maxWindow, int margin)
+        public void addElement(int chromIndex, int scanIndex, double scanNumber, double intensity)
+    //public static String peakFinding(SpectrumModel sModel, SpecRange range, Configuration conf, int keyIndex, double[] samIsoArr, double[][] bionSample, double[][] bionRef, double[][] yionSample, double[][] yionRef)
+    public static String peakFinding(SpectrumModel sModel, SpecRange range, Configuration conf, int keyIndex, double[] samIsoArr)            
+    /*    public static String peakFinding(SpectrumModel sModel, SpecRange range, Configuration conf, int keyIndex, double[] samIsoArr)            
+    public static int findNextKeyIndex(int keys[], int keyIndex, int move, IndexedFile iFile, Configuration conf, double avgMass)
+    public static int findHeavyKey(int keys[], int keyIndex, IndexedFile iFile, Configuration conf, double avgMass)
+    public static int findMRMNextKey(int keys[], int keyIndex, int move, IndexedFile iFile, Configuration conf) //throws PrecursorNotFoundException
+    public static int findMRMNextKeyIndex(int keys[], int keyIndex, int move, IndexedFile iFile, Configuration conf)
+    public static int findLightKey(int keys[], int keyIndex, int move, IndexedFile iFile, Configuration conf) //throws PrecursorNotFoundException
+    public static String peakFindingMSMSMultipleSpecific(SpectrumModel sModel, SpecRange range, Configuration conf, int keyIndex) 
+    public static String peakFindingMSMS(SpectrumModel sModel, SpecRange range, Configuration conf, int keyIndex) 
+    public static String peakFinding(SpectrumModel sModel, SpecRange range, Configuration conf, int keyIndex)
+    public static void oldPeakFinding(SpectrumModel sModel, SpecRange range, Configuration conf, int keyIndex)
+    public static String calculateNonlabelMS(
+    public static String calculateNonlabelMS(
+    public static String calculateFullMS(
+    public static void getSpectrumArr(int[] keys, int curIndex, TIntLongHashMap index, RandomAccessFile file) throws IOException, CensusIndexOutOfBoundException
+    public static double[] readFullSpectrum(
+    public static double[] readSpectrum(
+    public static double[] readFullSpectrum(
+    public static double[] readFullSpectrum(
+    public static double[] readFullSpectrum(
+    public static double intensitySum(double[] massArr, double[] intArr, double startMass, double endMass)
+    //public static double intensitySum(double[] massArr, double[] intArr, double[] isoArr, int num)
+    public static double intensitySum(double[] massArr, double[] intArr, double[] isoArr)
+    public static void getPeaks(ChroPeptide peptide, int startWindow, int endWindow, int threshold)
+    public static FragIonList getBestFragIons(long[][] bsTempArr, long[][] ysTempArr, long[][] brTempArr, long[][] yrTempArr, int startPeakIndex, int endPeakIndex, int maxShift)            
+    public static double calculateSNRatio(long[] samArr, long[] refArr, int startIndex, int endIndex)
+	public int getDiff()
+	public void setDiff(int diff)
+        public IndexedFile getIFile() {
+        public void setIFile(IndexedFile iFile) {
+        public int[] getKeys() {
+        public void setKeys(int[] keys) {
+        public double getSamStartMass() {
+        public void setSamStartMass(double samStartMass) {
+        public double getSamEndMass() {
+        public void setSamEndMass(double samEndMass) {
+        public double getRefStartMass() {
+        public void setRefStartMass(double refStartMass) {
+        public double getRefEndMass() {
+        public void setRefEndMass(double refEndMass) {
+        public boolean isHighRes() {
+        public void setHighRes(boolean highRes) {
+        public TIntLongHashMap getIndex() {
+        public void setIndex(TIntLongHashMap index) {
+        public RandomAccessFile getFile() {
+        public void setFile(RandomAccessFile file) {
+        public int getSteepArea() {
+        public void setSteepArea(int steepArea) {
+        public double[] getSamIsoArr() {
+        public void setSamIsoArr(double[] samIsoArr) {
+        public double[] getRefIsoArr() {
+        public void setRefIsoArr(double[] refIsoArr) {
+	public String getResult() {
+	public void setResult(String result) {
+        public double[][] getBioSample() {
+        public void setBioSample(double[][] bioSample) {
+        public double[][] getYioSample() {
+        public void setYioSample(double[][] yioSample) {
+        public double[][] getBioRef() {
+        public void setBioRef(double[][] bioRef) {
+        public double[][] getYioRef() {
+        public void setYioRef(double[][] yioRef) {
+        public List getMsmsSpecificMassList() {
+        public void setMsmsSpecificMassList(List msmsSpecificMassList) {
+    public static double getWeightedStdev(double corr)
+	public static void main(String[] args) throws Exception

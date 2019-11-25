@@ -1,0 +1,26 @@
+H	Census version null
+H	Create by 
+H	Robin, Sung Kyu Park rpark@scripps.edu
+H	John Venable jvenable@scripps.edu
+H	The Scripps Research Institute, La Jolla, CA
+H	SLINE	Peptide line
+H	&SLINE	Singleton Peptide line
+H	PLINE	LOCUS	AVERAGE_RATIO	STANDARD_DEVIATION	WEIGHTED_AVERAGE	PEPTIDE_NUM	SPEC_COUNT	AREA_RATIO	DESCRIPTION
+H	SLINE	UNIQUE	SEQUENCE	RATIO	REGRESSION_FACTOR	DETERMINANT_FACTOR	XCorr	deltaCN	SAM_INT	REF_INT	AREA_RATIO	PROFILE_SCORE	FILE_NAME	SCAN	CS	ENRICHMENT
+H	&SLINE	UNIQUE	SEQUENCE	RATIO	REGRESSION_FACTOR	DETERMINANT_FACTOR	XCorr	deltaCN	SAM_INT	REF_INT	AREA_RATIO	SINGLETON_SCORE	FILE_NAME	SCAN	CS
+H	Total Redundant Proteins	775
+H	Total Unique Proteins	775
+H	Total peptides	3095
+H	Quantified peptides	2078
+H	Quantification efficiency	67.14 %
+H	Correction Factor (Ln)	0.0
+P	pfa3D7|chr11|PF11_0061|Pf	1.00	0.10	1.00	15	117	9.170269006666666E7	Annotation|Plasmodium_falciparum_TIGR|(protein coding) histone H4, putative Location= chr11 complement(221819..222130) 
+S	U	K.ILRDNIQGITKPAIR.R	1.18	0.93	0.86	2.9715	0.0862	5997965.0	4547076.0	1.32	0.96	Fansidar_4h_rep1_10	3545	3	0.98
+S	U	K.RISGLIYEEIR.G	0.96	1.00	1.00	2.8053	0.0977	975796.0	1002484.0	0.97	0.48	HFansidar_4h_rep1_05	3488	3	0.98
+P	pfa3D7|chr11|PF11_0043|Pf	0.88	0.06	0.88	4	13	8.807483625E7	Annotation|Plasmodium_falciparum_TIGR|(protein coding) 60S acidic ribosomal protein p1, putative Location= chr11 complement(join(140603..140802, 140049..140205)) 
+S	U	K.QELLCTYAALILHEEK.M	0.80	0.94	0.88	2.0773	0.1878	1.2173725E7	1.6798597E7	0.72	0.65	Fansidar_4h_rep1_04	5298	3	0.98
+S	U	K.GKDIQSLLSNLSVGSAPAAAAQVTTEKPSEDKK.E	0.92	0.96	0.92	2.8825	0.2777	9.8263462E7	1.14878592E8	0.86	0.92	Fansidar_4h_rep1_03	4528	4	0.98
+P	pfa3D7|chr14|PF14_0599|Pf	0.78	0.08	0.79	14	352	6.66345105E7	Annotation|Plasmodium_falciparum_TIGR|(protein coding) glyceraldehyde-3-phosphate dehydrogenase Location= chr14 join(2559033..2559116, 2559353..2560282) 
+P	pfa3D7|chr14|PF14_0598|Pf	0.78	0.08	0.79	14	352	6.66345105E7	Annotation|Plasmodium_falciparum_TIGR|(protein coding) glyceraldehyde-3-phosphate dehydrogenase Location= chr14 join(2559033..2559116, 2559353..2560282) 
+S	U	R.KDIEVVAINDPFMDLNHLCYLLK.Y	0.80	0.79	0.63	4.296	0.4408	2645497.0	2792655.0	0.95	0.81	HFansidar_4h_rep1_04	6047	3	0.98
+S	U	K.DIEVVAINDPFMDLNHLCYLLK.Y	0.64	0.90	0.82	3.3373	0.4569	1179408.0	1554996.0	0.76	0.23	Fansidar_4h_rep1_03	7197	2	0.98

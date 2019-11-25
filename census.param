@@ -1,0 +1,17 @@
+H	census parameters for report file generation
+H	1:true, 0:false
+nofilter	0	#use filtering parameters. 1 means Census uses no parameter filters
+determinant_facter_threshold	0.5
+filter_fragment_ions	0	#it works only for data independent experiment.  Ignored on other experimenets
+correction_factor	0	
+discard_unlabeled_peptide	1
+remove_negative_determinant_factor	1
+unique_peptide_only	0
+use_outlier	1
+outlier_p_value	0.1
+discard_singleton_peptide	1
+singleton_arearatio_lower_threshold	1
+singleton_arearatio_upper_threshold	10
+singleton_score_threshold	0.5
+singleton_minimum_peptides	3
+H	private boolean detSelect;

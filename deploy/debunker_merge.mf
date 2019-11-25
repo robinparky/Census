@@ -1,0 +1,3 @@
+Manifest-Version: 1.0
+Main-Class: scripts.lliao.phospho_proteome.CensusReportDebunkerMerge
+Class-Path: jdom.jar trove.jar AbsoluteLayout.jar swing-layout-0.7.jar commons-cli-1.0.jar mzxmlviewer.jar

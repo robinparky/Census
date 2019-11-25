@@ -1,0 +1,343 @@
+29d28
+< import edu.scripps.pms.census.hash.IndexUtil;
+63d61
+< import scripts.MSSplitFolderCreation;
+89c87,88
+<         String tmpFile = args[1];
+---
+>         String tmpFile = args[1]; //http://192.168.2.9/ip2/viewLabelfree.html?pid=127&projectName=JonB_Cox
+>         
+275a275,276
+>                    // System.out.println("=================>>" + intensity.length + "\t" + corrIntensity.length + "\t" +
+>                    //         j + "\t" + key + "\t" + counter + "\t" + intensityMap.get(key) + "\t" + intensityMap.get(key).size());
+431,432c432,433
+<                 p.print(protein.getMultipleRatiopValue());
+<                 p.print("\t");
+---
+>                // p.print(protein.getMultipleRatiopValue());
+>                 p.print("1.0\t");
+561a563,582
+>         
+>         List<org.jdom.Element> samGroupEleList1 = conf.getRootConfEle().getChildren("sample");
+>         int expSize = 0;
+> 
+>         List<Integer> indexList = new ArrayList<>();
+>         for (Iterator<org.jdom.Element> samgItr = samGroupEleList1.iterator(); samgItr.hasNext();) {
+>             int count =0;
+>             org.jdom.Element groupEle = samgItr.next();
+> 
+> 
+>             List<org.jdom.Element> sampleEleList = groupEle.getChildren("each_sample");
+>             
+>             for (Iterator<org.jdom.Element> samItr = sampleEleList.iterator(); samItr.hasNext();) {
+>                 org.jdom.Element eachSample = samItr.next();
+>                 count++;
+>                 expSize++;
+>             }
+>             indexList.add(count);
+>         }
+>         
+569c590
+< 
+---
+>         
+572,578c593
+<         Hashtable<String, IndexedFile> origMs1FileHt = new Hashtable<>();
+< 
+<         MSSplitFolderCreation msp = new MSSplitFolderCreation();
+<         Map<String, String> splitSpectraMap = new HashMap<>();
+<         Map<String, IndexedFile> splitMs1FileHt = new HashMap<>();
+<         Map<String, HashMap<Integer, Integer>> ms2ToMs1Map = new HashMap<>();
+< 
+---
+>         Hashtable<String, IndexedFile> indexHt = new Hashtable<>();
+580a596,597
+>                 Hashtable<String, IndexedFile> ht = ChroGenerator.createIndexedFiles(path, "ms1", false);
+>                 indexHt.putAll(ht);
+582,595c599
+<                 if(!path.endsWith("/"))
+<                     path += "/";
+< 
+<                 String spectraPath = path + "../../spectra/";
+<                 String splitSpectraPath = path + "../../spectra/split/";
+< 
+<                 splitSpectraMap.putAll( msp.splitMS1Files(spectraPath, CensusConstants.LABELFREE_MS1_SPLIT_SCAN_NUM) );
+<                 splitMs1FileHt.putAll( ChroGenerator.createIndexedFiles(splitSpectraPath, CensusConstants.MS1_FILE) );
+<                 ms2ToMs1Map.putAll( IndexUtil.buildMS2toMS1ScanMapFiles(spectraPath) );
+< 
+<                 Hashtable<String, IndexedFile> ht = ChroGenerator.createIndexedFiles(spectraPath, "ms1", true);
+<                 origMs1FileHt.putAll(ht);
+< 
+<                 ChroXmlReader cr = new ChroXmlReader(path + "census_chro_temp.xml");
+---
+>                 ChroXmlReader cr = new ChroXmlReader(path + File.separator + "census_chro_temp.xml");
+613c617
+<         conf.setIndexHt(origMs1FileHt);
+---
+>         conf.setIndexHt(indexHt);
+660a665,666
+>                 //    System.out.println("===\t" + expPep.getSequence());
+> 
+681,682c687
+<                         List<String> fnameList = sampleList.get(count).getLabelfreeFilenameList();
+<                         List<String> pathList = sampleList.get(count).getPathList();
+---
+> //                        String fname = .getLabelfreeFilename();
+684,693c689,691
+<                         for(int i=0;i<fnameList.size();i++) {
+<                             String eachFile = fnameList.get(i);
+<                             String eachPath = pathList.get(i);
+<                             String eachKey = eachFile;
+< 
+<                             if(eachPath.endsWith("/")) {
+<                                 eachKey = eachPath + "../../spectra/" + eachFile;
+<                             } else {
+<                                 eachKey = eachPath + "/../../spectra/" + eachFile;
+<                             }
+---
+>                         List<String> fileNameList = sampleList.get(count).getLabelfreeFilenameList();
+> 
+>                         for(String fname:fileNameList) {
+695,696c693,694
+<                             IndexedFile origIFile = origMs1FileHt.get(eachKey);
+<                             TDoubleIntHashMap retentonToScanMap = origIFile.getRetentonToScanMap();
+---
+>                             IndexedFile iFile = indexHt.get(fname);
+>                             TDoubleIntHashMap retentonToScanMap = iFile.getRetentonToScanMap();
+701c699
+<                             double[] retKeys = origIFile.getRtArr();
+---
+>                             double[] retKeys = iFile.getRtArr();
+716a715
+>                             GaussianPeakModel peakModel = isotopeCalc(startScan, endScan, startIndex, endIndex, isoReader, each.getSequence(), each.getChargeState(), iFile);
+718,729d716
+<                             //System.out.println("==========" + startIndex + " " + startScan);
+< 
+< 
+<                             //IndexedFile origIFile = origMs1FileHt.get(origFile);
+< 
+<                             GaussianPeakModel peakModel = isotopeCalc(startScan, endScan, startIndex, endIndex, isoReader, each.getSequence(),
+<                                     each.getChargeState(), origIFile,
+<                                     splitSpectraMap,
+<                                     splitMs1FileHt
+<                                     );
+<                             //System.out.println("--------------" + startScan + " " + endScan);
+<                             //System.out.println(iFile + " " + fname + " " + expPep.getFileName());
+739,740c726,727
+<                                 for (int j = 0; j < scanArr.length; j++) {
+<                                     sb.append(scanArr[j]).append(" ").append(retArr[j]).append(" ").append(peakArr[j]).append(";");
+---
+>                                 for (int i = 0; i < scanArr.length; i++) {
+>                                     sb.append(scanArr[i]).append(" ").append(retArr[i]).append(" ").append(peakArr[i]).append(";");
+750,751c737,738
+<                                     for (int j = 0; j < gxArr.length; j++) {
+<                                         gPeakSb.append(gxArr[j]).append(" ").append(gyArr[j]).append(";");
+---
+>                                     for (int i = 0; i < gxArr.length; i++) {
+>                                         gPeakSb.append(gxArr[i]).append(" ").append(gyArr[i]).append(";");
+755d741
+< 
+764,771d749
+< 
+<                             ChroPeptide tmpChroPeptide = analyzedPeptideHt.get(key);
+< 
+<                             if( !peakModel.isHasPeak() && null!=tmpChroPeptide)
+<                                 continue;
+< 
+<                             analyzedPeptideHt.put(key, expPep);
+< 
+775,789c753,754
+< 
+<                         /*
+< 
+<         String origFile = iFile.getFileName();
+< 
+< 
+<         HashMap<Integer, Integer> ms2Ms1ScanMap = ms2ToMs1Map.get(origFile);
+<         int ms1ScanNum = ms2Ms1ScanMap.get(ms2ScanNumber);
+<         String fileKey = ms1ScanNum + "\t" + origFile;
+<         String spltiMs1File = splitSpectraMap.get(fileKey);
+< 
+<         IndexedFile splitIFile = splitMs1FileHt.get(spltiMs1File);
+<         IndexedFile origIFile = origMs1FileHt.get(origFile);
+< 
+<                          */
+---
+>                           //System.out.println("--------------" + startScan + " " + endScan);
+>                           //System.out.println(iFile + " " + fname + " " + expPep.getFileName());
+791a757
+>                         analyzedPeptideHt.put(key, expPep);
+1148a1115,1132
+>                 
+>                 for (int a = 0; a < samGroupEleList.get(0).getChildren().size(); a++) {
+> 
+>                     ps.print("MEDIAN_LOG_RATIO_" + (a + 1));
+>                     ps.print("\t");
+>                 }
+>                 for (int a = 0; a < expSize; a++) {
+>                     ps.print("INTENSITY_"+(a+1)+"\t");
+>                 }
+>                 for(int a=0;a<indexList.size();a++){
+>                     ps.print("AVG_GROUP_INTENSITY_VALUE_"+(a+1)+"\t");
+>                 }
+>                 for(int a=0;a<expSize;a++){
+>                     ps.print("AVG_ION_INJECTION_TIME_INTENSITY_"+(a+1)+"\t");
+>                 }
+>                 for(int a=0;a<indexList.size();a++){
+>                     ps.print("AVG_GROUP_ION_INJECTION_TIME_INTENSITY_VALUE_"+(a+1)+"\t");
+>                 }
+1162c1146
+<                     if(words3[rr].startsWith("NORM")){
+---
+>                     if(words3[rr].startsWith("NORM")) {
+1177a1162
+>                 
+1180a1166,1181
+>                 for (double d : proteinList.get(i).getPeptideMedianLogRatioArr()) {
+>                     ps.print(d);
+>                     ps.print("\t");
+>                 }
+>                 for(int rr=0;rr<proteinList.get(i).getBestCorrelationEachpeptideIntensityList().size();rr++){
+>                     ps.print(proteinList.get(i).getBestCorrelationEachpeptideIntensityList().get(rr).longValue()+"\t");
+>                 }
+>                 for(int rr=0;rr<proteinList.get(i).getBestCorrelationIntensityList().size();rr++){
+>                     ps.print(proteinList.get(i).getBestCorrelationIntensityList().get(rr).longValue()+"\t");
+>                 }
+>                 for(int rr=0;rr<proteinList.get(i).getBestCorrelationEachpeptideIntensityListIIT().size();rr++){
+>                     ps.print(proteinList.get(i).getBestCorrelationEachpeptideIntensityListIIT().get(rr).longValue()+"\t");
+>                 }
+>                 for(int rr=0;rr<proteinList.get(i).getBestCorrelationIntensityListIIT().size();rr++){
+>                     ps.print(proteinList.get(i).getBestCorrelationIntensityListIIT().get(rr).longValue()+"\t");
+>                 }
+1229c1230
+<         LabelfreeMissingPeptideBuilder.proteinCompareBasedOnRatios(proteinList, sample1IndexList, sample2IndexList);
+---
+>        // LabelfreeMissingPeptideBuilder.proteinCompareBasedOnRatios(proteinList, sample1IndexList, sample2IndexList);
+1326,1339c1327
+<     public static GaussianPeakModel isotopeCalc(int startScan, int endScan, int startIndex, int endIndex,
+<                                                 IsotopeReader isoReader, String sequence,
+<                                                 int chargeState,
+<                                                 IndexedFile origIFile,
+<                                                 Map<String, String> splitSpectraMap,
+<                                                 Map<String, IndexedFile> splitMs1FileHt
+< 
+<                                                 ) throws Exception {
+< 
+<         String origFile = origIFile.getFileName();
+< 
+< //        IndexedFile splitIFile = splitMs1FileHt.get(spltiMs1File);
+< 
+< 
+---
+>     public static GaussianPeakModel isotopeCalc(int startScan, int endScan, int startIndex, int endIndex, IsotopeReader isoReader, String sequence, int chargeState, IndexedFile iFile) throws Exception {
+1393,1399c1381,1382
+< 
+< 
+< 
+< 
+< 
+<        // long currentPos = origIFile.getPositionByIndex(startIndex);
+<       //  long nextPos = -1;
+---
+>         long currentPos = iFile.getPositionByIndex(startIndex);
+>         long nextPos = -1;
+1407d1389
+< 
+1410,1414c1392,1394
+<             int eachScan = origIFile.getKeys()[i];
+<             String fileKey = eachScan + "\t" + origFile;
+<             //String spltiMs1File = splitSpectraMap.get(fileKey);
+<             //IndexedFile splitIFile = splitMs1FileHt.get(spltiMs1File);
+<             //int splitCurIndex = splitIFile.getIndexByScan(eachScan);
+---
+>             if ((i + 1) >= iFile.getScanPositionMap().size()) {
+>                 break;
+>             }
+1415a1396
+>             nextPos = iFile.getPositionByIndex(i + 1);
+1420,1429c1401
+< 
+<             //if ((splitCurIndex + 1) >= splitIFile.getScanPositionMap().size()) {
+<             //    break;
+<             //}
+< 
+<             //long currentPos = splitIFile.getPositionByIndex(splitCurIndex);
+<             //long nextPos = splitIFile.getPositionByIndex(splitCurIndex + 1);
+< 
+< 
+<           //  int diff = (int) (nextPos - currentPos);
+---
+>             int diff = (int) (nextPos - currentPos);
+1431,1435c1403
+<                     conf.getMassTolerance(), origIFile, chargeState, conf, pepMass);
+< 
+<             //SpectrumModel spec = CalcUtilGeneric.readLabelfreeFullSpectrum(isoArr, currentPos, diff,
+<              //       conf.getMassTolerance(), splitIFile, chargeState, conf, pepMass);
+< 
+---
+>                     conf.getMassTolerance(), iFile, chargeState, conf, pepMass);
+1444c1412
+<             //currentPos = nextPos;
+---
+>             currentPos = nextPos;
+1458c1426
+<             int diff = (int) (origIFile.getPositionByIndex(startIndex+1) - origIFile.getPositionByIndex(startIndex)); //nextPos - currentPos);
+---
+>             int diff = (int) (iFile.getPositionByIndex(startIndex+1) - iFile.getPositionByIndex(startIndex)); //nextPos - currentPos);
+1464,1485c1432,1433
+< 
+<             int currentScan = origIFile.getKeys()[startIndex];
+<             String fileKey = currentScan + "\t" + origFile;
+<             String spltiMs1File = splitSpectraMap.get(fileKey);
+<             IndexedFile splitIFile = splitMs1FileHt.get(spltiMs1File);
+<             int splitCurIndex = splitIFile.getIndexByScan(currentScan);
+< 
+<             long startPos = splitIFile.getPositionByScan(currentScan);
+< 
+<             long backGroundNoise = 0;
+<             if ((splitCurIndex + 1) < splitIFile.getScanPositionMap().size()) {
+<                 long currentPos = splitIFile.getPositionByIndex(splitCurIndex);
+<                 long nextPos = splitIFile.getPositionByIndex(splitCurIndex + 1);
+< 
+< 
+<                 diff = (int) (nextPos - currentPos);
+< 
+< 
+<                 backGroundNoise = CalcUtilGeneric.getBackGroundNoise(isoArr, currentPos, diff, splitIFile);
+< 
+<             }
+< 
+---
+>             currentPos = iFile.getPositionByIndex(startIndex);
+>             long backGroundNoise = CalcUtilGeneric.getBackGroundNoise(isoArr, currentPos, diff, iFile);
+1605c1553,1567
+<         int reportIonCount = sample1List.size() + sample2List.size();
+---
+>         sample2List.add(4);
+>         List<Integer> sampleList2new = sample2List;
+>         List<Integer> sampleList1new = sample1List;
+>         if(sample1List.size() < sample2List.size()){
+>             sampleList2new=new ArrayList<>();
+>             for(int h=0;h<sample1List.size();h++){
+>                 sampleList2new.add(sample2List.get(h));
+>             }
+>         }else{
+>             sampleList1new=new ArrayList<>();
+>             for(int h=0;h<sample2List.size();h++){
+>                 sampleList1new.add(sample1List.get(h));
+>             }
+>         }
+>         int reportIonCount = sampleList1new.size() + sampleList2new.size();
+1607a1570
+>             
+1616a1580,1581
+>                     //System.out.println("********************");
+>                    // System.out.println(""+peptide.getAverageIntensity());
+1620c1585
+<                 ICombinatoricsVector<Integer> initialVector = Factory.createVector(sample2List);
+---
+>                 ICombinatoricsVector<Integer> initialVector = Factory.createVector(sampleList2new);
+1637c1602
+<                         ratio = avgIntensityList.get((int) sample1List.get(r)) / avgIntensityList.get((int) obj);
+---
+>                         ratio = avgIntensityList.get((int) sampleList1new.get(r)) / avgIntensityList.get((int) obj);

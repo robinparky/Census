@@ -1,0 +1,968 @@
+ protein binding	510	na	2303	na	0.0000000	0.0000000	*
+nucleotide binding	423	na	1116	na	0.0000000	0.0000000	*
+ ATP binding	419	na	2518	na	0.3036898	0.8570768	
+ 	259	na	1589	na	0.2441824	0.8880310	
+ transferase activity	246	na	1068	na	0.0000015	0.0000009	*
+ zinc ion binding	238	na	2933	na	0.0000000	1.0000000	
+ calcium ion binding	217	na	1192	na	0.4331339	0.2316472	
+ GTP binding	192	na	521	na	0.0000000	0.0000000	*
+ metal ion binding	176	na	860	na	0.0170927	0.0095242	*
+ hydrolase activity	167	na	542	na	0.0000000	0.0000000	*
+structural constituent of ribosome	154	na	1036	na	0.0292114	0.9882037	
+ oxidoreductase activity	147	na	589	na	0.0000026	0.0000017	*
+ RNA binding	128	na	721	na	0.8029364	0.4102767	
+nucleic acid binding	127	na	1987	na	0.0000000	1.0000000	
+actin binding	104	na	297	na	0.0000000	0.0000000	*
+DNA binding	104	na	1192	na	0.0000000	1.0000000	
+binding	91	na	652	na	0.0183406	0.9928401	
+protein serine/threonine kinase activity	88	na	706	na	0.0003350	0.9998879	
+receptor activity	88	na	1114	na	0.0000000	1.0000000	
+ structural molecule activity	87	na	349	na	0.0003514	0.0002159	*
+magnesium ion binding	79	na	181	na	0.0000000	0.0000000	*
+catalytic activity	68	na	350	na	0.3195741	0.1714044	
+transporter activity	63	na	728	na	0.0000000	1.0000000	
+ iron ion binding	60	na	475	na	0.0048618	0.9982734	
+ GTPase activity	55	na	111	na	0.0000000	0.0000000	*
+ ligase activity	51	na	109	na	0.0000000	0.0000000	*
+calmodulin binding	46	na	102	na	0.0000000	0.0000000	*
+ signal transducer activity	46	na	214	na	0.1228106	0.0690315	
+ kinase activity	43	na	149	na	0.0004715	0.0003552	*
+electron carrier activity	42	na	208	na	0.2712034	0.1626604	
+glyceraldehyde-3-phosphate dehydrogenase (phosphorylating) activity	41	na	194	na	0.1821832	0.1006262	
+ ubiquitin-protein ligase activity	38	na	193	na	0.3909378	0.2228085	
+ translation initiation factor activity	36	na	100	na	0.0000075	0.0000063	*
+ isomerase activity	34	na	76	na	0.0000000	0.0000000	*
+ lyase activity	33	na	70	na	0.0000000	0.0000000	*
+ ATPase activity	33	na	237	na	0.1685789	0.9362616	
+ potassium ion binding	32	na	94	na	0.0000946	0.0000717	*
+protein transporter activity	31	na	108	na	0.0032156	0.0024206	*
+ ion channel activity	30	na	267	na	0.0071496	0.9980421	
+guanyl-nucleotide exchange factor activity	30	na	175	na	1.0000000	0.5647021	
+ nucleoside-triphosphatase activity	29	na	115	na	0.0349720	0.0214254	*
+ acyltransferase activity	27	na	96	na	0.0095733	0.0060004	*
+ motor activity	26	na	152	na	1.0000000	0.5695396	
+cysteine-type endopeptidase activity	24	na	189	na	0.1007232	0.9683593	
+ GTPase activator activity	24	na	75	na	0.0019314	0.0014745	*
+ lipid binding	23	na	96	na	0.1038709	0.0625386	
+ "hydrogen-transporting ATPase activity, rotational mechanism"	23	na	80	na	0.0112556	0.0080581	*
+ protein-tyrosine kinase activity	23	na	200	na	0.0305516	0.9918709	
+ ATP-dependent helicase activity	23	na	143	na	0.7408566	0.6927765	
+ubiquitin thiolesterase activity	23	na	132	na	1.0000000	0.5308981	
+ heme binding	22	na	278	na	0.0000069	0.9999985	
+ "hydrogen-transporting ATP synthase activity, rotational mechanism"	22	na	79	na	0.0242180	0.0138462	*
+ microtubule motor activity	22	na	166	na	0.1812718	0.9388155	
+ protein disulfide oxidoreductase activity	22	na	71	na	0.0044038	0.0035622	*
+NADH dehydrogenase (ubiquinone) activity	21	na	45	na	0.0000053	0.0000053	*
+protein domain specific binding	21	na	40	na	0.0000005	0.0000005	*
+ Rho guanyl-nucleotide exchange factor activity	20	na	131	na	0.6433464	0.7719480	
+ peptidase activity	20	na	193	na	0.0096502	0.9977412	
+ FAD binding	19	na	70	na	0.0389767	0.0274388	*
+serine-type endopeptidase inhibitor activity	19	na	215	na	0.0005390	0.9998869	
+ symporter activity	18	na	72	na	0.1170022	0.0649371	
+ protein heterodimerization activity	18	na	55	na	0.0063392	0.0042049	*
+ manganese ion binding	18	na	62	na	0.0271161	0.0160505	*
+ "hydrolase activity, acting on acid anhydrides, catalyzing transmembrane movement of substances"	17	na	53	na	0.0096002	0.0066771	*
+ translation elongation factor activity	17	na	48	na	0.0032406	0.0020886	*
+ structural constituent of cytoskeleton	16	na	27	na	0.0000013	0.0000013	*
+glutathione transferase activity	15	na	37	na	0.0007694	0.0007694	*
+threonine endopeptidase activity	15	na	34	na	0.0002569	0.0002569	*
+ transcription factor binding	15	na	55	na	0.0719373	0.0448311	*
+ voltage-gated potassium channel activity	15	na	114	na	0.2656768	0.9100067	
+cytochrome-c oxidase activity	15	na	40	na	0.0024444	0.0019658	*
+protein tyrosine phosphatase activity	15	na	93	na	0.8908810	0.6672469	
+ calcium-dependent phospholipid binding	14	na	32	na	0.0004563	0.0004563	*
+ protein homodimerization activity	14	na	57	na	0.1607509	0.1073707	
+ copper ion binding	14	na	93	na	0.6805381	0.7631782	
+transcription factor activity	14	na	1101	na	0.0000000	1.0000000	
+ metallopeptidase activity	14	na	97	na	0.5038215	0.8152225	
+phosphoprotein phosphatase activity	14	na	43	na	0.0141864	0.0114725	*
+receptor binding	14	na	80	na	1.0000000	0.5349948	
+inositol/phosphatidylinositol phosphatase activity	13	na	38	na	0.0156713	0.0093493	*
+ diacylglycerol binding	13	na	28	na	0.0003577	0.0003577	*
+protein C-terminus binding	12	na	18	na	0.0000049	0.0000049	*
+ metalloendopeptidase activity	12	na	163	na	0.0003649	0.9999409	
+ARF guanyl-nucleotide exchange factor activity	12	na	28	na	0.0014414	0.0014414	*
+ protein kinase binding	11	na	27	na	0.0036529	0.0036529	*
+ phosphoinositide binding	11	na	77	na	0.5487948	0.8053877	
+ cytoskeletal protein binding	11	na	40	na	0.0958947	0.0747945	
+diacylglycerol kinase activity	11	na	44	na	0.2286048	0.1296954	
+protein phosphatase type 2A regulator activity	11	na	19	na	0.0000825	0.0000825	*
+chromatin binding	11	na	97	na	0.1387410	0.9623008	
+ double-stranded RNA binding	11	na	38	na	0.0822419	0.0540094	
+ chloride channel activity	10	na	25	na	0.0064275	0.0064275	*
+ sodium/potassium-exchanging ATPase activity	10	na	16	na	0.0000717	0.0000717	*
+ protein serine/threonine phosphatase activity	10	na	15	na	0.0000319	0.0000319	*
+ heparin binding	10	na	40	na	0.2095563	0.1441944	
+phosphoinositide phospholipase C activity	10	na	30	na	0.0290524	0.0258122	*
+ "transferase activity, transferring glycosyl groups"	10	na	77	na	0.3673125	0.8821308	
+ sugar binding	10	na	288	na	0.0000000	1.0000000	
+PDZ domain binding	9	na	24	na	0.0255344	0.0153313	*
+ "hydrolase activity, acting on ester bonds"	9	na	27	na	0.0394413	0.0336913	*
+GABA-A receptor activity	9	na	35	na	0.1844367	0.1410985	
+ glutamate-gated ion channel activity	9	na	23	na	0.0112909	0.0112909	*
+ phosphopyruvate hydratase activity	9	na	26	na	0.0333876	0.0264262	*
+oxygen transporter activity	9	na	14	na	0.0001236	0.0001236	*
+ protein kinase activity	9	na	152	na	0.0000554	0.9999929	
+ oxygen binding	9	na	19	na	0.0024722	0.0024722	*
+ pyridoxal phosphate binding	9	na	20	na	0.0038076	0.0038076	*
+ phospholipid binding	9	na	15	na	0.0002612	0.0002612	*
+ neurotransmitter receptor activity	8	na	61	na	0.4979087	0.8545237	
+ "ATPase activity, coupled to transmembrane movement of substances"	8	na	64	na	0.4075917	0.8883438	
+ extracellular ligand-gated ion channel activity	8	na	61	na	0.4979087	0.8545237	
+ "3',5'-cAMP binding"	8	na	13	na	0.0004634	0.0004634	*
+ protein kinase C binding	8	na	12	na	0.0002104	0.0002104	*
+ microtubule binding	8	na	24	na	0.0543749	0.0441717	*
+voltage-gated calcium channel activity	8	na	51	na	0.8548863	0.6819964	
+monooxygenase activity	8	na	158	na	0.0000067	0.9999993	
+ 1-phosphatidylinositol-4-phosphate 5-kinase activity	8	na	13	na	0.0004634	0.0004634	*
+"hydrolase activity, hydrolyzing O-glycosyl compounds"	8	na	58	na	0.6026485	0.8129209	
+ methyltransferase activity	8	na	74	na	0.1658198	0.9574806	
+acyl-CoA binding	8	na	21	na	0.0197878	0.0197878	*
+ calcium-transporting ATPase activity	8	na	17	na	0.0045302	0.0045302	*
+NADH dehydrogenase activity	8	na	10	na	0.0000267	0.0000267	*
+ serine-type endopeptidase activity	8	na	241	na	0.0000000	1.0000000	
+protein phosphatase inhibitor activity	8	na	20	na	0.0144008	0.0144008	*
+ rRNA binding	8	na	12	na	0.0002104	0.0002104	*
+ growth factor activity	7	na	140	na	0.0000164	0.9999976	
+ protein self binding	7	na	23	na	0.1022579	0.0899056	
+ calcium channel activity	7	na	48	na	0.7064708	0.7519651	
+ubiquinol-cytochrome-c reductase activity	7	na	14	na	0.0052292	0.0052292	*
+ palmitoyl-CoA hydrolase activity	7	na	24	na	0.1705199	0.1087372	
+hormone activity	7	na	153	na	0.0000028	0.9999997	
+sugar porter activity	7	na	56	na	0.4784430	0.8765482	
+ selenium binding	7	na	23	na	0.1022579	0.0899056	
+aminopeptidase activity	7	na	15	na	0.0083477	0.0083477	*
+extracellular matrix structural constituent	7	na	63	na	0.2428652	0.9380286	
+ protein dimerization activity	7	na	117	na	0.0005155	0.9999312	
+ G-protein coupled receptor activity	7	na	123	na	0.0001841	0.9999708	
+endopeptidase inhibitor activity	7	na	33	na	0.4970566	0.3465999	
+ voltage-gated ion channel activity	6	na	38	na	1.0000000	0.6681823	
+ tripeptidyl-peptidase I activity	6	na	6	na	0.0000275	0.0000275	*
+ biotin binding	6	na	11	na	0.0057134	0.0057134	*
+ single-stranded DNA binding	6	na	19	na	0.1235932	0.0970617	
+voltage-dependent ion-selective channel activity	6	na	17	na	0.0989566	0.0600746	
+membrane alanyl aminopeptidase activity	6	na	22	na	0.2542653	0.1700217	
+ hyaluronic acid binding	6	na	32	na	0.8155954	0.4908589	
+ fatty acid binding	6	na	14	na	0.0231855	0.0231855	*
+transcriptional activator activity	6	na	59	na	0.1694039	0.9573189	
+acyl-CoA dehydrogenase activity	6	na	15	na	0.0330774	0.0330774	*
+tRNA ligase activity	6	na	37	na	1.0000000	0.6414724	
+small GTPase regulatory/interacting protein activity	6	na	53	na	0.2811159	0.9177674	
+carbonate dehydratase activity	6	na	32	na	0.8155954	0.4908589	
+ long-chain-fatty-acid-CoA ligase activity	6	na	7	na	0.0001638	0.0001638	*
+cysteine protease inhibitor activity	6	na	60	na	0.1705543	0.9619032	
+voltage-gated sodium channel activity	6	na	18	na	0.1094439	0.0773252	
+peptidyl-prolyl cis-trans isomerase activity	6	na	19	na	0.1235932	0.0970617	
+ drug binding	6	na	9	na	0.0014272	0.0014272	*
+ disulfide oxidoreductase activity	6	na	29	na	0.6238820	0.3913659	
+ "hydrolase activity, acting on glycosyl bonds"	6	na	32	na	0.8155954	0.4908589	
+ endonuclease activity	6	na	62	na	0.1302285	0.9697507	
+ subtilase activity	6	na	25	na	0.4242752	0.2593095	
+ GTPase binding	6	na	17	na	0.0989566	0.0600746	
+ actin filament binding	6	na	15	na	0.0330774	0.0330774	*
+ cation transporter activity	6	na	27	na	0.4524121	0.3244092	
+ antiporter activity	5	na	23	na	0.5808810	0.3700897	
+methionyl aminopeptidase activity	5	na	9	na	0.0107306	0.0107306	*
+protein disulfide isomerase activity	5	na	5	na	0.0001584	0.0001584	*
+ferric iron binding	5	na	65	na	0.0470325	0.9925661	
+ ephrin receptor activity	5	na	28	na	1.0000000	0.5509608	
+voltage-gated chloride channel activity	5	na	35	na	0.8236233	0.7519896	
+ "oxidoreductase activity, acting on NADH or NADPH"	5	na	5	na	0.0001584	0.0001584	*
+palmitoyl-(protein) hydrolase activity	5	na	8	na	0.0055620	0.0055620	*
+ protein translocase activity	5	na	20	na	0.3737515	0.2595272	
+ribose-phosphate diphosphokinase activity	5	na	7	na	0.0024346	0.0024346	*
+ calcium/calmodulin-dependent protein kinase activity	5	na	6	na	0.0008126	0.0008126	*
+ MAP kinase activity	5	na	27	na	0.8015819	0.5164661	
+"intramolecular transferase activity, phosphotransferases"	5	na	11	na	0.0290055	0.0290055	*
+ sodium:dicarboxylate symporter activity	5	na	12	na	0.0427530	0.0427530	*
+ calcium channel regulator activity	5	na	7	na	0.0024346	0.0024346	*
+serine esterase activity	5	na	15	na	0.1606352	0.1036557	
+ coenzyme binding	5	na	9	na	0.0107306	0.0107306	*
+inorganic anion exchanger activity	5	na	19	na	0.3571303	0.2244439	
+beta-amyloid binding	5	na	6	na	0.0008126	0.0008126	*
+ SH3 domain binding	5	na	12	na	0.0427530	0.0427530	*
+ "oxidoreductase activity, acting on NADH or NADPH, NAD or NADP as acceptor"	5	na	8	na	0.0055620	0.0055620	*
+ transcription regulator activity	5	na	194	na	0.0000000	1.0000000	
+nucleotidyltransferase activity	5	na	39	na	0.6709911	0.8320631	
+ carrier activity	5	na	13	na	0.0597924	0.0597924	
+ "phosphotransferase activity, alcohol group as acceptor"	5	na	30	na	1.0000000	0.6160745	
+ transcription coactivator activity	5	na	23	na	0.5808810	0.3700897	
+ "metabotropic glutamate, GABA-B-like receptor activity"	5	na	499	na	0.0000000	1.0000000	
+steroid binding	5	na	41	na	0.5350090	0.8634046	
+ "protein binding, bridging"	5	na	12	na	0.0427530	0.0427530	*
+ lipid transporter activity	5	na	27	na	0.8015819	0.5164661	
+syntaxin binding	5	na	12	na	0.0427530	0.0427530	*
+ acetate-CoA ligase activity	4	na	4	na	0.0009118	0.0009118	*
+ serine-type peptidase activity	4	na	26	na	1.0000000	0.6854889	
+glutathione peroxidase activity	4	na	18	na	0.5376738	0.3838158	
+ N-methyl-D-aspartate selective glutamate receptor activity	4	na	5	na	0.0039253	0.0039253	*
+ alpha-amino-3-hydroxy-5-methyl-4-isoxazole propionate selective glutamate receptor activity	4	na	4	na	0.0009118	0.0009118	*
+ "ATPase activity, coupled to transmembrane movement of ions, phosphorylative mechanism"	4	na	71	na	0.0068460	0.9991584	
+ adenylate cyclase activity	4	na	9	na	0.0549841	0.0549841	
+ cadherin binding	4	na	12	na	0.1408276	0.1408276	
+ "oxidoreductase activity, acting on the CH-OH group of donors, NAD or NADP as acceptor"	4	na	16	na	0.5038606	0.2982252	
+ carboxypeptidase A activity	4	na	46	na	0.1696612	0.9697899	
+ monovalent inorganic cation transporter activity	4	na	8	na	0.0353158	0.0353158	*
+ carboxy-lyase activity	4	na	12	na	0.1408276	0.1408276	
+ nucleoside-diphosphate kinase activity	4	na	20	na	0.7668571	0.4680119	
+ transcriptional repressor activity	4	na	42	na	0.2228874	0.9492026	
+ cofactor binding	4	na	11	na	0.1081361	0.1081361	
+ peptide binding	4	na	9	na	0.0549841	0.0549841	
+peroxidase activity	4	na	24	na	1.0000000	0.6204875	
+ adenylate kinase activity	4	na	9	na	0.0549841	0.0549841	
+aldehyde dehydrogenase (NAD) activity	4	na	7	na	0.0204389	0.0204389	*
+ tropomyosin binding	4	na	13	na	0.2603405	0.1768433	
+phosphogluconate dehydrogenase (decarboxylating) activity	4	na	4	na	0.0009118	0.0009118	*
+ sodium channel activity	4	na	10	na	0.0793613	0.0793613	
+neurotransmitter:sodium symporter activity	4	na	37	na	0.3865640	0.9056347	
+ "phosphatidylinositol-4,5-bisphosphate binding"	4	na	5	na	0.0039253	0.0039253	*
+dolichyl-diphosphooligosaccharide-protein glycotransferase activity	4	na	6	na	0.0101508	0.0101508	*
+ mRNA binding	4	na	7	na	0.0204389	0.0204389	*
+enzyme inhibitor activity	4	na	16	na	0.5038606	0.2982252	
+protein N-terminus binding	4	na	9	na	0.0549841	0.0549841	
+intracellular transporter activity	4	na	10	na	0.0793613	0.0793613	
+structural constituent of myelin sheath	4	na	12	na	0.1408276	0.1408276	
+dipeptidase activity	4	na	6	na	0.0101508	0.0101508	*
+ ubiquitin activating enzyme activity	4	na	12	na	0.1408276	0.1408276	
+ FMN binding	4	na	18	na	0.5376738	0.3838158	
+ cAMP-dependent protein kinase regulator activity	4	na	23	na	1.0000000	0.5849799	
+ helicase activity	4	na	61	na	0.0261487	0.9962734	
+prolyl oligopeptidase activity	4	na	11	na	0.1081361	0.1081361	
+L-lactate dehydrogenase activity	4	na	19	na	0.7601316	0.4263150	
+threonine-tRNA ligase activity	4	na	7	na	0.0204389	0.0204389	*
+ ATP-dependent peptidase activity	4	na	10	na	0.0793613	0.0793613	
+ phosphoric monoester hydrolase activity	3	na	12	na	0.4491494	0.3480745	
+ "3',5'-cyclic-nucleotide phosphodiesterase activity"	3	na	34	na	0.2569999	0.9501269	
+GPI-anchor transamidase activity	3	na	4	na	0.0182589	0.0182589	*
+molecular_function	3	na	16	na	0.7496766	0.5440411	
+ neurexin binding	3	na	4	na	0.0182589	0.0182589	*
+ receptor signaling complex scaffold activity	3	na	4	na	0.0182589	0.0182589	*
+transaminase activity	3	na	21	na	1.0000000	0.7332571	
+succinate-semialdehyde dehydrogenase activity	3	na	3	na	0.0052485	0.0052485	*
+ transmembrane receptor protein tyrosine kinase activity	3	na	23	na	0.7851098	0.7892087	
+ glutamate binding	3	na	5	na	0.0397591	0.0397591	*
+ DNA topoisomerase (ATP-hydrolyzing) activity	3	na	11	na	0.4186148	0.2962627	
+ myosin binding	3	na	6	na	0.0693675	0.0693675	
+ G-protein coupled receptor kinase activity	3	na	7	na	0.1060640	0.1060640	
+ inorganic diphosphatase activity	3	na	6	na	0.0693675	0.0693675	
+receptor signaling protein activity	3	na	14	na	0.7218781	0.4496025	
+protein tyrosine/serine/threonine phosphatase activity	3	na	46	na	0.0513094	0.9913877	
+ water channel activity	3	na	11	na	0.4186148	0.2962627	
+exonuclease activity	3	na	31	na	0.3452605	0.9246050	
+ ubiquitin binding	3	na	3	na	0.0052485	0.0052485	*
+ aspartate-tRNA ligase activity	3	na	6	na	0.0693675	0.0693675	
+metalloexopeptidase activity	3	na	8	na	0.1485128	0.1485128	
+beta-catenin binding	3	na	7	na	0.1060640	0.1060640	
+nucleocytoplasmic transporter activity	3	na	6	na	0.0693675	0.0693675	
+ dopamine receptor binding	3	na	5	na	0.0397591	0.0397591	*
+ nuclease activity	3	na	20	na	1.0000000	0.7011549	
+ potassium channel activity	3	na	25	na	0.6052958	0.8350342	
+ formate-tetrahydrofolate ligase activity	3	na	5	na	0.0397591	0.0397591	*
+fructose-bisphosphate aldolase activity	3	na	10	na	0.3930622	0.2449555	
+sterol carrier activity	3	na	8	na	0.1485128	0.1485128	
+ clathrin binding	3	na	5	na	0.0397591	0.0397591	*
+ antigen binding	3	na	78	na	0.0004740	0.9999498	
+ profilin binding	3	na	3	na	0.0052485	0.0052485	*
+adenosylhomocysteinase activity	3	na	6	na	0.0693675	0.0693675	
+ Hsp70 protein binding	3	na	3	na	0.0052485	0.0052485	*
+oxoglutarate dehydrogenase (succinyl-transferring) activity	3	na	6	na	0.0693675	0.0693675	
+thiosulfate sulfurtransferase activity	3	na	3	na	0.0052485	0.0052485	*
+pyrroline-5-carboxylate reductase activity	3	na	5	na	0.0397591	0.0397591	*
+PLC activating metabotropic glutamate receptor activity	3	na	3	na	0.0052485	0.0052485	*
+ NADPH binding	3	na	19	na	1.0000000	0.6661834	
+microtubule plus-end binding	3	na	3	na	0.0052485	0.0052485	*
+ RNA polymerase II transcription factor activity	3	na	49	na	0.0366329	0.9945576	
+ cation:chloride symporter activity	3	na	16	na	0.7496766	0.5440411	
+ isocitrate dehydrogenase (NAD+) activity	3	na	5	na	0.0397591	0.0397591	*
+ cysteine-type peptidase activity	3	na	39	na	0.1378393	0.9755802	
+guanylate kinase activity	3	na	3	na	0.0052485	0.0052485	*
+ Ras GTPase activator activity	3	na	7	na	0.1060640	0.1060640	
+trypsin activity	3	na	7	na	0.1060640	0.1060640	
+ "transferase activity, transferring hexosyl groups"	3	na	71	na	0.0014581	0.9998394	
+double-stranded DNA binding	3	na	31	na	0.3452605	0.9246050	
+choline-phosphate cytidylyltransferase activity	3	na	3	na	0.0052485	0.0052485	*
+glycerol-3-phosphate dehydrogenase (NAD+) activity	3	na	5	na	0.0397591	0.0397591	*
+ "inositol 1,4,5-triphosphate-sensitive calcium-release channel activity"	3	na	5	na	0.0397591	0.0397591	*
+ 6-phosphofructokinase activity	3	na	3	na	0.0052485	0.0052485	*
+guanylate cyclase activity	3	na	13	na	0.4829411	0.3994438	
+carboxypeptidase activity	3	na	22	na	1.0000000	0.7625702	
+ kinase inhibitor activity	3	na	3	na	0.0052485	0.0052485	*
+ ATPase inhibitor activity	3	na	4	na	0.0182589	0.0182589	*
+ inorganic phosphate transporter activity	3	na	6	na	0.0693675	0.0693675	
+ DNA-directed RNA polymerase activity	3	na	40	na	0.1401564	0.9788998	
+L-glutamate transporter activity	3	na	3	na	0.0052485	0.0052485	*
+ porin activity	3	na	7	na	0.1060640	0.1060640	
+ "oxidoreductase activity, acting on single donors with incorporation of molecular oxygen, incorporation of two atoms of oxygen"	3	na	19	na	1.0000000	0.6661834	
+ Rho GTPase binding	3	na	30	na	0.4665065	0.9137232	
+ inotropic glutamate receptor activity	3	na	13	na	0.4829411	0.3994438	
+structural constituent of cell wall	3	na	5	na	0.0397591	0.0397591	*
+protein-histidine kinase activity	3	na	7	na	0.1060640	0.1060640	
+vascular endothelial growth factor receptor activity	3	na	13	na	0.4829411	0.3994438	
+aminomethyltransferase activity	3	na	9	na	0.1952772	0.1952772	
+ antioxidant activity	3	na	6	na	0.0693675	0.0693675	
+cysteine-tRNA ligase activity	3	na	6	na	0.0693675	0.0693675	
+ beta-N-acetylhexosaminidase activity	3	na	8	na	0.1485128	0.1485128	
+ glycogen synthase kinase 3 activity	3	na	3	na	0.0052485	0.0052485	*
+3-hydroxyacyl-CoA dehydrogenase activity	3	na	5	na	0.0397591	0.0397591	*
+tRNA binding	3	na	10	na	0.3930622	0.2449555	
+cytokine activity	3	na	62	na	0.0063991	0.9993020	
+peptide-aspartate beta-dioxygenase activity	3	na	11	na	0.4186148	0.2962627	
+phosphoglycerate kinase activity	3	na	5	na	0.0397591	0.0397591	*
+ lipoate-protein ligase B activity	3	na	4	na	0.0182589	0.0182589	*
+ SH2 domain binding	3	na	4	na	0.0182589	0.0182589	*
+DNA topoisomerase type I activity	2	na	7	na	0.3503222	0.3503222	
+ glycine binding	2	na	5	na	0.2101453	0.2101453	
+ glycine-gated ion channel activity	2	na	2	na	0.0302073	0.0302073	*
+ glycogen phosphorylase activity	2	na	2	na	0.0302073	0.0302073	*
+ tau protein binding	2	na	2	na	0.0302073	0.0302073	*
+glutamate decarboxylase activity	2	na	3	na	0.0801248	0.0801248	
+ structural constituent of nuclear pore	2	na	6	na	0.2805341	0.2805341	
+ JUN kinase activity	2	na	2	na	0.0302073	0.0302073	*
+ ribonuclease H activity	2	na	8	na	0.6346073	0.4175919	
+1-alkyl-2-acetylglycerophosphocholine esterase activity	2	na	5	na	0.2101453	0.2101453	
+ phosphatase binding	2	na	2	na	0.0302073	0.0302073	*
+phosphatidate cytidylyltransferase activity	2	na	4	na	0.1419908	0.1419908	
+ AMP binding	2	na	2	na	0.0302073	0.0302073	*
+enoyl-CoA hydratase activity	2	na	3	na	0.0801248	0.0801248	
+ IMP dehydrogenase activity	2	na	2	na	0.0302073	0.0302073	*
+ potassium channel inhibitor activity	2	na	3	na	0.0801248	0.0801248	
+ 5'-nucleotidase activity	2	na	9	na	0.6603916	0.4811104	
+ adenosine kinase activity	2	na	2	na	0.0302073	0.0302073	*
+ histone acetyltransferase binding	2	na	4	na	0.1419908	0.1419908	
+ nucleotide kinase activity	2	na	8	na	0.6346073	0.4175919	
+ potassium:chloride symporter activity	2	na	2	na	0.0302073	0.0302073	*
+ valine-tRNA ligase activity	2	na	3	na	0.0801248	0.0801248	
+ 3'-5' exonuclease activity	2	na	17	na	0.7533901	0.8219384	
+ "oxidoreductase activity, acting on NADH or NADPH, disulfide as acceptor"	2	na	5	na	0.2101453	0.2101453	
+ platelet-derived growth factor receptor activity	2	na	2	na	0.0302073	0.0302073	*
+strictosidine synthase activity	2	na	2	na	0.0302073	0.0302073	*
+ citrate transporter activity	2	na	4	na	0.1419908	0.1419908	
+ "hydroxymethyl-, formyl- and related transferase activity"	2	na	4	na	0.1419908	0.1419908	
+ ion transporter activity	2	na	11	na	1.0000000	0.5943462	
+riboflavin kinase activity	2	na	3	na	0.0801248	0.0801248	
+ latrotoxin receptor activity	2	na	20	na	0.5583723	0.8857757	
+ trans-2-enoyl-CoA reductase (NADPH) activity	2	na	2	na	0.0302073	0.0302073	*
+ hydrogen/potassium-exchanging ATPase activity	2	na	3	na	0.0801248	0.0801248	
+ Rab interactor activity	2	na	26	na	0.2975016	0.9549105	
+kinesin binding	2	na	3	na	0.0801248	0.0801248	
+oligosaccharyl transferase activity	2	na	4	na	0.1419908	0.1419908	
+ connexon channel activity	2	na	24	na	0.4148397	0.9382173	
+ phenylalanine-tRNA ligase activity	2	na	4	na	0.1419908	0.1419908	
+ low-density lipoprotein receptor binding	2	na	2	na	0.0302073	0.0302073	*
+Rho GDP-dissociation inhibitor activity	2	na	3	na	0.0801248	0.0801248	
+protein kinase CK2 regulator activity	2	na	2	na	0.0302073	0.0302073	*
+phospholipase A2 activity	2	na	29	na	0.2155081	0.9721081	
+1-acylglycerol-3-phosphate O-acyltransferase activity	2	na	3	na	0.0801248	0.0801248	
+ phosphatidylinositol transporter activity	2	na	2	na	0.0302073	0.0302073	*
+ formyltetrahydrofolate dehydrogenase activity	2	na	3	na	0.0801248	0.0801248	
+acid phosphatase activity	2	na	27	na	0.2108155	0.9615436	
+ snoRNP binding	2	na	2	na	0.0302073	0.0302073	*
+aconitate hydratase activity	2	na	4	na	0.1419908	0.1419908	
+ pyruvate carboxylase activity	2	na	2	na	0.0302073	0.0302073	*
+ casein kinase activity	2	na	4	na	0.1419908	0.1419908	
+copper ion transporter activity	2	na	7	na	0.3503222	0.3503222	
+ phosphodiesterase I activity	2	na	5	na	0.2101453	0.2101453	
+ mannose binding	2	na	8	na	0.6346073	0.4175919	
+ phospholipid-hydroperoxide glutathione peroxidase activity	2	na	2	na	0.0302073	0.0302073	*
+carnitine O-palmitoyltransferase activity	2	na	3	na	0.0801248	0.0801248	
+ "hydrogen-exporting ATPase activity, phosphorylative mechanism"	2	na	3	na	0.0801248	0.0801248	
+ L-malate dehydrogenase activity	2	na	3	na	0.0801248	0.0801248	
+ calcium/calmodulin-responsive adenylate cyclase activity	2	na	2	na	0.0302073	0.0302073	*
+ cation-transporting ATPase activity	2	na	2	na	0.0302073	0.0302073	*
+ cAMP-dependent protein kinase activity	2	na	2	na	0.0302073	0.0302073	*
+ glutamate-cysteine ligase activity	2	na	2	na	0.0302073	0.0302073	*
+ L-asparagine transporter activity	2	na	2	na	0.0302073	0.0302073	*
+ribosome binding	2	na	2	na	0.0302073	0.0302073	*
+glycylpeptide N-tetradecanoyltransferase activity	2	na	3	na	0.0801248	0.0801248	
+4-aminobutyrate transaminase activity	2	na	3	na	0.0801248	0.0801248	
+creatine kinase activity	2	na	4	na	0.1419908	0.1419908	
+glutamate-tRNA ligase activity	2	na	10	na	0.6882559	0.5401492	
+tubulin binding	2	na	3	na	0.0801248	0.0801248	
+mannose-6-phosphate isomerase activity	2	na	2	na	0.0302073	0.0302073	*
+ 1-aminocyclopropane-1-carboxylate synthase activity	2	na	7	na	0.3503222	0.3503222	
+calpain activity	2	na	26	na	0.2975016	0.9549105	
+ DNA helicase activity	2	na	7	na	0.3503222	0.3503222	
+cytochrome-b5 reductase activity	2	na	4	na	0.1419908	0.1419908	
+RAB GDP-dissociation inhibitor activity	2	na	4	na	0.1419908	0.1419908	
+bisphosphoglycerate mutase activity	2	na	2	na	0.0302073	0.0302073	*
+ gamma-aminobutyric acid:sodium symporter activity	2	na	4	na	0.1419908	0.1419908	
+ beta-lactamase activity	2	na	3	na	0.0801248	0.0801248	
+ "phosphatidylinositol-3,4,5-triphosphate binding"	2	na	3	na	0.0801248	0.0801248	
+ phosphoric ester hydrolase activity	2	na	4	na	0.1419908	0.1419908	
+glycerophosphodiester phosphodiesterase activity	2	na	10	na	0.6882559	0.5401492	
+ pyruvate kinase activity	2	na	23	na	0.4090892	0.9278085	
+N4-(beta-N-acetylglucosaminyl)-L-asparaginase activity	2	na	2	na	0.0302073	0.0302073	*
+ enzyme binding	2	na	5	na	0.2101453	0.2101453	
+ wide-spectrum protease inhibitor activity	2	na	2	na	0.0302073	0.0302073	*
+L-serine transporter activity	2	na	5	na	0.2101453	0.2101453	
+phospholipase C activity	2	na	7	na	0.3503222	0.3503222	
+dipeptidyl-peptidase IV activity	2	na	11	na	1.0000000	0.5943462	
+signal peptidase activity	2	na	6	na	0.2805341	0.2805341	
+"hydrolase activity, acting on carbon-nitrogen (but not peptide) bonds"	2	na	4	na	0.1419908	0.1419908	
+ N-acetyltransferase activity	2	na	44	na	0.0258452	0.9977116	
+isocitrate dehydrogenase (NADP+) activity	2	na	4	na	0.1419908	0.1419908	
+group III metabotropic glutamate receptor activity	2	na	2	na	0.0302073	0.0302073	*
+ amino acid binding	2	na	11	na	1.0000000	0.5943462	
+ ribonuclease activity	2	na	14	na	1.0000000	0.7277243	
+ bisphosphoglycerate phosphatase activity	2	na	2	na	0.0302073	0.0302073	*
+ enzyme regulator activity	2	na	5	na	0.2101453	0.2101453	
+ retinal binding	2	na	7	na	0.3503222	0.3503222	
+ sodium:hydrogen antiporter activity	2	na	12	na	1.0000000	0.6436005	
+ NF-kappaB binding	2	na	2	na	0.0302073	0.0302073	*
+aspartate transaminase activity	2	na	2	na	0.0302073	0.0302073	*
+ phosphoglycerate mutase activity	2	na	2	na	0.0302073	0.0302073	*
+aldehyde dehydrogenase activity	2	na	4	na	0.1419908	0.1419908	
+ amino acid transporter activity	2	na	8	na	0.6346073	0.4175919	
+amino acid permease activity	2	na	9	na	0.6603916	0.4811104	
+ methenyltetrahydrofolate cyclohydrolase activity	2	na	2	na	0.0302073	0.0302073	*
+aldehyde dehydrogenase [NAD(P)+] activity	2	na	15	na	1.0000000	0.7630741	
+ 3-hydroxyisobutyrate dehydrogenase activity	2	na	2	na	0.0302073	0.0302073	*
+ TATA-binding protein binding	2	na	4	na	0.1419908	0.1419908	
+ DNA-(apurinic or apyrimidinic site) lyase activity	2	na	2	na	0.0302073	0.0302073	*
+ casein kinase I activity	2	na	4	na	0.1419908	0.1419908	
+ hexokinase activity	2	na	6	na	0.2805341	0.2805341	
+serine-tRNA ligase activity	2	na	3	na	0.0801248	0.0801248	
+ damaged DNA binding	2	na	35	na	0.0740434	0.9895675	
+malate dehydrogenase (oxaloacetate-decarboxylating) (NADP+) activity	2	na	2	na	0.0302073	0.0302073	*
+ sodium-dependent multivitamin transporter activity	2	na	2	na	0.0302073	0.0302073	*
+endopeptidase activity	2	na	5	na	0.2101453	0.2101453	
+nicotinate phosphoribosyltransferase activity	2	na	2	na	0.0302073	0.0302073	*
+phosphorus-oxygen lyase activity	2	na	11	na	1.0000000	0.5943462	
+ transferrin receptor activity	2	na	2	na	0.0302073	0.0302073	*
+hydroxymethylglutaryl-CoA synthase activity	2	na	2	na	0.0302073	0.0302073	*
+ mRNA 3'-UTR binding	2	na	4	na	0.1419908	0.1419908	
+ alanine-tRNA ligase activity	2	na	4	na	0.1419908	0.1419908	
+succinate dehydrogenase activity	2	na	4	na	0.1419908	0.1419908	
+mitochondrial processing peptidase activity	2	na	2	na	0.0302073	0.0302073	*
+amidase activity	2	na	7	na	0.3503222	0.3503222	
+vitamin D binding	2	na	6	na	0.2805341	0.2805341	
+solute:hydrogen antiporter activity	2	na	19	na	0.5582605	0.8673136	
+tryptophan-tRNA ligase activity	2	na	3	na	0.0801248	0.0801248	
+ phosphoglycolate phosphatase activity	2	na	3	na	0.0801248	0.0801248	
+amine oxidase activity	2	na	4	na	0.1419908	0.1419908	
+3-methyl-2-oxobutanoate dehydrogenase (2-methylpropanoyl-transferring) activity	2	na	2	na	0.0302073	0.0302073	*
+ brain-specific angiogenesis inhibitor activity	2	na	9	na	0.6603916	0.4811104	
+ acyl-CoA oxidase activity	2	na	4	na	0.1419908	0.1419908	
+tubulin-tyrosine ligase activity	2	na	23	na	0.4090892	0.9278085	
+ retinoid binding	2	na	2	na	0.0302073	0.0302073	*
+endopeptidase Clp activity	2	na	2	na	0.0302073	0.0302073	*
+long-chain-acyl-CoA dehydrogenase activity	2	na	2	na	0.0302073	0.0302073	*
+syntaxin-1 binding	2	na	2	na	0.0302073	0.0302073	*
+ acyl-CoA thioesterase activity	2	na	3	na	0.0801248	0.0801248	
+ phospholipase A2 inhibitor activity	2	na	3	na	0.0801248	0.0801248	
+pepsin A activity	2	na	15	na	1.0000000	0.7630741	
+RAB-protein geranylgeranyltransferase activity	2	na	4	na	0.1419908	0.1419908	
+ L-glutamine transporter activity	2	na	3	na	0.0801248	0.0801248	
+ histone deacetylase activity	2	na	11	na	1.0000000	0.5943462	
+thioredoxin-disulfide reductase activity	2	na	2	na	0.0302073	0.0302073	*
+3'-5'-exoribonuclease activity	2	na	12	na	1.0000000	0.6436005	
+malic enzyme activity	2	na	4	na	0.1419908	0.1419908	
+SH3/SH2 adaptor protein activity	2	na	2	na	0.0302073	0.0302073	*
+ GABA-B receptor activity	2	na	4	na	0.1419908	0.1419908	
+amino acid-polyamine transporter activity	2	na	18	na	0.7555063	0.8461420	
+proteasome activator activity	2	na	9	na	0.6603916	0.4811104	
+ glucose transporter activity	2	na	13	na	1.0000000	0.6879926	
+rhodopsin-like receptor activity	2	na	466	na	0.0000000	1.0000000	
+ platelet activating factor acetyltransferase activity	2	na	2	na	0.0302073	0.0302073	*
+ cobalt ion binding	2	na	8	na	0.6346073	0.4175919	
+ TPR domain binding	2	na	2	na	0.0302073	0.0302073	*
+aldehyde reductase activity	2	na	3	na	0.0801248	0.0801248	
+pyruvate dehydrogenase (acetyl-transferring) activity	2	na	3	na	0.0801248	0.0801248	
+acetyl-CoA C-acyltransferase activity	2	na	4	na	0.1419908	0.1419908	
+ epoxide hydrolase activity	2	na	4	na	0.1419908	0.1419908	
+MAP-kinase scaffold activity	1	na	1	na	0.1738198	0.1738198	
+ nardilysin activity	1	na	1	na	0.1738198	0.1738198	
+ metalloendopeptidase inhibitor activity	1	na	8	na	1.0000000	0.7829846	
+ inositol-polyphosphate 5-phosphatase activity	1	na	4	na	0.5341179	0.5341179	
+ GDP binding	1	na	5	na	1.0000000	0.6151111	
+ L-proline transporter activity	1	na	1	na	0.1738198	0.1738198	
+alcohol dehydrogenase (NADP+) activity	1	na	2	na	0.3174324	0.3174324	
+ methylenetetrahydrofolate dehydrogenase activity	1	na	1	na	0.1738198	0.1738198	
+asparagine synthase (glutamine-hydrolyzing) activity	1	na	5	na	1.0000000	0.6151111	
+alkylglycerone-phosphate synthase activity	1	na	1	na	0.1738198	0.1738198	
+NAD+ nucleosidase activity	1	na	2	na	0.3174324	0.3174324	
+ asparagine-tRNA ligase activity	1	na	4	na	0.5341179	0.5341179	
+ nucleoside-triphosphate-adenylate kinase activity	1	na	1	na	0.1738198	0.1738198	
+ 4-trimethylammoniobutyraldehyde dehydrogenase activity	1	na	1	na	0.1738198	0.1738198	
+ estrogen receptor binding	1	na	2	na	0.3174324	0.3174324	
+uroporphyrinogen-III synthase activity	1	na	1	na	0.1738198	0.1738198	
+glycine hydroxymethyltransferase activity	1	na	3	na	0.4360861	0.4360861	
+ hepoxilin-epoxide hydrolase activity	1	na	1	na	0.1738198	0.1738198	
+ adenosine deaminase activity	1	na	7	na	1.0000000	0.7373105	
+carnitine O-acetyltransferase activity	1	na	1	na	0.1738198	0.1738198	
+ glutathione dehydrogenase (ascorbate) activity	1	na	1	na	0.1738198	0.1738198	
+ retinol binding	1	na	4	na	0.5341179	0.5341179	
+ferredoxin-NADP+ reductase activity	1	na	1	na	0.1738198	0.1738198	
+ SMAD binding	1	na	2	na	0.3174324	0.3174324	
+ isopentenyl-diphosphate delta-isomerase activity	1	na	15	na	0.4931357	0.9430206	
+ L-xylulose reductase activity	1	na	1	na	0.1738198	0.1738198	
+ protein tyrosine kinase activator activity	1	na	1	na	0.1738198	0.1738198	
+glycine transporter activity	1	na	5	na	1.0000000	0.6151111	
+ peptidylamidoglycolate lyase activity	1	na	1	na	0.1738198	0.1738198	
+cathepsin B activity	1	na	1	na	0.1738198	0.1738198	
+ virion binding	1	na	1	na	0.1738198	0.1738198	
+opioid peptide activity	1	na	3	na	0.4360861	0.4360861	
+"oxidoreductase activity, acting on the aldehyde or oxo group of donors, disulfide as acceptor"	1	na	4	na	0.5341179	0.5341179	
+ "oxidoreductase activity, acting on paired donors, with incorporation or reduction of molecular oxygen, 2-oxoglutarate as one donor, and incorporation of one atom each of oxygen into both donors"	1	na	21	na	0.1564046	0.9818965	
+ aspartoacylase activity	1	na	1	na	0.1738198	0.1738198	
+phosphoenolpyruvate carboxykinase activity	1	na	2	na	0.3174324	0.3174324	
+ non-membrane spanning protein tyrosine phosphatase activity	1	na	4	na	0.5341179	0.5341179	
+porphobilinogen synthase activity	1	na	2	na	0.3174324	0.3174324	
+ X-Pro aminopeptidase activity	1	na	2	na	0.3174324	0.3174324	
+alpha-ketoacid dehydrogenase activity	1	na	1	na	0.1738198	0.1738198	
+ S-adenosylmethionine-dependent methyltransferase activity	1	na	2	na	0.3174324	0.3174324	
+pyridoxamine-phosphate oxidase activity	1	na	1	na	0.1738198	0.1738198	
+ chemoattractant activity	1	na	1	na	0.1738198	0.1738198	
+ cholesterol transporter activity	1	na	7	na	1.0000000	0.7373105	
+ short-branched-chain-acyl-CoA dehydrogenase activity	1	na	1	na	0.1738198	0.1738198	
+ geranyltranstransferase activity	1	na	2	na	0.3174324	0.3174324	
+interleukin-5 receptor binding	1	na	2	na	0.3174324	0.3174324	
+ glutathione synthase activity	1	na	1	na	0.1738198	0.1738198	
+ proline-tRNA ligase activity	1	na	4	na	0.5341179	0.5341179	
+ calcium-dependent protein kinase C activity	1	na	1	na	0.1738198	0.1738198	
+aspartic-type endopeptidase activity	1	na	13	na	0.7114512	0.9165027	
+inositol-3-phosphate synthase activity	1	na	1	na	0.1738198	0.1738198	
+ cation channel activity	1	na	3	na	0.4360861	0.4360861	
+choline kinase activity	1	na	2	na	0.3174324	0.3174324	
+importin-alpha export receptor activity	1	na	1	na	0.1738198	0.1738198	
+ malonate-semialdehyde dehydrogenase (acetylating) activity	1	na	1	na	0.1738198	0.1738198	
+ phosphorylase activity	1	na	1	na	0.1738198	0.1738198	
+L-iditol 2-dehydrogenase activity	1	na	1	na	0.1738198	0.1738198	
+dopachrome isomerase activity	1	na	1	na	0.1738198	0.1738198	
+ MAP kinase kinase kinase activity	1	na	3	na	0.4360861	0.4360861	
+ Hsp70/Hsc70 protein inhibitor activity	1	na	1	na	0.1738198	0.1738198	
+ calcium ion transporter activity	1	na	1	na	0.1738198	0.1738198	
+ cAMP-specific phosphodiesterase activity	1	na	5	na	1.0000000	0.6151111	
+ cyclin binding	1	na	1	na	0.1738198	0.1738198	
+two-component sensor molecule activity	1	na	9	na	1.0000000	0.8207189	
+ "ATPase activity, coupled to transmembrane movement of ions"	1	na	1	na	0.1738198	0.1738198	
+dimethylallyltranstransferase activity	1	na	2	na	0.3174324	0.3174324	
+aldose 1-epimerase activity	1	na	1	na	0.1738198	0.1738198	
+ [acyl-carrier protein] S-malonyltransferase activity	1	na	1	na	0.1738198	0.1738198	
+dihydrolipoyl dehydrogenase activity	1	na	2	na	0.3174324	0.3174324	
+purine-nucleoside phosphorylase activity	1	na	2	na	0.3174324	0.3174324	
+neurotransmitter transporter activity	1	na	1	na	0.1738198	0.1738198	
+acylaminoacyl-peptidase activity	1	na	1	na	0.1738198	0.1738198	
+phosphoribosylamine-glycine ligase activity	1	na	1	na	0.1738198	0.1738198	
+ nicotinamide phosphoribosyltransferase activity	1	na	1	na	0.1738198	0.1738198	
+v-SNARE activity	1	na	1	na	0.1738198	0.1738198	
+ hypoxanthine phosphoribosyltransferase activity	1	na	2	na	0.3174324	0.3174324	
+heme oxygenase (decyclizing) activity	1	na	3	na	0.4360861	0.4360861	
+prenyltransferase activity	1	na	7	na	1.0000000	0.7373105	
+ pentraxin receptor activity	1	na	1	na	0.1738198	0.1738198	
+ 7-dehydrocholesterol reductase activity	1	na	1	na	0.1738198	0.1738198	
+rRNA methyltransferase activity	1	na	5	na	1.0000000	0.6151111	
+acetylcholinesterase activity	1	na	1	na	0.1738198	0.1738198	
+caspase inhibitor activity	1	na	3	na	0.4360861	0.4360861	
+ calmodulin inhibitor activity	1	na	1	na	0.1738198	0.1738198	
+"6,7-dihydropteridine reductase activity"	1	na	1	na	0.1738198	0.1738198	
+ ephrin receptor binding	1	na	6	na	1.0000000	0.6820265	
+ peptidyl-dipeptidase A activity	1	na	7	na	1.0000000	0.7373105	
+ acyl-CoA hydrolase activity	1	na	1	na	0.1738198	0.1738198	
+hydroxyacylglutathione hydrolase activity	1	na	1	na	0.1738198	0.1738198	
+ mannose transporter activity	1	na	3	na	0.4360861	0.4360861	
+alanine transaminase activity	1	na	1	na	0.1738198	0.1738198	
+ tyrosine 3-monooxygenase activity	1	na	1	na	0.1738198	0.1738198	
+cAMP-dependent protein kinase inhibitor activity	1	na	5	na	1.0000000	0.6151111	
+ ferrous iron binding	1	na	2	na	0.3174324	0.3174324	
+sulfotransferase activity	1	na	43	na	0.0042626	0.9997304	
+ cytoskeletal regulatory protein binding	1	na	1	na	0.1738198	0.1738198	
+glycine amidinotransferase activity	1	na	1	na	0.1738198	0.1738198	
+"2,4-dienoyl-CoA reductase (NADPH) activity"	1	na	2	na	0.3174324	0.3174324	
+t-SNARE activity	1	na	2	na	0.3174324	0.3174324	
+ sodium channel auxiliary protein activity	1	na	1	na	0.1738198	0.1738198	
+transaldolase activity	1	na	1	na	0.1738198	0.1738198	
+4-alpha-glucanotransferase activity	1	na	1	na	0.1738198	0.1738198	
+ inward rectifier potassium channel activity	1	na	14	na	0.4878044	0.9310242	
+ protease inhibitor activity	1	na	4	na	0.5341179	0.5341179	
+peroxisome targeting sequence binding	1	na	1	na	0.1738198	0.1738198	
+ adenylosuccinate lyase activity	1	na	1	na	0.1738198	0.1738198	
+isoleucine-tRNA ligase activity	1	na	6	na	1.0000000	0.6820265	
+cyclin-dependent protein kinase inhibitor activity	1	na	8	na	1.0000000	0.7829846	
+ fumarylacetoacetase activity	1	na	1	na	0.1738198	0.1738198	
+ insulin receptor binding	1	na	22	na	0.1573044	0.9850460	
+ formaldehyde dehydrogenase (glutathione) activity	1	na	1	na	0.1738198	0.1738198	
+ polyribonucleotide nucleotidyltransferase activity	1	na	2	na	0.3174324	0.3174324	
+ fibroblast growth factor binding	1	na	2	na	0.3174324	0.3174324	
+ nitric-oxide synthase regulator activity	1	na	1	na	0.1738198	0.1738198	
+ glutamate dehydrogenase [NAD(P)+] activity	1	na	1	na	0.1738198	0.1738198	
+transketolase activity	1	na	2	na	0.3174324	0.3174324	
+ sphingomyelin phosphodiesterase activity	1	na	4	na	0.5341179	0.5341179	
+ GMP synthase (glutamine-hydrolyzing) activity	1	na	2	na	0.3174324	0.3174324	
+ 2-oxoisovalerate dehydrogenase (acylating) activity	1	na	1	na	0.1738198	0.1738198	
+DNA ligase (ATP) activity	1	na	19	na	0.2297480	0.9734684	
+cGMP-stimulated cyclic-nucleotide phosphodiesterase activity	1	na	1	na	0.1738198	0.1738198	
+platelet-derived growth factor receptor binding	1	na	1	na	0.1738198	0.1738198	
+ acylglycerol lipase activity	1	na	1	na	0.1738198	0.1738198	
+ ErbB-2 class receptor binding	1	na	1	na	0.1738198	0.1738198	
+pyrophosphatase activity	1	na	1	na	0.1738198	0.1738198	
+AMP deaminase activity	1	na	4	na	0.5341179	0.5341179	
+ferroxidase activity	1	na	2	na	0.3174324	0.3174324	
+UDP-glucose 4-epimerase activity	1	na	1	na	0.1738198	0.1738198	
+superoxide dismutase activity	1	na	1	na	0.1738198	0.1738198	
+ thyroid hormone receptor binding	1	na	3	na	0.4360861	0.4360861	
+G-protein-coupled receptor binding	1	na	15	na	0.4931357	0.9430206	
+ hydroxymethylglutaryl-CoA reductase (NADPH) activity	1	na	4	na	0.5341179	0.5341179	
+argininosuccinate lyase activity	1	na	1	na	0.1738198	0.1738198	
+ glutamate carboxypeptidase activity	1	na	1	na	0.1738198	0.1738198	
+ thiol-disulfide exchange intermediate activity	1	na	2	na	0.3174324	0.3174324	
+SNF1A/AMP-activated protein kinase activity	1	na	2	na	0.3174324	0.3174324	
+ arachidonate 15-lipoxygenase activity	1	na	2	na	0.3174324	0.3174324	
+N-acetylgalactosamine-4-sulfatase activity	1	na	1	na	0.1738198	0.1738198	
+ phosphoglucomutase activity	1	na	1	na	0.1738198	0.1738198	
+ ribonuclease III activity	1	na	4	na	0.5341179	0.5341179	
+ calcium-dependent protein serine/threonine phosphatase activity	1	na	1	na	0.1738198	0.1738198	
+ guanidinoacetate N-methyltransferase activity	1	na	1	na	0.1738198	0.1738198	
+fumarate hydratase activity	1	na	1	na	0.1738198	0.1738198	
+ dimethylargininase activity	1	na	1	na	0.1738198	0.1738198	
+glucose-6-phosphate 1-dehydrogenase activity	1	na	3	na	0.4360861	0.4360861	
+cathepsin L activity	1	na	1	na	0.1738198	0.1738198	
+ hematopoietin/interferon-class (D200-domain) cytokine receptor activity	1	na	24	na	0.1059545	0.9897969	
+RNA-3'-phosphate cyclase activity	1	na	5	na	1.0000000	0.6151111	
+acyl carrier activity	1	na	3	na	0.4360861	0.4360861	
+ poly(A) binding	1	na	1	na	0.1738198	0.1738198	
+ protein-disulfide reductase (glutathione) activity	1	na	1	na	0.1738198	0.1738198	
+ DNA-directed DNA polymerase activity	1	na	26	na	0.0715157	0.9930386	
+ calmodulin regulated protein kinase activity	1	na	2	na	0.3174324	0.3174324	
+ "calcium, potassium:sodium antiporter activity"	1	na	3	na	0.4360861	0.4360861	
+ cyclosporin A binding	1	na	1	na	0.1738198	0.1738198	
+ orotidine-5'-phosphate decarboxylase activity	1	na	1	na	0.1738198	0.1738198	
+ translation regulator activity	1	na	4	na	0.5341179	0.5341179	
+ "inositol-1,4,5-triphosphate receptor activity"	1	na	1	na	0.1738198	0.1738198	
+ dihydroorotate oxidase activity	1	na	2	na	0.3174324	0.3174324	
+ "electron transporter, transferring electrons within CoQH2-cytochrome c reductase complex activity"	1	na	1	na	0.1738198	0.1738198	
+diphosphomevalonate decarboxylase activity	1	na	1	na	0.1738198	0.1738198	
+ tRNA-pseudouridine synthase I activity	1	na	16	na	0.3357992	0.9529310	
+ ornithine-oxo-acid transaminase activity	1	na	1	na	0.1738198	0.1738198	
+ "hydrolase activity, acting on acid anhydrides, in phosphorus-containing anhydrides"	1	na	14	na	0.4878044	0.9310242	
+ferrochelatase activity	1	na	3	na	0.4360861	0.4360861	
+phosphatidate phosphatase activity	1	na	4	na	0.5341179	0.5341179	
+high-affinity glutamate transporter activity	1	na	1	na	0.1738198	0.1738198	
+ threonine synthase activity	1	na	2	na	0.3174324	0.3174324	
+ fatty acid amide hydrolase activity	1	na	1	na	0.1738198	0.1738198	
+mannosyl-oligosaccharide glucosidase activity	1	na	1	na	0.1738198	0.1738198	
+ [pyruvate dehydrogenase (lipoamide)] kinase activity	1	na	2	na	0.3174324	0.3174324	
+calpain inhibitor activity	1	na	5	na	1.0000000	0.6151111	
+ microtubule-severing ATPase activity	1	na	2	na	0.3174324	0.3174324	
+ sterol 14-demethylase activity	1	na	1	na	0.1738198	0.1738198	
+proprotein convertase 2 activity	1	na	1	na	0.1738198	0.1738198	
+glutathione-disulfide reductase activity	1	na	1	na	0.1738198	0.1738198	
+ mercury ion binding	1	na	1	na	0.1738198	0.1738198	
+ "phosphotransferase activity, phosphate group as acceptor"	1	na	1	na	0.1738198	0.1738198	
+6-phosphogluconolactonase activity	1	na	2	na	0.3174324	0.3174324	
+prostaglandin-D synthase activity	1	na	2	na	0.3174324	0.3174324	
+ low-density lipoprotein binding	1	na	1	na	0.1738198	0.1738198	
+cerebroside-sulfatase activity	1	na	1	na	0.1738198	0.1738198	
+phorbol ester receptor activity	1	na	2	na	0.3174324	0.3174324	
+procollagen-proline 4-dioxygenase activity	1	na	2	na	0.3174324	0.3174324	
+protein-arginine deiminase activity	1	na	5	na	1.0000000	0.6151111	
+sulfuric ester hydrolase activity	1	na	14	na	0.4878044	0.9310242	
+ protein prenyltransferase activity	1	na	4	na	0.5341179	0.5341179	
+ cell adhesion molecule binding	1	na	6	na	1.0000000	0.6820265	
+ alpha-N-acetylgalactosaminidase activity	1	na	1	na	0.1738198	0.1738198	
+ protein kinase activator activity	1	na	2	na	0.3174324	0.3174324	
+triacylglycerol lipase activity	1	na	11	na	0.7019166	0.8776480	
+sulfinoalanine decarboxylase activity	1	na	1	na	0.1738198	0.1738198	
+cystathionine beta-synthase activity	1	na	1	na	0.1738198	0.1738198	
+holocytochrome-c synthase activity	1	na	1	na	0.1738198	0.1738198	
+ inhibitory extracellular ligand-gated ion channel activity	1	na	2	na	0.3174324	0.3174324	
+ ADP-ribose diphosphatase activity	1	na	2	na	0.3174324	0.3174324	
+lactoylglutathione lyase activity	1	na	1	na	0.1738198	0.1738198	
+ mRNA (guanine-N7-)-methyltransferase activity	1	na	1	na	0.1738198	0.1738198	
+ argininosuccinate synthase activity	1	na	1	na	0.1738198	0.1738198	
+ Rab GTPase activator activity	1	na	2	na	0.3174324	0.3174324	
+ arylesterase activity	1	na	4	na	0.5341179	0.5341179	
+NADPH-hemoprotein reductase activity	1	na	4	na	0.5341179	0.5341179	
+ 3-oxoacyl-[acyl-carrier protein] reductase activity	1	na	1	na	0.1738198	0.1738198	
+ "saccharopine dehydrogenase (NAD+, L-glutamate-forming) activity"	1	na	1	na	0.1738198	0.1738198	
+tricarboxylate carrier activity	1	na	1	na	0.1738198	0.1738198	
+ histidine-tRNA ligase activity	1	na	3	na	0.4360861	0.4360861	
+ calcium-dependent protein binding	1	na	2	na	0.3174324	0.3174324	
+carbon-carbon lyase activity	1	na	6	na	1.0000000	0.6820265	
+ tumor necrosis factor receptor binding	1	na	24	na	0.1059545	0.9897969	
+glucosamine-6-phosphate deaminase activity	1	na	3	na	0.4360861	0.4360861	
+ methionine adenosyltransferase activity	1	na	5	na	1.0000000	0.6151111	
+ MAP kinase kinase activity	1	na	2	na	0.3174324	0.3174324	
+3-hydroxybutyrate dehydrogenase activity	1	na	1	na	0.1738198	0.1738198	
+ LRR domain binding	1	na	1	na	0.1738198	0.1738198	
+arachidonate 12-lipoxygenase activity	1	na	1	na	0.1738198	0.1738198	
+ phosphoribosylaminoimidazolecarboxamide formyltransferase activity	1	na	2	na	0.3174324	0.3174324	
+enzyme activator activity	1	na	9	na	1.0000000	0.8207189	
+adenyl-nucleotide exchange factor activity	1	na	2	na	0.3174324	0.3174324	
+acylphosphatase activity	1	na	6	na	1.0000000	0.6820265	
+ "neurotensin receptor activity, G-protein coupled"	1	na	4	na	0.5341179	0.5341179	
+ shikimate kinase activity	1	na	2	na	0.3174324	0.3174324	
+calmodulin-dependent cyclic-nucleotide phosphodiesterase activity	1	na	1	na	0.1738198	0.1738198	
+methylmalonyl-CoA mutase activity	1	na	1	na	0.1738198	0.1738198	
+leucyl aminopeptidase activity	1	na	3	na	0.4360861	0.4360861	
+"2',3'-cyclic-nucleotide 3'-phosphodiesterase activity"	1	na	1	na	0.1738198	0.1738198	
+ eukaryotic elongation factor-2 kinase activator activity	1	na	1	na	0.1738198	0.1738198	
+ phosphatidylinositol 3-kinase activity	1	na	25	na	0.1081971	0.9915722	
+ phosphoribosylaminoimidazolesuccinocarboxamide synthase activity	1	na	2	na	0.3174324	0.3174324	
+ pyroglutamyl-peptidase II activity	1	na	1	na	0.1738198	0.1738198	
+ "fructose-2,6-bisphosphate 2-phosphatase activity"	1	na	5	na	1.0000000	0.6151111	
+"oxidoreductase activity, acting on paired donors, with incorporation or reduction of molecular oxygen"	1	na	2	na	0.3174324	0.3174324	
+ phosphate:hydrogen symporter activity	1	na	1	na	0.1738198	0.1738198	
+ insulin-like growth factor receptor binding	1	na	4	na	0.5341179	0.5341179	
+ ligand-dependent nuclear receptor transcription coactivator activity	1	na	4	na	0.5341179	0.5341179	
+bleomycin hydrolase activity	1	na	1	na	0.1738198	0.1738198	
+acetylornithine transaminase activity	1	na	1	na	0.1738198	0.1738198	
+ CAAX-protein geranylgeranyltransferase activity	1	na	2	na	0.3174324	0.3174324	
+"copper, zinc superoxide dismutase activity"	1	na	7	na	1.0000000	0.7373105	
+ thiamin-triphosphatase activity	1	na	1	na	0.1738198	0.1738198	
+glycogenin glucosyltransferase activity	1	na	1	na	0.1738198	0.1738198	
+ protein-cysteine S-palmitoleyltransferase activity	1	na	1	na	0.1738198	0.1738198	
+ GABA receptor binding	1	na	3	na	0.4360861	0.4360861	
+axon guidance receptor activity	1	na	1	na	0.1738198	0.1738198	
+chitinase activity	1	na	20	na	0.2334184	0.9780838	
+glucose-6-phosphate isomerase activity	1	na	1	na	0.1738198	0.1738198	
+dihydrolipoyllysine-residue succinyltransferase activity	1	na	1	na	0.1738198	0.1738198	
+carbonyl reductase (NADPH) activity	1	na	2	na	0.3174324	0.3174324	
+protein farnesyltransferase activity	1	na	2	na	0.3174324	0.3174324	
+gamma-glutamyltransferase activity	1	na	8	na	1.0000000	0.7829846	
+ collagen binding	1	na	12	na	0.7044739	0.8989250	
+ transcriptional elongation regulator activity	1	na	3	na	0.4360861	0.4360861	
+triose-phosphate isomerase activity	1	na	7	na	1.0000000	0.7373105	
+ phenylpyruvate tautomerase activity	1	na	1	na	0.1738198	0.1738198	
+estradiol 17-beta-dehydrogenase activity	1	na	6	na	1.0000000	0.6820265	
+UDP-glucose 6-dehydrogenase activity	1	na	1	na	0.1738198	0.1738198	
+[acyl-carrier protein] S-acetyltransferase activity	1	na	1	na	0.1738198	0.1738198	
+UDP-glucose:glycoprotein glucosyltransferase activity	1	na	4	na	0.5341179	0.5341179	
+adenylosuccinate synthase activity	1	na	3	na	0.4360861	0.4360861	
+calcium:sodium antiporter activity	1	na	10	na	1.0000000	0.8518933	
+ molybdenum ion binding	1	na	7	na	1.0000000	0.7373105	
+ inorganic diphosphate transporter activity	1	na	1	na	0.1738198	0.1738198	
+bis(5'-nucleosyl)-tetraphosphatase (asymmetrical) activity	1	na	1	na	0.1738198	0.1738198	
+ carboxypeptidase E activity	1	na	1	na	0.1738198	0.1738198	
+ ATP citrate synthase activity	1	na	1	na	0.1738198	0.1738198	
+phosphoribosylaminoimidazole carboxylase activity	1	na	2	na	0.3174324	0.3174324	
+IMP cyclohydrolase activity	1	na	2	na	0.3174324	0.3174324	
+acetyl-CoA C-acetyltransferase activity	1	na	1	na	0.1738198	0.1738198	
+transmembrane receptor activity	1	na	52	na	0.0013338	0.9999518	
+L-histidine transporter activity	1	na	2	na	0.3174324	0.3174324	
+carbon-sulfur lyase activity	1	na	1	na	0.1738198	0.1738198	
+biliverdin reductase activity	1	na	1	na	0.1738198	0.1738198	
+thymidylate kinase activity	1	na	3	na	0.4360861	0.4360861	
+ ARF GTPase activator activity	1	na	1	na	0.1738198	0.1738198	
+ toxin binding	1	na	2	na	0.3174324	0.3174324	
+structural constituent of eye lens	1	na	18	na	0.3447802	0.9678813	
+ platelet-derived growth factor alpha-receptor activity	1	na	1	na	0.1738198	0.1738198	
+ plasminogen activator activity	1	na	5	na	1.0000000	0.6151111	
+citrate (Si)-synthase activity	1	na	1	na	0.1738198	0.1738198	
+hydroxymethylglutaryl-CoA lyase activity	1	na	1	na	0.1738198	0.1738198	
+ peroxisome proliferator activated receptor binding	1	na	2	na	0.3174324	0.3174324	
+methionine-tRNA ligase activity	1	na	2	na	0.3174324	0.3174324	
+ "GDP-mannose 4,6-dehydratase activity"	1	na	1	na	0.1738198	0.1738198	
+dodecenoyl-CoA delta-isomerase activity	1	na	3	na	0.4360861	0.4360861	
+ methylmalonate-semialdehyde dehydrogenase (acylating) activity	1	na	1	na	0.1738198	0.1738198	
+ long-chain-3-hydroxyacyl-CoA dehydrogenase activity	1	na	1	na	0.1738198	0.1738198	
+phosphoglycerate dehydrogenase activity	1	na	1	na	0.1738198	0.1738198	
+ catechol O-methyltransferase activity	1	na	1	na	0.1738198	0.1738198	
+ oligopeptide transporter activity	1	na	5	na	1.0000000	0.6151111	
+ xenobiotic-transporting ATPase activity	1	na	2	na	0.3174324	0.3174324	
+ "selenide, water dikinase activity"	1	na	3	na	0.4360861	0.4360861	
+ sulfite oxidase activity	1	na	1	na	0.1738198	0.1738198	
+ lysine-tRNA ligase activity	1	na	2	na	0.3174324	0.3174324	
+ dipeptidyl-peptidase activity	1	na	5	na	1.0000000	0.6151111	
+ thioredoxin peroxidase activity	1	na	1	na	0.1738198	0.1738198	
+ "3'(2'),5'-bisphosphate nucleotidase activity"	1	na	1	na	0.1738198	0.1738198	
+ cystathionine gamma-lyase activity	1	na	1	na	0.1738198	0.1738198	
+glycerol-3-phosphate dehydrogenase activity	1	na	2	na	0.3174324	0.3174324	
+thrombin activity	1	na	1	na	0.1738198	0.1738198	
+kynurenine-oxoglutarate transaminase activity	1	na	2	na	0.3174324	0.3174324	
+spermidine synthase activity	1	na	1	na	0.1738198	0.1738198	
+ mevalonate kinase activity	1	na	1	na	0.1738198	0.1738198	
+ ubiquinone biosynthesis monooxygenase activity	1	na	1	na	0.1738198	0.1738198	
+catalase activity	1	na	1	na	0.1738198	0.1738198	
+ structural constituent of muscle	1	na	5	na	1.0000000	0.6151111	
+aminoacylase activity	1	na	2	na	0.3174324	0.3174324	
+ tau-protein kinase activity	1	na	1	na	0.1738198	0.1738198	
+ hormone binding	1	na	3	na	0.4360861	0.4360861	
+legumain activity	1	na	4	na	0.5341179	0.5341179	
+ carbamoyl-phosphate synthase activity	1	na	4	na	0.5341179	0.5341179	
+ alpha1-adrenergic receptor activity	1	na	6	na	1.0000000	0.6820265	
+ inositol-trisphosphate 3-kinase activity	1	na	11	na	0.7019166	0.8776480	
+aminopeptidase I activity	1	na	1	na	0.1738198	0.1738198	
+alpha-mannosidase activity	1	na	9	na	1.0000000	0.8207189	
+sphinganine-1-phosphate aldolase activity	1	na	1	na	0.1738198	0.1738198	
+sepiapterin reductase activity	1	na	2	na	0.3174324	0.3174324	
+ glycerone-phosphate O-acyltransferase activity	1	na	1	na	0.1738198	0.1738198	
+ laminin receptor activity	1	na	1	na	0.1738198	0.1738198	
+ tripeptidyl-peptidase II activity	1	na	1	na	0.1738198	0.1738198	
+microfilament motor activity	1	na	3	na	0.4360861	0.4360861	
+ glutamine-tRNA ligase activity	1	na	1	na	0.1738198	0.1738198	
+lanosterol synthase activity	1	na	1	na	0.1738198	0.1738198	
+ glutamate 5-kinase activity	1	na	1	na	0.1738198	0.1738198	
+ carbohydrate binding	1	na	6	na	1.0000000	0.6820265	
+ DNA replication origin binding	1	na	4	na	0.5341179	0.5341179	
+glutamate-ammonia ligase activity	1	na	2	na	0.3174324	0.3174324	
+ tRNA (guanine-N2-)-methyltransferase activity	1	na	2	na	0.3174324	0.3174324	
+phospholipase inhibitor activity	1	na	4	na	0.5341179	0.5341179	
+glycine-tRNA ligase activity	1	na	5	na	1.0000000	0.6151111	
+ protein kinase CK2 activity	1	na	2	na	0.3174324	0.3174324	
+ double-stranded RNA adenosine deaminase activity	1	na	3	na	0.4360861	0.4360861	
+ "hydrolase activity, acting on carbon-nitrogen (but not peptide) bonds, in cyclic amides"	1	na	6	na	1.0000000	0.6820265	
+ thyroid hormone transporter activity	1	na	4	na	0.5341179	0.5341179	
+ calcium-dependent protein kinase inhibitor activity	1	na	2	na	0.3174324	0.3174324	
+ inositol/phosphatidylinositol kinase activity	1	na	19	na	0.2297480	0.9734684	
+ leucine-tRNA ligase activity	1	na	2	na	0.3174324	0.3174324	
+ ethanolamine kinase activity	1	na	1	na	0.1738198	0.1738198	
+ syndecan binding	1	na	1	na	0.1738198	0.1738198	
+ biotin carboxylase activity	1	na	1	na	0.1738198	0.1738198	
+isovaleryl-CoA dehydrogenase activity	1	na	1	na	0.1738198	0.1738198	
+aryldialkylphosphatase activity	1	na	2	na	0.3174324	0.3174324	
+uroporphyrinogen decarboxylase activity	1	na	2	na	0.3174324	0.3174324	
+serine carboxypeptidase activity	1	na	5	na	1.0000000	0.6151111	
+ ankyrin binding	1	na	2	na	0.3174324	0.3174324	
+ CTP synthase activity	1	na	9	na	1.0000000	0.8207189	
+ NAD+ ADP-ribosyltransferase activity	1	na	26	na	0.0715157	0.9930386	
+nitric-oxide synthase activity	1	na	6	na	1.0000000	0.6820265	
+CDP-diacylglycerol-inositol 3-phosphatidyltransferase activity	1	na	1	na	0.1738198	0.1738198	
+protein kinase regulator activity	1	na	3	na	0.4360861	0.4360861	
+ protein kinase C inhibitor activity	1	na	1	na	0.1738198	0.1738198	
+ protein methyltransferase activity	1	na	5	na	1.0000000	0.6151111	
+cathepsin D activity	1	na	1	na	0.1738198	0.1738198	
+ N-acylglucosamine 2-epimerase activity	1	na	1	na	0.1738198	0.1738198	
+NAD(P)H dehydrogenase (quinone) activity	1	na	4	na	0.5341179	0.5341179	
+ inositol-1(or 4)-monophosphatase activity	1	na	2	na	0.3174324	0.3174324	
+ L-arginine transporter activity	1	na	2	na	0.3174324	0.3174324	
+NADPH:quinone reductase activity	1	na	1	na	0.1738198	0.1738198	
+ cyclin-dependent protein kinase activity	1	na	3	na	0.4360861	0.4360861	
+ "UDP-galactose-glucosylceramide beta-1,4-galactosyltransferase activity"	1	na	2	na	0.3174324	0.3174324	
+ methylenetetrahydrofolate dehydrogenase (NADP+) activity	1	na	1	na	0.1738198	0.1738198	
+ cytoskeletal adaptor activity	1	na	1	na	0.1738198	0.1738198	
+phospholipid transporter activity	1	na	1	na	0.1738198	0.1738198	
+ [cytochrome c]-arginine N-methyltransferase activity	1	na	1	na	0.1738198	0.1738198	
+retinal dehydrogenase activity	1	na	2	na	0.3174324	0.3174324	
+ vasopressin activated calcium mobilizing receptor activity	1	na	1	na	0.1738198	0.1738198	
+ lipoxygenase activity	1	na	15	na	0.4931357	0.9430206	
+ insulin-like growth factor receptor activity	1	na	2	na	0.3174324	0.3174324	
+ arylsulfatase activity	1	na	3	na	0.4360861	0.4360861	
+ phosphatidylinositol binding	1	na	1	na	0.1738198	0.1738198	
+"transferase activity, transferring pentosyl groups"	1	na	2	na	0.3174324	0.3174324	
+ (S)-3-amino-2-methylpropionate transaminase activity	1	na	1	na	0.1738198	0.1738198	
+ cholinesterase activity	1	na	3	na	0.4360861	0.4360861	
+ calmodulin-dependent protein kinase I activity	1	na	2	na	0.3174324	0.3174324	
+branched-chain-amino-acid transaminase activity	1	na	3	na	0.4360861	0.4360861	
+ pyridoxal kinase activity	1	na	2	na	0.3174324	0.3174324	
+ ADPribosylarginine hydrolase activity	1	na	3	na	0.4360861	0.4360861	
+ specific transcriptional repressor activity	1	na	6	na	1.0000000	0.6820265	
+ signal recognition particle binding	1	na	1	na	0.1738198	0.1738198	
+ethanolamine-phosphate cytidylyltransferase activity	1	na	1	na	0.1738198	0.1738198	
+CoA-transferase activity	1	na	5	na	1.0000000	0.6151111	
+group II metabotropic glutamate receptor activity	1	na	2	na	0.3174324	0.3174324	
+ FK506 binding	1	na	2	na	0.3174324	0.3174324	
+ phosphoinositide 5-phosphatase activity	1	na	3	na	0.4360861	0.4360861	
+ neurotransmitter binding	1	na	2	na	0.3174324	0.3174324	
+ glutamine-phenylpyruvate transaminase activity	1	na	1	na	0.1738198	0.1738198	
+ glycerone kinase activity	1	na	1	na	0.1738198	0.1738198	
+ succinate dehydrogenase (ubiquinone) activity	1	na	2	na	0.3174324	0.3174324	
+ neutral amino acid transporter activity	1	na	5	na	1.0000000	0.6151111	
+ chloride-transporting ATPase activity	1	na	1	na	0.1738198	0.1738198	
+ lipoprotein receptor activity	1	na	1	na	0.1738198	0.1738198	
+ "enoyl-[acyl-carrier protein] reductase (NADPH, B-specific) activity"	1	na	1	na	0.1738198	0.1738198	
+electron-transferring-flavoprotein dehydrogenase activity	1	na	2	na	0.3174324	0.3174324	
+1-phosphatidylinositol 4-kinase activity	1	na	2	na	0.3174324	0.3174324	
+carboxylic ester hydrolase activity	1	na	7	na	1.0000000	0.7373105	
+ acetyl-CoA carboxylase activity	1	na	1	na	0.1738198	0.1738198	
+ 5S rRNA binding	1	na	5	na	1.0000000	0.6151111	
+ sodium-dependent phosphate transporter activity	1	na	7	na	1.0000000	0.7373105	
+aspartate carbamoyltransferase activity	1	na	4	na	0.5341179	0.5341179	
+ O-sialoglycoprotein endopeptidase activity	1	na	3	na	0.4360861	0.4360861	
+ dipeptidyl-peptidase III activity	1	na	4	na	0.5341179	0.5341179	
+ [pyruvate dehydrogenase (lipoamide)] phosphatase activity	1	na	2	na	0.3174324	0.3174324	
+glycosaminoglycan binding	1	na	1	na	0.1738198	0.1738198	
+hydroxymethylbilane synthase activity	1	na	2	na	0.3174324	0.3174324	
+ serotonin receptor activity	1	na	8	na	1.0000000	0.7829846	
+protein-glutamine gamma-glutamyltransferase activity	1	na	4	na	0.5341179	0.5341179	
+alpha-L-fucosidase activity	1	na	2	na	0.3174324	0.3174324	
+phosphatase activator activity	1	na	1	na	0.1738198	0.1738198	
+ peptidylglycine monooxygenase activity	1	na	2	na	0.3174324	0.3174324	
+ apolipoprotein E receptor activity	1	na	1	na	0.1738198	0.1738198	
+ 3-hydroxy-2-methylbutyryl-CoA dehydrogenase activity	1	na	1	na	0.1738198	0.1738198	
+histone acetyltransferase activity	1	na	8	na	1.0000000	0.7829846	
+ribonucleoside-diphosphate reductase activity	1	na	7	na	1.0000000	0.7373105	
+cystathionine beta-lyase activity	1	na	1	na	0.1738198	0.1738198	
+Rho GTPase activator activity	1	na	4	na	0.5341179	0.5341179	
+ G-protein activated inward rectifier potassium channel activity	1	na	7	na	1.0000000	0.7373105	
+ histone-arginine N-methyltransferase activity	1	na	2	na	0.3174324	0.3174324	
+lipid phosphatase activity	1	na	1	na	0.1738198	0.1738198	
+beta-galactosidase activity	1	na	6	na	1.0000000	0.6820265	
+ 3-hydroxypalmitoyl-[acyl-carrier protein] dehydratase activity	1	na	1	na	0.1738198	0.1738198	
+ protein phosphatase 1 binding	1	na	1	na	0.1738198	0.1738198	
+transcription corepressor activity	1	na	3	na	0.4360861	0.4360861	
+ubiquitin conjugating enzyme activity	1	na	1	na	0.1738198	0.1738198	
+ phosphoribosylformylglycinamidine synthase activity	1	na	2	na	0.3174324	0.3174324	
+glutaminase activity	1	na	2	na	0.3174324	0.3174324	
+galactokinase activity	1	na	2	na	0.3174324	0.3174324	
+ protein kinase inhibitor activity	1	na	2	na	0.3174324	0.3174324	
+ peptide antigen binding	1	na	5	na	1.0000000	0.6151111	
+ dihydrolipoyllysine-residue acetyltransferase activity	1	na	2	na	0.3174324	0.3174324	
+ ribosomal protein S6 kinase activity	1	na	1	na	0.1738198	0.1738198	
+ translation release factor activity	1	na	2	na	0.3174324	0.3174324	
+ "amylo-alpha-1,6-glucosidase activity"	1	na	2	na	0.3174324	0.3174324	
+glycine dehydrogenase (decarboxylating) activity	1	na	3	na	0.4360861	0.4360861	
+ NAD(P)+ transhydrogenase (AB-specific) activity	1	na	1	na	0.1738198	0.1738198	
+"translation release factor activity, codon specific"	1	na	3	na	0.4360861	0.4360861	
+complement component C1q binding	1	na	1	na	0.1738198	0.1738198	
+dTDP-4-dehydrorhamnose reductase activity	1	na	5	na	1.0000000	0.6151111	
+ ErbB-3 class receptor binding	1	na	2	na	0.3174324	0.3174324	
+ glycerophosphoinositol glycerophosphodiesterase activity	1	na	1	na	0.1738198	0.1738198	
+ actinin binding	1	na	2	na	0.3174324	0.3174324	
+adenine nucleotide transporter activity	1	na	1	na	0.1738198	0.1738198	
+lysophospholipase activity	1	na	4	na	0.5341179	0.5341179	
+O-methyltransferase activity	1	na	3	na	0.4360861	0.4360861	
+GMP reductase activity	1	na	2	na	0.3174324	0.3174324	
+integrin binding	1	na	3	na	0.4360861	0.4360861	
+dihydroorotate dehydrogenase activity	1	na	2	na	0.3174324	0.3174324	
+"phosphatidylinositol-3,4-bisphosphate 4-phosphatase activity"	1	na	2	na	0.3174324	0.3174324	
+ steroid delta-isomerase activity	1	na	9	na	1.0000000	0.8207189	
+ nucleotide-sugar transporter activity	1	na	6	na	1.0000000	0.6820265	
+arginine-tRNA ligase activity	1	na	5	na	1.0000000	0.6151111	
+ protease activator activity	1	na	1	na	0.1738198	0.1738198	
+deaminase activity	1	na	7	na	1.0000000	0.7373105	
+gap-junction forming channel activity	1	na	2	na	0.3174324	0.3174324	
+butyryl-CoA dehydrogenase activity	1	na	1	na	0.1738198	0.1738198	
+viral receptor activity	1	na	2	na	0.3174324	0.3174324	
+insulysin activity	1	na	1	na	0.1738198	0.1738198	
+proline dehydrogenase activity	1	na	7	na	1.0000000	0.7373105	
+ ryanodine-sensitive calcium-release channel activity	1	na	6	na	1.0000000	0.6820265	
+ oleoyl-[acyl-carrier protein] hydrolase activity	1	na	2	na	0.3174324	0.3174324	
+ epidermal growth factor receptor binding	1	na	7	na	1.0000000	0.7373105	
+3-beta-hydroxy-delta5-steroid dehydrogenase activity	1	na	12	na	0.7044739	0.8989250	
+ubiquitin-specific protease activity	1	na	1	na	0.1738198	0.1738198	
+ farnesyl-diphosphate farnesyltransferase activity	1	na	1	na	0.1738198	0.1738198	
+ monocarboxylate porter activity	1	na	5	na	1.0000000	0.6151111	
+nucleoside transporter activity	1	na	6	na	1.0000000	0.6820265	
+ L-ascorbate:sodium symporter activity	1	na	2	na	0.3174324	0.3174324	
+ anion transporter activity	1	na	1	na	0.1738198	0.1738198	
+SNARE binding	1	na	2	na	0.3174324	0.3174324	
+orotate phosphoribosyltransferase activity	1	na	1	na	0.1738198	0.1738198	
+ tyrosine-tRNA ligase activity	1	na	2	na	0.3174324	0.3174324	
+ acetylglucosaminyltransferase activity	1	na	14	na	0.4878044	0.9310242	
+ potassium channel regulator activity	1	na	6	na	1.0000000	0.6820265	
+ retinoid X receptor binding	1	na	1	na	0.1738198	0.1738198	
+adenine phosphoribosyltransferase activity	1	na	1	na	0.1738198	0.1738198	
+lysosphingolipid and lysophosphatidic acid receptor activity	1	na	10	na	1.0000000	0.8518933	
+protein-methionine-S-oxide reductase activity	1	na	6	na	1.0000000	0.6820265	
+2-hydroxyacylsphingosine 1-beta-galactosyltransferase activity	1	na	1	na	0.1738198	0.1738198	
+ pantothenate kinase activity	1	na	7	na	1.0000000	0.7373105	
+ dynein binding	1	na	2	na	0.3174324	0.3174324	
+fibroblast growth factor receptor binding	1	na	3	na	0.4360861	0.4360861	
+ 3-mercaptopyruvate sulfurtransferase activity	1	na	1	na	0.1738198	0.1738198	
+ glutamate-5-semialdehyde dehydrogenase activity	1	na	1	na	0.1738198	0.1738198	
+propionyl-CoA carboxylase activity	1	na	2	na	0.3174324	0.3174324	
+ acetylcholine receptor activator activity	1	na	1	na	0.1738198	0.1738198	
+ 1-acylglycerophosphocholine O-acyltransferase activity	1	na	1	na	0.1738198	0.1738198	
+ farnesyltranstransferase activity	1	na	2	na	0.3174324	0.3174324	
+ ATPase stimulator activity	1	na	1	na	0.1738198	0.1738198	
+ 3-oxoacyl-[acyl-carrier protein] synthase activity	1	na	1	na	0.1738198	0.1738198	
+ aminopeptidase B activity	1	na	1	na	0.1738198	0.1738198	
+ NADPH-adrenodoxin reductase activity	1	na	1	na	0.1738198	0.1738198	
+glycogen (starch) synthase activity	1	na	9	na	1.0000000	0.8207189	
+ cysteine-S-conjugate beta-lyase activity	1	na	1	na	0.1738198	0.1738198	
+ "transferase activity, transferring phosphorus-containing groups"	1	na	3	na	0.4360861	0.4360861	
+ sodium:bicarbonate symporter activity	1	na	1	na	0.1738198	0.1738198	
+protein-L-isoaspartate (D-aspartate) O-methyltransferase activity	1	na	6	na	1.0000000	0.6820265	
+ diphosphoinositol-polyphosphate diphosphatase activity	1	na	2	na	0.3174324	0.3174324	
+prenylcysteine oxidase activity	1	na	1	na	0.1738198	0.1738198	

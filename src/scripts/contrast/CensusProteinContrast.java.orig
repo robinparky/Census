@@ -1,0 +1,167 @@
+//package scripts.contrast;
+
+import java.util.*;
+import java.io.*;
+
+public class CensusProteinContrast
+{
+    private static Hashtable<String, Set> descHt = new Hashtable<String, Set>();
+
+    public static Hashtable<String, String> readFile(String fileName) throws Exception
+    {
+	Hashtable<String, String> proHt = new Hashtable<String, String>();
+
+        BufferedReader br = new BufferedReader(new FileReader(fileName));
+
+        String eachLine;
+
+	Hashtable<String, Set> ht = new Hashtable<String, Set>();
+
+	while( (eachLine = br.readLine()) != null)
+	{       
+	    if(eachLine.startsWith("P\t"))
+	    {
+		String[] arr = eachLine.split("\t");                
+
+		//proHt.put(arr[1] + "\t" + arr[2], eachLine);
+		proHt.put(arr[1], eachLine);
+	    }            
+	}
+
+	return proHt;
+    }
+
+    public static void main(String[] args) throws IOException, Exception
+    {       
+	if(args.length<=0)
+	{
+	    System.out.println("it needs census-out.txt files as paramters");
+	    System.exit(0);
+
+	}
+
+	CensusProteinContrast contrast = new CensusProteinContrast();
+	contrast.run(args);
+    }
+
+    public void run(String[] args) throws Exception {
+
+	List<Hashtable<String, String>> proHtList = new ArrayList<Hashtable<String, String>>();
+//	List<Hashtable<String, Set>> setList = new ArrayList<Hashtable<String, Set>>();
+    
+	for(int i=0;i<args.length;i++)
+	{
+	    System.out.print(args[i] + "\t");
+	}
+
+	System.out.println("");
+
+	for(int i=0;i<args.length;i++)
+	{
+	    Hashtable<String, String> proHt = readFile(args[i]);
+//	    setList.add(ht);
+
+	    proHtList.add(proHt);
+
+	}
+
+	//for(Iterator<Hashtable<String, Set>> itr=l.iterator(); itr.hasNext(); )
+
+	Set<String> analyzedSet = new HashSet<String>();
+	
+	for(int i=0;i<proHtList.size();i++)
+	{
+//	    Hashtable<String, Set> ht = setList.get(i);
+
+	    Hashtable<String, String> proHt = proHtList.get(i);
+	    Set s = proHt.keySet();
+
+
+	    int countPro = 0;
+	    int colSize=0;
+	    int maxColSize=0;
+	    for(Iterator<String> itr=s.iterator(); itr.hasNext(); )
+	    {
+		String key = itr.next();
+	//	String value1 = proHt.get(key);
+		String str = proHt.get(key);
+
+		if(analyzedSet.contains(key))
+		    continue;
+
+		String[] arr = str.split("\t");
+		colSize = arr.length;
+
+		if(colSize>maxColSize)
+		    maxColSize = colSize;
+	    }
+
+	    for(Iterator<String> itr=s.iterator(); itr.hasNext(); )
+	    {
+		String key = itr.next();
+	//	String value1 = proHt.get(key);
+		String str = proHt.get(key);
+
+		if(analyzedSet.contains(key))
+		    continue;
+
+		analyzedSet.add(key);
+
+		String[] arr = str.split("\t");
+
+		for(int tmpC=0;tmpC<i;tmpC++)
+		{
+		    //for(String eachStr:arr)
+		    for(int tmpC2=0; tmpC2<maxColSize; tmpC2++)
+			System.out.print("X\t");
+		}
+
+		System.out.print(str + "\t");
+
+		for(int tmpC=i+1;tmpC<proHtList.size();tmpC++)
+		{
+		    Hashtable<String, String> tmpPepHt = proHtList.get(tmpC);
+		    String tValue = tmpPepHt.get(key);
+
+		//    tmpPepHt.remove(key);
+//		    Hashtable<String, Set> tht = setList.get(tmpC);
+//		    Set tset = tht.get(key);
+
+		    //System.out.print(((tset==null)?"X\tX\tX\tX\tX":tmpPepHt.get(key)) + "\t");
+
+		    if(tValue == null)
+		    {
+			//for(String eachStr:arr)
+			for(int tmpC2=0; tmpC2<maxColSize; tmpC2++)
+			    System.out.print("X\t");
+		    }
+		    else
+		    {
+
+			System.out.print(tValue + "\t");
+		    }
+
+		}
+
+		System.out.println("");
+	    }
+	}
+
+/*
+	Hashtable<String, Set> ht1 = readFile(args[0], pepHt1);
+	Hashtable<String, Set> ht2 = readFile(args[1], pepHt2);
+
+	s = ht2.keySet();
+	for(Iterator<String> itr=s.iterator(); itr.hasNext(); )
+	{
+	    String key = itr.next();
+	    String value = pepHt2.get(key);
+	    Set set2 = ht2.get(key);
+	    //System.out.println(key + "\tX\t" + set2 + "\t" + "X\tX\tX" + "\t" + value);
+	    System.out.println(key + "\t" + set2 + "\t" + set2 + "\t" + "X\tX\tX" + "\t" + value);
+
+	}
+	*/
+    }
+}
+

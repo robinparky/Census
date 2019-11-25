@@ -1,0 +1,116 @@
+<             File dtaFile = new File(filePath + "DTASelect.txt");
+---
+>         //    File dtaFile = new File(filePath + "DTASelect.txt");
+2404a2405
+>                 //    System.out.println(peptide.getPtmIndex() + " ============================= " + peptide.getPtmIndexProtein());
+2406c2407,2408
+<                     //System.out.println("");
+---
+> 
+> 
+2490a2493,2495
+>                     peptideEle.setAttribute("ptmIndex", peptide.getPtmIndex());
+>                     peptideEle.setAttribute("ptmIndexProtein", peptide.getPtmIndexProtein());
+> 
+2560c2565,2567
+<                             if(intArrList == null)
+---
+>                             double [] intArr = intArrList.toNativeArray();
+>                             double [] massArr = massArrList.toNativeArray();
+>                             for(double d: intArr)
+2562,2564c2569
+<                                 purityList.add(0.0);
+<                                 peptideEle.setAttribute("tmt_purity", Double.toString(0.0));
+< 
+---
+>                                 totalIntensity+=d;
+2566,2573d2570
+<                             else
+<                             {
+<                                 double [] intArr = intArrList.toNativeArray();
+<                                 double [] massArr = massArrList.toNativeArray();
+<                                 for(double d: intArr)
+<                                 {
+<                                     totalIntensity+=d;
+<                                 }
+2575,2582c2572,2579
+<                                 for(int i=0; i<samIsoArr.length; i++)
+<                                 {
+<                                     double mass = samIsoArr[i];
+<                                     double tempDiff = mass-slineMass;
+<                                     //   if(tempDiff>3)System.out.println("..... "+tempDiff + " " + chargeState);
+<                                     precursorSum+=  CalcUtil.intensitySumForSinglePeakNewMassTolerance(massArr, intArr, mass, massTol);
+<                                 }
+<                                 double purity = precursorSum/totalIntensity;
+---
+>                             for(int i=0; i<samIsoArr.length; i++)
+>                             {
+>                                 double mass = samIsoArr[i];
+>                                 double tempDiff = mass-slineMass;
+>                                 //   if(tempDiff>3)System.out.println("..... "+tempDiff + " " + chargeState);
+>                                 precursorSum+=  CalcUtil.intensitySumForSinglePeakNewMassTolerance(massArr, intArr, mass, massTol);
+>                             }
+>                             double purity = precursorSum/totalIntensity;
+2587,2591c2584,2585
+<                                 purityList.add(purity);
+<                                 peptideEle.setAttribute("tmt_purity", Double.toString(purity));
+<                             }
+< 
+< 
+---
+>                             purityList.add(purity);
+>                             peptideEle.setAttribute("tmt_purity", Double.toString(purity));
+2730a2725,2726
+>                     IndexedFile iFile2 = ht.get(filePath+ peptide.getFileName() + "." + "ms2");
+>                     if(null == iFile2) {
+2731a2728,2739
+>                         if(FileFilterUtil.isHeavyFile(peptide.getFileName() + ".ms2", filePath)) {
+>                             iFile2 = ht.get(filePath + peptide.getFileName().substring(1) + "." + "ms2");
+>                             if(null != iFile2)
+>                                 peptide.setFileName(peptide.getFileNameWithScan().substring(1));
+>                         }
+>                         else if(null == iFile2) {
+>                             iFile2 = ht.get(filePath+ peptide.getFileName() + "." + "ms3");
+> 
+>                             if(null == iFile2 && FileFilterUtil.isHeavyFile(peptide.getFileName() + ".ms3", filePath)) {
+>                                 iFile2 = ht.get(filePath + peptide.getFileName().substring(1) + "." + "ms3");
+>                                 if(null != iFile2)
+>                                     peptide.setFileName(peptide.getFileNameWithScan().substring(1));
+2733c2741,2746
+<                     IndexedFile iFile2 = ht.get(filePath+ peptide.getFileName() + "." + "ms2");
+---
+>                             }
+>                         }
+> 
+> 
+> 
+>                     }
+2743a2757
+> 
+2789,2790c2803,2809
+<                             xyPoints = SpectrumUtil.getSpectrum(filePath, peptide.getFileName() + ".ms3", ms3Scan,
+<                                     startmass-1, endMass+1 );
+---
+>     File f = new File(filePath + peptide.getFileName() + ".ms3");
+>     if(f.exists()) 
+>     xyPoints = SpectrumUtil.getSpectrum(filePath, peptide.getFileName() + ".ms3", ms3Scan,
+>     startmass-1, endMass+1 );
+>     else
+>     xyPoints = SpectrumUtil.getSpectrum(filePath, peptide.getFileName().substring(1) + ".ms3", ms3Scan,
+>     startmass-1, endMass+1 );
+2793,2794c2812,2818
+<                             xyPoints = SpectrumUtil.getSpectrum(filePath, peptide.getFileName() + "_ms3.ms2", ms3Scan,
+<                                     startmass-1, endMass+1 );
+---
+>     File f = new File(filePath + peptide.getFileName() + "_ms3.ms2");
+>     if(f.exists()) 
+>     xyPoints = SpectrumUtil.getSpectrum(filePath, peptide.getFileName() + "_ms3.ms2", ms3Scan,
+>     startmass-1, endMass+1 );
+>     else
+>     xyPoints = SpectrumUtil.getSpectrum(filePath, peptide.getFileName().substring(1) + "_ms3.ms2", ms3Scan,
+>     startmass-1, endMass+1 );
+2840c2864
+<             Histogram signalHist= new Histogram(20,0,200);  //max value is 200
+---
+>           Histogram signalHist= new Histogram(20,0,200);  //max value is 200
+[rpark@cheezer Census]$ vim src/edu/scripps/pms/census/ChroGenerator.java

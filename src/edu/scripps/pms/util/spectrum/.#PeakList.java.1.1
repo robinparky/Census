@@ -1,0 +1,92 @@
+/**
+ * @file PeakList.java
+ * This is the source file for edu.scripps.pms.util.spectrum.PeakList
+ * @author Tao Xu
+ * @date $Date: 2004/12/21 19:58:33 $
+ */
+
+
+
+package edu.scripps.pms.util.spectrum;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Comparator;
+import java.util.Collections;
+import java.util.Iterator;
+
+public class PeakList {
+
+    private int loscan;
+    private int hiscan;
+    private float precursorMass;
+    private List hlines = new ArrayList();
+    private ArrayList zlines = new ArrayList();
+    private ArrayList peaks = new ArrayList();
+
+    public void setHlines(List hlines) {
+       this.hlines = hlines;
+    }
+
+    public void setLoscan(int loscan) {
+        this.loscan = loscan;
+    }
+
+    public void setHiscan(int hiscan) {
+        this.hiscan = hiscan;
+    }
+
+    public void setPrecursorMass(float precursorMass) {
+        this.precursorMass = precursorMass;
+    }
+
+    public void addZline(Zline z) {
+        zlines.add((Object)z);
+    }
+
+    public void addPeak(Peak p) {
+        peaks.add((Object)p);
+    }
+    public int numPeaks() {
+        return peaks.size();
+    }
+    public void sort(boolean sortByIntensity) {
+        Comparator c = new PeakComparator(sortByIntensity);
+        Collections.sort(peaks, c);
+    }
+    /**
+     * Return the low scan number of this
+     */
+    public int getLoscan() {
+        return loscan;
+    }
+
+    public int getHiscan() {
+        return hiscan;
+    }
+
+    public float getPrecursorMass() {
+        return precursorMass;
+    }
+
+    public static void main(String args[]) {
+        float a = -90.32f;
+        float b = -90.32f;
+        if (a == b) {
+            System.out.println(a + " == " + b);
+        } else {
+
+            System.out.println(a + " != " + b);
+        }
+
+
+        System.out.println("maximum int: " + Integer.MAX_VALUE);
+        System.out.println("maximum float: " + Float.MAX_VALUE);
+        System.out.println("maximum double: " + Double.MAX_VALUE);
+    }
+
+    public Iterator getPeaks()
+    {
+        return peaks.iterator();
+    }
+}

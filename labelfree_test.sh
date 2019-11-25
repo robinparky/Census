@@ -1,0 +1,1 @@
+java -Xmx1g -jar /home/rpark/tomcat/webapps/ip2/softwares/census/census.jar -c /data/2/rpark/ip2_data/rpark/xmhan_label_free_yeast/labelfree_quant/census_config_labelfree_807.xml -aa -of /home/rpark/test_labelfree.txt

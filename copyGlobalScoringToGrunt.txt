@@ -1,0 +1,1 @@
+scp scripts/global_scoring/*.class grunt:/home/rpark/rpark_on_data/deploy/global/scripts/global_scoring/.

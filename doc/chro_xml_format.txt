@@ -1,0 +1,15 @@
+
+-. Tandem, labeling
+P start_peak_scan end_peak_scan; (repeat)scan_num sample_int ref_int, b_sample_ion_arr, b_ref_ion_arr,  y_sample_ion_arr, y_ref_ion_arr;
+
+-. Full, labeling free
+P start_peak_scan end_peak_scan; (repeat)scan_num1 scan_num1 scan_num3 and so one..  sample1_int sample2_int sample3_int and_so_on; repeat
+
+-. Tandem, labeling free
+P start_peak_scan end_peak_scan; (repeat)ref_scan_num1 scan_num2 .., intsum1 intsum2..,  b_sample1_ion_arr y_sample1_ion_arr, b_sample2_ion_arr y_sample2_ion_arr, ..; repeat;
+
+-. iTRAQ (labeling single)
+(repeat)mass1 mass2 mass3.., intensity1 intensity2 intensity3...
+
+-. iTRAQ (labeling multiple)
+P start_peak_scan end_peak_scan; (repeat)scan_mum1 ... ????  mass1 mass2 mass3.., intensity1 intensity2 intensity3...

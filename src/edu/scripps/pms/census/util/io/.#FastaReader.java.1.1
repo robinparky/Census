@@ -1,0 +1,103 @@
+/**
+ * @file FastaReader.java
+ * This is the source file for edu.scripps.pms.util.spectrum.FastaReader
+ * @author Tao Xu
+ * @date $Date: 2005/01/07 19:05:14 $
+ */
+
+package edu.scripps.pms.util.io;
+
+import java.io.*;
+import java.util.Iterator;
+
+import edu.scripps.pms.util.seq.Fasta;
+
+public class FastaReader {
+
+    public static final char FIRSTCHAROFDEFLINE = '>';
+
+    private String fastaFileName;
+
+    public FastaReader (String fastaFileName) throws IOException {
+        this.fastaFileName = fastaFileName;
+    }
+
+    public static void main(String args[]) throws Exception {
+        String line = null;
+        FastaReader fr = new FastaReader(args[0]);
+        Iterator it = fr.getFastas();
+        int counter = 0;
+
+        while (it.hasNext()) {
+            counter++;
+            it.next();
+        }
+        System.out.println("Total number of fasta processed: " + counter);
+        System.out.println("Finished");
+    }
+
+
+    public Iterator getFastas() throws IOException {
+        return new Iterator() {
+
+
+            private String lastLine = ""; // remember the last line read
+            private BufferedReader br;
+            {
+                br = new BufferedReader(new FileReader(fastaFileName), 4096);
+                // remove the potential empty lines and get the first defline
+                while ((lastLine = br.readLine()) != null && lastLine.equals(""));
+
+                if (lastLine.charAt(0) != FIRSTCHAROFDEFLINE) {
+                    throw new FileFormatUnknownException();
+                }
+            }
+
+            public boolean hasNext() {
+                return lastLine != null;
+            }
+
+            public Object next() {
+
+                Fasta fasta = null;
+                try {
+                    fasta = getFasta();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                return fasta;
+            }
+
+            public void remove() {
+                throw new UnsupportedOperationException("Not supported");
+            }
+
+
+            private Fasta getFasta() throws IOException {
+
+                StringBuffer sb = new StringBuffer(500);
+
+                // if the line read is a empty string, ignore it
+                while ((lastLine = br.readLine()) != null && (lastLine.equals("")
+                             || lastLine.charAt(0) != FIRSTCHAROFDEFLINE)){
+                    //System.out.println(lastLine);
+                    if (!lastLine.equals("")) {
+                        sb.append(lastLine);
+                    }
+                }
+
+                // the lastLine should be the defline
+                // and sb.toString should be the sequence
+                return new Fasta(lastLine, sb.toString());
+            }
+
+            protected void finalize() throws IOException {
+                br.close();
+                System.out.println("finalized");
+            }
+
+        };
+    }
+
+}

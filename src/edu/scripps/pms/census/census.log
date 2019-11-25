@@ -1,0 +1,16 @@
+Census version 2.36
+Parsing /data/2/rpark/ip2_data/rpark/Demo_Project_c_elegance/D2_pPro_A__2009_12_09_15_461/quant/2015_09_11_13_11354/DTASelect-filter.txt...done.
+Parsing DTASelect.txt...done.
+1/18 peptides, 5 % is complete2/18 peptides, 11 % is complete3/18 peptides, 16 % is complete4/18 peptides, 22 % is complete5/18 peptides, 27 % is complete6/18 peptides, 33 % is complete7/18 peptides, 38 % is complete8/18 peptides, 44 % is complete9/18 peptides, 50 % is complete10/18 peptides, 55 % is complete11/18 peptides, 61 % is complete12/18 peptides, 66 % is complete13/18 peptides, 72 % is complete14/18 peptides, 77 % is complete15/18 peptides, 83 % is complete16/18 peptides, 88 % is complete17/18 peptides, 94 % is complete18/18 peptides, 100 % is complete
+100% complete
+1.706 seconds taken
+Census version 2.36
+Report file was successfully created
+Total peptides : 18
+Quantified peptides : 14
+Quantification efficiency : 77.78 %
+Census version 2.36
+Report file was successfully created
+Total peptides : 18
+Quantified peptides : 14
+Quantification efficiency : 77.78 %

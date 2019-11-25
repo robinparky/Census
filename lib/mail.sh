@@ -1,0 +1,2 @@
+#!/bin/bash
+echo Hi, Robin. The ProLuCID job in /data/2/rpark/ip2_data//rpark/test1/prolucid_test_2016_10_28_10_85832/search/projects2016_10_31_12_104882/ is removed from the list of JobStatus.  | mail -s Search_status_Reminder rpark@scripps.edu -- 

@@ -1,0 +1,14 @@
+# census report file for command line
+noFilter	false	
+detSelect	true
+pValueSelect	true
+filterFragmentIons	false
+detValue	0.5
+pValue	0.1
+correctFactorValue	0
+isUniquePeptide	false
+removeNegative	true
+discardAN	false
+allNoneLowerBound	0.1
+allNoneUpperBound	10
+allNoneCompositeScore	0.95

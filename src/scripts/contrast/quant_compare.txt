@@ -1,0 +1,12 @@
+a1.txt	a2.txt	a3.txt	
+PLINE	LOCUS	AVERAGE_RATIO_1	STANDARD_DEVIATION_1	WEIGHTED_AVERAGE_1	PEPTIDE_NUM_1	SPEC_COUNT_1	AREA_RATIO_1	AVERAGE_RATIO_2	STANDARD_DEVIATION_2	WEIGHTED_AVERAGE_2	PEPTIDE_NUM_2	SPEC_COUNT_2	AREA_RATIO_2	AVERAGE_RATIO_3	STANDARD_DEVIATION_3	WEIGHTED_AVERAGE_3	PEPTIDE_NUM_3	SPEC_COUNT_3	AREA_RATIO_3	DESCRIPTION
+
+P	pfa3D7|chr14|PF14_0599|Pf	0.78	0.08	0.79	14	352	6.66345105E7	X	X	X	X	X	X	X	X	X	X	X	X	Annotation|Plasmodium_falciparum_TIGR|(protein coding) glyceraldehyde-3-phosphate dehydrogenase Location= chr14 join(2559033..2559116, 2559353..2560282) 
+P	pfa3D7|chr11|PF11_0061|Pf	1.00	0.10	1.00	15	117	9.170269006666666E7	X	X	X	X	X	X	1.00	0.10	1.00	15	117	9.170269006666666E7	Annotation|Plasmodium_falciparum_TIGR|(protein coding) histone H4, putative Location= chr11 complement(221819..222130) 
+P	pfa3D7|chr11|PF11_0043|Pf	0.88	0.06	0.88	4	13	8.807483625E7	X	X	X	X	X	X	0.88	0.06	0.88	4	13	8.807483625E7	Annotation|Plasmodium_falciparum_TIGR|(protein coding) 60S acidic ribosomal protein p1, putative Location= chr11 complement(join(140603..140802, 140049..140205)) 
+P	pfa3D7|chr13|PF13_0141|Pf	X	X	X	X	X	X	0.89	0.12	0.90	10	189	5.38053294E7	X	X	X	X	X	X	Annotation|Plasmodium_falciparum_Sanger|(protein coding) L-lactate dehydrogenase Location= chr13 1041358..1042308 
+P	pfa3D7|chr14|PF14_0598|Pf	X	X	X	X	X	X	0.86	0.08	0.87	14	352	6.66345105E7	0.78	0.08	0.79	14	352	6.66345105E7	Annotation|Plasmodium_falciparum_TIGR|(protein coding) glyceraldehyde-3-phosphate dehydrogenase Location= chr14 join(2559033..2559116, 2559353..2560282) 
+P	pfa3D7|chr6|PFF0860c|Pf	X	X	X	X	X	X	1.05	0.08	1.05	17	96	8.969236394117647E7	X	X	X	X	X	X	Annotation|Plasmodium_falciparum_Sanger|(protein coding) histone h2a Location= chr6 complement(748413..748811) 
+P	pfa3D7|chr11|PF11_0250|Pf	X	X	X	X	X	X	1.01	0.19	1.04	3	26	2.3280125E7	X	X	X	X	X	X	Annotation|Plasmodium_falciparum_TIGR|(protein coding) high mobility group-like protein NHP2, putative Location= chr11 join(945469..945643, 945812..945915, 945989..946147) 
+P	pfa3D7|chr13|MAL13P1.133|Pf	X	X	X	X	X	X	X	X	X	X	X	X	2.19		2.19	1	1	2430743.0	Annotation|Plasmodium_falciparum_Sanger|(protein coding) hypothetical protein Location= chr13 complement(join(1003700..1003824, 1003971..1019504, 1002949..1003537)) 
+P	pfa3D7|chr3|PFC0760c|Pf	X	X	X	X	X	X	X	X	X	X	X	X	1.01	0.10	1.02	2	2	8302362.5	Annotation|Plasmodium_falciparum_Sanger|(protein coding) hypothetical protein Location= chr3 complement(696215..706399) 

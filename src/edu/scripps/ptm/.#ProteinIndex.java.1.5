@@ -1,0 +1,140 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+package edu.scripps.ptm;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.List;
+
+/**
+ *
+ * @author Harshil
+ */
+public class ProteinIndex {
+    private final int proteinScaledLength=400;
+    private String accession;
+    private int[] unModifiedArr;
+    private int[] modifiedArr;
+    private Set<Integer> changedIndex = new HashSet();
+    private String proteinSequence ;
+    private String modSiteString;//format is S:27 (12/34),T:34(2/32)
+    private int proteinLength;
+    
+    private List<ResidueLocation> residueList = null;
+
+    public void setUnModifiedArr(int index,int value) {
+        unModifiedArr[index] = value;
+    }
+
+    public void setModifiedArr(int index,int value) {
+        modifiedArr[index] = value;
+    }
+
+    public ProteinIndex(String accession,String proteinSequence) {
+      
+        this.accession = accession;
+        this.proteinSequence = proteinSequence;
+        unModifiedArr = new int[proteinSequence.length()];
+        modifiedArr = new int[proteinSequence.length()];
+    }
+    
+    public List<ResidueLocation> getResidueList() {
+        
+        if(null != residueList)
+            return residueList;
+        
+        return residueList;
+    }
+
+    public void setResidueList(List<ResidueLocation> residueList) {
+        this.residueList = residueList;
+    }
+
+    
+    public int getProteinLength() {
+        return this.proteinSequence.length();        
+    }
+
+    public void setProteinLength(int proteinLength) {
+        this.proteinLength = proteinLength;
+    }
+    
+    
+
+    public String getModSiteString() {
+        
+        //build string like S34 (34/43), T32 (53,32)
+        return "dummy site index";
+        //return modSiteString;
+    }
+
+    public void setModSiteString(String modSiteString) {
+        this.modSiteString = modSiteString;
+    }
+    
+    
+    
+    
+
+    public void addChangedIndex(int value)
+    {
+        getChangedIndex().add(value);
+    }
+    
+    
+    public void addModifiedIndex(int index, int value)
+    {
+        modifiedArr[index] += value;
+    }
+    
+    public void addUnModifiedIndex(int index, int value)
+    {
+        unModifiedArr[index] += value;
+    }
+    public void setUnModifiedIndex(int index, int value)
+    {
+        unModifiedArr[index]=value;
+    }
+    public String getAccession() {
+        return accession;
+    }
+
+    public void setAccession(String accession) {
+        this.accession = accession;
+    }
+
+    /**
+     * @return the unModifiedArr
+     */
+    public int[] getUnModifiedArr() {
+        return unModifiedArr;
+    }
+
+    /**
+     * @return the modifiedArr
+     */
+    public int[] getModifiedArr() {
+        return modifiedArr;
+    }
+
+    /**
+     * @return the changedIndex
+     */
+    public Set<Integer> getChangedIndex() {
+        return changedIndex;
+    }
+
+    /**
+     * @return the proteinSequence
+     */
+    public String getProteinSequence() {
+        return proteinSequence;
+    }
+
+    
+    
+}

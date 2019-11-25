@@ -1,0 +1,8 @@
+tag 
+
+gui01	;gui working 0502 2006
+
+//before changing MRM/data independent quantification v092
+
+gui04132006	;before start adding itraq 04 13 2006
+

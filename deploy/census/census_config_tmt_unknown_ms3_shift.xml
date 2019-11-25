@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+  <label_type labeling="true">
+    <name>sample</name>
+  </label_type>
+  <!--experiment type tag.
+Note.  Currently this tag requires only for iTRAQ, TMT and data independent experiment.
+13: iTRAQ single spectrum monotoring experiment
+14: iTRAQ multiple spectra monotoring experiment
+201: TMT single spectra monotoring experiment
+15: data independent experiment
+20: MRM experiment
+-->
+  <experiment_type>13</experiment_type>
+  <quant_type>TMT</quant_type>
+  <params>
+    <scan_type>MS/MS</scan_type>
+    <enrich>0.98</enrich>
+    <msms_params scan_shift="0" ms3="random">
+      <frag_ext_type type="specific">
+        <spectrum>single</spectrum>
+        <specific_mass cp_list="6.1," cm_list="0.0,">126.1277</specific_mass>
+        <specific_mass cp_list="6.7," cm_list="0.5,">127.1248</specific_mass>
+        <specific_mass cp_list="4.2," cm_list="1.1,">128.1344</specific_mass>
+        <specific_mass cp_list="4.1," cm_list="1.7,">129.1315</specific_mass>
+        <specific_mass cp_list="2.5," cm_list="2.8,">130.1411</specific_mass>
+        <specific_mass cp_list="2.8," cm_list="3.2,">131.1382</specific_mass>
+        <msms_tolerance>0.05</msms_tolerance>
+      </frag_ext_type>
+    </msms_params>
+  </params>
+  <element_comp>
+    <each_sample name="light">
+      <residue name="A">
+        <ele_C>3</ele_C>
+        <ele_H>5</ele_H>
+        <ele_O>1</ele_O>
+        <ele_N>1</ele_N>
+        <ele_S>0</ele_S>
+        <ele_P>0</ele_P>
+        <ele_15N>0</ele_15N>
+        <ele_2H>0</ele_2H>
+        <ele_13C>0</ele_13C>
+      </residue>
+      <residue name="C">
+        <ele_C>5</ele_C>
+        <ele_H>8</ele_H>
+        <ele_O>2</ele_O>
+        <ele_N>2</ele_N>
+        <ele_S>1</ele_S>
+        <ele_P>0</ele_P>
+        <ele_15N>0</ele_15N>
+        <ele_2H>0</ele_2H>
+        <ele_13C>0</ele_13C>
+      </residue>
+      <residue name="D">
+        <ele_C>4</ele_C>
+        <ele_H>5</ele_H>
+        <ele_O>3</ele_O>
+        <ele_N>1</ele_N>
+        <ele_S>0</ele_S>
+        <ele_P>0</ele_P>
+        <ele_15N>0</ele_15N>
+        <ele_2H>0</ele_2H>
+        <ele_13C>0</ele_13C>
+      </residue>
+      <residue name="E">
+        <ele_C>5</ele_C>
+        <ele_H>7</ele_H>
+        <ele_O>3</ele_O>
+        <ele_N>1</ele_N>
+        <ele_S>0</ele_S>
+        <ele_P>0</ele_P>
+        <ele_15N>0</ele_15N>
+        <ele_2H>0</ele_2H>
+        <ele_13C>0</ele_13C>
+      </residue>
+      <residue name="F">
+        <ele_C>9</ele_C>
+        <ele_H>9</ele_H>
+        <ele_O>1</ele_O>
+        <ele_N>1</ele_N>
+        <ele_S>0</ele_S>
+        <ele_P>0</ele_P>
+        <ele_15N>0</ele_15N>
+        <ele_2H>0</ele_2H>
+        <ele_13C>0</ele_13C>
+      </residue>
+      <residue name="G">
+        <ele_C>2</ele_C>
+        <ele_H>3</ele_H>
+        <ele_O>1</ele_O>
+        <ele_N>1</ele_N>
+        <ele_S>0</ele_S>
+        <ele_P>0</ele_P>
+        <ele_15N>0</ele_15N>
+        <ele_2H>0</ele_2H>
+        <ele_13C>0</ele_13C>
+      </residue>
+      <residue name="H">
+        <ele_C>6</ele_C>
+        <ele_H>7</ele_H>
+        <ele_O>1</ele_O>
+        <ele_N>3</ele_N>
+        <ele_S>0</ele_S>
+        <ele_P>0</ele_P>
+        <ele_15N>0</ele_15N>
+        <ele_2H>0</ele_2H>
+        <ele_13C>0</ele_13C>
+      </residue>
+      <residue name="I">
+        <ele_C>6</ele_C>
+        <ele_H>11</ele_H>
+        <ele_O>1</ele_O>
+        <ele_N>1</ele_N>
+        <ele_S>0</ele_S>
+        <ele_P>0</ele_P>
+        <ele_15N>0</ele_15N>
+        <ele_2H>0</ele_2H>
+        <ele_13C>0</ele_13C>
+      </residue>
+      <residue name="K">
+        <ele_C>6</ele_C>
+        <ele_H>12</ele_H>
+        <ele_O>1</ele_O>
+        <ele_N>2</ele_N>
+        <ele_S>0</ele_S>
+        <ele_P>0</ele_P>
+        <ele_15N>0</ele_15N>
+        <ele_2H>0</ele_2H>
+        <ele_13C>0</ele_13C>
+      </residue>
+      <residue name="L">
+        <ele_C>6</ele_C>
+        <ele_H>11</ele_H>
+        <ele_O>1</ele_O>
+        <ele_N>1</ele_N>
+        <ele_S>0</ele_S>
+        <ele_P>0</ele_P>
+        <ele_15N>0</ele_15N>
+        <ele_2H>0</ele_2H>
+        <ele_13C>0</ele_13C>
+      </residue>
+      <residue name="M">
+        <ele_C>5</ele_C>
+        <ele_H>9</ele_H>
+        <ele_O>1</ele_O>
+        <ele_N>1</ele_N>
+        <ele_S>1</ele_S>
+        <ele_P>0</ele_P>
+        <ele_15N>0</ele_15N>
+        <ele_2H>0</ele_2H>
+        <ele_13C>0</ele_13C>
+      </residue>
+      <residue name="N">
+        <ele_C>4</ele_C>
+        <ele_H>6</ele_H>
+        <ele_O>2</ele_O>
+        <ele_N>2</ele_N>
+        <ele_S>0</ele_S>
+        <ele_P>0</ele_P>
+        <ele_15N>0</ele_15N>
+        <ele_2H>0</ele_2H>
+        <ele_13C>0</ele_13C>
+      </residue>
+      <residue name="P">
+        <ele_C>5</ele_C>
+        <ele_H>7</ele_H>
+        <ele_O>1</ele_O>
+        <ele_N>1</ele_N>
+        <ele_S>0</ele_S>
+        <ele_P>0</ele_P>
+        <ele_15N>0</ele_15N>
+        <ele_2H>0</ele_2H>
+        <ele_13C>0</ele_13C>
+      </residue>
+      <residue name="Q">
+        <ele_C>5</ele_C>
+        <ele_H>8</ele_H>
+        <ele_O>2</ele_O>
+        <ele_N>2</ele_N>
+        <ele_S>0</ele_S>
+        <ele_P>0</ele_P>
+        <ele_15N>0</ele_15N>
+        <ele_2H>0</ele_2H>
+        <ele_13C>0</ele_13C>
+      </residue>
+      <residue name="R">
+        <ele_C>6</ele_C>
+        <ele_H>12</ele_H>
+        <ele_O>1</ele_O>
+        <ele_N>4</ele_N>
+        <ele_S>0</ele_S>
+        <ele_P>0</ele_P>
+        <ele_15N>0</ele_15N>
+        <ele_2H>0</ele_2H>
+        <ele_13C>0</ele_13C>
+      </residue>
+      <residue name="S">
+        <ele_C>3</ele_C>
+        <ele_H>5</ele_H>
+        <ele_O>2</ele_O>
+        <ele_N>1</ele_N>
+        <ele_S>0</ele_S>
+        <ele_P>0</ele_P>
+        <ele_15N>0</ele_15N>
+        <ele_2H>0</ele_2H>
+        <ele_13C>0</ele_13C>
+      </residue>
+      <residue name="T">
+        <ele_C>4</ele_C>
+        <ele_H>7</ele_H>
+        <ele_O>2</ele_O>
+        <ele_N>1</ele_N>
+        <ele_S>0</ele_S>
+        <ele_P>0</ele_P>
+        <ele_15N>0</ele_15N>
+        <ele_2H>0</ele_2H>
+        <ele_13C>0</ele_13C>
+      </residue>
+      <residue name="V">
+        <ele_C>5</ele_C>
+        <ele_H>9</ele_H>
+        <ele_O>1</ele_O>
+        <ele_N>1</ele_N>
+        <ele_S>0</ele_S>
+        <ele_P>0</ele_P>
+        <ele_15N>0</ele_15N>
+        <ele_2H>0</ele_2H>
+        <ele_13C>0</ele_13C>
+      </residue>
+      <residue name="W">
+        <ele_C>11</ele_C>
+        <ele_H>10</ele_H>
+        <ele_O>1</ele_O>
+        <ele_N>2</ele_N>
+        <ele_S>0</ele_S>
+        <ele_P>0</ele_P>
+        <ele_15N>0</ele_15N>
+        <ele_2H>0</ele_2H>
+        <ele_13C>0</ele_13C>
+      </residue>
+      <residue name="Y">
+        <ele_C>9</ele_C>
+        <ele_H>9</ele_H>
+        <ele_O>2</ele_O>
+        <ele_N>1</ele_N>
+        <ele_S>0</ele_S>
+        <ele_P>0</ele_P>
+        <ele_15N>0</ele_15N>
+        <ele_2H>0</ele_2H>
+        <ele_13C>0</ele_13C>
+      </residue>
+      <residue name="NTERM">
+        <ele_C>0</ele_C>
+        <ele_H>1</ele_H>
+        <ele_O>0</ele_O>
+        <ele_N>0</ele_N>
+        <ele_S>0</ele_S>
+        <ele_P>0</ele_P>
+        <ele_15N>0</ele_15N>
+        <ele_2H>0</ele_2H>
+        <ele_13C>0</ele_13C>
+      </residue>
+      <residue name="CTERM">
+        <ele_C>0</ele_C>
+        <ele_H>1</ele_H>
+        <ele_O>1</ele_O>
+        <ele_N>0</ele_N>
+        <ele_S>0</ele_S>
+        <ele_P>0</ele_P>
+        <ele_15N>0</ele_15N>
+        <ele_2H>0</ele_2H>
+        <ele_13C>0</ele_13C>
+      </residue>
+      <residue name="*">
+        <ele_C>0</ele_C>
+        <ele_H>0</ele_H>
+        <ele_O>0</ele_O>
+        <ele_N>0</ele_N>
+        <ele_S>0</ele_S>
+        <ele_P>0</ele_P>
+        <ele_15N>0</ele_15N>
+        <ele_2H>0</ele_2H>
+        <ele_13C>0</ele_13C>
+      </residue>
+      <residue name="#">
+        <ele_C>0</ele_C>
+        <ele_H>0</ele_H>
+        <ele_O>0</ele_O>
+        <ele_N>0</ele_N>
+        <ele_S>0</ele_S>
+        <ele_P>0</ele_P>
+        <ele_15N>0</ele_15N>
+        <ele_2H>0</ele_2H>
+        <ele_13C>0</ele_13C>
+      </residue>
+      <residue name="@">
+        <ele_C>0</ele_C>
+        <ele_H>0</ele_H>
+        <ele_O>0</ele_O>
+        <ele_N>0</ele_N>
+        <ele_S>0</ele_S>
+        <ele_P>0</ele_P>
+        <ele_15N>0</ele_15N>
+        <ele_2H>0</ele_2H>
+        <ele_13C>0</ele_13C>
+      </residue>
+    </each_sample>
+  </element_comp>
+</config>
+

@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+  <label_type labeling="false" />
+  <params>
+    <scan_type>MS</scan_type>
+    <extract_method>1</extract_method>
+    <mass_accuracy unit="m/z">0.3</mass_accuracy>
+    <max_win>300</max_win>
+    <avg_interval>3</avg_interval>
+    <peak_margin>10</peak_margin>
+    <area_threshold>0.95</area_threshold>
+    <alignment align="false">
+      <band_con>500</band_con>
+      <align_type>Peak Profile</align_type>
+    </alignment>
+  </params>
+  <sample>
+    <name>SetA</name>
+    <ms_files>
+      <file>/home/rpark/001/nonlabel/IsotopeFree/SetA/rep1/092106_IsotopeFree_A-01_itms.ms1</file>
+      <file>/home/rpark/001/nonlabel/IsotopeFree/SetA/rep2/092106_IsotopeFree_A-02_itms.ms1</file>
+      <file>/home/rpark/001/nonlabel/IsotopeFree/SetA/rep3/092106_IsotopeFree_A-03_itms.ms1</file>
+      <file>/home/rpark/001/nonlabel/IsotopeFree/SetA/rep4/092106_IsotopeFree_A-04_itms.ms1</file>
+    </ms_files>
+  </sample>
+  <sample>
+    <name>SetB</name>
+    <ms_files>
+      <file>/home/rpark/001/nonlabel/IsotopeFree/SetB/rep1/092106_IsotopeFree_B-01_itms.ms1</file>
+      <file>/home/rpark/001/nonlabel/IsotopeFree/SetB/rep2/092106_IsotopeFree_B-02_itms.ms1</file>
+      <file>/home/rpark/001/nonlabel/IsotopeFree/SetB/rep3/092106_IsotopeFree_B-03_itms.ms1</file>
+      <file>/home/rpark/001/nonlabel/IsotopeFree/SetB/rep4/092106_IsotopeFree_B-04_itms.ms1</file>
+      <file>/home/rpark/001/nonlabel/IsotopeFree/SetB/rep5/092106_IsotopeFree_B-05_itms.ms1</file>
+    </ms_files>
+  </sample>
+  <sample>
+    <name>SetC</name>
+    <ms_files>
+      <file>/home/rpark/001/nonlabel/IsotopeFree/SetC/rep1/092106_IsotopeFree_C-01_itms.ms1</file>
+      <file>/home/rpark/001/nonlabel/IsotopeFree/SetC/rep2/092106_IsotopeFree_C-02_itms.ms1</file>
+      <file>/home/rpark/001/nonlabel/IsotopeFree/SetC/rep3/092106_IsotopeFree_C-03_itms.ms1</file>
+      <file>/home/rpark/001/nonlabel/IsotopeFree/SetC/rep4/092106_IsotopeFree_C-04_itms.ms1</file>
+      <file>/home/rpark/001/nonlabel/IsotopeFree/SetC/rep5/092106_IsotopeFree_C-05_itms.ms1</file>
+    </ms_files>
+  </sample>
+  <element_comp>
+    <each_sample>
+      <residue name="A">
+        <ele_C>3</ele_C>
+        <ele_H>5</ele_H>
+        <ele_O>1</ele_O>
+        <ele_N>1</ele_N>
+        <ele_S>0</ele_S>
+        <ele_P>0</ele_P>
+        <ele_15N>0</ele_15N>
+        <ele_2H>0</ele_2H>
+        <ele_13C>0</ele_13C>
+      </residue>
+      <residue name="C">
+        <ele_C>5</ele_C>
+        <ele_H>8</ele_H>
+        <ele_O>2</ele_O>
+        <ele_N>2</ele_N>
+        <ele_S>1</ele_S>
+        <ele_P>0</ele_P>
+        <ele_15N>0</ele_15N>
+        <ele_2H>0</ele_2H>
+        <ele_13C>0</ele_13C>
+      </residue>
+      <residue name="D">
+        <ele_C>4</ele_C>
+        <ele_H>5</ele_H>
+        <ele_O>3</ele_O>
+        <ele_N>1</ele_N>
+        <ele_S>0</ele_S>
+        <ele_P>0</ele_P>
+        <ele_15N>0</ele_15N>
+        <ele_2H>0</ele_2H>
+        <ele_13C>0</ele_13C>
+      </residue>
+      <residue name="E">
+        <ele_C>5</ele_C>
+        <ele_H>7</ele_H>
+        <ele_O>3</ele_O>
+        <ele_N>1</ele_N>
+        <ele_S>0</ele_S>
+        <ele_P>0</ele_P>
+        <ele_15N>0</ele_15N>
+        <ele_2H>0</ele_2H>
+        <ele_13C>0</ele_13C>
+      </residue>
+      <residue name="F">
+        <ele_C>9</ele_C>
+        <ele_H>9</ele_H>
+        <ele_O>1</ele_O>
+        <ele_N>1</ele_N>
+        <ele_S>0</ele_S>
+        <ele_P>0</ele_P>
+        <ele_15N>0</ele_15N>
+        <ele_2H>0</ele_2H>
+        <ele_13C>0</ele_13C>
+      </residue>
+      <residue name="G">
+        <ele_C>2</ele_C>
+        <ele_H>3</ele_H>
+        <ele_O>1</ele_O>
+        <ele_N>1</ele_N>
+        <ele_S>0</ele_S>
+        <ele_P>0</ele_P>
+        <ele_15N>0</ele_15N>
+        <ele_2H>0</ele_2H>
+        <ele_13C>0</ele_13C>
+      </residue>
+      <residue name="H">
+        <ele_C>6</ele_C>
+        <ele_H>7</ele_H>
+        <ele_O>1</ele_O>
+        <ele_N>3</ele_N>
+        <ele_S>0</ele_S>
+        <ele_P>0</ele_P>
+        <ele_15N>0</ele_15N>
+        <ele_2H>0</ele_2H>
+        <ele_13C>0</ele_13C>
+      </residue>
+      <residue name="I">
+        <ele_C>6</ele_C>
+        <ele_H>11</ele_H>
+        <ele_O>1</ele_O>
+        <ele_N>1</ele_N>
+        <ele_S>0</ele_S>
+        <ele_P>0</ele_P>
+        <ele_15N>0</ele_15N>
+        <ele_2H>0</ele_2H>
+        <ele_13C>0</ele_13C>
+      </residue>
+      <residue name="K">
+        <ele_C>6</ele_C>
+        <ele_H>12</ele_H>
+        <ele_O>1</ele_O>
+        <ele_N>2</ele_N>
+        <ele_S>0</ele_S>
+        <ele_P>0</ele_P>
+        <ele_15N>0</ele_15N>
+        <ele_2H>0</ele_2H>
+        <ele_13C>0</ele_13C>
+      </residue>
+      <residue name="L">
+        <ele_C>6</ele_C>
+        <ele_H>11</ele_H>
+        <ele_O>1</ele_O>
+        <ele_N>1</ele_N>
+        <ele_S>0</ele_S>
+        <ele_P>0</ele_P>
+        <ele_15N>0</ele_15N>
+        <ele_2H>0</ele_2H>
+        <ele_13C>0</ele_13C>
+      </residue>
+      <residue name="M">
+        <ele_C>5</ele_C>
+        <ele_H>9</ele_H>
+        <ele_O>1</ele_O>
+        <ele_N>1</ele_N>
+        <ele_S>1</ele_S>
+        <ele_P>0</ele_P>
+        <ele_15N>0</ele_15N>
+        <ele_2H>0</ele_2H>
+        <ele_13C>0</ele_13C>
+      </residue>
+      <residue name="N">
+        <ele_C>4</ele_C>
+        <ele_H>6</ele_H>
+        <ele_O>2</ele_O>
+        <ele_N>2</ele_N>
+        <ele_S>0</ele_S>
+        <ele_P>0</ele_P>
+        <ele_15N>0</ele_15N>
+        <ele_2H>0</ele_2H>
+        <ele_13C>0</ele_13C>
+      </residue>
+      <residue name="P">
+        <ele_C>5</ele_C>
+        <ele_H>7</ele_H>
+        <ele_O>1</ele_O>
+        <ele_N>1</ele_N>
+        <ele_S>0</ele_S>
+        <ele_P>0</ele_P>
+        <ele_15N>0</ele_15N>
+        <ele_2H>0</ele_2H>
+        <ele_13C>0</ele_13C>
+      </residue>
+      <residue name="Q">
+        <ele_C>5</ele_C>
+        <ele_H>8</ele_H>
+        <ele_O>2</ele_O>
+        <ele_N>2</ele_N>
+        <ele_S>0</ele_S>
+        <ele_P>0</ele_P>
+        <ele_15N>0</ele_15N>
+        <ele_2H>0</ele_2H>
+        <ele_13C>0</ele_13C>
+      </residue>
+      <residue name="R">
+        <ele_C>6</ele_C>
+        <ele_H>12</ele_H>
+        <ele_O>1</ele_O>
+        <ele_N>4</ele_N>
+        <ele_S>0</ele_S>
+        <ele_P>0</ele_P>
+        <ele_15N>0</ele_15N>
+        <ele_2H>0</ele_2H>
+        <ele_13C>0</ele_13C>
+      </residue>
+      <residue name="S">
+        <ele_C>3</ele_C>
+        <ele_H>5</ele_H>
+        <ele_O>2</ele_O>
+        <ele_N>1</ele_N>
+        <ele_S>0</ele_S>
+        <ele_P>0</ele_P>
+        <ele_15N>0</ele_15N>
+        <ele_2H>0</ele_2H>
+        <ele_13C>0</ele_13C>
+      </residue>
+      <residue name="T">
+        <ele_C>4</ele_C>
+        <ele_H>7</ele_H>
+        <ele_O>2</ele_O>
+        <ele_N>1</ele_N>
+        <ele_S>0</ele_S>
+        <ele_P>0</ele_P>
+        <ele_15N>0</ele_15N>
+        <ele_2H>0</ele_2H>
+        <ele_13C>0</ele_13C>
+      </residue>
+      <residue name="V">
+        <ele_C>5</ele_C>
+        <ele_H>9</ele_H>
+        <ele_O>1</ele_O>
+        <ele_N>1</ele_N>
+        <ele_S>0</ele_S>
+        <ele_P>0</ele_P>
+        <ele_15N>0</ele_15N>
+        <ele_2H>0</ele_2H>
+        <ele_13C>0</ele_13C>
+      </residue>
+      <residue name="W">
+        <ele_C>11</ele_C>
+        <ele_H>10</ele_H>
+        <ele_O>1</ele_O>
+        <ele_N>2</ele_N>
+        <ele_S>0</ele_S>
+        <ele_P>0</ele_P>
+        <ele_15N>0</ele_15N>
+        <ele_2H>0</ele_2H>
+        <ele_13C>0</ele_13C>
+      </residue>
+      <residue name="Y">
+        <ele_C>9</ele_C>
+        <ele_H>9</ele_H>
+        <ele_O>2</ele_O>
+        <ele_N>1</ele_N>
+        <ele_S>0</ele_S>
+        <ele_P>0</ele_P>
+        <ele_15N>0</ele_15N>
+        <ele_2H>0</ele_2H>
+        <ele_13C>0</ele_13C>
+      </residue>
+      <residue name="NTERM">
+        <ele_C>0</ele_C>
+        <ele_H>1</ele_H>
+        <ele_O>0</ele_O>
+        <ele_N>0</ele_N>
+        <ele_S>0</ele_S>
+        <ele_P>0</ele_P>
+        <ele_15N>0</ele_15N>
+        <ele_2H>0</ele_2H>
+        <ele_13C>0</ele_13C>
+      </residue>
+      <residue name="CTERM">
+        <ele_C>0</ele_C>
+        <ele_H>1</ele_H>
+        <ele_O>1</ele_O>
+        <ele_N>0</ele_N>
+        <ele_S>0</ele_S>
+        <ele_P>0</ele_P>
+        <ele_15N>0</ele_15N>
+        <ele_2H>0</ele_2H>
+        <ele_13C>0</ele_13C>
+      </residue>
+      <residue name="*">
+        <ele_C>0</ele_C>
+        <ele_H>0</ele_H>
+        <ele_O>0</ele_O>
+        <ele_N>0</ele_N>
+        <ele_S>0</ele_S>
+        <ele_P>0</ele_P>
+        <ele_15N>0</ele_15N>
+        <ele_2H>0</ele_2H>
+        <ele_13C>0</ele_13C>
+      </residue>
+      <residue name="#">
+        <ele_C>0</ele_C>
+        <ele_H>0</ele_H>
+        <ele_O>0</ele_O>
+        <ele_N>0</ele_N>
+        <ele_S>0</ele_S>
+        <ele_P>0</ele_P>
+        <ele_15N>0</ele_15N>
+        <ele_2H>0</ele_2H>
+        <ele_13C>0</ele_13C>
+      </residue>
+      <residue name="@">
+        <ele_C>0</ele_C>
+        <ele_H>0</ele_H>
+        <ele_O>0</ele_O>
+        <ele_N>0</ele_N>
+        <ele_S>0</ele_S>
+        <ele_P>0</ele_P>
+        <ele_15N>0</ele_15N>
+        <ele_2H>0</ele_2H>
+        <ele_13C>0</ele_13C>
+      </residue>
+    </each_sample>
+  </element_comp>
+  <ref>
+    <sample_name>SetA</sample_name>
+    <file_name>/home/rpark/001/nonlabel/IsotopeFree/SetA/rep1/092106_IsotopeFree_A-01_itms.ms1</file_name>
+  </ref>
+</config>
+

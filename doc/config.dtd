@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT config (label_type, params, element_comp)>
+<!ATTLIST label_type labeling (true|false) REQUIRED>
+<!ELEMENT label_type ((name)+)>
+<!ELEMENT params (scan_type, enrich, iso_window, max_win, msms_params)>
+
+<!ELEMENT msms_params (frag_ext_type)>
+<!ATTLIST frag_ext_type type (auto|specific) REQUIRED>
+<!ELEMENT frag_ext_type ((specific_mass)+, mass_tolerance)>
+<!ELEMENT specific_mass (#PCDATA)>
+<!ELEMENT mass_tolerance (#PCDATA)>
+<!ELEMENT element_comp((each_sample)+)>
+<!--ATTLIST label_type labeling CDATA #REQUIRED-->

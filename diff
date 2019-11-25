@@ -1,0 +1,199 @@
+8,12c8,11
+< import com.google.gson.Gson;
+< import edu.scripps.pms.census.util.SpectrumUtil;
+< import edu.scripps.pms.census.util.XYPoint;
+< import edu.scripps.pms.census.util.io.*;
+< 
+---
+> import edu.scripps.pms.census.util.io.SpectrumReader;
+> import edu.scripps.pms.census.util.io.DTASelectFilterReader;
+> import edu.scripps.pms.census.util.io.IdentificationReader;
+> import edu.scripps.pms.census.util.io.BaseIdentificationReader;
+30a30
+> import edu.scripps.pms.census.ElementComposition;
+35a36
+> import edu.scripps.pms.census.labelFree.LabelfreeUtil;
+43a45,47
+> import org.jdom.input.*;
+> 
+> import java.io.*;
+45a50
+> import edu.scripps.pms.census.model.mrm.*;
+51,52d55
+< import static edu.scripps.pms.census.util.SpectrumUtil.MZTHESHOLD;
+< 
+61d63
+<     public final static String MASTER_JSON = "JSON_OBJ";
+657c659
+<                 chroText = CalcUtil.calculateFullMS(keyIndex, iFile, samIsoArr, refProlineIsoArr, range, null);
+---
+>                 chroText = CalcUtil.calculateFullMS(keyIndex, iFile, samIsoArr, refProlineIsoArr, range);
+662c664
+<                 chroText = CalcUtil.calculateFullMS(keyIndex, iFile, samIsoArr, null, range, null);
+---
+>                 chroText = CalcUtil.calculateFullMS(keyIndex, iFile, samIsoArr, null, range);
+2223c2225
+<              * Red DTASelect.txt file to find spectrum range for each peptide
+---
+>              * Read DTASelect.txt file to find spectrum range for each peptide
+2238,2242d2239
+<             File JSONfile =new File(filePath+"JSON_OBJ");
+<             if(!JSONfile.exists())
+<             {
+<                 JSONfile.mkdir();
+<             }
+2246,2247c2243,2244
+< 
+<             if (dtaFile.exists()) {
+---
+>             //if (dtaFile.exists()) {
+>             if (false) {  //we don't use DTASelect.txt parsing any more
+2301d2297
+<             Gson gson = new Gson();
+2391d2386
+<                     DisplayData.DisplayPeptide displayPeptide = new DisplayData.DisplayPeptide(peptide);
+2457,2464c2452
+<                         List<XYPoint> points = SpectrumUtil.getMs1ScanPeaks(tempPath,msFile,peptide.getScanNumber(),mass-mass_tol,mass+mass_tol);
+<                         purityCount = points.size();
+<                         peptideEle.setAttribute("tmt_purity",Integer.toString(purityCount));
+< /*
+<                         points = SpectrumUtil.getSpectrumMS1(tempPath,msFile,peptide.getScanNumber(),htMs1);
+<                         DisplayData.DisplayChroData displayChroData = new DisplayData.DisplayChroData();
+<                         displayChroData.setXyPoints(points);
+<                         displayChroData.setMassAccuracy(mass_tol);
+---
+>                         purityCount = SpectrumUtil.getMs1ScanPeaks(tempPath,msFile,peptide.getScanNumber(),mass-mass_tol,mass+mass_tol).size();
+2466,2470c2454,2455
+<                         FileUtil.writeJSON(gson.toJson(displayChroData), filePath + "JSON_OBJ/" + peptide.getSequence() + peptide.getFileName() + peptide.getScanNum() + cs + ".JSON");
+< */
+< 
+< 
+<                        // System.out.println("Contaminated Status: " + contaminanted);
+---
+>                         peptideEle.setAttribute("tmt_purity",Integer.toString(purityCount));
+>                         System.out.println("Contaminated Status: " + contaminanted);
+2588d2572
+<                         peptideEle.setAttribute("Signal_to_noise",CensusHelper.format.format(CalcUtil.SignalToNoise));
+4510c4494
+<                     chro.setText(CalcUtil.calculateFullMS(keyIndex, iFile, samIsoArr, refIsoArr, range, null));
+---
+>                     chro.setText(CalcUtil.calculateFullMS(keyIndex, iFile, samIsoArr, refIsoArr, range));
+5266d5249
+< 
+5274d5256
+<             Gson gson = new Gson();
+5293,5299d5274
+<             File jsonDir = new File(filePath+MASTER_JSON);
+<             if(!jsonDir.exists())
+<             {
+<                 jsonDir.mkdir();
+<             }
+< 
+< 
+5312,5313c5287
+<             //if (dtaFile.exists()) {
+<              if (false) {  //skip DTASelect.txt parsing
+---
+>             if (dtaFile.exists()) {
+5489c5463
+<                     String msFile = fileName;
+---
+> 
+5492c5466
+<                         msFile = fileName.substring(1);
+---
+> 
+5502,5503d5475
+< 
+<                             msFile =unSplitMs1File + ".ms1";
+5512,5519d5483
+< /*
+<                     TODELETE rereads ms1 files so is inefficient
+<                     List<XYPoint> points = SpectrumUtil.getSpectrumMS1(filePath,msFile,peptide.getScanNumber(),ht);
+<                     DisplayData.DisplayChroData displayChroData = new DisplayData.DisplayChroData();
+<                     displayChroData.setXyPoints(points);
+<                   //  displayChroData.setMassAccuracy(mass_tol);
+< 
+<                     FileUtil.writeJSON(gson.toJson(displayChroData), filePath + "JSON_OBJ/" + peptide.getSequence() + peptide.getFileName() + peptide.getScanNum() + peptide.getChargeState() + ".JSON");
+5521d5484
+< */
+5653,5654d5615
+< 
+< 
+5800,5813d5760
+<                         String cleanName = fileName;
+<                         if(fileName.startsWith("H")||fileName.startsWith("M"))
+<                         {
+<                             cleanName = fileName.substring(1);
+<                         }
+<                         /*if(peptide.getSequence().equals("R.AVFVDLEPTVIDEVR.T") && peptide.getScanNumber() ==73284 )
+<                         {
+<                             System.out.println(">>>");
+<                         }*/
+<                         String chroLine = "";
+<                     //    System.out.println(">>>>"+filePath+cleanName);
+<                         int ms1Scan= SpectrumUtil.getMS1Scan(ht,filePath+cleanName,peptide.getScanNumber());
+<                         CalcUtil.setScanToSearch(ms1Scan);
+<                         DisplayData.DisplayChroData chroData = new DisplayData.DisplayChroData();
+5854,5855c5801,5802
+<                             chroLine = CalcUtil.calculateFullMS(keyIndex, iFile, samIsoArr, refProlineIsoArr, range,chroData);
+<                             chro.setText(chroLine);
+---
+> 
+>                             chro.setText(CalcUtil.calculateFullMS(keyIndex, iFile, samIsoArr, refProlineIsoArr, range));
+5857,5858c5804
+<                             chroLine =CalcUtil.calculateFullMS3Plex(keyIndex, iFile, samIsoArr, refIsoArr, ref2IsoArr);
+<                             chro.setText(chroLine);
+---
+>                             chro.setText(CalcUtil.calculateFullMS3Plex(keyIndex, iFile, samIsoArr, refIsoArr, ref2IsoArr));
+5860,5861c5806
+<                             chroLine =CalcUtil.calculateFullMS(keyIndex, iFile, samIsoArr, refIsoArr, range, chroData);
+<                             chro.setText(chroLine);
+---
+>                             chro.setText(CalcUtil.calculateFullMS(keyIndex, iFile, samIsoArr, refIsoArr, range));
+5863,5907d5807
+<                        /* double low = samIsoArr[0];
+<                         double high = refIsoArr[refIsoArr.length-1];*/
+< 
+<                         double [] massArr = CalcUtil.getXyMassArr();
+<                         double [] intensityArr = CalcUtil.getXyIntArr();
+<                        // TDoubleArrayList massList = new TDoubleArrayList();
+<                        // TDoubleArrayList intList = new TDoubleArrayList();
+< 
+<                         double maxIntensity = Double.MIN_VALUE;
+<                      /*   for(int i=0; i<massArr.length; i++)
+<                         {
+<                             double d = massArr[i];
+<                         /   if(d>low-massTolerance && d<high+massTolerance)
+<                             {
+<                                 massList.add(d);
+<                                 intList.add(intensityArr[i]);
+<                                 if(d>maxIntensity)
+<                                 {
+<                                     maxIntensity = d;
+<                                 }
+<                             }
+<                         }*/
+<                         List<edu.scripps.pms.census.model.XYPoint> massInt=new ArrayList<>();
+< 
+< 
+< 
+<                         //long threshold = (long)(maxIntensity*MZTHESHOLD);
+<                         for(DisplayData.DisplayChroDataXY data: chroData.getData1()){
+<                             if(data.getY()>maxIntensity) maxIntensity = data.getY();
+<                         }
+<                         for(DisplayData.DisplayChroDataXY data: chroData.getData2()){
+<                             if(data.getY()>maxIntensity) maxIntensity = data.getY();
+<                         }
+< 
+<                         chroData.setStartRange(CalcUtil.getLowbound());
+<                         chroData.setEndRange(CalcUtil.getHighbound());
+<                         chroData.setThoMass(IsoCalcUtil.massWrite(samIsoArr, refIsoArr));
+<                         chroData.setXyPoints(massInt);
+<                         //chroData.setMaxIntensity((long)maxIntensity);
+<                         chroData.setMassAccuracy(conf.getMassTolerance());
+<                         //  displayChroData.setMassAccuracy(mass_tol);
+< 
+<                         FileUtil.writeJSON(gson.toJson(chroData), filePath + MASTER_JSON +File.separatorChar+ peptide.getSequence() + peptide.getFileName() + peptide.getScanNum() + peptide.getChargeState() + ".JSON");
+< 
+< 

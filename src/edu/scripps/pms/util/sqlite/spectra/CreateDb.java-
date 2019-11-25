@@ -1,0 +1,143 @@
+package edu.scripps.pms.util.sqlite.spectra;
+
+import edu.scripps.pms.util.FileFilterUtil;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.sql.*;
+import java.util.List;
+
+
+public class CreateDb {
+    public static void main(String[] args) throws Exception {
+
+     //   String path = "/data/2/rpark/ip2_data/rpark/Demo_Project_C_elegant_label_free_test/D2a_2010_07_14_15_1521/spectra/temp";
+
+        String path = args[0];
+
+        if(!path.endsWith(File.separator))
+            path += File.separator;
+
+        List<String> fileList = FileFilterUtil.getFilesBySuffix(path, ".ms2");
+
+        for(String each:fileList) {
+
+            System.out.println(each);
+
+            createNewDatabase(path, each + ".sqlite", each);
+        }
+
+      //  if(true) return;
+
+
+        fileList = FileFilterUtil.getFilesBySuffix(path, ".ms1");
+
+        for(String each:fileList) {
+
+            System.out.println(each);
+
+            createNewDatabase(path, each + ".sqlite", each);
+        }
+
+
+
+
+        System.out.println("aaa");
+
+        createNewDatabase(path, "test.db", "test");
+
+    }
+
+
+        /**
+         * Connect to a sample database
+         *
+         * @param dbFilename the database file name
+         */
+        public static void createNewDatabase(String path, String dbFilename, String spectralFile) throws Exception {
+
+            //String url = "jdbc:sqlite:/home/rpark/temp/" + fileName;
+            String url = "jdbc:sqlite:" + path + dbFilename;
+
+            // SQL statement for creating a new table
+            //String sql = "CREATE TABLE IF NOT EXISTS spectra (\n"
+            String sql = "CREATE TABLE IF NOT EXISTS spectra (\n"
+                    + "id integer PRIMARY KEY,\n"
+                    + "scan integer NOT NULL,\n"
+                    + "    filename text,\n"
+                    + "    scanFilename text,\n"
+                    + "spectrum text NON NULL"
+                    + ");";
+            String sqldrop = "DROP TABLE IF EXISTS spectra\n";
+
+
+            PreparedStatement pstmt = null;
+            try (Connection conn = DriverManager.getConnection(url);
+                 Statement stmt = conn.createStatement()) {
+                // create a new table
+                stmt.execute(sqldrop);
+                stmt.execute(sql);
+
+                BufferedReader br = new BufferedReader(new FileReader(path + spectralFile));
+                String eachLine="";
+                int scanNum=0;
+                int previousScan=0;
+                StringBuffer spectrum = new StringBuffer();
+
+                while( null != (eachLine = br.readLine()) && !eachLine.startsWith("S\t") );
+                spectrum.append(eachLine).append("\n");
+
+                //insert sql
+
+                String insertSql = "INSERT INTO spectra(scan, spectrum) VALUES(?,?)";
+                pstmt = conn.prepareStatement(insertSql);
+
+
+                while( null != (eachLine = br.readLine()) ) {
+
+                    if(eachLine.startsWith("S\t")) {
+
+                        System.out.println("========================");
+                        System.out.println(scanNum);
+                        System.out.println(spectrum.toString());
+
+
+                        pstmt.setInt(1, scanNum);
+                        pstmt.setString(2, spectrum.toString());
+                        //pstmt.addBatch();
+
+                        pstmt.executeUpdate();
+
+                        System.out.println("========================>>");
+
+                        spectrum.delete(0, spectrum.length());
+
+                        String[] arr = eachLine.split("\t");
+                        scanNum = Integer.parseInt(arr[1]);
+
+
+                    }
+
+                    spectrum.append(eachLine).append("\n");
+
+
+
+
+
+                    //System.out.println(eachLine);
+                }
+
+               // conn.commit();
+
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+
+  //          pstmt.close();
+        }
+
+}

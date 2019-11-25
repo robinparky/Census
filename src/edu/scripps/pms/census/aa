@@ -1,0 +1,128 @@
+./io/DTASelectForLabelfreeParser.java:    //private RandomAccessFile file=null;
+./io/SpecRangeGenerator.java:    //private RandomAccessFile file=null;
+./util/io/MzxmlSpectrumReader.java:    private RandomAccessFile raf; // reads from the mzxml file
+./util/io/MzxmlSpectrumReader.java:        raf = new RandomAccessFile(msFileName, "r"); 
+./util/io/SQTParser.java:import java.io.RandomAccessFile;
+./util/io/SpectrumIndexReader.java:    private RandomAccessFile file=null;
+./util/io/SpectrumIndexReader.java:       	file = new RandomAccessFile(fileName, "r");
+./util/io/DTASelectFilterReader.java:import java.io.RandomAccessFile;
+./util/io/DTASelectFilterReader.java:        RandomAccessFile file = null;
+./util/io/DTASelectFilterReader.java:		file = new RandomAccessFile(fileName, "r");
+./util/CalcUtilGeneric.java:import java.io.RandomAccessFile;
+./util/CalcUtilGeneric.java:	RandomAccessFile file = iFile.getFile();
+./util/CalcUtilGeneric.java:	RandomAccessFile file = iFile.getFile();
+./util/CalcUtilGeneric.java:        RandomAccessFile file = iFile.getFile();
+./util/CalcUtilGeneric.java:    public static double[][] getSpectrumArr(int[] keys, int curIndex, TIntLongHashMap index, RandomAccessFile file) throws IOException, CensusIndexOutOfBoundException
+./util/CalcUtil.java:import java.io.RandomAccessFile;
+./util/CalcUtil.java:            RandomAccessFile rfile = iFile.getFile();
+./util/CalcUtil.java:        RandomAccessFile file = iFile.getFile();
+./util/CalcUtil.java:        RandomAccessFile file = iFile.getFile();
+./util/CalcUtil.java:	RandomAccessFile rfile = iFile.getFile();
+./util/CalcUtil.java:    public static String getPrecursorMass(TIntLongHashMap index,  int i, long sampleIndex, RandomAccessFile file, int[] keys ) 
+./util/CalcUtil.java:	RandomAccessFile file = iFile.getFile();
+./util/CalcUtil.java:	RandomAccessFile file = iFile.getFile();
+./util/CalcUtil.java:	RandomAccessFile file = iFile.getFile();
+./util/CalcUtil.java:	RandomAccessFile file = iFile.getFile();
+./util/CalcUtil.java:	RandomAccessFile file = iFile.getFile();
+./util/CalcUtil.java:	RandomAccessFile file = iFile.getFile();
+./util/CalcUtil.java:	RandomAccessFile file = (RandomAccessFile)ofile;
+./util/CalcUtil.java:        RandomAccessFile file = iFile.getFile();
+./util/CalcUtil.java:        RandomAccessFile file = iFile.getFile();
+./util/CalcUtil.java:	RandomAccessFile file = sModel.getFile();        
+./util/CalcUtil.java:        RandomAccessFile file = iFile.getFile();
+./util/CalcUtil.java:	RandomAccessFile file = sModel.getFile();        
+./util/CalcUtil.java:        RandomAccessFile file = iFile.getFile();
+./util/CalcUtil.java:        RandomAccessFile file = iFile.getFile();
+./util/CalcUtil.java:        RandomAccessFile file = iFile.getFile();
+./util/CalcUtil.java:	RandomAccessFile file = (RandomAccessFile)ofile;
+./util/CalcUtil.java:            //RandomAccessFile file
+./util/CalcUtil.java:            RandomAccessFile file = tmpIndexFile.getFile();
+./util/CalcUtil.java:            RandomAccessFile nousefile,
+./util/CalcUtil.java:	    RandomAccessFile file = tmpIndexFile.getFile();
+./util/CalcUtil.java:            //RandomAccessFile file,
+./util/CalcUtil.java:	if(reader instanceof RandomAccessFile)
+./util/CalcUtil.java:            //RandomAccessFile file,
+./util/CalcUtil.java:	if(reader instanceof RandomAccessFile)
+./util/CalcUtil.java:            //RandomAccessFile file,
+./util/CalcUtil.java://           RandomAccessFile file,
+./util/CalcUtil.java:	if(reader instanceof RandomAccessFile)
+./util/CalcUtil.java:	    RandomAccessFile rFile = (RandomAccessFile)reader;
+./util/CalcUtil.java:            RandomAccessFile file,
+./util/CalcUtil.java://	RandomAccessFile file = (RandomAccessFile)ofile;
+./util/CalcUtil.java:        private RandomAccessFile file;
+./util/CalcUtil.java:        public RandomAccessFile getFile() {
+./util/CalcUtil.java:        public void setFile(RandomAccessFile file) {
+./util/CalcUtil.java:		//CalcUtil.calculateMass(new RandomAccessFile(args[0], "r"), Long.parseLong(args[1]), Long.parseLong(args[2]),
+./util/CalcUtil.java:	RandomAccessFile file = iFile.getFile();
+./util/IsoCalcUtil.java:import java.io.RandomAccessFile;
+./util/IsoCalcUtil.java:            RandomAccessFile rfile = iFile.getFile();
+./util/IsoCalcUtil.java:        RandomAccessFile file = iFile.getFile();
+./util/IsoCalcUtil.java:        RandomAccessFile file = iFile.getFile();
+./util/IsoCalcUtil.java:	RandomAccessFile rfile = iFile.getFile();
+./util/IsoCalcUtil.java:    public static String getPrecursorMass(TIntLongHashMap index,  int i, long sampleIndex, RandomAccessFile file, int[] keys ) 
+./util/IsoCalcUtil.java:	RandomAccessFile file = iFile.getFile();
+./util/IsoCalcUtil.java:	RandomAccessFile file = iFile.getFile();
+./util/IsoCalcUtil.java:	RandomAccessFile file = iFile.getFile();
+./util/IsoCalcUtil.java:	RandomAccessFile file = iFile.getFile();
+./util/IsoCalcUtil.java:	RandomAccessFile file = iFile.getFile();
+./util/IsoCalcUtil.java:	RandomAccessFile file = (RandomAccessFile)ofile;
+./util/IsoCalcUtil.java:        RandomAccessFile file = iFile.getFile();
+./util/IsoCalcUtil.java:        RandomAccessFile file = iFile.getFile();
+./util/IsoCalcUtil.java:	RandomAccessFile file = sModel.getFile();        
+./util/IsoCalcUtil.java:        RandomAccessFile file = iFile.getFile();
+./util/IsoCalcUtil.java:	RandomAccessFile file = sModel.getFile();        
+./util/IsoCalcUtil.java:        RandomAccessFile file = iFile.getFile();
+./util/IsoCalcUtil.java:        RandomAccessFile file = iFile.getFile();
+./util/IsoCalcUtil.java:	RandomAccessFile file = (RandomAccessFile)ofile;
+./util/IsoCalcUtil.java:            //RandomAccessFile file
+./util/IsoCalcUtil.java:            RandomAccessFile file = tmpIndexFile.getFile();
+./util/IsoCalcUtil.java:            RandomAccessFile nousefile,
+./util/IsoCalcUtil.java:	    RandomAccessFile file = tmpIndexFile.getFile();
+./util/IsoCalcUtil.java:            //RandomAccessFile file,
+./util/IsoCalcUtil.java:	if(reader instanceof RandomAccessFile)
+./util/IsoCalcUtil.java:            //RandomAccessFile file,
+./util/IsoCalcUtil.java:	if(reader instanceof RandomAccessFile)
+./util/IsoCalcUtil.java:            //RandomAccessFile file,
+./util/IsoCalcUtil.java:	if(reader instanceof RandomAccessFile)
+./util/IsoCalcUtil.java://           RandomAccessFile file,
+./util/IsoCalcUtil.java:	if(reader instanceof RandomAccessFile)
+./util/IsoCalcUtil.java:	    RandomAccessFile rFile = (RandomAccessFile)reader;
+./util/IsoCalcUtil.java:            RandomAccessFile file,
+./util/IsoCalcUtil.java://	RandomAccessFile file = (RandomAccessFile)ofile;
+./util/IsoCalcUtil.java:        private RandomAccessFile file;
+./util/IsoCalcUtil.java:        public RandomAccessFile getFile() {
+./util/IsoCalcUtil.java:        public void setFile(RandomAccessFile file) {
+./util/IsoCalcUtil.java:		//CalcUtil.calculateMass(new RandomAccessFile(args[0], "r"), Long.parseLong(args[1]), Long.parseLong(args[2]),
+./util/IsoCalcUtil.java:	RandomAccessFile file = iFile.getFile();
+./hash/MSIndexFileCreator.java:        RandomAccessFile raf = new RandomAccessFile(fileName , "r");
+./hash/MSIndexFileCreator.java:        RandomAccessFile raf = new RandomAccessFile(fileName , "r");
+./hash/MSIndexBuilder.java:    //private RandomAccessFile file;
+./hash/MSIndexBuilder.java:    public MSIndexBuilder(RandomAccessFile file)
+./hash/MSIndexBuilder.java:    public MSIndexBuilder(File indexedFile, RandomAccessFile file)
+./hash/IndexedFile.java:    private RandomAccessFile file=null;
+./hash/IndexedFile.java:        file = new RandomAccessFile(fileName, "r");     
+./hash/IndexedFile.java:        file = new RandomAccessFile(fileName, "r");
+./hash/IndexedFile.java:    public RandomAccessFile getFile()
+./conf/Configuration.java:    private boolean ms3ScanRandom=false;
+./conf/Configuration.java:                        this.ms3ScanRandom = true;
+./conf/Configuration.java:    public boolean isMs3ScanRandom() {
+./conf/Configuration.java:        return ms3ScanRandom;
+./conf/Configuration.java:    public void setMs3ScanRandom(boolean ms3ScanRandom) {
+./conf/Configuration.java:        this.ms3ScanRandom = ms3ScanRandom;
+./plot/AlignPlot.java:import java.io.RandomAccessFile;
+./plot/SimplePlot.java:import java.io.RandomAccessFile;
+./labelFree/JsonIndexer.java:import java.io.RandomAccessFile;
+./labelFree/JsonIndexer.java:        RandomAccessFile random = null;
+./labelFree/JsonIndexer.java:            random = new RandomAccessFile(inputFile, "r");
+./labelFree/JsonIndexer.java:            RandomAccessFile random = new RandomAccessFile(fileName, "r");
+./labelFree/LabelFreeCalcUtil.java:import java.io.RandomAccessFile;
+./labelFree/LabelFreeCalcUtil.java:            //RandomAccessFile file,
+./labelFree/LabelFreeCalcUtil.java:	if(reader instanceof RandomAccessFile)
+./labelFree/LabelFreeCalcUtil.java:	RandomAccessFile rfile = iFile.getFile();
+./labelFree/util/LabelfreeChroUtil.java:import java.io.RandomAccessFile;
+./labelFree/util/LabelfreeChroUtil.java:        RandomAccessFile file = iFile.getFile();
+./ChroGenerator.java:        if (conf.isMs3ScanRandom() || "ms3".equals(conf.getFileShift()) || conf.getScanShift() > 0) {
+./ChroGenerator.java:                    if (conf.isMs3ScanRandom()) {  //ms3 based search
+./ChroGenerator.java:                        if(conf.isMs3ScanRandom()) {
+./ChroGenerator.java:    private int findStartScanNum(int scanNum, RandomAccessFile file, int[] keys, double precursor) throws IOException {
+./ChroGenerator.java:    private double findScanNum(RandomAccessFile file, int scanNum, long pos, double avgMass) throws IOException {

@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+
+<project name="compile" default="compile" basedir=".">
+  <property environment="env"/>
+  <property name="dir.src" value="src"/>
+  <property name="dir.lib" value="lib"/>
+  <property name="build" location="build/classes"/>
+
+  <path id="project.classpath">
+    <pathelement location="${dir.src}"/>
+    <fileset dir="lib">
+      <include name="*.jar"/>
+    </fileset>
+  </path>
+ 
+  <target name="compile">
+
+    <echo message="+------------------------------------------+"/>
+    <echo message="|                                          |"/>
+    <echo message="| Compiling files                          |"/>
+    <echo message="|                                          |"/>
+    <echo message="+------------------------------------------+"/>
+
+    <javac
+      debug="on"
+      srcdir="./src"
+      destdir="./build/classes"
+      deprecation="off"
+      verbose="off">
+	<classpath refid="project.classpath"/>
+	 <!--compilerarg value="-Xlint"/--> 
+    </javac>
+    <copy todir="./build/classes" >
+    <fileset dir="./src">
+    	<include name="*.gif"/>
+    </fileset>
+    </copy>
+
+
+  </target>
+
+  <!-- ================================================================ -->
+  <!-- C L E A N                                                        -->
+  <!-- ================================================================ -->
+                                                                                                                                               
+  <target name="clean" description="--> cleans up the build directory">
+                                                                                                                                               
+    <echo message="+--------------------------------------------+"/>
+    <echo message="|                                            |"/>
+    <echo message="| Cleaning class files	                |"/>
+    <echo message="|                                            |"/>
+    <echo message="+--------------------------------------------+"/>
+                                                                                                                                               
+    <delete dir="${build}"/>
+    <mkdir dir="${build}"/>
+                                                                                                                                               
+  </target>
+
+
+  <target name="census" depends="compile" description="creat Census jar file to deploy">
+    <echo message="+--------------------------------------------+"/>
+    <echo message="|                                            |"/>
+    <echo message="| Creating a jar file for Census             |"/>
+    <echo message="|                                            |"/>
+    <echo message="+--------------------------------------------+"/>
+
+    <jar jarfile="deploy/census2.jar" update="yes" manifest="deploy/census.mf">
+        <fileset dir="build/classes"
+                includes="**/*.class, *.gif"/>
+    </jar>
+  </target>
+
+
+</project>

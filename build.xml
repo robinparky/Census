@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Venndia" default="compile" basedir=".">
+  <description>Builds, tests, and runs the venn diagram</description>
+  <property name="dir.src" value="src"/>
+  <property name="dir.lib" value="lib"/>
+  <property name="build" location="classes"/>
+  <path id="project.classpath">
+    <pathelement location="${dir.src}"/>
+    <fileset dir="lib">
+      <include name="*.jar"/>
+    </fileset>
+  </path>
+
+
+  <target name="deploy" depends="compile" description="creat jar file to deploy">
+    <echo message="+--------------------------------------------+"/>
+    <echo message="|                                            |"/>
+    <echo message="| Creating a jar file with encryption |"/>
+    <echo message="|                                            |"/>
+    <echo message="+--------------------------------------------+"/>
+
+    <jar jarfile="deploy/venndia.jar" update="yes" manifest="deploy/venndia.mf">
+        <fileset dir="classes"
+                includes="**/*.class, *.gif"/>
+    </jar>
+  </target>
+
+  <target name="compile">
+
+    <echo message="+------------------------------------------+"/>
+    <echo message="|                                          |"/>
+    <echo message="| Compiling files                          |"/>
+    <echo message="|                                          |"/>
+    <echo message="+------------------------------------------+"/>
+
+    <javac
+      debug="on"
+      srcdir="./src"
+      destdir="./classes"
+      deprecation="off"
+      verbose="off">
+        <classpath refid="project.classpath"/>
+         <!--compilerarg value="-Xlint"/-->
+    </javac>
+    <copy todir="./classes" >
+    <fileset dir="./src">
+        <include name="*.gif"/>
+    </fileset>
+    </copy>
+
+
+  </target>
+
+
+  <target name="clean" description="--> cleans up the build directory">
+
+    <echo message="+--------------------------------------------+"/>
+    <echo message="|                                            |"/>
+    <echo message="| Cleaning class files                       |"/>
+    <echo message="|                                            |"/>
+    <echo message="+--------------------------------------------+"/>
+
+    <delete dir="${build}"/>
+    <mkdir dir="${build}"/>
+
+  </target>
+</project>
+
