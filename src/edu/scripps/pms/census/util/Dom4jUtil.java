@@ -12,6 +12,7 @@ import org.dom4j.io.SAXReader;
 import org.dom4j.Element;
 
 import java.io.File;
+import java.net.MalformedURLException;
 
 
 /**
@@ -19,13 +20,13 @@ import java.io.File;
  * @author rpark
  */
 public class Dom4jUtil {           
-    public static Document getDocument(File file) throws DocumentException {
+    public static Document getDocument(File file) throws DocumentException, MalformedURLException {
         SAXReader reader = new SAXReader();
         Document document = reader.read(file);
         return document;
     }
     
-    public static Element getRootEle(File file) throws DocumentException {
+    public static Element getRootEle(File file) throws DocumentException, MalformedURLException {
         
         Document document = getDocument(file);
         return document.getRootElement();

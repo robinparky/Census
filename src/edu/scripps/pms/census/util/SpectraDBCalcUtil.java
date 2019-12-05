@@ -691,6 +691,10 @@ public class SpectraDBCalcUtil {
 
         SpectraDB.Spectrum spectrum = spectraDB.getSpectrumFromDB(keys[i]);
 
+        if(spectrum== null)
+        {
+            return null;
+        }
         result.append(keys[i]).append(" ");
 
 

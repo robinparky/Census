@@ -3,10 +3,7 @@ package edu.scripps.pms.util.sqlite.spectra;
 import edu.scripps.pms.util.FileFilterUtil;
 import org.sqlite.SQLiteConfig;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.*;
 import java.sql.*;
 import java.util.List;
 
@@ -51,6 +48,14 @@ public class CreateDb {
         }
 
 
+        fileList = FileFilterUtil.getFilesBySuffix(path, ".ms3");
+
+        for(String each:fileList) {
+
+
+
+            createNewDatabase(path, each + ".sqlite", each);
+        }
 
 
       //  System.out.println("aaa");
@@ -59,14 +64,15 @@ public class CreateDb {
 
     }
 
-
+    public static void createNewDatabase(String path, String dbFilename, String spectralFile) throws IOException {
+        createNewDatabase(path,dbFilename,spectralFile,false);
+    }
         /**
          * Connect to a sample database
          *
          * @param dbFilename the database file name
          */
-        public static void createNewDatabase(String path, String dbFilename, String spectralFile) throws Exception {
-            System.out.println("edu.scripps.pms.util.sqlite.spectra.CreateDb: creating " + dbFilename);
+        public static void createNewDatabase(String path, String dbFilename, String spectralFile, boolean deleteMode) throws IOException {
             //String url = "jdbc:sqlite:/home/rpark/temp/" + fileName;
             if(!path.endsWith(File.separator))
                 path+=File.separator;
@@ -78,15 +84,22 @@ public class CreateDb {
             {
                 f.createNewFile();
             }
-            else
-            {
-                f.delete();
-                f.createNewFile();
+            else {
+                if (deleteMode)
+                {
+                    f.delete();
+                    f.createNewFile();
+                }
+                else
+                {
+                    return;
+                }
             }
             if(journalF.exists())
             {
                 journalF.delete();
             }
+            System.out.println("edu.scripps.pms.util.sqlite.spectra.CreateDb: creating " + dbFilename);
 
             SQLiteConfig config = SpectraDB.GetDefaultConfig();
 
@@ -106,7 +119,7 @@ public class CreateDb {
                     + "retTime REAL ,\n"
                     + "charge integer "
                     + ");";
-            String sqlIndex = "CREATE INDEX scan_index ON spectra(scan)";
+            String sqlIndex = "CREATE INDEX scan_index ON spectra(scan);\n";
             String sqldrop = "DROP TABLE IF EXISTS spectra\n";
 
 
@@ -209,6 +222,10 @@ public class CreateDb {
                 pstmt.setInt(6, cs);
                 pstmt.addBatch();
                 pstmt.executeBatch();
+
+                //stmt.execute("OPTIMIZE;\n");
+                //Statement vacuumStatement = conn.createStatement();
+                //vacuumStatement.execute("VACUUM");
                // conn.commit();
 
             } catch (SQLException e) {

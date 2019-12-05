@@ -5,7 +5,9 @@ import java.io.*;
 
 import edu.scripps.pms.averagine.AssignMass;
 import edu.scripps.pms.census.labelFree.SpectrumModel;
+import edu.scripps.pms.census.model.Spectrum;
 import edu.scripps.pms.util.spectrum.PeakList;
+import edu.scripps.pms.util.sqlite.spectra.SpectraDB;
 import gnu.trove.*;
 
 import java.io.RandomAccessFile;
@@ -17,6 +19,7 @@ import static edu.scripps.pms.census.ChroGenerator.createIndexedFiles;
 import edu.scripps.pms.census.conf.*;
 import edu.scripps.pms.census.exception.CensusIndexOutOfBoundException;
 
+import java.sql.SQLException;
 import java.util.*;
 import java.text.*;
 
@@ -523,7 +526,11 @@ if(peakList.size()<=0) return false;
       //  }
         }
 
-
+        System.out.println();
+        System.out.print(">>>");
+        for(double d: intArr)
+        System.out.println(d+" ");
+        System.out.println();
 
         Arrays.sort(intArr);
 
@@ -542,9 +549,39 @@ if(peakList.size()<=0) return false;
         }
 
         return (long)sum/size;
-
-
     }
+
+
+    public static long getBackGroundNoise (int scanNumber, SpectraDB spectraDB)
+            throws SQLException {
+        SpectraDB.Spectrum spectrum =  spectraDB.getSpectrumFromDB(scanNumber);
+       // double [] tempIntArr = spectrum.getIntensityList().toNativeArray();
+        int [] intArr = new int[spectrum.getIntensityList().size()];
+        for(int i=0; i<spectrum.getIntensityList().size(); i++)
+        {
+            intArr[i] = (int)spectrum.getIntensityList().get(i);
+        }
+
+
+        Arrays.sort(intArr);
+
+        int size = (int)(intArr.length*0.05);
+
+        if(size == 0 ) size=1;
+        //System.out.println("==========" + byteSize +  " " + diffPos + " " + intArr.length);
+
+        //System.out.println("<<<>>>< "+intArr.length);
+        double sum = 0;
+
+        if(intArr.length<=0) return 1000;  //fixed background noise when there are no peaks
+
+        for(int i=0;i<size;i++) {
+            sum+=intArr[i];
+        }
+
+        return (long)sum/size;
+    }
+
 
     public static double [][] readLabelfreeFullSpectrum(
             long startPos,
@@ -1153,6 +1190,36 @@ if(peakList.size()<=0) return false;
         String[] lines = str.split(System.getProperty("line.separator"));
         return lines;
     }
+
+
+    public static edu.scripps.pms.census.labelFree.SpectrumModel labelFreeSpectrumReader(
+            double[] isoArr,
+            int scanNumber,
+            double massTolerance,
+           SpectraDB spectraDB,
+            int chargeState,
+            Configuration conf,
+            double pepMass
+    ) throws IOException, CensusIndexOutOfBoundException, Exception
+    {
+
+        SpectraDB.Spectrum spectrum = spectraDB.getSpectrumFromDB(scanNumber);
+        double retTime = spectrum.retTime;
+        double [] massArr = spectrum.getMzList().toNativeArray();
+        double [] intArr = spectrum.getIntensityList().toNativeArray();
+
+        edu.scripps.pms.census.labelFree.SpectrumModel spec = new edu.scripps.pms.census.labelFree.SpectrumModel();
+
+        spec.setRetentionTime(retTime);
+        spec.setScanNumber(scanNumber);
+
+        double[] tempArr = intensitySumWithIsotopeModeling(massArr, intArr, isoArr, massTolerance, pepMass);
+        if(null != tempArr) {
+            spec.setPrecursorPeakIntensity((long) tempArr[0]);
+        }
+        return spec;
+    }
+
 
 
     public static edu.scripps.pms.census.labelFree.SpectrumModel labelFreeSpectrumReader(

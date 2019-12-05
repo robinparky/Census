@@ -7,12 +7,16 @@
 package edu.scripps.pms.census.hash;
 
 
+import edu.scripps.pms.census.ChroGenerator;
 import edu.scripps.pms.census.conf.Configuration;
 import edu.scripps.pms.census.util.io.*;
 //import edu.scripps.pms.censu.util.io.MzxmlSpectrumReader;
+import edu.scripps.pms.util.sqlite.spectra.CreateDb;
+import edu.scripps.pms.util.sqlite.spectra.SpectraDB;
 import gnu.trove.*;
 
 import java.io.*;
+import java.sql.SQLException;
 import java.util.*;
 
 
@@ -66,6 +70,7 @@ public class IndexedFile {
     private TIntDoubleHashMap scanRtMap = new TIntDoubleHashMap();
     private TIntArrayList scanArr = new TIntArrayList();
     private TIntIntHashMap scanToIndexMap = new TIntIntHashMap();
+    private SpectraDB spectraDB = null;
    
     public static void main(String args[]) throws Exception
     {
@@ -478,5 +483,33 @@ public class IndexedFile {
 
     public void setIdScanToMs1ScanMap(TIntIntHashMap idScanToMs1ScanMap) {
         this.idScanToMs1ScanMap = idScanToMs1ScanMap;
+    }
+
+    public SpectraDB getSpectraDB() throws IOException, SQLException {
+        return getSpectraDB(true);
+    }
+
+    public SpectraDB getSpectraDB( boolean createDB) throws IOException, SQLException {
+        if(createDB)
+        {
+            if(spectraDB==null)
+            {
+                File ms2File = new File(fileName);
+                File parentDir = ms2File.getParentFile().getAbsoluteFile();
+                File spectraDir = new File(parentDir.getAbsolutePath() + "/../../spectra/");
+                spectraDB = ChroGenerator.connectCreateSpectraDB(parentDir.getAbsolutePath(), spectraDir, ms2File);
+            }
+            /*
+            if(spectraDB == null)
+            {
+                File f = new File(fileName+".sqlite");
+                if(!f.exists())
+                {
+                    CreateDb.createNewDatabase("",fileName+".sqlite",fileName);
+                }
+                spectraDB = SpectraDB.connectToDBReadOnly(fileName+".sqlite");
+            }*/
+        }
+        return spectraDB;
     }
 }

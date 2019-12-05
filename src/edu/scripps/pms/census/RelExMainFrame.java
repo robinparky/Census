@@ -7010,13 +7010,16 @@ public class RelExMainFrame extends javax.swing.JFrame implements java.beans.Pro
           peptide.setSpectraDataPoints(endIndex - startIndex + 1);
         }
 
-        double slope = reg.getSlope();
+        double slope = reg.getSlope()  ;
         double intercept = reg.getIntercept();
-        double slopeRev = regrev.getSlope();
+        double slopeRev = regrev.getSlope()   ;
         double interceptRev = regrev.getIntercept();
 
-        slope = Math.exp(Math.log(slope) + correctFactorValue);
-        slopeRev = Math.exp(Math.log(slopeRev) - correctFactorValue);
+
+        double logSlope =  slope > 0 ? (Math.log(slope) + correctFactorValue) : 0;
+        double logSlopeRev =  slopeRev > 0 ? (Math.log(slopeRev) - correctFactorValue): 0;
+        slope = Math.exp( logSlope);
+        slopeRev = Math.exp(logSlopeRev);
         peptide.setSlope(slope);
         peptide.setCorr(reg.getCorr());
         peptide.setSlopeRev(slopeRev);
@@ -8454,8 +8457,11 @@ public class RelExMainFrame extends javax.swing.JFrame implements java.beans.Pro
                 double slopeRev = regrev.getSlope();
                 double interceptRev = regrev.getIntercept();
 
-                slope = Math.exp(Math.log(slope) + correctFactorValue);
-                slopeRev = Math.exp(Math.log(slopeRev) - correctFactorValue);
+
+              double logSlope =  slope > 0 ? (Math.log(slope) + correctFactorValue) : 0;
+              double logSlopeRev =  slopeRev > 0 ? (Math.log(slopeRev) - correctFactorValue): 0;
+              slope = Math.exp( logSlope);
+              slopeRev = Math.exp(logSlopeRev);
                 peptide.setSlope(slope);
                 peptide.setCorr(reg.getCorr());
                 peptide.setSlopeRev(slopeRev);
@@ -9538,9 +9544,10 @@ public class RelExMainFrame extends javax.swing.JFrame implements java.beans.Pro
                 double intercept = reg.getIntercept();
                 double slopeRev = regrev.getSlope();
                 double interceptRev = regrev.getIntercept();
-
-                slope = Math.exp(Math.log(slope) + correctFactorValue);
-                slopeRev = Math.exp(Math.log(slopeRev) - correctFactorValue);
+              double logSlope =  slope > 0 ? (Math.log(slope) + correctFactorValue) : 0;
+              double logSlopeRev =  slopeRev > 0 ? (Math.log(slopeRev) - correctFactorValue): 0;
+              slope = Math.exp( logSlope);
+              slopeRev = Math.exp(logSlopeRev);
                 peptide.setSlope(slope);
                 peptide.setCorr(reg.getCorr());
                 peptide.setSlopeRev(slopeRev);
@@ -10908,7 +10915,9 @@ public class RelExMainFrame extends javax.swing.JFrame implements java.beans.Pro
         } else {
             this.regScoreField.setText(CensusHelper.format.format(reg.getCorr()));
             this.rrField.setText(CensusHelper.format.format(reg.getCorr() * reg.getCorr()));
-            this.areaRatioLogField.setText(CensusHelper.format.format(Math.log(slope)));
+
+
+            this.areaRatioLogField.setText(CensusHelper.format.format( slope > 0 ? (Math.log(slope) ) : 0));
             this.regressionRatioField.setText(CensusHelper.format.format(slope));
             this.areaRatioField.setText(CensusHelper.format.format(reg.getAreaRatio()));
 
@@ -11231,7 +11240,7 @@ public class RelExMainFrame extends javax.swing.JFrame implements java.beans.Pro
             this.areaRatioField.setText("N/A");
         } else {
             this.rrField.setText(CensusHelper.format.format(reg.getCorr() * reg.getCorr()));
-            this.areaRatioLogField.setText(CensusHelper.format.format(Math.log(slope)));
+            this.areaRatioLogField.setText(CensusHelper.format.format( slope > 0 ? (Math.log(slope) ) : 0));
             this.regressionRatioField.setText(CensusHelper.format.format(slope));
             this.areaRatioField.setText(CensusHelper.format.format(reg.getAreaRatio()));
         }
@@ -11413,7 +11422,7 @@ public class RelExMainFrame extends javax.swing.JFrame implements java.beans.Pro
             this.areaRatioField.setText("N/A");
         } else {
             this.rrField.setText(CensusHelper.format.format(reg.getCorr() * reg.getCorr()));
-            this.areaRatioLogField.setText(CensusHelper.format.format(Math.log(slope)));
+            this.areaRatioLogField.setText(CensusHelper.format.format( slope > 0 ? (Math.log(slope) ) : 0));
             this.regressionRatioField.setText(CensusHelper.format.format(slope));
             this.areaRatioField.setText(CensusHelper.format.format(reg.getAreaRatio()));
         }
@@ -11701,7 +11710,7 @@ public class RelExMainFrame extends javax.swing.JFrame implements java.beans.Pro
                 reg = new LinearRegression(samArr, refArr, startIndex, endIndex, conf.getMaxSpectrumShift());
                 double slope = reg.getSlope();
                 double intercept = reg.getIntercept();
-                slope = Math.exp(Math.log(slope));
+                slope = Math.exp( slope > 0 ? (Math.log(slope) ) : 0);
 
                 peptide.setSlope(slope);
                 peptide.setCorr(reg.getCorr());
@@ -11885,7 +11894,7 @@ public class RelExMainFrame extends javax.swing.JFrame implements java.beans.Pro
             }
 
             //normalize the ratio in case overall ratios shifted
-            slope = Math.exp(Math.log(slope));
+            slope = Math.exp( slope > 0 ? (Math.log(slope) ) : 0);
 
             peptide.setSlope(slope);
             peptide.setCorr(reg.getCorr());
@@ -12575,7 +12584,7 @@ public class RelExMainFrame extends javax.swing.JFrame implements java.beans.Pro
                 this.areaRatioField.setText("N/A");
             } else {
                 this.rrField.setText(CensusHelper.format.format(reg.getCorr() * reg.getCorr()));
-                this.areaRatioLogField.setText(CensusHelper.format.format(Math.log(slope)));
+                this.areaRatioLogField.setText(CensusHelper.format.format( slope > 0 ? (Math.log(slope) ) : 0));
                 this.regressionRatioField.setText(CensusHelper.format.format(slope));
                 this.areaRatioField.setText(CensusHelper.format.format(reg.getAreaRatio()));
             }
@@ -12757,7 +12766,7 @@ public class RelExMainFrame extends javax.swing.JFrame implements java.beans.Pro
                 this.areaRatioField.setText("N/A");
             } else {
                 this.rrField.setText(CensusHelper.format.format(reg.getCorr() * reg.getCorr()));
-                this.areaRatioLogField.setText(CensusHelper.format.format(Math.log(slope)));
+                this.areaRatioLogField.setText(CensusHelper.format.format( slope > 0 ? (Math.log(slope) ) : 0));
                 this.regressionRatioField.setText(CensusHelper.format.format(slope));
                 this.areaRatioField.setText(CensusHelper.format.format(reg.getAreaRatio()));
             }
@@ -12829,7 +12838,7 @@ public class RelExMainFrame extends javax.swing.JFrame implements java.beans.Pro
                 this.areaRatioField.setText("N/A");
             } else {
                 this.rrField.setText(CensusHelper.format.format(reg.getCorr() * reg.getCorr()));
-                this.areaRatioLogField.setText(CensusHelper.format.format(Math.log(slope)));
+                this.areaRatioLogField.setText(CensusHelper.format.format( slope > 0 ? (Math.log(slope) ) : 0));
                 this.regressionRatioField.setText(CensusHelper.format.format(slope));
                 this.areaRatioField.setText(CensusHelper.format.format(reg.getAreaRatio()));
             }

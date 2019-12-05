@@ -32,6 +32,7 @@ import edu.scripps.pms.census.util.CalcUtilGeneric;
 import edu.scripps.pms.census.util.IsotopeDist;
 import edu.scripps.pms.census.util.io.FastaReader;
 import edu.scripps.pms.census.util.io.FileUtil;
+import edu.scripps.pms.util.sqlite.spectra.SpectraDB;
 import gnu.trove.TDoubleArrayList;
 import gnu.trove.TDoubleIntHashMap;
 
@@ -1365,9 +1366,6 @@ public class LabelfreeMissingPeptideBuilderSplit {
         // sampleList.get(0).getPathList();
         Hashtable<String, IndexedFile> origMs1FileHt = new Hashtable<>();
 
-        MSSplitFolderCreation msp = new MSSplitFolderCreation();
-        Map<String, String> splitSpectraMap = new HashMap<>();
-        Map<String, IndexedFile> splitMs1FileHt = new HashMap<>();
         Map<String, HashMap<Integer, Integer>> ms2ToMs1Map = new HashMap<>();
 
         int smallestIndex = sample1IndexList.size()>sample2IndexList.size() ? sample2IndexList.size() : sample1IndexList.size();
@@ -1381,8 +1379,8 @@ public class LabelfreeMissingPeptideBuilderSplit {
                 String spectraPath = path + "../../spectra/";
                 String splitSpectraPath = path + "../../spectra/split/";
 
-                splitSpectraMap.putAll( msp.splitMS1Files(spectraPath, CensusConstants.LABELFREE_MS1_SPLIT_SCAN_NUM, true, conf.isLabelfreeCheckChargeState()) );
-                splitMs1FileHt.putAll( ChroGenerator.createIndexedFiles(splitSpectraPath, CensusConstants.MS1_FILE) );
+             //   splitSpectraMap.putAll( msp.splitMS1Files(spectraPath, CensusConstants.LABELFREE_MS1_SPLIT_SCAN_NUM, true, conf.isLabelfreeCheckChargeState()) );
+             //   splitMs1FileHt.putAll( ChroGenerator.createIndexedFiles(splitSpectraPath, CensusConstants.MS1_FILE) );
                 ms2ToMs1Map.putAll( IndexUtil.buildMS2toMS1ScanMapFiles(spectraPath) );
 
                 Hashtable<String, IndexedFile> ht = ChroGenerator.createIndexedFiles(spectraPath, "ms1", true,true);
@@ -1520,10 +1518,9 @@ public class LabelfreeMissingPeptideBuilderSplit {
                             }
 
                             //GaussianPeakModel peakModel = isotopeCalc(startScan, endScan, startIndex, endIndex, isoReader, each.getSequence(), each.getChargeState(), iFile);
-                            GaussianPeakModel peakModel = isotopeCalc(startScan, endScan, startIndex, endIndex, isoReader, each.getSequence(),
-                                    each.getChargeState(), origIFile,
-                                    splitSpectraMap,
-                                    splitMs1FileHt
+                            GaussianPeakModel peakModel = isotopeCalc( startIndex, endIndex, isoReader, each.getSequence(),
+                                    each.getChargeState(), origIFile, false
+
                             );
 
                             if (null != peakModel) {
@@ -1631,10 +1628,8 @@ public class LabelfreeMissingPeptideBuilderSplit {
                             }
 
                             //GaussianPeakModel peakModel = isotopeCalc(startScan, endScan, startIndex, endIndex, isoReader, each.getSequence(), each.getChargeState(), iFile);
-                            GaussianPeakModel peakModel = isotopeCalc(startScan, endScan, startIndex, endIndex, isoReader, each.getSequence(),
-                                    each.getChargeState(), origIFile,
-                                    splitSpectraMap,
-                                    splitMs1FileHt, true
+                            GaussianPeakModel peakModel = isotopeCalc( startIndex, endIndex, isoReader, each.getSequence(),
+                                    each.getChargeState(), origIFile, true
                             );
 
                             if (null != peakModel) {
@@ -1757,6 +1752,8 @@ public class LabelfreeMissingPeptideBuilderSplit {
             System.out.println(proteinCount + "\t" + totalProtein + "\t" + ((double) proteinCount) / totalProtein * 100 + "% complete");
 
         }
+
+
 
         /*
          * Each Json ProteinIndex file  wiring
@@ -2076,7 +2073,7 @@ public class LabelfreeMissingPeptideBuilderSplit {
 
 
 
-        String filledFile = tmpFile.substring(0, tmpFile.indexOf(".")) + "_filled.txt";
+        String filledFile = tmpFile.substring(0, tmpFile.lastIndexOf(".")) + "_filled.txt";
 
         BufferedReader br = new BufferedReader(new FileReader(tmpFile));
 
@@ -2289,7 +2286,14 @@ public class LabelfreeMissingPeptideBuilderSplit {
 
         br.close();
         ps.close();
-
+        for(Map.Entry<String,IndexedFile> entry: origMs1FileHt.entrySet()){
+            IndexedFile indexedFile = entry.getValue();
+            SpectraDB db = indexedFile.getSpectraDB(false);
+            if(db!=null)
+            {
+                db.close();;
+            }
+        }
      //   return proteinList;
     }
 
@@ -2609,6 +2613,145 @@ public class LabelfreeMissingPeptideBuilderSplit {
 
          */
     }
+
+    public static GaussianPeakModel isotopeCalc(int startIndex, int endIndex,
+                                                IsotopeReader isoReader, String sequence,
+                                                int chargeState,
+                                                IndexedFile origIFile,
+                                                boolean fillZeroOnly
+
+    ) throws Exception {
+
+
+        if (sequence.contains(".")) {
+            sequence = sequence.substring(2, sequence.length() - 2);
+        }
+
+        /**
+         * *********************************
+         * 1 calculate isotope distribution *********************************
+         */
+        char[] ch = sequence.toCharArray();
+
+        ElementComposition element = new ElementComposition(ch, 0, ch.length, isoReader.getIsotope());
+        element.calculate();
+
+        if (!element.isQuantifiable()) {
+            System.out.print("\nError : ");
+            System.out.println(sequence + " is not quantifiable.");
+            return null;
+        }
+
+        Configuration conf = Configuration.getInstance();
+
+        IsotopeDist sampleDist = new IsotopeDist(element.getElementSampleArr(), element.getModShift(), true);
+
+        double[] isoArr = sampleDist.getHighMassList();
+        double[] isoIntArr = sampleDist.getRelabun(isoArr.length);
+        double pepMass = sampleDist.getHighMassList()[0];
+
+        for (int i = 0; i < isoArr.length; i++) {
+            isoArr[i] = (isoArr[i] + chargeState * CensusConstants.PROTON_MASS) / chargeState;
+        }
+
+        /**
+         * *********************************
+         * 2 Re-construct chromatogram *********************************
+         */
+
+        long[] chromPeakArr = new long[endIndex - startIndex + 1];
+        double[] retArr = new double[chromPeakArr.length];
+        int[] scanArr = new int[chromPeakArr.length];
+        int count = 0;
+        SpectraDB spectraDB = origIFile.getSpectraDB();
+
+        boolean hasPeak=false;
+        if(!fillZeroOnly) {
+            for (int i = startIndex; i <= endIndex; i++) {
+
+                int eachScan = origIFile.getKeys()[i];
+
+
+                SpectrumModel spec = CalcUtilGeneric.labelFreeSpectrumReader(isoArr, eachScan,
+                        conf.getMassTolerance(), spectraDB, chargeState, conf, pepMass);/**/
+                chromPeakArr[count] = spec.getPrecursorPeakIntensity();
+                if (!hasPeak && chromPeakArr[count] > 0)
+                    hasPeak = true;
+
+                retArr[count] = spec.getRetentionTime();
+                scanArr[count] = spec.getScanNumber();
+
+                count++;
+
+            }
+        }
+
+        /**
+         * *********************************
+         * 3 Smooth chromatogram *********************************
+         */
+        if(!hasPeak) {
+            GaussianPeakModel gModel = new GaussianPeakModel();
+            gModel.setScanArr(scanArr);
+            gModel.setRetArr(retArr);
+            gModel.setHasPeak(false);
+
+            int currentScan = origIFile.getKeys()[startIndex];
+
+
+            double backGroundNoise = CalcUtilGeneric.getBackGroundNoise(currentScan, spectraDB);
+
+
+            gModel.setPeakArea(backGroundNoise);
+
+            double[] noPeakArr = new double[chromPeakArr.length];
+            gModel.setPeakArr(noPeakArr);
+
+            return gModel;
+        }
+
+        double[] smoothChromArr = Smooth.smoothAsDouble(chromPeakArr, LabelfreeMissingPeptideBuilderSplit.SMOOTH_WINDOW_SIZE);
+
+        double basePeak = 0;
+        int basePeakIndex = 0;
+
+        for (int i = 0; i < smoothChromArr.length; i++) {
+
+            if (basePeak < smoothChromArr[i]) {
+                basePeak = smoothChromArr[i];
+                basePeakIndex = i;
+            }
+
+        }
+
+        /**
+         * *********************************
+         * 4. Find simple/rough peak range (1/3 of base peak) for Gaussian input
+         * *********************************
+         */
+
+
+        int[] indexResult = LabelfreeChroUtil.getPeakRange(basePeakIndex, basePeak, smoothChromArr);
+        int peakStartIndex = indexResult[0];
+        int peakEndIndex = indexResult[1];
+
+        GaussianPeakModel gModel = GaussianFitting.getGaussianPeakRangeIndex(retArr, smoothChromArr, peakStartIndex, peakEndIndex);
+        gModel.setScanArr(scanArr);
+        gModel.setRetArr(retArr);
+        gModel.setPeakArr(smoothChromArr);
+
+
+        double maxPeakIntensity = 0;
+        for(double d:smoothChromArr) {
+            if(d>maxPeakIntensity)
+                maxPeakIntensity = d;
+        }
+
+        gModel.setMaxIntensity(maxPeakIntensity);
+
+        return gModel;
+    }
+
 
     //return parameters: y, x, and sigma
     //peak ranges from -3 x sigma to 3 x sigma

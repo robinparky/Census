@@ -1,7 +1,7 @@
 package scripts;
 
 import edu.scripps.pms.util.io.CensusOutputReader;
-import edu.scripps.pms.util.stats.LinearRegressionDouble;
+
 import org.apache.commons.math3.stat.regression.SimpleRegression;
 
 import java.io.BufferedReader;

@@ -281,7 +281,7 @@ public class ChroGenerator {
                         case Configuration.MS_FILE_FORMAT:
 
                             origMs1FileHt = createIndexedFiles(spectraPath, CensusConstants.MS1_FILE);
-                            splitMs1FileHt = createIndexedFiles(splitSpectraPath, CensusConstants.MS1_FILE);
+                     //       splitMs1FileHt = createIndexedFiles(splitSpectraPath, CensusConstants.MS1_FILE);
                             ms2ToMs1Map = IndexUtil.buildMS2toMS1ScanMapFiles(spectraPath);
                             break;
 
@@ -416,7 +416,8 @@ public class ChroGenerator {
                                 }
 
                                 try {
-                                    Element peptideEle = LabelfreeChroUtil.getPeptideDomElement(peptide, isoReader, spectraPath, origMs1FileHt, splitMs1FileHt, splitSpectraMap, ms2ToMs1Map);
+                                   // Element peptideEle = LabelfreeChroUtil.getPeptideDomElement(peptide, isoReader, spectraPath, origMs1FileHt, splitMs1FileHt, splitSpectraMap, ms2ToMs1Map);
+                                      Element peptideEle = LabelfreeChroUtil.getPeptideDomElement(peptide, isoReader, spectraPath, origMs1FileHt,ms2ToMs1Map);
                                     if (null != peptideEle) {
                                         proteinEle.addContent(peptideEle);
                                     }
@@ -499,11 +500,23 @@ public class ChroGenerator {
                         }
 
                         //Close all random files
-                        for (Enumeration e = splitMs1FileHt.keys(); e.hasMoreElements();) {
+                      /*  for (Enumeration e = splitMs1FileHt.keys(); e.hasMoreElements();) {
                             iFile = splitMs1FileHt.get(e.nextElement());
 
                             if (null != iFile) {
                                 iFile.close();
+                            }
+                        }*/
+                        for(Map.Entry<String,IndexedFile> entry : origMs1FileHt.entrySet())
+                        {
+                            IndexedFile indexedFile = entry.getValue();
+                            if(indexedFile!=null)
+                            {
+                                SpectraDB db = indexedFile.getSpectraDB(false);
+                                if(db!=null)
+                                {
+                                    db.close();
+                                }
                             }
                         }
 
@@ -1413,13 +1426,49 @@ public class ChroGenerator {
         ChroProgressDialog.addMessageWithLine(progress, "done.");
     }
 
+    public static SpectraDB connectCreateSpectraDB(String filePath, File spectraDir, File ms2File) throws SQLException, IOException {
+        String sqliteDBPath = ms2File.getAbsolutePath()+".sqlite";
+        File sqliteDB = new File(sqliteDBPath);
+        if(sqliteDB.exists())
+        {
+            SpectraDB db = SpectraDB.connectToDBReadOnly(sqliteDBPath);
+            return db;
+        }
+        else if(spectraDir.exists()){
+            String spectraSqliteDBPath = spectraDir.getAbsolutePath() +File.separatorChar + ms2File.getName() + ".sqlite";
+            File spectraSqliteDB = new File(spectraSqliteDBPath);
+            if(spectraSqliteDB.exists())
+            {
+                SpectraDB spectraDB = SpectraDB.connectToDBReadOnly(spectraSqliteDB.getAbsolutePath());
+                return spectraDB;
+            }
+            else
+            {
+                CreateDb.createNewDatabase(spectraDir.getAbsolutePath(),ms2File.getName()+".sqlite",ms2File.getName());
+                SpectraDB spectraDB = SpectraDB.connectToDBReadOnly(spectraSqliteDB.getAbsolutePath());
+                return spectraDB;
+            }
+        }
+        else if(!spectraDir.exists())
+        {
+            CreateDb.createNewDatabase(filePath,sqliteDB.getName(),ms2File.getName());
+            SpectraDB spectraDB = SpectraDB.connectToDBReadOnly(sqliteDBPath);
+            return spectraDB;
+        }
+        return null;
+    }
+
+
     public static Map<String, SpectraDB> connectCreateSpectraDB(String filePath, String extension) throws Exception {
         Map<String,SpectraDB> result = new HashMap<>();
         File spectraDir = new File(filePath+"/../../spectra/");
         File currentDir = new File(filePath);
         File [] arr = currentDir.listFiles(new RelExFileFilter(extension));
+     //   if(arr.length > 0)
+           // SpectraDB.setCacheSize(1_000_000/arr.length);
         for(File ms2File: arr)
         {
+            /*
             String sqliteDBPath = ms2File.getAbsolutePath()+".sqlite";
             File sqliteDB = new File(sqliteDBPath);
             if(sqliteDB.exists())
@@ -1447,10 +1496,10 @@ public class ChroGenerator {
                 CreateDb.createNewDatabase(filePath,sqliteDB.getName(),ms2File.getName());
                 SpectraDB spectraDB = SpectraDB.connectToDBReadOnly(sqliteDBPath);
                 result.put(ms2File.getName(),spectraDB);
-            }
+            }*/
+            SpectraDB db = connectCreateSpectraDB(filePath,spectraDir,ms2File);
+            result.put(ms2File.getName(), db);
         }
-
-
         return result;
     }
     public static Map<String, SpectraDB> connectSpectraDB(String filePath, String extension) throws SQLException {
@@ -2890,7 +2939,6 @@ public class ChroGenerator {
                         }
 
                         int ms3Scan = TMTUtil.getCorrespondingMs3Scan(ms3Ifile, keys[keyIndex]);
-                        //MS_READ
 
                         if (ms3Scan < 0) {
                             continue;
@@ -3241,16 +3289,17 @@ public class ChroGenerator {
 
         String ms1path = null;
 
-        boolean usingOldPath = false;
+     //   boolean usingOldPath = false;
         if(ms1Map.isEmpty())
         {
-            ms1path = filePath.concat("/../../spectra");
-            ms1Map = createIndexedFiles(ms1path,CensusConstants.MS1_FILE);
-            usingOldPath = !ms1Map.isEmpty();
+         //   ms1path = filePath.concat("/../../spectra");
+       //     ms1Map = connectCreateSpectraDB(ms1path,CensusConstants.MS1_FILE);
+   //         usingOldPath = !ms1Map.isEmpty();
         }
 
         if (conf.isMs3ScanRandom() || "ms3".equals(conf.getFileShift()) || conf.getScanShift() > 0) {
-            ms2Map.putAll(createIndexedFiles(filePath, CensusConstants.MS3_FILE));
+            ms2Ht.putAll(createIndexedFiles(filePath, CensusConstants.MS3_FILE));
+            ms2Map.putAll(connectCreateSpectraDB(filePath, CensusConstants.MS3_FILE));
         }
 
         //////////////////// remove this later robin
@@ -3344,7 +3393,7 @@ public class ChroGenerator {
 
             IdentificationReader idReader = BaseIdentificationReader.getIdentificationInst(isoReader);
             int redundantPeptideNum = idReader.getTotalPeptideNumber();
-
+            System.out.println(">><<<>> "+redundantPeptideNum);
 
             //if (dtaFile.exists()) {
             if (false) {  //we don't use DTASelect.txt parsing any more
@@ -3420,7 +3469,7 @@ public class ChroGenerator {
             double maxSignalToNoise = Double.MIN_VALUE;
             double minSignalTONoise = Double.MAX_VALUE;
             List<Protein> aList = new ArrayList<>();
-            SpectraDB spectraDBMs3 = null;
+            SpectraDB ispectraDB = null;
 
             for (Iterator<Protein> itr = idReader.getProteins(); itr.hasNext();) {
                 protein = itr.next();
@@ -3547,9 +3596,11 @@ public class ChroGenerator {
                     Element chro = new Element("chro");
                     //output.append("[CHROMATOGRAMS]\tSCAN\tSAMPLE\tREFERENCE\n");
                     iFile = ms2Ht.get(this.filePath + ms2FileName + "." + "ms2");
-                    spectraDBMs3 = ms2Map.get(ms2FileName + "." + "ms2");
+                    ispectraDB = ms2Map.get(ms2FileName+".ms2");
+                    //spectraDBMs3 = ms2Map.get(ms2FileName + "." + "ms2");
                     if (null == iFile) {
                         iFile = ms2Ht.get(filePath + ms2FileName.substring(1) + "." + "ms2");
+                        ispectraDB = ms2Map.get(ms2FileName.substring(1)+".ms2");
 
                         if (null == iFile) {
 
@@ -3668,7 +3719,7 @@ public class ChroGenerator {
 //                    spReader.init();
 
                         if (null != iFileMs1) {
-                            String path = usingOldPath ? ms1path : tempPath;
+                          //  String path = usingOldPath ? ms1path : tempPath;
                             double slineMass = iFile.getPrecursorMap().get(peptide.getScanNumber());
 //MS_READ
                             // int[] arr = iFile.getPrecursorMap().keys();
@@ -3740,17 +3791,17 @@ public class ChroGenerator {
                         String ms3FileName = this.filePath + ms2FileName + ".ms3";
                         String ms3FileName2 =  ms2FileName + ".ms3";
                         IndexedFile ms3Ifile = ms2Ht.get(ms3FileName);
-                        spectraDBMs3 = ms3Map.get(ms2FileName + ".ms3");
+                        SpectraDB ispectraDB3 = ms2Map.get(ms3FileName2);
                         if (null == ms3Ifile) {  //for heavy file
                             ms3Ifile = ms2Ht.get(filePath + ms2FileName.substring(1) + "." + "ms3");
-                            spectraDBMs3 = ms3Map.get( ms2FileName.substring(1) + "." + "ms3");
+                            ispectraDB3 = ms2Map.get( ms2FileName.substring(1) + "." + "ms3");
                             if (null == ms3Ifile) {  //for replaced ext
 
                                 ms3Ifile = ms2Ht.get(ms3FileName.replace(".ms3", "_ms3.ms2"));
 
-                                spectraDBMs3 = ms2Map.get(ms3FileName2.replace(".ms3", "_ms3.ms2"));
+                                ispectraDB3 = ms2Map.get(ms3FileName2.replace(".ms3", "_ms3.ms2"));
                                 if (null == ms3Ifile) {
-                                    spectraDBMs3 = ms2Map.get(ms3FileName2.replace(".ms3", ".ms2"));
+                                    ispectraDB3 = ms2Map.get(ms3FileName2.replace(".ms3", ".ms2"));
 
                                     ms3Ifile = ms2Ht.get(ms3FileName.replace(".ms3", ".ms2"));
                                 }
@@ -3760,7 +3811,7 @@ public class ChroGenerator {
                                     //check if ms3 file can be heavy one
                                     if (ms2FileName.startsWith("H") || ms2FileName.startsWith("M")) {
                                         String heavyMs3File = this.filePath + ms2FileName.substring(1) + "_ms3.ms2";
-                                        spectraDBMs3 = ms2Map.get(ms3FileName2.substring(1) + "_ms3.ms2");
+                                        ispectraDB3 = ms2Map.get(ms3FileName2.substring(1) + "_ms3.ms2");
 
                                         ms3Ifile = ms2Ht.get(heavyMs3File);
                                     }
@@ -3787,10 +3838,12 @@ public class ChroGenerator {
                         //MS_READ
 
                         if (ms3Scan < 0) {
+                            System.out.println("MISSING MS3SCAN ");
                             continue;
                         }
 
                         iFile = ms3Ifile;
+                        ispectraDB = ispectraDB3;
                         //keyIndex
 
                         keyIndex = Arrays.binarySearch(iFile.getKeys(), ms3Scan);
@@ -3804,9 +3857,13 @@ public class ChroGenerator {
 
 
                     try {
-//MS_READ
+            //            System.out.println(">><<>> ");
+//
+             //           System.out.println(">><<>> "+iFile.getFileName());
+            //            System.out.println(">><<>> "+ispectraDB.path);
+                        //MS_READ
                         String outStr = SpectraDBCalcUtil.calculateMS2Mass(iFile, range, keyIndex, null,
-                                null, null, null, conf, chargeState, spectraDBMs3);
+                                null, null, null, conf, chargeState, ispectraDB);
                         peptideEle.setAttribute("signal-noise", CensusHelper.format.format(CalcUtil.SignalToNoise));
                         peptideEle.setAttribute("report-ion-signal-noise", CensusHelper.format.format(CalcUtil.ReportIonSignalToNoise));
 
@@ -3965,7 +4022,7 @@ public class ChroGenerator {
                     }
                     else{
                         //MS_READ
-                        String ms2Key = filePath+ peptide.getFileName()+".ms2";
+                        String ms2Key =  peptide.getFileName()+".ms2";
                         SpectraDB ms2SpectraDB = ms2Map.get(ms2Key);
 
                         xyPoints = SpectrumUtil.getSpectrum(filePath, ms2SpectraDB,
