@@ -269,7 +269,7 @@ public class ChroGenerator {
                     MSSplitFolderCreation msp = new MSSplitFolderCreation();
 
                     // if version2 file exists in split folder, don't index again.
-                    HashMap<String, String> splitSpectraMap = msp.splitMS1Files(spectraPath, CensusConstants.LABELFREE_MS1_SPLIT_SCAN_NUM, true);  //if exist, don't index again
+                   // HashMap<String, String> splitSpectraMap = msp.splitMS1Files(spectraPath, CensusConstants.LABELFREE_MS1_SPLIT_SCAN_NUM, true);  //if exist, don't index again
 
                     //String splitSpectraPath = spectraPath+ File.separator + "split";
                     Hashtable<String, IndexedFile> splitMs1FileHt = null;

@@ -6,6 +6,8 @@ import org.sqlite.SQLiteConfig;
 import java.io.*;
 import java.sql.*;
 import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadPoolExecutor;
 
 
 public class CreateDb {
@@ -121,7 +123,7 @@ public class CreateDb {
                     + ");";
             String sqlIndex = "CREATE INDEX scan_index ON spectra(scan);\n";
             String sqldrop = "DROP TABLE IF EXISTS spectra\n";
-
+         //   ThreadPoolExecutor executor =  (ThreadPoolExecutor) Executors.newFixedThreadPool(1);
 
             PreparedStatement pstmt = null;
             try (Connection conn = DriverManager.getConnection(url,config.toProperties());
@@ -129,8 +131,9 @@ public class CreateDb {
                 // create a new table
                 stmt.execute(sqldrop);
                 stmt.execute(sql);
+           //     conn.setAutoCommit(false);
 
-                stmt.execute(sqlIndex);
+
 
                 BufferedReader br = new BufferedReader(new FileReader(path + spectralFile));
                 String eachLine="";
@@ -175,10 +178,17 @@ public class CreateDb {
 
                         pstmt.addBatch();
                         batchCount++;
-                        if(batchCount>=100_000)
+                        if(batchCount>=1_000_000)
                         {
-                            batchCount =0;
+                            batchCount =0;/*
+                            PreparedStatement finalPstmt = pstmt;
+                            executor.submit(() ->{
+                                finalPstmt.executeBatch();
+                                return null;
+                            });*/
                             pstmt.executeBatch();
+
+                            pstmt = conn.prepareStatement(insertSql);
                         }
 
 
@@ -214,6 +224,7 @@ public class CreateDb {
 
                     //System.out.println(eachLine);
                 }
+              //  executor.shutdown();
                 pstmt.setInt(1, scanNum);
                 pstmt.setString(2, spectrum.toString());
                 pstmt.setDouble(3, prcMass);
@@ -223,7 +234,10 @@ public class CreateDb {
                 pstmt.addBatch();
                 pstmt.executeBatch();
 
-                //stmt.execute("OPTIMIZE;\n");
+                stmt.execute(sqlIndex);
+                //conn.commit();
+
+                stmt.execute("VACUUM;\n");
                 //Statement vacuumStatement = conn.createStatement();
                 //vacuumStatement.execute("VACUUM");
                // conn.commit();

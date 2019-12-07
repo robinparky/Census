@@ -15,8 +15,8 @@ public class SpectraDB implements Closeable {
     private Map<Integer, Spectrum> scanSpectraMap = null;
     private boolean savePrevSpectra =true;
     private boolean useCache = false;
-    private static int cacheSize = 10_000;
-    private  static int num_db_open;
+
+    private  static int num_db_open =0;
 
     public  enum StorageMode
     {
@@ -60,7 +60,7 @@ public class SpectraDB implements Closeable {
     }
 
     public static SpectraDB connectToDBReadOnly(String path) throws SQLException {
-        return connectToDBReadOnly(path, false, false, false);
+        return connectToDBReadOnly(path, true, true, false);
     }
 
     public static SpectraDB connectToDBReadOnly(String path, boolean useCache, boolean savePrevSpectra, boolean preFetch)
@@ -68,10 +68,10 @@ public class SpectraDB implements Closeable {
         SpectraDB db = new SpectraDB(path);
         db.useCache = useCache;
         db.savePrevSpectra = savePrevSpectra;
-        db.scanSpectraMap = useCache ? new Cache<>(cacheSize, 0.75f, true)
+        db.scanSpectraMap = useCache ? new Cache<>( 0.75f, true)
                 : new HashMap<>(1_000_000);
         db.connectReadOnly();;
-        editNumSpectaDBOpen(1);
+
         if(preFetch)
         {
             if(useCache)
@@ -116,6 +116,7 @@ public class SpectraDB implements Closeable {
         }
         result.close();
     }
+
     public void generateScanSpectraMapLarge() throws SQLException {
         // scanSpectraMap = new HashMap<>(1_000_000);
         String retrieveScans = "SELECT scan, spectrum FROM spectra;";
@@ -128,14 +129,13 @@ public class SpectraDB implements Closeable {
             Spectrum spectra = new Spectrum(scan,-1,-1,-1,-1);
             spectra.setSpectrum(spectrum);
             scanSpectraMap.put(scan,spectra);
-            if(scanSpectraMap.size() == cacheSize)
-                break;
+
         }
         result.close();
     }
 
 
-    public String getSpectrumStrFromDB(int scan) throws SQLException {
+    public synchronized String getSpectrumStrFromDB(int scan) throws SQLException {
         String retrieveSql = "SELECT spectrum FROM spectra WHERE scan = ?";
         PreparedStatement statement = conn.prepareStatement(retrieveSql);
         statement.setInt(1,scan);
@@ -149,30 +149,13 @@ public class SpectraDB implements Closeable {
         return  spectrum;
     }
 
-    public Spectrum getSpectrumFromDB(int scan) throws SQLException {
+    public synchronized Spectrum getSpectrumFromDB(int scan) throws SQLException {
         Spectrum spectrum = savePrevSpectra ?  scanSpectraMap.get(scan) : null ;
         if(spectrum == null)
         {
-            if(useCache)
-            {
-                spectrum = getEntryFromDBLight(scan);
-                if(savePrevSpectra)
-                    scanSpectraMap.put(scan,spectrum);
-                /*List<Spectrum> spectrumList = getEntriesFromDBLight(scan-500, scan+500);
-                for(Spectrum spec : spectrumList)
-                {
-                    scanSpectraMap.put(spec.id, spec);
-                    if(spec.scanNumber == scan)
-                    {
-                        spectrum = spec;
-                    }
-                }*/
-            }
-            else{
-                spectrum = getEntryFromDBLight(scan);
-                if(savePrevSpectra)
-                    scanSpectraMap.put(scan,spectrum);
-            }
+            spectrum = getEntryFromDBLight(scan);
+            if(savePrevSpectra)
+                scanSpectraMap.put(scan,spectrum);
         }
         if(spectrum == null )
             return null;
@@ -184,7 +167,8 @@ public class SpectraDB implements Closeable {
     }
 
     private PreparedStatement getEntryFromDBListStatement = null;
-    private Spectrum getEntryFromDBLight(int scan) throws SQLException {
+
+    private synchronized Spectrum getEntryFromDBLight(int scan) throws SQLException {
         if(getEntryFromDBListStatement == null)
         {
             String retrieveScans = "SELECT spectrum FROM spectra WHERE scan= ?;";
@@ -265,6 +249,7 @@ public class SpectraDB implements Closeable {
         config.setCacheSize(-50_000);
         config.setJournalMode(SQLiteConfig.JournalMode.OFF);
         conn = DriverManager.getConnection(url,config.toProperties());
+        editNumSpectaDBOpen(1);
     }
 
 
@@ -272,12 +257,15 @@ public class SpectraDB implements Closeable {
 
     @Override
     public void close() throws IOException {
-        editNumSpectaDBOpen(-1);
+
         if(conn!=null)
         {
             try {
                 if(!conn.isClosed())
+                {
+                    editNumSpectaDBOpen(-1);
                     conn.close();
+                }
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -288,17 +276,17 @@ public class SpectraDB implements Closeable {
 
     public static SQLiteConfig GetDefaultConfig()
     {
-        final int cacheSize = 100000 ;
+        final int cacheSize = 100_000 ;
         final int pageSize = 4096;
         SQLiteConfig config = new SQLiteConfig();
         //optimize for multiple connections that can share data structures
         config.setSharedCache(true);
         config.setCacheSize(cacheSize);
         config.setPageSize(pageSize);
-        config.setJournalMode(SQLiteConfig.JournalMode.MEMORY);
+        config.setJournalMode(SQLiteConfig.JournalMode.OFF);
         config.enableFullSync(false);
         config.enableRecursiveTriggers(false);
-        config.setLockingMode(SQLiteConfig.LockingMode.NORMAL);
+        config.setLockingMode(SQLiteConfig.LockingMode.EXCLUSIVE);
         config.setSynchronous(SQLiteConfig.SynchronousMode.OFF); //TODO may be dangerous on some systems to have off
         return config;
     }
@@ -371,22 +359,28 @@ public class SpectraDB implements Closeable {
     public static class Cache<K , V> extends LinkedHashMap<K , V>
     {
         public final int MAX_SIZE = 10_000_000;
-        public Cache(int initialCapacity, float loadFactor, boolean accessOrder) {
+        public Cache(float loadFactor, boolean accessOrder) {
             super(500_000, loadFactor, accessOrder);
             //MAX_SIZE = initialCapacity;
         }
 
         @Override
         protected boolean removeEldestEntry(Map.Entry eldest) {
-            return size() > MAX_SIZE/ num_db_open;
+            return size() > MAX_SIZE/ getNumDBOpen();
         }
     }
 
-    public static int getCacheSize() {
-        return cacheSize;
+    private synchronized static int getNumDBOpen()
+    {
+        if(num_db_open>0)
+        {
+            return num_db_open;
+        }
+        else
+        {
+            return 1;
+        }
     }
 
-    public static void setCacheSize(int cacheSize) {
-        SpectraDB.cacheSize = cacheSize;
-    }
+
 }
