@@ -7586,7 +7586,8 @@ public class RelExMainFrame extends javax.swing.JFrame implements java.beans.Pro
       //if()
 
       //if (totalPeptideNumber < param.getMinimumPeptidePerProtein()) continue;
-      if (sequenceSet.size() < param.getMinimumPeptidePerProtein()) continue;
+      if (sequenceSet.size() < param.getMinimumPeptidePerProtein() && !param.isNoFilter())
+        continue;
       //System.out.println("total peptide=======" + protein.getLocus() + "\t" + totalPeptideNumber + "\t" + peptideCount + "\t" + singletonPeptideCount + "\t" + singletonFinal + "\t" + allNoneMinPeptide);
 
 
