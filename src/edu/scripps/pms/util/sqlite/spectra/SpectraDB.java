@@ -16,8 +16,9 @@ public class SpectraDB implements Closeable {
     private boolean savePrevSpectra =true;
     private boolean useCache = false;
 
-    private  static int num_db_open =0;
 
+    private  static int num_db_open =0;
+    private static int max_spectra_size =2000;
     public  enum StorageMode
     {
         CACHE, REGULAR, NO_STORAGE
@@ -331,6 +332,7 @@ public class SpectraDB implements Closeable {
                     intensityList.add(intensity);
                 }
             }
+            setMaxSpectraSize(mzList.size());
         }
 
         public String getSpectrum() throws SQLException {
@@ -358,17 +360,31 @@ public class SpectraDB implements Closeable {
 
     public static class Cache<K , V> extends LinkedHashMap<K , V>
     {
-        public final int MAX_SIZE = 10_000_000;
+        public static final int MAX_SIZE = 500_000;
         public Cache(float loadFactor, boolean accessOrder) {
-            super(500_000, loadFactor, accessOrder);
+            super(50_000, loadFactor, accessOrder);
             //MAX_SIZE = initialCapacity;
         }
 
         @Override
         protected boolean removeEldestEntry(Map.Entry eldest) {
-            return size() > MAX_SIZE/ getNumDBOpen();
+            return size() > getMaxSize();
         }
+
+        private static int getMaxSize()
+        {
+            int ratio = 2000/max_spectra_size;
+            int tempMax = MAX_SIZE * ratio /getNumDBOpen();
+            if(tempMax < 100 )
+                return 100;
+            else
+                return MAX_SIZE * ratio /getNumDBOpen();
+        }
+
     }
+
+
+
 
     private synchronized static int getNumDBOpen()
     {
@@ -381,6 +397,16 @@ public class SpectraDB implements Closeable {
             return 1;
         }
     }
+
+    private synchronized static void setMaxSpectraSize(int size)
+    {
+        if(size>max_spectra_size)
+        {
+            max_spectra_size = size;
+        }
+    }
+
+
 
 
 }

@@ -61,6 +61,7 @@ public final class CensusConstants {
 
     public static final String MS1_FILE = "ms1";
     public static final String MS2_FILE = "ms2";
+    public static final String SQLITE_FILE = "sqlite";
     public static final String MS3_FILE = "ms3";
     public static final String MZXML = "mzXML";
 

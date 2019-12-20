@@ -456,7 +456,7 @@ public class Census {
 	    }
 
 	    if(null != p)
-		p.close();
+		    p.close();
 
 	    if(null != singleP)
 		singleP.close();
@@ -582,6 +582,7 @@ public class Census {
 	File ff = new File(path);
         String[] flist = ff.list(new RelExFileFilter(CensusConstants.MS1_FILE));
         String[] ms2flist = ff.list(new RelExFileFilter(CensusConstants.MS2_FILE));
+        String[] sqlite_list = ff.list(new RelExFileFilter(CensusConstants.SQLITE_FILE));
 	String[] mzflist = ff.list(new RelExFileFilter(CensusConstants.MZXML));
 
 	/***************  MRM EXPERIMENT WITHOUT IDENTIFICATION ***********************/
@@ -602,7 +603,7 @@ public class Census {
 	    System.out.println("Converting mzXML to MS1 files is completed.");
 	}
 
-	if( ms2flist.length<=0 && conf.getQuantLevel() == 2)
+	if( ms2flist.length<=0 && sqlite_list.length<=0 && conf.getQuantLevel() == 2)
 	{
 	    System.out.println("Start converting mzXML to MS2 files... Census does this only once.");
 	    Mzxml2Ms.converMzXML2MS2(path);

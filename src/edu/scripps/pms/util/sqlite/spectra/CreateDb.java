@@ -87,7 +87,7 @@ public class CreateDb {
                 f.createNewFile();
             }
             else {
-                if (deleteMode)
+                if (deleteMode || f.length()==0)
                 {
                     f.delete();
                     f.createNewFile();
@@ -178,7 +178,7 @@ public class CreateDb {
 
                         pstmt.addBatch();
                         batchCount++;
-                        if(batchCount>=1_000_000)
+                        if(batchCount>=1_000)
                         {
                             batchCount =0;/*
                             PreparedStatement finalPstmt = pstmt;

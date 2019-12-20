@@ -269,10 +269,10 @@ public class ChroGenerator {
                     MSSplitFolderCreation msp = new MSSplitFolderCreation();
 
                     // if version2 file exists in split folder, don't index again.
-                   // HashMap<String, String> splitSpectraMap = msp.splitMS1Files(spectraPath, CensusConstants.LABELFREE_MS1_SPLIT_SCAN_NUM, true);  //if exist, don't index again
-
+                  //  HashMap<String, String> splitSpectraMap = msp.splitMS1Files(spectraPath, CensusConstants.LABELFREE_MS1_SPLIT_SCAN_NUM, true);  //if exist, don't index again
+//
                     //String splitSpectraPath = spectraPath+ File.separator + "split";
-                    Hashtable<String, IndexedFile> splitMs1FileHt = null;
+                 //   Hashtable<String, IndexedFile> splitMs1FileHt = null;
                     Hashtable<String, IndexedFile> origMs1FileHt = null;
                     HashMap<String, HashMap<Integer, Integer>> ms2ToMs1Map = null;
 
@@ -281,12 +281,12 @@ public class ChroGenerator {
                         case Configuration.MS_FILE_FORMAT:
 
                             origMs1FileHt = createIndexedFiles(spectraPath, CensusConstants.MS1_FILE);
-                     //       splitMs1FileHt = createIndexedFiles(splitSpectraPath, CensusConstants.MS1_FILE);
+                          //  splitMs1FileHt = createIndexedFiles(splitSpectraPath, CensusConstants.MS1_FILE);
                             ms2ToMs1Map = IndexUtil.buildMS2toMS1ScanMapFiles(spectraPath);
                             break;
 
                         case Configuration.MZXML_FILE_FORMAT:
-                            splitMs1FileHt = createIndexedFiles(splitSpectraPath, CensusConstants.MZXML);
+                        //    splitMs1FileHt = createIndexedFiles(splitSpectraPath, CensusConstants.MZXML);
                             break;
 
                         default:
@@ -1429,7 +1429,7 @@ public class ChroGenerator {
     public static SpectraDB connectCreateSpectraDB(String filePath, File spectraDir, File ms2File) throws SQLException, IOException {
         String sqliteDBPath = ms2File.getAbsolutePath()+".sqlite";
         File sqliteDB = new File(sqliteDBPath);
-        if(sqliteDB.exists())
+        if(sqliteDB.exists()  && sqliteDB.length()>0)
         {
             SpectraDB db = SpectraDB.connectToDBReadOnly(sqliteDBPath);
             return db;
@@ -1437,7 +1437,7 @@ public class ChroGenerator {
         else if(spectraDir.exists()){
             String spectraSqliteDBPath = spectraDir.getAbsolutePath() +File.separatorChar + ms2File.getName() + ".sqlite";
             File spectraSqliteDB = new File(spectraSqliteDBPath);
-            if(spectraSqliteDB.exists())
+            if(spectraSqliteDB.exists()  && spectraSqliteDB.length()>0)
             {
                 SpectraDB spectraDB = SpectraDB.connectToDBReadOnly(spectraSqliteDB.getAbsolutePath());
                 return spectraDB;
@@ -1574,11 +1574,18 @@ public class ChroGenerator {
 
 
     public static Hashtable createIndexedFiles(String filePath, String extension) throws IOException, CensusGeneralException {
-        return createIndexedFiles(filePath, extension, true, false);
+        return createIndexedFilesHelper(filePath, extension, true, false,false);
+    }
+    public static Hashtable createIndexedFilesNoMs(String filePath, String extension) throws IOException, CensusGeneralException {
+        return createIndexedFilesHelper(filePath, extension, true, false,true);
     }
 
-    //robin
+
     public static Hashtable createIndexedFiles(String filePath, String extension, boolean includePath, boolean indexCheck) throws IOException, CensusGeneralException {
+            return createIndexedFilesHelper(filePath, extension, true, false,false);
+    }
+        //robin
+    public static Hashtable createIndexedFilesHelper(String filePath, String extension, boolean includePath, boolean indexCheck, boolean indexOnly) throws IOException, CensusGeneralException {
 
         //for non-labeling quantification, same file names may appear in different folders.  That means
         // it is dangerous to use file names as keys.  Fix me later.
@@ -1589,7 +1596,8 @@ public class ChroGenerator {
 
         File f = new File(filePath);
 
-        String[] list = f.list(new RelExFileFilter(extension));
+
+        String[] list = f.list(new RelExFileFilter(indexOnly ? extension+".index" : extension));
 
         Hashtable<String, IndexedFile> ht = new Hashtable<String, IndexedFile>();
         IndexedFile iFile = null;
@@ -1612,7 +1620,7 @@ public class ChroGenerator {
                 if(indexCheck)
                   System.out.print("creating index file");
                 for (int i = 0; i < list.length; i++) {
-                    indexFileName = filePath + list[i] + ".index";
+                    indexFileName = filePath + list[i] + (indexOnly ? "" : ".index");
                     indexFile = new File(indexFileName);
 
                     //System.out.println(indexFileName + " " + indexFile.exists());
@@ -1688,8 +1696,9 @@ public class ChroGenerator {
 
             case Configuration.MS2_FILE_FORMAT:
                 for (int i = 0; i < list.length; i++) {
-                    indexFileName = filePath + list[i] + ".index";
+                    indexFileName = filePath + list[i] + (indexOnly ? "" : ".index");
                     indexFile = new File(indexFileName);
+                    String path = filePath + (indexOnly? list[i].replace(".index","") : list[i]);
 
                     if (!indexFile.exists() || indexFile.length() <= 0) {
                         System.out.println("creating index file " + indexFileName);
@@ -1699,7 +1708,9 @@ public class ChroGenerator {
                     }
 
                     try {
-                        iFile = new IndexedFile(indexFile, filePath + list[i]);
+                        iFile = new IndexedFile(indexFile,
+                                path,
+                                false);
                     } catch (FileNotFoundException fnfe) {
                         System.out.println("Error: Spectral file is not found");
 
@@ -1714,7 +1725,7 @@ public class ChroGenerator {
                     }
 
                     if (includePath) {
-                        ht.put(filePath + list[i], iFile);
+                        ht.put(path, iFile);
                     } else {
                         ht.put(list[i], iFile);
                     }
@@ -3281,7 +3292,7 @@ public class ChroGenerator {
         Map<String, SpectraDB> ms3Map = connectCreateSpectraDB(filePath, CensusConstants.MS3_FILE);
 
     //    createSpectraDB(filePath,CensusConstants.MS2_FILE);
-        Map<String, IndexedFile> ms2Ht = createIndexedFiles(filePath, CensusConstants.MS2_FILE);
+        Map<String, IndexedFile> ms2Ht = createIndexedFilesNoMs(filePath, CensusConstants.MS2_FILE);
         Map<String, SpectraDB> ms2Map = connectCreateSpectraDB(filePath, CensusConstants.MS2_FILE);
 
        // createSpectraDB(filePath,CensusConstants.MS1_FILE);
@@ -3298,7 +3309,7 @@ public class ChroGenerator {
         }
 
         if (conf.isMs3ScanRandom() || "ms3".equals(conf.getFileShift()) || conf.getScanShift() > 0) {
-            ms2Ht.putAll(createIndexedFiles(filePath, CensusConstants.MS3_FILE));
+            ms2Ht.putAll(createIndexedFilesNoMs(filePath, CensusConstants.MS3_FILE));
             ms2Map.putAll(connectCreateSpectraDB(filePath, CensusConstants.MS3_FILE));
         }
 
@@ -3596,11 +3607,11 @@ public class ChroGenerator {
                     Element chro = new Element("chro");
                     //output.append("[CHROMATOGRAMS]\tSCAN\tSAMPLE\tREFERENCE\n");
                     iFile = ms2Ht.get(this.filePath + ms2FileName + "." + "ms2");
-                    ispectraDB = ms2Map.get(ms2FileName+".ms2");
+                    ispectraDB = iFile.getSpectraDB();
                     //spectraDBMs3 = ms2Map.get(ms2FileName + "." + "ms2");
                     if (null == iFile) {
                         iFile = ms2Ht.get(filePath + ms2FileName.substring(1) + "." + "ms2");
-                        ispectraDB = ms2Map.get(ms2FileName.substring(1)+".ms2");
+                        ispectraDB =  iFile.getSpectraDB();
 
                         if (null == iFile) {
 
@@ -4022,7 +4033,7 @@ public class ChroGenerator {
                     }
                     else{
                         //MS_READ
-                        String ms2Key =  peptide.getFileName()+".ms2";
+                        String ms2Key = filePath + peptide.getFileName()+".ms2";
                         SpectraDB ms2SpectraDB = ms2Map.get(ms2Key);
 
                         xyPoints = SpectrumUtil.getSpectrum(filePath, ms2SpectraDB,
