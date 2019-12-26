@@ -1573,13 +1573,15 @@ public class ChroGenerator {
 
 
 
-    public static Hashtable createIndexedFiles(String filePath, String extension) throws IOException, CensusGeneralException {
+    public static Hashtable spectraSqliteDB(String filePath, String extension) throws IOException, CensusGeneralException {
         return createIndexedFilesHelper(filePath, extension, true, false,false);
     }
     public static Hashtable createIndexedFilesNoMs(String filePath, String extension) throws IOException, CensusGeneralException {
         return createIndexedFilesHelper(filePath, extension, true, false,true);
     }
-
+    public static Hashtable createIndexedFiles(String filePath, String extension) throws IOException, CensusGeneralException {
+        return createIndexedFilesHelper(filePath, extension, true, false,false);
+    }
 
     public static Hashtable createIndexedFiles(String filePath, String extension, boolean includePath, boolean indexCheck) throws IOException, CensusGeneralException {
             return createIndexedFilesHelper(filePath, extension, true, false,false);
@@ -3292,7 +3294,7 @@ public class ChroGenerator {
         Map<String, SpectraDB> ms3Map = connectCreateSpectraDB(filePath, CensusConstants.MS3_FILE);
 
     //    createSpectraDB(filePath,CensusConstants.MS2_FILE);
-        Map<String, IndexedFile> ms2Ht = createIndexedFilesNoMs(filePath, CensusConstants.MS2_FILE);
+        Map<String, IndexedFile> ms2Ht = createIndexedFiles(filePath, CensusConstants.MS2_FILE);
         Map<String, SpectraDB> ms2Map = connectCreateSpectraDB(filePath, CensusConstants.MS2_FILE);
 
        // createSpectraDB(filePath,CensusConstants.MS1_FILE);

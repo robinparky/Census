@@ -38,6 +38,7 @@ public class IndexedFile {
     }
     
     private RandomAccessFile file=null;
+    private boolean useRandomReader = true;
     private MzxmlSpectrumReader mzreader = null;
     private int[] keys;
     private double[] rtArr;
@@ -105,7 +106,25 @@ public class IndexedFile {
 
         keys = keyIntArr.toNativeArray();
     }
-        
+
+    public IndexedFile(File indexFile, String fileName, boolean useRandomReader) throws IOException
+    {
+        this.useRandomReader =useRandomReader;
+        this.indexFile = indexFile;
+
+        if(!indexFile.exists()) {
+            MSIndexFileCreator.createIndexFile(fileName);
+        }
+
+        this.fileName = fileName;
+        readIndexFile();
+        createScanNum();
+
+        conf = Configuration.getInstance();
+    }
+
+
+
     public IndexedFile(File indexFile, String fileName) throws IOException
     {
         this.indexFile = indexFile;
@@ -142,7 +161,8 @@ public class IndexedFile {
     
     private void readIndexFile() throws IOException
     {
-        file = new RandomAccessFile(fileName, "r");     
+
+        file = useRandomReader?  new RandomAccessFile(fileName, "r") : null;
 
         builder = new MSIndexBuilder(indexFile, fileName);        
         index = builder.readIndexFile();
@@ -167,6 +187,7 @@ public class IndexedFile {
         this.scanToIndexMap = builder.getScanToIndexMap();
 
         Arrays.sort(keys);
+        if(file!=null)
         file.close();
       //  Arrays.sort(rtArr);          
     }

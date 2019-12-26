@@ -1519,9 +1519,7 @@ public class LabelfreeMissingPeptideBuilderSplit {
 
                             //GaussianPeakModel peakModel = isotopeCalc(startScan, endScan, startIndex, endIndex, isoReader, each.getSequence(), each.getChargeState(), iFile);
                             GaussianPeakModel peakModel = isotopeCalc( startIndex, endIndex, isoReader, each.getSequence(),
-                                    each.getChargeState(), origIFile, false
-
-                            );
+                                    each.getChargeState(), origIFile, false);
 
                             if (null != peakModel) {
                                 peakArea += peakModel.getPeakArea();
