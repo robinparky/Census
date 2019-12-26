@@ -80,8 +80,16 @@ public class CreateDb {
                 path+=File.separator;
             String filePath = path +dbFilename;
             String journal = path + dbFilename+".sqlite-journal";
+
             File f = new File(filePath);
             File journalF = new File(journal);
+
+            File ms2File = new File(path + spectralFile);
+            if(ms2File.length()==0)
+            {
+                return;
+            }
+
             if(!f.exists())
             {
                 f.createNewFile();
@@ -124,6 +132,13 @@ public class CreateDb {
             String sqlIndex = "CREATE INDEX scan_index ON spectra(scan);\n";
             String sqldrop = "DROP TABLE IF EXISTS spectra\n";
          //   ThreadPoolExecutor executor =  (ThreadPoolExecutor) Executors.newFixedThreadPool(1);
+            try(Connection conn = DriverManager.getConnection(url,config.toProperties())){
+
+            } catch (SQLException e) {
+                f.delete();
+                f.createNewFile();
+            }
+
 
             PreparedStatement pstmt = null;
             try (Connection conn = DriverManager.getConnection(url,config.toProperties());
