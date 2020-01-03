@@ -1498,7 +1498,7 @@ public class ChroGenerator {
                 result.put(ms2File.getName(),spectraDB);
             }*/
             SpectraDB db = connectCreateSpectraDB(filePath,spectraDir,ms2File);
-            result.put(ms2File.getName(), db);
+            result.put( ms2File.getName(), db);
         }
         return result;
     }
@@ -4035,7 +4035,7 @@ public class ChroGenerator {
                     }
                     else{
                         //MS_READ
-                        String ms2Key = filePath + peptide.getFileName()+".ms2";
+                        String ms2Key =peptide.getFileName()+".ms2";
                         SpectraDB ms2SpectraDB = ms2Map.get(ms2Key);
 
                         xyPoints = SpectrumUtil.getSpectrum(filePath, ms2SpectraDB,
