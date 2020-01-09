@@ -1426,6 +1426,39 @@ public class ChroGenerator {
         ChroProgressDialog.addMessageWithLine(progress, "done.");
     }
 
+
+    public static SpectraDB connectCreateSpectraDB(String filePath, File spectraDir, String path, String name) throws SQLException, IOException {
+        String sqliteDBPath = path+".sqlite";
+        File sqliteDB = new File(sqliteDBPath);
+        if(sqliteDB.exists()  && sqliteDB.length()>0)
+        {
+            SpectraDB db = SpectraDB.connectToDBReadOnly(sqliteDBPath);
+            return db;
+        }
+        else if(spectraDir.exists()){
+            String spectraSqliteDBPath = spectraDir.getAbsolutePath() +File.separatorChar + name + ".sqlite";
+            File spectraSqliteDB = new File(spectraSqliteDBPath);
+            if(spectraSqliteDB.exists()  && spectraSqliteDB.length()>0)
+            {
+                SpectraDB spectraDB = SpectraDB.connectToDBReadOnly(spectraSqliteDB.getAbsolutePath());
+                return spectraDB;
+            }
+            else
+            {
+                CreateDb.createNewDatabase(spectraDir.getAbsolutePath(),name+".sqlite",name);
+                SpectraDB spectraDB = SpectraDB.connectToDBReadOnly(spectraSqliteDB.getAbsolutePath());
+                return spectraDB;
+            }
+        }
+        else if(!spectraDir.exists())
+        {
+            CreateDb.createNewDatabase(filePath,sqliteDB.getName(),name);
+            SpectraDB spectraDB = SpectraDB.connectToDBReadOnly(sqliteDBPath);
+            return spectraDB;
+        }
+        return null;
+    }
+
     public static SpectraDB connectCreateSpectraDB(String filePath, File spectraDir, File ms2File) throws SQLException, IOException {
         String sqliteDBPath = ms2File.getAbsolutePath()+".sqlite";
         File sqliteDB = new File(sqliteDBPath);
@@ -1464,44 +1497,16 @@ public class ChroGenerator {
         File spectraDir = new File(filePath+"/../../spectra/");
         File currentDir = new File(filePath);
         File [] arr = currentDir.listFiles(new RelExFileFilter(extension));
-     //   if(arr.length > 0)
-           // SpectraDB.setCacheSize(1_000_000/arr.length);
         for(File ms2File: arr)
         {
-            /*
-            String sqliteDBPath = ms2File.getAbsolutePath()+".sqlite";
-            File sqliteDB = new File(sqliteDBPath);
-            if(sqliteDB.exists())
-            {
-                SpectraDB db = SpectraDB.connectToDBReadOnly(sqliteDBPath);
-                result.put(ms2File.getName(),db);
-            }
-            else if(spectraDir.exists()){
-                String spectraSqliteDBPath = spectraDir.getAbsolutePath() +File.separatorChar + ms2File.getName() + ".sqlite";
-                File spectraSqliteDB = new File(spectraSqliteDBPath);
-                if(spectraSqliteDB.exists())
-                {
-                    SpectraDB spectraDB = SpectraDB.connectToDBReadOnly(spectraSqliteDB.getAbsolutePath());
-                    result.put(ms2File.getName(),spectraDB);
-                }
-                else
-                {
-                    CreateDb.createNewDatabase(spectraDir.getAbsolutePath(),ms2File.getName()+".sqlite",ms2File.getName());
-                    SpectraDB spectraDB = SpectraDB.connectToDBReadOnly(spectraSqliteDB.getAbsolutePath());
-                    result.put(ms2File.getName(),spectraDB);
-                }
-            }
-            else if(!spectraDir.exists())
-            {
-                CreateDb.createNewDatabase(filePath,sqliteDB.getName(),ms2File.getName());
-                SpectraDB spectraDB = SpectraDB.connectToDBReadOnly(sqliteDBPath);
-                result.put(ms2File.getName(),spectraDB);
-            }*/
             SpectraDB db = connectCreateSpectraDB(filePath,spectraDir,ms2File);
             result.put( ms2File.getName(), db);
         }
         return result;
     }
+
+
+
     public static Map<String, SpectraDB> connectSpectraDB(String filePath, String extension) throws SQLException {
         return connectSpectraDB(filePath,extension, new HashMap<>());
     }
@@ -3286,7 +3291,8 @@ public class ChroGenerator {
 
             if(!ms2f.exists() && isHeavy) {
                 FileFilterUtil.makeSymbolicLink(this.filePath, this.filePath, ms2file.substring(1), ms2file);
-                FileFilterUtil.makeSymbolicLink(this.filePath, this.filePath, ms2file.substring(1) + ".index", ms2file + ".index");
+                FileFilterUtil.makeSymbolicLink(this.filePath, this.filePath, ms2file.substring(1)
+                        + ".index", ms2file + ".index");
             }
         }
 
