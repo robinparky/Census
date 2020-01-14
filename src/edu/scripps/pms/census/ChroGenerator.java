@@ -1491,12 +1491,31 @@ public class ChroGenerator {
         return null;
     }
 
+    public static Map<String, SpectraDB> connectCreateSpectraDBIndex(String filePath, String extension) throws Exception {
+        Map<String,SpectraDB> result = new HashMap<>();
+        File spectraDir = new File(filePath+"/../../spectra/");
+        File currentDir = new File(filePath);
+        File [] arr = currentDir.listFiles(new RelExFileFilter(extension+".index"));
+        for(File ms2File: arr)
+        {
+            String path  = ms2File.getAbsolutePath().replaceAll("\\.index", "");
+            String name = ms2File.getName().replaceAll("\\.index","");
+            SpectraDB db = connectCreateSpectraDB(filePath,spectraDir,path,name);
+            result.put( name, db);
+        }
+        return result;
+    }
+
+
 
     public static Map<String, SpectraDB> connectCreateSpectraDB(String filePath, String extension) throws Exception {
         Map<String,SpectraDB> result = new HashMap<>();
         File spectraDir = new File(filePath+"/../../spectra/");
         File currentDir = new File(filePath);
         File [] arr = currentDir.listFiles(new RelExFileFilter(extension));
+        if(arr.length==0)
+            arr = spectraDir.listFiles(new RelExFileFilter(extension));
+
         for(File ms2File: arr)
         {
             SpectraDB db = connectCreateSpectraDB(filePath,spectraDir,ms2File);
@@ -3704,7 +3723,7 @@ public class ChroGenerator {
                         //System.out.println(">>looking for "+iFileMs1.getFileName());
                         if (iFileMs1 == null) {
                             //     System.out.println(">> "+this.filePath + "/../../spectra/" + fname + "." + "ms1");
-                            iFileMs1 = ms1Map.get(this.filePath + "/../../spectra/" + fname + "." + "ms1");
+                            iFileMs1 = ms1Map.get(fname + "." + "ms1");
                             //        System.out.println(">>looking for "+iFileMs1.getFileName());
                             //     // msFile = this.filePath + "/../../spectra/" + ms2FileName + "." + "ms1";
                         }
