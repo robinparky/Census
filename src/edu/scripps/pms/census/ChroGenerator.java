@@ -1516,12 +1516,15 @@ public class ChroGenerator {
         if(arr.length==0)
             arr = spectraDir.listFiles(new RelExFileFilter(extension));
 
-        for(File ms2File: arr)
+        if(arr !=null)
         {
-            SpectraDB db = connectCreateSpectraDB(filePath,spectraDir,ms2File);
-            result.put( ms2File.getName(), db);
+            for(File ms2File: arr)
+            {
+                SpectraDB db = connectCreateSpectraDB(filePath,spectraDir,ms2File);
+                result.put( ms2File.getName(), db);
+            }
         }
-        return result;
+       return result;
     }
 
 
@@ -3826,8 +3829,20 @@ public class ChroGenerator {
                     }
 
                     if (conf.isMs3ScanRandom()) {  //ms3 based search
-                        String ms3FileName = this.filePath + ms2FileName + ".ms3";
-                        String ms3FileName2 =  ms2FileName + ".ms3";
+                        String ms3FileName;
+                        String ms3FileName2;
+                        if(ms2FileName.endsWith("_ms3"))
+                        {
+                            ms3FileName = this.filePath + ms2FileName + ".ms2";
+                            ms3FileName2 =  ms2FileName + ".ms2";
+                        }
+                        else
+                        {
+                             ms3FileName = this.filePath + ms2FileName + ".ms3";
+                             ms3FileName2 =  ms2FileName + ".ms3";
+                        }
+
+
                         IndexedFile ms3Ifile = ms2Ht.get(ms3FileName);
                         SpectraDB ispectraDB3 = ms2Map.get(ms3FileName2);
                         if (null == ms3Ifile) {  //for heavy file
@@ -3840,7 +3855,6 @@ public class ChroGenerator {
                                 ispectraDB3 = ms2Map.get(ms3FileName2.replace(".ms3", "_ms3.ms2"));
                                 if (null == ms3Ifile) {
                                     ispectraDB3 = ms2Map.get(ms3FileName2.replace(".ms3", ".ms2"));
-
                                     ms3Ifile = ms2Ht.get(ms3FileName.replace(".ms3", ".ms2"));
                                 }
 
@@ -7229,7 +7243,7 @@ element.printComposition();
                     }
 
 
-                    /*
+                    System.out.println("<<>>>> "+ peptide.getScanNum());
 			       for(int i=0;i<samIsoArr.length;i++)
 			       {
 			       System.out.println("s before=======================" + samIsoArr[i]);
@@ -7238,7 +7252,7 @@ element.printComposition();
 			       {
 			       System.out.println("rr before=======================" + refIsoArr[i]);
 			       }
-                     */
+
                     //boolean isProline = true;
                     //double prolineMassDiff = 6.0138;
                     //                        System.out.println(pepSequence);
@@ -7811,7 +7825,7 @@ element.printComposition();
                     SpecRange range = rangeGen.getSpecRange(rangeKey.toString());
 
 
-                       if (null == range) {
+                    if (null == range) {
                         int tmpScanNum = Integer.parseInt(peptide.getScanNum());
                         range = new SpecRange(tmpScanNum, tmpScanNum);
                         peptideEle.setAttribute("start_scan", peptide.getScanNum());

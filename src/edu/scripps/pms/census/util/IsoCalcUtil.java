@@ -5098,16 +5098,16 @@ return null;
         //conf.getQuantLevel()
 
 	if(conf.isDataIndependent())
-        {
-	    result = new double[maxWindow*2+1+margin*2][4*sModel.getBioSample().length+3]; //scan #, sample intensity, ref intensity
-            intensityResult = new IsoData[maxWindow*2+1+margin*2]; //scan #, sample intensity, ref intensity
-        }
+    {
+        result = new double[maxWindow*2+1+margin*2][4*sModel.getBioSample().length+3]; //scan #, sample intensity, ref intensity
+        intensityResult = new IsoData[maxWindow*2+1+margin*2]; //scan #, sample intensity, ref intensity
+    }
 	else
-        {
+    {
 	    result = new double[maxWindow*2+1+margin*2][3];
-            intensityResult = new IsoData[maxWindow*2+1+margin*2];
-        }
-        int leftIndex=maxWindow+margin;
+        intensityResult = new IsoData[maxWindow*2+1+margin*2];
+    }
+    int leftIndex=maxWindow+margin;
         int rightIndex=maxWindow+margin+1;
 
 
@@ -5126,68 +5126,63 @@ return null;
 
         for(int i=0;i<initWin;i++) ///Index=maxWindow;keys[leftPeakIndex]>=leftMinValue; )
         {
-	    if(moveLeftKeyIndex<=0 || leftIndex<=0)
-	    {
-		moveLeftKeyIndex += 1*numIsoWindow;
-		leftIndex++;
+            if(moveLeftKeyIndex<=0 || leftIndex<=0)
+            {
+                moveLeftKeyIndex += 1*numIsoWindow;
+                leftIndex++;
 
-		break;
-	    }
+                break;
+            }
 
-	    if(conf.isDataIndependent()) //data independent
-	    {
-		result[leftIndex] = readSpectrum(keys, moveLeftKeyIndex, index, sModel.getDiff(), file, sModel.getBioSample(), sModel.getBioRef(), sModel.getYioSample(), sModel.getYioRef());
-
-	    }
-	    else //data dependent
-	    {
-		if(sModel.isHighRes())
+            if(conf.isDataIndependent()) //data independent
+            {
+                result[leftIndex] = readSpectrum(keys, moveLeftKeyIndex, index, sModel.getDiff(), file, sModel.getBioSample(), sModel.getBioRef(), sModel.getYioSample(), sModel.getYioRef());
+            }
+            else //data dependent
+            {
+                if(sModel.isHighRes())
                 {
-		    result[leftIndex] = readFullSpectrum(keys, moveLeftKeyIndex, index, file, sModel.getSamIsoArr(), sModel.getRefIsoArr());
-
+                    result[leftIndex] = readFullSpectrum(keys, moveLeftKeyIndex, index, file, sModel.getSamIsoArr(), sModel.getRefIsoArr());
                     //harshil shah
                     intensityResult[leftIndex]= getIso(keys, moveLeftKeyIndex, index, file, sModel.getSamIsoArr(), sModel.getRefIsoArr());
 
                 }
-		else
-		    result[leftIndex] = readFullSpectrum(keys, moveLeftKeyIndex, index, file, sModel.getSamStartMass(), sModel.getSamEndMass(), sModel.getRefStartMass(), sModel.getRefEndMass());
+                else
+                    result[leftIndex] = readFullSpectrum(keys, moveLeftKeyIndex, index, file, sModel.getSamStartMass(), sModel.getSamEndMass(), sModel.getRefStartMass(), sModel.getRefEndMass());
 
-	    }
+            }
             totalIntensity += result[leftIndex][1];
             totalIntensity += result[leftIndex][2];
-
-	   // if(moveLeftKeyIndex<=0 || leftIndex<=0)
-	//	break;
-
-	    moveLeftKeyIndex -= numIsoWindow;
-            leftIndex--;
+           // if(moveLeftKeyIndex<=0 || leftIndex<=0)
+        //	break;
+            moveLeftKeyIndex -= numIsoWindow;
+                leftIndex--;
         }
 
         for(int i=0;i<initWin;i++) //leftIndex=maxWindow;keys[leftPeakIndex]>=leftMinValue; )
         {
             if(moveRightKeyIndex>=keys.length)
             {
-		moveRightKeyIndex -= 1*numIsoWindow;
+		        moveRightKeyIndex -= 1*numIsoWindow;
                 rightIndex--;
-
                 break;
             }
 
-	    if(conf.isDataIndependent()) //data independent
-	    {
-		result[rightIndex] = readSpectrum(keys, moveRightKeyIndex, index, sModel.getDiff(), file, sModel.getBioSample(), sModel.getBioRef(), sModel.getYioSample(), sModel.getYioRef());
-	    }
-	    else //data dependent
-	    {
-		if(sModel.isHighRes())
+            if(conf.isDataIndependent()) //data independent
+            {
+                result[rightIndex] = readSpectrum(keys, moveRightKeyIndex, index, sModel.getDiff(), file, sModel.getBioSample(), sModel.getBioRef(), sModel.getYioSample(), sModel.getYioRef());
+            }
+            else //data dependent
+            {
+                if(sModel.isHighRes())
                 {
-		    result[rightIndex] = readFullSpectrum(keys, moveRightKeyIndex, index, file, sModel.getSamIsoArr(), sModel.getRefIsoArr());
+                    result[rightIndex] = readFullSpectrum(keys, moveRightKeyIndex, index, file, sModel.getSamIsoArr(), sModel.getRefIsoArr());
                                  //harshil shah
                     intensityResult[rightIndex]= getIso(keys, moveRightKeyIndex, index, file, sModel.getSamIsoArr(), sModel.getRefIsoArr());
                 }
-		else
-		    result[rightIndex] = readFullSpectrum(keys, moveRightKeyIndex, index, file, sModel.getSamStartMass(), sModel.getSamEndMass(), sModel.getRefStartMass(), sModel.getRefEndMass());
-	    }
+                else
+                    result[rightIndex] = readFullSpectrum(keys, moveRightKeyIndex, index, file, sModel.getSamStartMass(), sModel.getSamEndMass(), sModel.getRefStartMass(), sModel.getRefEndMass());
+            }
 
             totalIntensity += result[rightIndex][1];
             totalIntensity += result[rightIndex][2];
@@ -5206,7 +5201,7 @@ return null;
         if(leftIndex+steepArea>=0)
         {
             //for(int i=0;i<300;i++)
-	    while(true)
+	        while(true)
             {
                 double area1=0;
                 double area2=0;
@@ -5220,41 +5215,40 @@ return null;
                 int tempKeyIndex = moveLeftKeyIndex;
                 while(true)
                 {
-		    if(tempKeyIndex<0 || steepCount<0 || steepCount>=steepArea-1)
-			break;
+		            if(tempKeyIndex<0 || steepCount<0 || steepCount>=steepArea-1)
+			            break;
 
-		    if(prevArr[0][0]!=0)
-		    {
-			for(int l=0;l<2;l++)
+                    if(prevArr[0][0]!=0)
+                    {
+                        for(int l=0;l<2;l++)
                         {
-			    for(int m=0;m<3;m++)
+                            for(int m=0;m<3;m++)
                             {
-				arr[l][m] = prevArr[l+1][m];
+                                arr[l][m] = prevArr[l+1][m];
 
                             }
                             tempIntArr[l]=prevIntArr[l+1];
                         }
-		    }
-		    else
-		    {
-			if(conf.isDataIndependent()) //data independent
-			    arr[steepCount] = readSpectrum(keys, tempKeyIndex, index, sModel.getDiff(), file, sModel.getBioSample(), sModel.getBioRef(), sModel.getYioSample(), sModel.getYioRef());
-			else
-			{
-			    if(sModel.isHighRes())
+                    }
+                    else
+                    {
+                        if(conf.isDataIndependent()) //data independent
+                            arr[steepCount] = readSpectrum(keys, tempKeyIndex, index, sModel.getDiff(), file, sModel.getBioSample(), sModel.getBioRef(), sModel.getYioSample(), sModel.getYioRef());
+                        else
+                        {
+                            if(sModel.isHighRes())
                             {
-				arr[steepCount] = readFullSpectrum(keys, tempKeyIndex, index, file, sModel.getSamIsoArr(), sModel.getRefIsoArr());
-                                             //harshil shah
-                    tempIntArr[steepCount]= getIso(keys, tempKeyIndex, index, file, sModel.getSamIsoArr(), sModel.getRefIsoArr());
+                                arr[steepCount] = readFullSpectrum(keys, tempKeyIndex, index, file, sModel.getSamIsoArr(), sModel.getRefIsoArr());
+                                                         //harshil shah
+                                tempIntArr[steepCount]= getIso(keys, tempKeyIndex, index, file, sModel.getSamIsoArr(), sModel.getRefIsoArr());
                             }
-			    else
-				arr[steepCount] = readFullSpectrum(keys, tempKeyIndex, index, file, sModel.getSamStartMass(), sModel.getSamEndMass(), sModel.getRefStartMass(), sModel.getRefEndMass());
-			}
-		    }
-
+                            else
+                                arr[steepCount] = readFullSpectrum(keys, tempKeyIndex, index, file, sModel.getSamStartMass(), sModel.getSamEndMass(), sModel.getRefStartMass(), sModel.getRefEndMass());
+                        }
+                    }
                     steepCount++;
-                    //tempKeyIndex--;
-		    tempKeyIndex = tempKeyIndex - 1*numIsoWindow;
+                            //tempKeyIndex--;
+                    tempKeyIndex = tempKeyIndex - 1*numIsoWindow;
                 }
 
 		if(tempKeyIndex<0)
@@ -5346,12 +5340,12 @@ return null;
                         if(result[leftIndex+1][1]<arr[k][1] || arr[k][0]==0)
                             break;
 
-			if(leftIndex<0)
-			    break;
+                        if(leftIndex<0)
+                            break;
 
                         result[leftIndex] = arr[k];
                         intensityResult[leftIndex] = tempIntArr[k];
-			moveLeftKeyIndex -= numIsoWindow;
+			            moveLeftKeyIndex -= numIsoWindow;
                         leftIndex--;
                     }
 
@@ -5361,17 +5355,17 @@ return null;
                 result[leftIndex--] = arr[0];
                 intensityResult[leftIndex] = tempIntArr[0];
 
-		moveLeftKeyIndex -= numIsoWindow;
+		        moveLeftKeyIndex -= numIsoWindow;
 
                 for(int j=0;j<steepCount;j++)
                     arr[j] = arr[j+1];
             }
         }
 
-	prevArr = new double[steepArea][3]; //clean up the array
+	    prevArr = new double[steepArea][3]; //clean up the array
 
         isGoingUp = true;
-	isHighIntensity = true;
+	    isHighIntensity = true;
         if(rightIndex+steepArea<result.length)
         {
             //for(int i=0;i<500;i++)
@@ -5588,19 +5582,19 @@ return null;
 	    else
 		result[rightIndex] = readFullSpectrum(keys, moveRightKeyIndex, index, file, sModel.getSamStartMass(), sModel.getSamEndMass(), sModel.getRefStartMass(), sModel.getRefEndMass());
 
-	    if(0 == result[rightIndex][0])
-	    {
-		moveRightKeyIndex += numIsoWindow;
-		continue;
-	    }
+            if(0 == result[rightIndex][0])
+            {
+                moveRightKeyIndex += numIsoWindow;
+                continue;
+            }
 
             rightIndex++;
-	    moveRightKeyIndex += numIsoWindow;
+	        moveRightKeyIndex += numIsoWindow;
         }
-	if(conf.isDataIndependent())
-	    return buildDIResult(peakStart, peakEnd, leftIndex, rightIndex, result, sModel.getBioSample().length);
-	else
-	    return buildDDResult(peakStart, peakEnd, leftIndex, rightIndex, intensityResult);
+        if(conf.isDataIndependent())
+            return buildDIResult(peakStart, peakEnd, leftIndex, rightIndex, result, sModel.getBioSample().length);
+        else
+            return buildDDResult(peakStart, peakEnd, leftIndex, rightIndex, intensityResult);
     }
 
     public static String peakFinding3Plex(SpectrumModel sModel, SpecRange range, int keyIndex)
@@ -7392,71 +7386,70 @@ System.exit(0);
         int totalPeakFound=0;
         double toleranceSum=0;
 
-	for(int i=0;i<isoArr.length;i++)
-	{
-            //double tempTolerance = isoArr[i]/1000*massTolerance;
-            //double tempTolerance = isoArr[i]/1000*massTolerance*0.001;
+        for(int i=0;i<isoArr.length;i++)
+        {
+                //double tempTolerance = isoArr[i]/1000*massTolerance;
+                //double tempTolerance = isoArr[i]/1000*massTolerance*0.001;
             double tempTolerance = isoArr[i]/1000*massTolerance;
-	    int start = Arrays.binarySearch(massArr, isoArr[i]-tempTolerance);
-	    if(start<0)
-		start = -start -1;
+            int start = Arrays.binarySearch(massArr, isoArr[i]-tempTolerance);
+            if(start<0)
+                start = -start -1;
 
-	    int j=0;
-	    double small=100;
-	    double massSmall=-1;
-	    double highinten=0;
+            int j=0;
+            double small=100;
+            double massSmall=-1;
+            double highinten=0;
 
             boolean isFound = false;
 
-	    while(true)
-	    {
-		if(start>=massArr.length)
-		    break;
+            while(true)
+            {
+                if(start>=massArr.length)
+                    break;
 
-		double temp = isoArr[i]-massArr[start];
-		if(temp<0)
-		    temp = -temp;
+                double temp = isoArr[i]-massArr[start];
+                if(temp<0)
+                    temp = -temp;
 
-		if(temp<tempTolerance)
-		{
-		    sumIntensity+=intArr[start];
+                if(temp<tempTolerance)
+                {
+                    sumIntensity+=intArr[start];
                     intensityList.add(intArr[start]);
                     totalPeakFound++;
                     toleranceSum += temp;
 
                     isFound = true;
 
-		    double diff = (massArr[start] - isoArr[i]);
-		    //if(diff<0)
-			//diff = -diff;
-		    if(Math.abs(diff)<Math.abs(small))
-		    {
-			small = massArr[start] - isoArr[i];
-			massSmall = massArr[start];
-			highinten = intArr[start];
-		    }
+                    double diff = (massArr[start] - isoArr[i]);
+                    //if(diff<0)
+                    //diff = -diff;
+                    if(Math.abs(diff)<Math.abs(small))
+                    {
+                        small = massArr[start] - isoArr[i];
+                        massSmall = massArr[start];
+                        highinten = intArr[start];
+                    }
 
-		}
+                }
+                    if(massArr[start]>isoArr[i])
+                        break;
 
-		if(massArr[start]>isoArr[i])
-		    break;
-
-		start++;
-	    }
+                    start++;
+            }
 
             if(isFound)
                 foundIsoNum++;
-	}
+        }
 
         resultArr[0] = sumIntensity;
         resultArr[1] = foundIsoNum;
         resultArr[2] = (totalPeakFound>0)?(toleranceSum/totalPeakFound):(-1);
-//        double[] result = new double[intensityList.size()];
-//        for(int i=0; i <intensityList.size();i++)
-//            result[i] = intensityList.get(i);
+    //        double[] result = new double[intensityList.size()];
+    //        for(int i=0; i <intensityList.size();i++)
+    //            result[i] = intensityList.get(i);
 
-//	return result;
-        	return resultArr;
+    //	return result;
+        return resultArr;
     }
 
     public static double[] getIntensity(double[] massArr, double[] intArr, double[] isoArr)

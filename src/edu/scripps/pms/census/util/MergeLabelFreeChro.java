@@ -169,10 +169,12 @@ public class MergeLabelFreeChro {
 
 	public static void main(String[] args) throws Exception {
 		Configuration conf = Configuration.getInstance();
+		String dir = args[0];
+		String config = args[1];
 		//conf.setFilePath("/data/2/rpark/ip2_data/rpark/Xianyin_Lai/labelfree_quant/labelfree_12279");
 		//String confFile = "/data/2/rpark/ip2_data/rpark/Xianyin_Lai/labelfree_quant/labelfree_12279/census_config_labelfree_12279.xml";
-		conf.setFilePath("/home/rpark/test_data/carol");
-		String confFile = "/home/rpark/test_data/carol/census_config_labelfree_16383.xml";
+		conf.setFilePath(dir);
+		String confFile = config;
 
 		MergeLabelFreeChro.readConfig(conf, confFile);
 

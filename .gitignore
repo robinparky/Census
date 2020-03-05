@@ -2,3 +2,5 @@
 /build/
 /deploy/
 /build/
+deploy.sh
+.gitignore

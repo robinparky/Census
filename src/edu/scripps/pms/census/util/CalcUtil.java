@@ -6731,7 +6731,7 @@ public class CalcUtil {
 
   public static void getSpectrumArr(int[] keys, int curIndex, TIntLongHashMap index, Object ofile) throws IOException, CensusIndexOutOfBoundException {
     RandomAccessFile file = (RandomAccessFile) ofile;
-
+  //  System.out.println("<<>>> "+keys[curIndex]);
     if (keys.length <= curIndex)
       throw new CensusIndexOutOfBoundException();
 
