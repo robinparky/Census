@@ -1527,7 +1527,7 @@ public class ChroGenerator {
             for(File ms2File: arr)
             {
 
-                System.out.println("<<>> " + ms2File.getAbsolutePath());
+              //  System.out.println("<<>> " + ms2File.getAbsolutePath());
                 SpectraDB db = connectCreateSpectraDB(filePath,spectraDir,ms2File);
                 result.put( ms2File.getName(), db);
             }
