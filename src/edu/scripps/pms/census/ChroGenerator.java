@@ -1460,6 +1460,12 @@ public class ChroGenerator {
     }
 
     public static SpectraDB connectCreateSpectraDB(String filePath, File spectraDir, File ms2File) throws SQLException, IOException {
+        String parentPath = ms2File.getParentFile().getAbsolutePath();
+        if(isHeavyFile(ms2File.getName(),parentPath) || isMediumFile(ms2File.getName(), parentPath)
+                || isLightFile(ms2File.getName(), parentPath))
+        {
+            ms2File = new File(parentPath + File.separator + ms2File.getName().substring(1));
+        }
         String sqliteDBPath = ms2File.getAbsolutePath()+".sqlite";
         File sqliteDB = new File(sqliteDBPath);
         if(sqliteDB.exists()  && sqliteDB.length()>0)
@@ -1513,13 +1519,15 @@ public class ChroGenerator {
         File spectraDir = new File(filePath+"/../../spectra/");
         File currentDir = new File(filePath);
         File [] arr = currentDir.listFiles(new RelExFileFilter(extension));
-        if(arr.length==0)
+        if(arr.length==0 && spectraDir !=null)
             arr = spectraDir.listFiles(new RelExFileFilter(extension));
 
         if(arr !=null)
         {
             for(File ms2File: arr)
             {
+
+                System.out.println("<<>> " + ms2File.getAbsolutePath());
                 SpectraDB db = connectCreateSpectraDB(filePath,spectraDir,ms2File);
                 result.put( ms2File.getName(), db);
             }
