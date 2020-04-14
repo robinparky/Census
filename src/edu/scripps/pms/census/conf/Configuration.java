@@ -121,7 +121,7 @@ public class Configuration {
     private boolean align=true;
     private boolean xmlConf=false;
 
-    private String version = "2.51";
+    private String version = "2.52";
     private String tmtOutlierLevel = "NO_OUTLIER";
 
 
