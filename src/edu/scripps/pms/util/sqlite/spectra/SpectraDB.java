@@ -249,6 +249,7 @@ public class SpectraDB implements Closeable {
         //config.setPageSize(100_000_000);
         config.setCacheSize(-50_000);
         config.setJournalMode(SQLiteConfig.JournalMode.OFF);
+        System.out.println("<<> " +url);
         conn = DriverManager.getConnection(url,config.toProperties());
         editNumSpectaDBOpen(1);
     }

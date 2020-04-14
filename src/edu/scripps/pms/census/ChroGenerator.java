@@ -417,6 +417,7 @@ public class ChroGenerator {
 
                                 try {
                                    // Element peptideEle = LabelfreeChroUtil.getPeptideDomElement(peptide, isoReader, spectraPath, origMs1FileHt, splitMs1FileHt, splitSpectraMap, ms2ToMs1Map);
+                                    //System.out.println("<<><><"+spectraPath);
                                       Element peptideEle = LabelfreeChroUtil.getPeptideDomElement(peptide, isoReader, spectraPath, origMs1FileHt,ms2ToMs1Map);
                                     if (null != peptideEle) {
                                         proteinEle.addContent(peptideEle);
@@ -7673,6 +7674,10 @@ System.exit(0);
                         if (null == iFile) {
 
                             int myIndex = fileName.indexOf("_my_");
+                            if(myIndex<=0)
+                            {
+                                myIndex = fileName.indexOf("_ms3");
+                            }
                             if (myIndex <= 0) {
                                 System.out.println("Error1 : cannot find the file " + fileName);
 
@@ -7686,6 +7691,10 @@ System.exit(0);
                             if (null == iFile) {
                                 System.out.println("Error2 : cannot find the file " + fileName);
                                 System.exit(0);
+                            }
+                            if(fileName.contains("_ms3"))
+                            {
+                                fileName = fileName.replace("_ms3","");
                             }
                         }
                     }

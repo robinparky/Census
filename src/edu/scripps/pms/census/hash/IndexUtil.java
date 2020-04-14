@@ -1,6 +1,5 @@
 package edu.scripps.pms.census.hash;
 
-import edu.scripps.pms.census.util.io.FileUtil;
 import edu.scripps.pms.util.FileFilterUtil;
 
 import java.io.BufferedReader;
