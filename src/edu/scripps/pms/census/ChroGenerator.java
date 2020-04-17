@@ -1460,11 +1460,11 @@ public class ChroGenerator {
         return null;
     }
 
-    public static SpectraDB connectCreateSpectraDB(String filePath, File spectraDir, File ms2File) throws SQLException, IOException {
+    public static SpectraDB connectCreateSpectraDB(String fileName, File spectraDir, File ms2File) throws SQLException, IOException {
         String parentPath = ms2File.getParentFile().getAbsolutePath();
-        if(isHeavyFile(ms2File.getName(),parentPath) || isMediumFile(ms2File.getName(), parentPath)
-                || isLightFile(ms2File.getName(), parentPath))
+        if(isHMLFile(fileName,parentPath))
         {
+          //  System.out.println("isHML: "+ms2File.getName());
             ms2File = new File(parentPath + File.separator + ms2File.getName().substring(1));
         }
         String sqliteDBPath = ms2File.getAbsolutePath()+".sqlite";
@@ -1491,7 +1491,7 @@ public class ChroGenerator {
         }
         else if(!spectraDir.exists())
         {
-            CreateDb.createNewDatabase(filePath,sqliteDB.getName(),ms2File.getName());
+            CreateDb.createNewDatabase(fileName,sqliteDB.getName(),ms2File.getName());
             SpectraDB spectraDB = SpectraDB.connectToDBReadOnly(sqliteDBPath);
             return spectraDB;
         }
@@ -1528,7 +1528,7 @@ public class ChroGenerator {
             for(File ms2File: arr)
             {
 
-              //  System.out.println("<<>> " + ms2File.getAbsolutePath());
+               // System.out.println("<<>> " + ms2File.getAbsolutePath());
                 SpectraDB db = connectCreateSpectraDB(filePath,spectraDir,ms2File);
                 result.put( ms2File.getName(), db);
             }
@@ -8275,6 +8275,19 @@ System.exit(0);
     public static void setConfiguration(Configuration con) {
         conf = con;
     }
+    public static boolean isHMLFile(String file, String path)
+    {
+        if(file.startsWith("H") || file.startsWith("M") || file.startsWith("L"))
+        {
+            String origFile = path + "/" + file.substring(1);
+            return new File(origFile).exists();
+        }
+        else
+        {
+            return false;
+        }
+    }
+
 
     public static boolean isHeavyFile(String file, String path) {
 
@@ -8321,6 +8334,7 @@ System.exit(0);
 
         //String lightfile = path + "/" + file.substring(1, file.length());
         String lightfile = path + "/" + file.split("\\.")[0] + ".ms2";
+       // System.out.println(",.,.,. "+lightfile);
 
         File lf = new File(lightfile);
 
