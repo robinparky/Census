@@ -35,6 +35,8 @@ import scripts.MSSplitFolderCreation;
 import java.io.*;
 import java.util.*;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static edu.scripps.pms.census.labelFree.LabelfreeTargeted.getEachSamplePeptides;
 import static edu.scripps.pms.census.util.CalcUtilGeneric.intensitySumWithIsotopeModeling;
@@ -45,6 +47,28 @@ import static edu.scripps.pms.census.util.CalcUtilGeneric.intensitySumWithIsotop
 public class LabelfreeTargetedUtil {
 
     public static final int NUMBER_ADDITIONAL_PEPTIDES = 4;
+
+    public static final Pattern prefixPattern = Pattern.compile("^[A-Z\\-]+\\.");
+    public static final Pattern suffixPattern = Pattern.compile("\\.[A-Z\\-]+$");
+
+    public static int [] getPeptideStartEnd(String peptide)
+    {
+        Matcher prefixMatcher  = prefixPattern.matcher(peptide);
+        int start = 0;
+        if(prefixMatcher.find())
+        {
+            start = prefixMatcher.end();
+        }
+
+        Matcher suffixMatcher = suffixPattern.matcher(peptide);
+        int end =peptide.length();
+        if(suffixMatcher.find())
+        {
+            end = suffixMatcher.start();
+        }
+        return new int[]{start,end};
+    }
+
 
     public static void main(String [] args) throws Exception {
         System.out.println("LabelfreeTargeted - new version");
@@ -152,7 +176,10 @@ public class LabelfreeTargetedUtil {
                 char[] ch = sequence.toCharArray();
 
 
-                ElementComposition element = new ElementComposition(ch, 0, ch.length, isoReader.getIsotope());
+                int [] startEnd = getPeptideStartEnd(sequence);
+               // System.out.println("<<> "+sequence +"\t"+sequence.substring(startEnd[0],startEnd[1]));
+
+                ElementComposition element = new ElementComposition(ch, startEnd[0], startEnd[1], isoReader.getIsotope());
                 element.calculate();
 
                 if (!element.isQuantifiable()) {
