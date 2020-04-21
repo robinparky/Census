@@ -164,37 +164,41 @@ public class LabelfreeTargetedUtil {
 
             String arr[] = eachLine.split("\t");
             String sequence = arr[0];
-            List<LabelfreePeptide> peptideList = new ArrayList<>();
+            if(sequence.length()>0)
+            {
+                List<LabelfreePeptide> peptideList = new ArrayList<>();
 
-            for (int cs = conf.getTargetedStartCharge(); cs <= conf.getTargetedEndCharge(); cs++) {
-                //System.out.println(eachLine);
-                edu.scripps.pms.census.labelFree.model.LabelfreePeptide pep = new edu.scripps.pms.census.labelFree.model.LabelfreePeptide();
+                for (int cs = conf.getTargetedStartCharge(); cs <= conf.getTargetedEndCharge(); cs++) {
+                    //System.out.println(eachLine);
+                    edu.scripps.pms.census.labelFree.model.LabelfreePeptide pep = new edu.scripps.pms.census.labelFree.model.LabelfreePeptide();
 
-                pep.setSequence(arr[0]);
-                pep.setChargeState(cs);
+                    pep.setSequence(arr[0]);
+                    pep.setChargeState(cs);
 
-                char[] ch = sequence.toCharArray();
+                    char[] ch = sequence.toCharArray();
 
 
-                int [] startEnd = getPeptideStartEnd(sequence);
-               // System.out.println("<<> "+sequence +"\t"+sequence.substring(startEnd[0],startEnd[1]));
+                    int [] startEnd = getPeptideStartEnd(sequence);
+                    // System.out.println("<<> "+sequence +"\t"+sequence.substring(startEnd[0],startEnd[1]));
 
-                ElementComposition element = new ElementComposition(ch, startEnd[0], startEnd[1]-startEnd[0], isoReader.getIsotope());
-                element.calculate();
+                    ElementComposition element = new ElementComposition(ch, startEnd[0], startEnd[1]-startEnd[0], isoReader.getIsotope());
+                    element.calculate();
 
-                if (!element.isQuantifiable()) {
-                    System.out.print("\nError : ");
-                    System.out.println(sequence + " is not quantifiable.");
-                    return null;
+                    if (!element.isQuantifiable()) {
+                        System.out.print("\nError : ");
+                        System.out.println(sequence + " is not quantifiable.");
+                        return null;
+                    }
+                    IsotopeDist sampleDist = new IsotopeDist(element.getElementSampleArr(), element.getModShift(), true);
+                    pep.setIsotopeDist(sampleDist);
+                    peptideList.add(pep);
+                    pepList.add(pep);
+                    String seqkey = sequence+cs;
+                    seqKeyPeptideMap.put(seqkey,pep);
                 }
-                IsotopeDist sampleDist = new IsotopeDist(element.getElementSampleArr(), element.getModShift(), true);
-                pep.setIsotopeDist(sampleDist);
-                peptideList.add(pep);
-                pepList.add(pep);
-                String seqkey = sequence+cs;
-                seqKeyPeptideMap.put(seqkey,pep);
+                sequencePeptideMap.put(sequence, peptideList);
             }
-            sequencePeptideMap.put(sequence, peptideList);
+
 
         }
 
@@ -237,7 +241,7 @@ public class LabelfreeTargetedUtil {
         int peptideCount = 0;
         Map<String, List<LabelFreeJSONPeptide>> sequenceJsonMap = new TreeMap<>();
         Map<String, BufferedWriter> tempBwList = new HashMap<>();
-        List<String> sampleFileNameList = new ArrayList<>();
+
         Map<String,Integer> sampleFileNameMap = new HashMap<>();
         for (SampleGroup sampleGroup : sampleGroupList) {
 
@@ -256,7 +260,7 @@ public class LabelfreeTargetedUtil {
                     String eachKey = eachFile;
                     String sampleFileNameKey =sampleGroup.ID+eachFile;
                     //sampleFileNameMap.put(sampleFileNameKey,sampleGroup.ID);
-                    sampleFileNameList.add(sampleFileNameKey);
+                    //sampleFileNameList.add(sampleFileNameKey);
                  /*   if (eachPath.endsWith("/")) {
                         eachKey = eachPath + eachFile;
                     } else {
@@ -684,6 +688,7 @@ public class LabelfreeTargetedUtil {
             List<String> rtList = new ArrayList<>();
             String cs = "";
             List<String> peakList = new ArrayList<>();
+            List<String> sampleFileNameList = new ArrayList<>();
             for(int k=0;k<lst.size();k++){
                 JSONObject lstObj= (JSONObject) lst.get(k);
                 JSONArray isotopeArray=(JSONArray) lstObj.get("isotopeArr");
@@ -694,7 +699,9 @@ public class LabelfreeTargetedUtil {
                 String fileName = (String)lstObj.get("file");
                 String sampleName = (String)lstObj.get("sampleName");
                 String groupName = (String)lstObj.get("rowId");
-                String key =groupName+fileName;
+                String key =groupName;
+           //     System.out.println("<><>>"+key);
+                sampleFileNameList.add(key);
 
 
                 String startRt = (String)lstObj.get("startRt");
@@ -766,9 +773,10 @@ public class LabelfreeTargetedUtil {
             StringBuilder peakBuilder = new StringBuilder();
             StringBuilder isoBuilder = new StringBuilder();
 
-            for(int i=0; i<sampleFileNameList.size(); i++)
+            for (SampleGroup sampleGroup : sampleGroupList)
             {
-
+                int i = sampleGroup.ID;
+                //System.out.println("<<>><> "+i);
                 String key = sampleFileNameList.get(i);
                 List<String> temp = aucMap.get(key);
                 for(String s :temp)
