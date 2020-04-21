@@ -179,7 +179,7 @@ public class LabelfreeTargetedUtil {
                 int [] startEnd = getPeptideStartEnd(sequence);
                // System.out.println("<<> "+sequence +"\t"+sequence.substring(startEnd[0],startEnd[1]));
 
-                ElementComposition element = new ElementComposition(ch, startEnd[0], startEnd[1], isoReader.getIsotope());
+                ElementComposition element = new ElementComposition(ch, startEnd[0], startEnd[1]-startEnd[0], isoReader.getIsotope());
                 element.calculate();
 
                 if (!element.isQuantifiable()) {
@@ -254,10 +254,10 @@ public class LabelfreeTargetedUtil {
                     String eachFile = fnameList.get(i);
                     String eachPath = pathList.get(i);
                     String eachKey = eachFile;
-                 /*   String sampleFileNameKey =sampleGroup.ID+eachFile;
-                    sampleFileNameMap.put(sampleFileNameKey,sampleGroup.ID);
+                    String sampleFileNameKey =sampleGroup.ID+eachFile;
+                    //sampleFileNameMap.put(sampleFileNameKey,sampleGroup.ID);
                     sampleFileNameList.add(sampleFileNameKey);
-                    if (eachPath.endsWith("/")) {
+                 /*   if (eachPath.endsWith("/")) {
                         eachKey = eachPath + eachFile;
                     } else {
                         eachKey = eachPath + File.separator + eachFile;
