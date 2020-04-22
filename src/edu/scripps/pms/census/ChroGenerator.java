@@ -3218,7 +3218,7 @@ public class ChroGenerator {
 
                     rootEle.addContent(proteinEle);
                     aList.clear();
-                } else {
+                } else if(protein.getPeptideList().size() == 0 ){
                     aList.add(protein);
                     //	    set.add(protein.getLocus());
                 }
@@ -5835,7 +5835,7 @@ System.exit(0);
 
                     rootEle.addContent(proteinEle);
                     aList.clear();
-                } else {
+                } else if(protein.getPeptideList().size() == 0 ) {
                     aList.add(protein);
                     //	    set.add(protein.getLocus());
                 }
@@ -6793,7 +6793,7 @@ System.exit(0);
 
                     rootEle.addContent(proteinEle);
                     aList.clear();
-                } else {
+                } else if(protein.getPeptideList().size() == 0 ) {
                     if(protein.isValid())
                         aList.add(protein);
                     //	    set.add(protein.getLocus());
@@ -7371,7 +7371,7 @@ System.exit(0);
 
                     rootEle.addContent(proteinEle);
                     aList.clear();
-                } else {
+                } else if(protein.getPeptideList().size() == 0 ){
                     aList.add(protein);
                     //	    set.add(protein.getLocus());
                 }
@@ -8230,7 +8230,7 @@ System.exit(0);
 
                     rootEle.addContent(proteinEle);
                     aList.clear();
-                } else {
+                } else if(protein.getPeptideList().size() == 0 ) {
                     aList.add(protein);
                     //	    set.add(protein.getLocus());
                 }
