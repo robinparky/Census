@@ -3523,6 +3523,7 @@ public class ChroGenerator {
 
             for (Iterator<Protein> itr = idReader.getProteins(); itr.hasNext();) {
                 protein = itr.next();
+                boolean ms3Found = true;
 
                 proteinEle = new Element("protein");
                 proteinEle.setAttribute("locus", protein.getLocus());
@@ -3540,6 +3541,7 @@ public class ChroGenerator {
                     proteinEle.setAttribute("desc", StringUtil.removeIsoControlChar(protein.getDescription()));
                 }
                 //  List<TandemTagPeptide> tandemTagPeptideList = new ArrayList<>();
+
                 for (Iterator<Peptide> pepItr = protein.getPeptides(); pepItr.hasNext(); ) {
                     peptide = pepItr.next();
                     // double theorMass = Double.parseDouble(peptide.getCalcMHplus());
@@ -3899,6 +3901,7 @@ public class ChroGenerator {
                         //MS_READ
 
                         if (ms3Scan < 0) {
+                            ms3Found = false;
                             System.out.println("MISSING MS3SCAN ");
                             continue;
                         }
@@ -4115,7 +4118,7 @@ public class ChroGenerator {
                     }
                 }
 
-                if (proteinEle.getChildren().size() > 0) {
+                if (proteinEle.getChildren().size() > 0 ) {
 
                     Element redunEle = new Element("redundant");
 
@@ -4150,7 +4153,7 @@ public class ChroGenerator {
 
                     rootEle.addContent(proteinEle);
                     aList.clear();
-                } else {
+                } else if (protein.getPeptideList().size() == 0 ){
                     aList.add(protein);
                     //	    set.add(protein.getLocus());
                 }
