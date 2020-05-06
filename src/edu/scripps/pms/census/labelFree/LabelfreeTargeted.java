@@ -1086,126 +1086,127 @@ public class LabelfreeTargeted {
             }
         }
 
-                    conf.setIndexHt(origMs1FileHt);
-                    // List<String> keys = p.getPeptideKey();
-                    //  HashMap<String, List<ChroPeptide>> peptideMap = p.getPeptideMap();
-                    List[] ratioArr = new List[expSize];
-                    for (int i = 0; i < ratioArr.length; i++) {
-                        ratioArr[i] = new ArrayList<>();
-                    }
+        conf.setIndexHt(origMs1FileHt);
+        // List<String> keys = p.getPeptideKey();
+        //  HashMap<String, List<ChroPeptide>> peptideMap = p.getPeptideMap();
+        List[] ratioArr = new List[expSize];
+        for (int i = 0; i < ratioArr.length; i++) {
+            ratioArr[i] = new ArrayList<>();
+        }
 
 
-                    for (LabelfreePeptide each : pepList) {
+        for (LabelfreePeptide each : pepList) {
 
-                        double startRt = each.getStartRetTime();
-                        double endRt = each.getEndRetTime();
+            double startRt = each.getStartRetTime();
+            double endRt = each.getEndRetTime();
 
-                        int sampleCount = 0;
-                        int peptideCount = 0;
-                        for (SampleGroup sampleGroup : sampleGroupList) {
+            int sampleCount = 0;
+            int peptideCount = 0;
+            for (SampleGroup sampleGroup : sampleGroupList) {
 
-                            sampleCount++;
-                          System.out.println(">>working on sample group\t" + sampleGroup.getName());
-                     //     System.out.println(">>peptide " + each.getSequence() + "\t charge state " + each.getChargeState());
-                 //         System.out.println("peptide " + each.getSequence() + "\t charge state " + each.getChargeState());
+                sampleCount++;
+                System.out.println(">>working on sample group\t" + sampleGroup.getName());
+         //     System.out.println(">>peptide " + each.getSequence() + "\t charge state " + each.getChargeState());
+     //         System.out.println("peptide " + each.getSequence() + "\t charge state " + each.getChargeState());
 
 
-                            for (SampleModel sampleModel : sampleGroup.getSampleModelList()) {
+                for (SampleModel sampleModel : sampleGroup.getSampleModelList())
+                {
 
 //                              System.out.println("sample name\t" + sampleModel.getSampleName());
-                 //             if(true) continue;
+     //             if(true) continue;
 
-                                peptideCount++;
+                    peptideCount++;
 
-                                //for (String path : sampleModel.getPathList()) {
-                                    //for (int h = 0; h < expSize; h++) {
-                                List<String> fnameList = sampleModel.getLabelfreeFilenameList();
-                                List<String> pathList = sampleModel.getPathList();
-
-
-                                for (int i = 0; i < fnameList.size(); i++) {
-                                    String eachFile = fnameList.get(i);
-                                    String eachPath = pathList.get(i);
-                                    String eachKey = eachFile;
-
-                                    if (eachPath.endsWith("/")) {
-                                        eachKey = eachPath + eachFile;
-                                    } else {
-                                        eachKey = eachPath + File.separator + eachFile;
-                                    }
-
-                                    IndexedFile origIFile = origMs1FileHt.get(eachKey);
-                                    if(null == origIFile) {
-                                        System.out.println("null error..");
-                                    }
-
-                                   // TDoubleIntHashMap retentonToScanMap = origIFile.getRetentonToScanMap();
-
-                                    //    int startScan = retentonToScanMap.get(startRt);
-                                    //  int endScan = retentonToScanMap.get(endRt);
+                    //for (String path : sampleModel.getPathList()) {
+                        //for (int h = 0; h < expSize; h++) {
+                    List<String> fnameList = sampleModel.getLabelfreeFilenameList();
+                    List<String> pathList = sampleModel.getPathList();
 
 
+                    for (int i = 0; i < fnameList.size(); i++) {
+                        String eachFile = fnameList.get(i);
+                        String eachPath = pathList.get(i);
+                        String eachKey = eachFile;
 
-
-                                    GaussianPeakModel peakModel = isotopePeakFinding(isoReader, each.getSequence(),
-                                            origIFile,
-                                            splitSpectraMap,
-                                            splitMs1FileHt, each.getChargeState()
-                                    );
-
-
-                                    ChroPeptide expPep = new ChroPeptide();
-                                    expPep.setPeptideIndex(peptideCount);
-                                    expPep.setSampleIndex(sampleCount);
-
-
-                                    if (null != peakModel) {
-                                        expPep.setPeakArea(peakModel.getPeakArea());
-
-                                        int[] scanArr = peakModel.getScanArr();
-                                        double[] retArr = peakModel.getRetArr();
-                                        double[] peakArr = peakModel.getPeakArr();
-
-                                        sb.delete(0, sb.length());
-                                        sb.append("P 0 0;");
-                                        for (int j = 0; j < scanArr.length; j++) {
-                                            sb.append(scanArr[j]).append(" ").append(retArr[j]).append(" ").append(peakArr[j]).append(";");
-                                        }
-
-                                        double[] gxArr = peakModel.getGaussianXArr();
-                                        double[] gyArr = peakModel.getGaussianYArr();
-                                        gPeakSb.delete(0, gPeakSb.length());
-
-
-                                        //                                System.out.println(java.util.Arrays.toString(gyArr));
-                                        if (null != gxArr) {
-                                            for (int j = 0; j < gxArr.length; j++) {
-                                                gPeakSb.append(gxArr[j]).append(" ").append(gyArr[j]).append(";");
-                                            }
-                                        }
-
-                                        expPep.setChroData(sb.toString());
-                                        expPep.setGaussianPeakString(gPeakSb.toString());
-                                        expPep.setPeakSigma(peakModel.getSigma());
-                                        expPep.setPeakx(peakModel.getX());
-                                        expPep.setPeaky(peakModel.getY());
-                                        expPep.setIsoArr(peakModel.getIsoArr());
-                                        expPep.setFileName(eachFile);
-                                        each.addChroPeptide(expPep);
-                                    } else {
-                                        System.out.println("peak not found");
-                                    }
-
-                                }
-
-                            }
+                        if (eachPath.endsWith("/")) {
+                            eachKey = eachPath + eachFile;
+                        } else {
+                            eachKey = eachPath + File.separator + eachFile;
                         }
 
-                        List<ChroPeptide> chroPepList = each.getPeptideList();
+                        IndexedFile origIFile = origMs1FileHt.get(eachKey);
+                        if(null == origIFile) {
+                            System.out.println("null error..");
+                        }
 
-                        List<LabelFreeJSONPeptide> jsonPeptides = getEachSamplePeptides(chroPepList, each.getChargeState(), each.getSequence(), startRt, endRt);
-                        //  peptideCount = peptideCount + jsonPeptides.size();
-                        jsonAllPeptideList.add(jsonPeptides);
+                       // TDoubleIntHashMap retentonToScanMap = origIFile.getRetentonToScanMap();
+
+                        //    int startScan = retentonToScanMap.get(startRt);
+                        //  int endScan = retentonToScanMap.get(endRt);
+
+
+
+
+                        GaussianPeakModel peakModel = isotopePeakFinding(isoReader, each.getSequence(),
+                                origIFile,
+                                splitSpectraMap,
+                                splitMs1FileHt, each.getChargeState()
+                        );
+
+
+                        ChroPeptide expPep = new ChroPeptide();
+                        expPep.setPeptideIndex(peptideCount);
+                        expPep.setSampleIndex(sampleCount);
+
+
+                        if (null != peakModel) {
+                            expPep.setPeakArea(peakModel.getPeakArea());
+
+                            int[] scanArr = peakModel.getScanArr();
+                            double[] retArr = peakModel.getRetArr();
+                            double[] peakArr = peakModel.getPeakArr();
+
+                            sb.delete(0, sb.length());
+                            sb.append("P 0 0;");
+                            for (int j = 0; j < scanArr.length; j++) {
+                                sb.append(scanArr[j]).append(" ").append(retArr[j]).append(" ").append(peakArr[j]).append(";");
+                            }
+
+                            double[] gxArr = peakModel.getGaussianXArr();
+                            double[] gyArr = peakModel.getGaussianYArr();
+                            gPeakSb.delete(0, gPeakSb.length());
+
+
+                            //                                System.out.println(java.util.Arrays.toString(gyArr));
+                            if (null != gxArr) {
+                                for (int j = 0; j < gxArr.length; j++) {
+                                    gPeakSb.append(gxArr[j]).append(" ").append(gyArr[j]).append(";");
+                                }
+                            }
+
+                            expPep.setChroData(sb.toString());
+                            expPep.setGaussianPeakString(gPeakSb.toString());
+                            expPep.setPeakSigma(peakModel.getSigma());
+                            expPep.setPeakx(peakModel.getX());
+                            expPep.setPeaky(peakModel.getY());
+                            expPep.setIsoArr(peakModel.getIsoArr());
+                            expPep.setFileName(eachFile);
+                            each.addChroPeptide(expPep);
+                        } else {
+                            System.out.println("peak not found");
+                        }
+
+                    }
+
+                }
+            }
+
+            List<ChroPeptide> chroPepList = each.getPeptideList();
+
+            List<LabelFreeJSONPeptide> jsonPeptides = getEachSamplePeptides(chroPepList, each.getChargeState(), each.getSequence(), startRt, endRt);
+            //  peptideCount = peptideCount + jsonPeptides.size();
+            jsonAllPeptideList.add(jsonPeptides);
 
 
                /* //  int rcount=0;
@@ -1223,7 +1224,7 @@ public class LabelfreeTargeted {
 
                        // peptideCount = chroPepList.size();
 
-                    }
+            }
 
                   //  ProteinModel protein = new ProteinModel();
                     // protein.setLogRatioArr(ratioArr);

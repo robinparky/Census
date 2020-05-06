@@ -426,6 +426,7 @@ public class LabelfreeMissingPeptideBuilderSplit {
 
         //SortedMap<String,List<Double>> nameRatioMap = new TreeMap<>();
         SortedMap<String,List<Double>> nameIntensityRatioPMap = new TreeMap<>();
+        SortedMap<String,List<double []>> nameNormIntensityRatioMap = new TreeMap<>();
         SortedMap<String,List<Double>>nameNormRatioPMap = new TreeMap<>();
         Map<String,List<Double>> nameIntensityRatioQMap = new HashMap<>();
         Map<String,List<Double>> nameNormRatioQMap = new HashMap<>();
@@ -637,6 +638,7 @@ public class LabelfreeMissingPeptideBuilderSplit {
             normPvalueMap.put(proteinName,normPvalue);
 
             nameIntensityRatioPMap.put(proteinName,intensityRatioPValueList);
+            nameNormIntensityRatioMap.put(proteinName, normClasses);
             nameNormRatioPMap.put(proteinName,normRatioPValueList);
             key2NameMap.put(key,proteinName);
 
@@ -928,6 +930,13 @@ public class LabelfreeMissingPeptideBuilderSplit {
             p.print("INTENSITY_RATIO_Q-VALUE_"+(i+2)+"_1");
             p.print("\t");
         }
+
+        for(int i=0; i< indexList.size()-1; i++)
+        {
+            p.print("NORM_INTENSITY_RATIOS_"+(i+2)+"_1");
+            p.print("\t");
+        }
+
 
         for(int i=0; i< indexList.size()-1; i++)
         {
@@ -1253,6 +1262,17 @@ public class LabelfreeMissingPeptideBuilderSplit {
                     }
 
                     p.print("\t");
+                }
+
+                for(double [] darr : nameNormIntensityRatioMap.get(key2NameMap.get(cprotein.getLocus())))
+                {
+                    StringBuilder sb = new StringBuilder();
+                    for(double d: darr)
+                    {
+                        sb.append(d).append(",");
+                    }
+                    sb.append("\t");
+                    p.print(sb.toString());
                 }
 
                 //ratio intensity pvalue

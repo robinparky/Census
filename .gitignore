@@ -1,6 +1,6 @@
 /out/
 /build/
 /deploy/
-/build/
+./build/
 deploy.sh
 .gitignore

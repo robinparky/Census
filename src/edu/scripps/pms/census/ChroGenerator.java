@@ -3348,7 +3348,7 @@ public class ChroGenerator {
         }
 
         if (conf.isMs3ScanRandom() || "ms3".equals(conf.getFileShift()) || conf.getScanShift() > 0) {
-            ms2Ht.putAll(createIndexedFilesNoMs(filePath, CensusConstants.MS3_FILE));
+            ms2Ht.putAll(createIndexedFiles(filePath, CensusConstants.MS3_FILE));
             ms2Map.putAll(connectCreateSpectraDB(filePath, CensusConstants.MS3_FILE));
         }
 
