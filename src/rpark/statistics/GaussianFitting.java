@@ -329,9 +329,6 @@ public class GaussianFitting {
             //System.out.println(xArr[i] + "\t" + yArr[i]);
         }
 
-
-
-      //  long startTime = System.currentTimeMillis(); //fetch starting time
         double[] parameters = null;
 
         try {
@@ -339,13 +336,6 @@ public class GaussianFitting {
         } catch(Exception ex) {
 
         }
-
-  //    System.out.println("111\t" + parameters[0]);
-  //    System.out.println("111\t" + parameters[1]);
-   //   System.out.println("111\t" + parameters[2]);
-
-
-//System.exit(0);
         return parameters;
     }
 

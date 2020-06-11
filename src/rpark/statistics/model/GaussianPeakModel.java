@@ -35,6 +35,7 @@ public class GaussianPeakModel {
     private double[] isoArr;
     //public final static double SQRT_PI=1.772454;  //sqrt(PI)
     public final static double SQRT_PI_60=106.3472;  //sqrt(PI) x 60 seconds
+    public final static double SQRT_2PI = 2.50662827463;
 
   private double maxIntensity=0;
 
@@ -127,11 +128,8 @@ public class GaussianPeakModel {
           //if(fwhm>y*2) peakArea = 0;
           //else
             this.peakArea = this.y * this.sigma * SQRT_PI_60;
-
           //System.out.println(">>>------" + y + " " + sigma + " " + peakArea);
-
         }
-
         return peakArea;
     }
 
@@ -273,6 +271,11 @@ public class GaussianPeakModel {
 
   public void setMaxIntensity(double maxIntensity) {
     this.maxIntensity = maxIntensity;
+  }
+
+  public static double getGaussianPeakArea(double peakHeight, double sigma)
+  {
+      return SQRT_2PI * peakHeight * sigma;
   }
 }
 
