@@ -1,5 +1,6 @@
 package scripts;
 
+import edu.scripps.pms.census.conf.Configuration;
 import edu.scripps.pms.census.labelFree.LabelfreeFilledParserTemp;
 import edu.scripps.pms.census.labelFree.LabelfreeMissingPeptideBuilderSplit;
 import edu.scripps.pms.census.labelFree.ProteinModel;
@@ -22,6 +23,9 @@ import edu.scripps.pms.census.util.dtaselect.Peptide;
 import java.util.Arrays;
 import org.apache.commons.math3.fitting.*;
 import org.apache.commons.math3.fitting.WeightedObservedPoints;
+
+import static edu.scripps.pms.census.labelFree.LabelfreeMissingPeptideBuilderSplit.getFastaFile;
+
 public class Test
 {
     public static void main(String args[]) throws Exception
@@ -35,6 +39,32 @@ public class Test
 1 = 19.164023036671388
 
          */
+        String configFile = "/home/yateslab/projectData/census/0505Labelfree/census_config_labelfree_23190.xml";
+        String tmpFile = "//home/yateslab/projectData/census/0505Labelfree/census_labelfree_out_23190.txttmp"; //http://192.168.2.9/ip2/viewLabelfree.html?pid=127&projectName=JonB_Cox
+        //  String jsonFile = "/data/2/rpark/ip2_data/carolfc/Marta_UCSD_2018_Secretome/labelfree_quant/labelfree_16169/temp/labelfree_dt_pep_16169.JSON";
+
+        String mainFileName = tmpFile.substring(0, tmpFile.length() - 7);
+        String filledFile = "//home/yateslab/projectData/census/0505Labelfree/census_labelfree_out_23190_filled.txt";
+        //fill IIT intensities for unidentified peptides
+        Configuration conf = Configuration.getInstance();
+
+        conf.setLabelfree(true);
+        conf.readXMLParam(configFile);
+
+
+        LabelfreeFilledParserTemp l = new LabelfreeFilledParserTemp(filledFile);
+        List<ProteinModel> proteinList = l.readWholeFile(configFile);
+        String baseFileName = filledFile.substring(0, filledFile.length() - 11);
+        String fastaFile = getFastaFile(conf);
+
+
+        l.processProteinList(proteinList,configFile,fastaFile, baseFileName + "_IIT_intensity.txt");
+
+
+        LabelfreeMissingPeptideBuilderSplit.generateLabelfreeOutputFile(proteinList, mainFileName + "_stat.txt", configFile);
+
+
+        if(true) return;
 
 
         DescriptiveStatistics list = new DescriptiveStatistics();
@@ -127,26 +157,6 @@ public class Test
 
 if(true) return;
 
-      String configFile = "/data/2/rpark/ip2_data/carolfc/Marta_UCSD_2018_Secretome/labelfree_quant/labelfree_16169/temp/census_config_labelfree_16169.xml";
-      String tmpFile = "/data/2/rpark/ip2_data/carolfc/Marta_UCSD_2018_Secretome/labelfree_quant/labelfree_16169/temp/census_labelfree_out_16169.txttmp"; //http://192.168.2.9/ip2/viewLabelfree.html?pid=127&projectName=JonB_Cox
-    //  String jsonFile = "/data/2/rpark/ip2_data/carolfc/Marta_UCSD_2018_Secretome/labelfree_quant/labelfree_16169/temp/labelfree_dt_pep_16169.JSON";
-
-      String mainFileName = tmpFile.substring(0, tmpFile.length() - 7);
-      String filledFile = mainFileName + "_filled.txt";
-      //fill IIT intensities for unidentified peptides
-
-
-
-
-      LabelfreeFilledParserTemp l = new LabelfreeFilledParserTemp(filledFile);
-      List<ProteinModel> proteinList = l.readWholeFile(configFile);
-
-
-
-      LabelfreeMissingPeptideBuilderSplit.generateLabelfreeOutputFile(proteinList, mainFileName + "_stat.txt", configFile);
-
-
-      if(true) return;
 
       float precMass = 100;
       float tolerance = 50;

@@ -7653,6 +7653,10 @@ System.exit(0);
 
                     //System.out.println( keyIndex, iFile, samIsoArr, refIsoArr, range) );
                     String fileName = peptide.getFileName();
+                    if(isHeavyFile(fileName, filePath))
+                    {
+                        fileName = fileName.substring(1);
+                    }
                     fileName = cleanFileName(fileName);
 
                     switch (conf.getSpectrumFormat()) {
@@ -7784,7 +7788,7 @@ element.printComposition();
                     } else {
                         try {
                             if ("15N".equals(conf.getQuantType())) {
-                                refDist = new IsotopeDist15N(element.getElementRefArr(), element.getModShift(), false);
+                                refDist = new IsotopeDist15N(element.getElementRefArr(), element.getModShift(), !peptide.getFileName().startsWith("H"));
                             } else {
                                 refDist = new IsotopeDist(element.getElementRefArr(), element.getModShift(), false);
                             }
@@ -8298,8 +8302,8 @@ System.exit(0);
             return false;
         }
 
-        String lightfile = path + "/" + file.split("\\.")[0] + ".ms2";
-        //String lightfile = path + "/" + file.substring(1, file.length());
+        String lightfile = path + "/" + file.substring(1) + ".ms2";
+       // String lightfile = path + "/" + file.substring(1, file.length());
         File lf = new File(lightfile);
 
         if (lf.exists()) {
