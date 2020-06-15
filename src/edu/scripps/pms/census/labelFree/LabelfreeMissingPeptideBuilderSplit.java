@@ -638,7 +638,9 @@ public class LabelfreeMissingPeptideBuilderSplit {
             normPvalueMap.put(proteinName,normPvalue);
 
             nameIntensityRatioPMap.put(proteinName,intensityRatioPValueList);
-            nameNormIntensityRatioMap.put(proteinName, normClasses);
+           // List<List<double[]>> list =  nameNormIntensityRatioMap.getOrDefault(proteinName, new ArrayList<>());
+          //  list.add(classes);
+            nameNormIntensityRatioMap.put(proteinName, normRatioList);
             nameNormRatioPMap.put(proteinName,normRatioPValueList);
             key2NameMap.put(key,proteinName);
 
@@ -694,8 +696,10 @@ public class LabelfreeMissingPeptideBuilderSplit {
             normQvalueMap.put(key,normqval.get(ii++));
         }
 
-                /*
+        /*
+
         Calculating Intensities Ratios QValue
+
          */
 
 /*
@@ -921,6 +925,13 @@ public class LabelfreeMissingPeptideBuilderSplit {
 
         for(int i=0; i< indexList.size()-1; i++)
         {
+            p.print("NORM_INTENSITY_RATIOS_"+(i+2)+"_1");
+            p.print("\t");
+        }
+
+
+        for(int i=0; i< indexList.size()-1; i++)
+        {
             p.print("INTENSITY_RATIO_P-VALUE_"+(i+2)+"_1");
             p.print("\t");
         }
@@ -931,11 +942,6 @@ public class LabelfreeMissingPeptideBuilderSplit {
             p.print("\t");
         }
 
-        for(int i=0; i< indexList.size()-1; i++)
-        {
-            p.print("NORM_INTENSITY_RATIOS_"+(i+2)+"_1");
-            p.print("\t");
-        }
 
 
         for(int i=0; i< indexList.size()-1; i++)
@@ -1269,7 +1275,11 @@ public class LabelfreeMissingPeptideBuilderSplit {
                     StringBuilder sb = new StringBuilder();
                     for(double d: darr)
                     {
-                        sb.append(d).append(",");
+                        //for(double  dd: d)
+                        {
+                            sb.append(d).append(",");
+                        }
+
                     }
                     sb.append("\t");
                     p.print(sb.toString());
@@ -2999,7 +3009,7 @@ public class LabelfreeMissingPeptideBuilderSplit {
 
             double pvalue = 1.0;
             if(arr.length>1)
-              pvalue = TTestUtil.oneSampleTTest(arr);
+              pvalue = TTestUtil.oneSampleTTestBasedOnLog(arr);
 
             if(Double.isNaN(pvalue) || Double.isInfinite(pvalue))
             {
@@ -3009,6 +3019,9 @@ public class LabelfreeMissingPeptideBuilderSplit {
         }
         return  result;
     }
+
+
+
 
     public static List<Double> createPValuesCompareWithFirst(List intensities) throws Exception
     {

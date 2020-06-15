@@ -4,3 +4,4 @@
 ./build/
 deploy.sh
 .gitignore
+/build/classes/
