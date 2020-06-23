@@ -275,6 +275,7 @@ public class ChroGenerator {
                  //   Hashtable<String, IndexedFile> splitMs1FileHt = null;
                     Hashtable<String, IndexedFile> origMs1FileHt = null;
                     HashMap<String, HashMap<Integer, Integer>> ms2ToMs1Map = null;
+                    Map<String, TimsTOFXICDB> timsTOFXICDBMap  = null;
 
                     switch (conf.getSpectrumFormat()) {
 
@@ -291,6 +292,10 @@ public class ChroGenerator {
 
                         default:
                             break;
+                    }
+                    if(conf.isTimstofXicMode())
+                    {
+                        timsTOFXICDBMap = TimsTOFXICDB.createDBIndexMap(eachPath);
                     }
 
            //         int[] keys;
@@ -418,7 +423,14 @@ public class ChroGenerator {
                                 try {
                                    // Element peptideEle = LabelfreeChroUtil.getPeptideDomElement(peptide, isoReader, spectraPath, origMs1FileHt, splitMs1FileHt, splitSpectraMap, ms2ToMs1Map);
                                     //System.out.println("<<><><"+spectraPath);
-                                      Element peptideEle = LabelfreeChroUtil.getPeptideDomElement(peptide, isoReader, spectraPath, origMs1FileHt,ms2ToMs1Map);
+                                    Element peptideEle = null;
+                                    if(conf.isTimstofXicMode())
+                                    {
+                                        peptideEle = LabelfreeChroUtil.getPeptideDomElement(peptide, isoReader, spectraPath, timsTOFXICDBMap);
+                                    }
+                                    else{
+                                         peptideEle = LabelfreeChroUtil.getPeptideDomElement(peptide, isoReader, spectraPath, origMs1FileHt,ms2ToMs1Map);
+                                    }
                                     if (null != peptideEle) {
                                         proteinEle.addContent(peptideEle);
                                     }
@@ -1460,11 +1472,12 @@ public class ChroGenerator {
         return null;
     }
 
-    public static SpectraDB connectCreateSpectraDB(String fileName, File spectraDir, File ms2File) throws SQLException, IOException {
+    public static SpectraDB connectCreateSpectraDB(String filePath, File spectraDir, File ms2File) throws SQLException, IOException {
         String parentPath = ms2File.getParentFile().getAbsolutePath();
-        if(isHMLFile(fileName,parentPath))
+        System.out.println("parentPath "+ms2File.getAbsolutePath());
+        if(isHMLFile(ms2File.getName(),parentPath))
         {
-          //  System.out.println("isHML: "+ms2File.getName());
+            System.out.println("isHML: "+ms2File.getName());
             ms2File = new File(parentPath + File.separator + ms2File.getName().substring(1));
         }
         String sqliteDBPath = ms2File.getAbsolutePath()+".sqlite";
@@ -1491,7 +1504,7 @@ public class ChroGenerator {
         }
         else if(!spectraDir.exists())
         {
-            CreateDb.createNewDatabase(fileName,sqliteDB.getName(),ms2File.getName());
+            CreateDb.createNewDatabase(filePath,sqliteDB.getName(),ms2File.getName());
             SpectraDB spectraDB = SpectraDB.connectToDBReadOnly(sqliteDBPath);
             return spectraDB;
         }
@@ -1519,9 +1532,13 @@ public class ChroGenerator {
         Map<String,SpectraDB> result = new HashMap<>();
         File spectraDir = new File(filePath+"/../../spectra/");
         File currentDir = new File(filePath);
+        File dir = currentDir;
         File [] arr = currentDir.listFiles(new RelExFileFilter(extension));
         if(arr.length==0 && spectraDir !=null)
+        {
             arr = spectraDir.listFiles(new RelExFileFilter(extension));
+            dir = spectraDir;
+        }
 
         if(arr !=null)
         {

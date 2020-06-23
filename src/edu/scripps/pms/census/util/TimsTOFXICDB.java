@@ -1,6 +1,5 @@
 package edu.scripps.pms.census.util;
 
-import com.mongodb.util.Hash;
 import edu.scripps.pms.util.sqlite.spectra.SpectraDB;
 import gnu.trove.TDoubleArrayList;
 import org.apache.commons.lang3.tuple.Pair;
@@ -9,6 +8,7 @@ import org.sqlite.SQLiteConfig;
 import rpark.statistics.model.GaussianPeakModel;
 
 import java.io.Closeable;
+import java.io.File;
 import java.io.IOException;
 import java.sql.*;
 import java.util.*;
@@ -22,6 +22,8 @@ public class TimsTOFXICDB implements Closeable {
     private Map<Integer,Integer> ms2TimstofPrecursorMap = null;
     private Connection conn = null;
     private PreparedStatement queryPrecursor  =null;
+    private TimsTOFIndex index = null;
+    public static final String DB_NAME = "precursor_xics.sqlite";
 
     public TimsTOFXICDB(String path) throws SQLException {
         dbPath = path;
@@ -35,11 +37,46 @@ public class TimsTOFXICDB implements Closeable {
         conn = DriverManager.getConnection(url,config.toProperties());
     }
 
+    public static class TimstofQueryResult
+    {
+        private List<Triple<String, Double,Double>> initialResult;
+        public final double retTime;
+        private List<Pair<Double,Double>> summedList = new ArrayList<>();
+
+        public TimstofQueryResult(List<Triple<String, Double, Double>> initialResult, double retTime) {
+            this.initialResult = initialResult;
+            this.retTime = retTime;
+        }
+        private void sumPeaks()
+        {
+            Map<String, Pair<Double,Double>> map = new HashMap<>();
+            for(Triple<String, Double, Double> r: initialResult)
+            {
+                Pair<Double,Double> p = map.get(r.getLeft());
+                if(p!=null)
+                {
+                    map.put(r.getLeft(), Pair.of(r.getMiddle(), p.getRight() + r.getRight()));
+                }
+                else
+                {
+                    map.put(r.getLeft(), Pair.of(r.getMiddle(), r.getRight()));
+                }
+            }
+            summedList = new ArrayList<>();
+            for(Map.Entry<String, Pair<Double,Double>> entry: map.entrySet() )
+            {
+                summedList.add(entry.getValue());
+            }
+            summedList.sort(Comparator.comparingDouble(Pair::getLeft));
+        }
+
+        public List<Pair<Double, Double>> getSummedList() {
+            return summedList;
+        }
+    }
 
 
-
-
-    public List<Triple<String, Double,Double>> queryPrecursorID(int id) throws SQLException {
+    public TimstofQueryResult queryPrecursorID(int id) throws SQLException {
         if(queryPrecursor == null)
         {
             queryPrecursor = conn.prepareStatement("select val.Time, val.Area, pre.Time as PrecTime, pre.Intensity" +
@@ -51,44 +88,35 @@ public class TimsTOFXICDB implements Closeable {
         queryPrecursor.setInt(1,id);
         ResultSet rs = queryPrecursor.executeQuery();
         List<Triple<String, Double,Double>> resultList = new ArrayList<>();
+
+        double prectime =0;
         while(rs.next())
         {
             String s = rs.getString(1);
 
             double time = rs.getDouble(1);
             double area = rs.getDouble(2);
+             prectime = rs.getDouble(3);
             resultList.add(Triple.of(s, time,area));
         }
-        return resultList;
-    }
-
-    public List<Pair<Double,Double>> queryAndSumPrecursorID(int id) throws SQLException {
-        List<Triple<String,Double,Double>> queryResult = queryPrecursorID(id);
-        Map<String, Pair<Double,Double>> map = new HashMap<>();
-        for(Triple<String, Double, Double> r: queryResult)
-        {
-            Pair<Double,Double> p = map.get(r.getLeft());
-            if(p!=null)
-            {
-               map.put(r.getLeft(), Pair.of(r.getMiddle(), p.getRight() + r.getRight()));
-            }
-            else
-            {
-                map.put(r.getLeft(), Pair.of(r.getMiddle(), r.getRight()));
-            }
-        }
-        List<Pair<Double,Double>> result = new ArrayList<>();
-        for(Map.Entry<String, Pair<Double,Double>> entry: map.entrySet() )
-        {
-            result.add(entry.getValue());
-        }
-        result.sort(Comparator.comparingDouble(Pair::getLeft));
-        return result;
+        return new TimstofQueryResult(resultList, prectime);
     }
 
 
 
 
+    public TimstofQueryResult queryAndSumPrecursorID(int id) throws SQLException {
+        TimstofQueryResult queryResult = queryPrecursorID(id);
+        queryResult.sumPeaks();
+        return queryResult;
+    }
+
+
+
+    public TimstofQueryResult queryAndSumMS2(int ms2id) throws SQLException {
+        int id = index.getPrecurscorID(ms2id);
+        return queryAndSumPrecursorID(id);
+    }
 
     @Override
     public void close() throws IOException {
@@ -154,7 +182,7 @@ public class TimsTOFXICDB implements Closeable {
         TimsTOFIndex index = new TimsTOFIndex(ms2path);
         int precursorId = index.getPrecurscorID(id);
         TimsTOFXICDB timsTOFXICDB = new TimsTOFXICDB(path);
-        List<Pair< Double,Double>> resutlt = timsTOFXICDB.queryAndSumPrecursorID(precursorId);
+        List<Pair< Double,Double>> resutlt = timsTOFXICDB.queryAndSumPrecursorID(precursorId).summedList;
         TDoubleArrayList xarrayList = new TDoubleArrayList();
         TDoubleArrayList yarrayList = new TDoubleArrayList();
         double max = Double.MIN_VALUE;
@@ -180,6 +208,38 @@ public class TimsTOFXICDB implements Closeable {
         System.out.println("<<>> gaussian peak area:\t"+area);
 
         timsTOFXICDB.close();
+
+    }
+
+    public TimsTOFIndex getIndex() {
+        return index;
+    }
+
+    public void setIndex(TimsTOFIndex index) {
+        this.index = index;
+    }
+
+    public static Map<String, TimsTOFXICDB> createDBIndexMap(String path) throws IOException, SQLException {
+
+        if (!path.endsWith(File.separator)) {
+            path += File.separator;
+        }
+
+        File f = new File(path);
+        String[] list = f.list(new RelExFileFilter(".ms2"));
+        Map<String,TimsTOFXICDB> timsTOFXICDBMap = new HashMap<>();
+
+        for(String ms2Path :list)
+        {
+            String rawName = ms2Path.replace("_nopd.ms2",".d");
+            TimsTOFIndex index = new TimsTOFIndex(path+ms2Path);
+            TimsTOFXICDB db = new TimsTOFXICDB(path+rawName+File.separator+DB_NAME);
+            db.setIndex(index);
+            timsTOFXICDBMap.put(ms2Path, db);
+
+        }
+        return timsTOFXICDBMap;
+
 
     }
 

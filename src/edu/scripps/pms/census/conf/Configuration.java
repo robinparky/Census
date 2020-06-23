@@ -11,7 +11,6 @@ import edu.scripps.pms.census.CensusConstants;
 
 import java.io.*;
 
-import edu.scripps.pms.util.FileFilterUtil;
 import gnu.trove.TDoubleArrayList;
 import edu.scripps.pms.census.util.StringUtil;
 import edu.scripps.pms.census.model.*;
@@ -173,7 +172,6 @@ public class Configuration {
     /*******************  END OF MSMS SPECIFIC PARAMETERS (e.g. iTRAQ) **************/
 
 
-
     private boolean useProline = false; // for proline from SILAC
     private int prolineCount= 1; // # of prolines to consider
     public static double PROLINE_SHIFT = 6.013804;
@@ -237,6 +235,9 @@ public class Configuration {
 
     private int targetedStartCharge=2;
     private int targetedEndCharge=5;
+
+    private boolean isTimstofXicMode = false;
+
 
     public String getAllIDSline() {
         return allIDSline;
@@ -816,7 +817,11 @@ public class Configuration {
          List<Element> sampleEleList = rootEle.getChildren("sample");
          if(labelfree)
             readLabelfreeSampleModel(sampleEleList);
-
+        String timstofXicMode = paramEle.getChildText("timstof_xic");
+        if(timstofXicMode !=null)
+        {
+            this.isTimstofXicMode = timstofXicMode.equalsIgnoreCase("true");
+        }
 
         String ms2LabelTxt = paramEle.getChildText("ms2_label");
         if(null != ms2LabelTxt) {
@@ -2618,5 +2623,7 @@ public class Configuration {
         this.isobaricIsolationWindow = isobaricIsolationWindow;
     }
 
-
+    public boolean isTimstofXicMode() {
+        return isTimstofXicMode;
+    }
 }

@@ -35,7 +35,7 @@ public class GaussianPeakModel {
     private double[] isoArr;
     //public final static double SQRT_PI=1.772454;  //sqrt(PI)
     public final static double SQRT_PI_60=106.3472;  //sqrt(PI) x 60 seconds
-    public final static double SQRT_2PI = 2.50662827463;
+    public final static double SQRT_2PI = 2.50662827463; //sqrt(2*PI)
 
   private double maxIntensity=0;
 

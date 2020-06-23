@@ -22,12 +22,17 @@ import static edu.scripps.pms.census.util.CalcUtil.peakFinding;
 import static edu.scripps.pms.census.util.CalcUtil.readFullSpectrum;
 import static edu.scripps.pms.census.util.CalcUtil.readFullSpectrumMzXml;
 import static edu.scripps.pms.census.util.CalcUtil.readSpectrum;
+import static edu.scripps.pms.census.util.TimsTOFXICDB.getPeakAreaEstimate;
+import static rpark.statistics.GaussianFitting.getGaussianPeakRangeIndex;
+import static rpark.statistics.model.GaussianPeakModel.getGaussianPeakArea;
 
 import edu.scripps.pms.census.util.CalcUtilGeneric;
 import edu.scripps.pms.census.util.IsotopeDist;
+import edu.scripps.pms.census.util.TimsTOFXICDB;
 import edu.scripps.pms.census.util.dtaselect.Peptide;
 import edu.scripps.pms.census.util.io.MzxmlSpectrumReader;
 import edu.scripps.pms.util.sqlite.spectra.SpectraDB;
+import gnu.trove.TDoubleArrayList;
 import gnu.trove.TIntDoubleHashMap;
 import gnu.trove.TIntLongHashMap;
 import java.io.IOException;
@@ -35,6 +40,7 @@ import java.io.RandomAccessFile;
 import java.sql.SQLException;
 import java.util.*;
 
+import org.apache.commons.lang3.tuple.Pair;
 import org.apache.commons.math3.analysis.function.Gaussian;
 import org.jdom.Element;
 import rpark.statistics.GaussianFitting;
@@ -508,6 +514,117 @@ public class LabelfreeChroUtil {
         return peptideEle;
     }
 
+    public static Element getPeptideDomElement(Peptide peptide, IsotopeReader isoReader,
+                                               String eachPath, Map<String, TimsTOFXICDB> timsTOFXICDBMap)
+            throws IOException, SQLException, CensusIndexOutOfBoundException, InvalidAAException {
+        String pepSequence = peptide.getSequence();
+        String fileName=peptide.getFileName();
+        fileName = ChroGenerator.cleanFileName(fileName);
+
+        //trim additional characters from peptide sequence at both ends
+
+        char[] ch = pepSequence.substring(2, peptide.getSequence().length()-2).toCharArray();
+
+
+        ElementComposition element = new ElementComposition(ch, 0, ch.length, isoReader.getIsotope());
+
+        try {
+            element.calculate();
+        }
+        catch (InvalidAAException invE)
+        {
+            System.out.println("Not Quantifiable peptide : " + pepSequence);
+            return null;
+        }
+        catch(Exception e) {
+            System.out.println("Not Quantifiable peptide : " + pepSequence);
+            return null;
+        }
+
+        if(!element.isQuantifiable())
+        {
+            System.out.print("\nError : ");
+            System.out.println(pepSequence + " is not quantifiable.");
+            return null;
+        }
+
+        Configuration conf = Configuration.getInstance();
+
+        IsotopeDist sampleDist = null;
+
+        sampleDist = new IsotopeDist(element.getElementSampleArr(), element.getModShift(), true);
+
+        //String origFileKey = eachPath + fileName+".ms1";
+        String origFile =  fileName+".ms2"; //splitSpectraMap.get(eachPath + fileName+".ms1");
+        int ms2ScanNumber = peptide.getScanNumber();
+        TimsTOFXICDB timsTOFXICDB = timsTOFXICDBMap.get(origFile);
+
+        //  splitSpectraMap.get(fileKey)
+        TimsTOFXICDB.TimstofQueryResult queryResult = timsTOFXICDB.queryAndSumMS2(ms2ScanNumber);
+        List<Pair<Double,Double>> peakList = queryResult.getSummedList();
+        TDoubleArrayList xarrayList = new TDoubleArrayList();
+        TDoubleArrayList yarrayList = new TDoubleArrayList();
+        double max = Double.MIN_VALUE;
+        double sum = 0;
+        for(Pair< Double,Double> r: peakList)
+        {
+            xarrayList.add(r.getLeft());
+            yarrayList.add(r.getRight());
+            if(r.getRight()> max)
+                max = r.getRight();
+            sum+=r.getRight();
+            //System.out.println(r.getLeft()+"\t"+r.getRight());
+        }
+        double [] xarr = xarrayList.toNativeArray();
+        double [] yarr = yarrayList.toNativeArray();
+        GaussianPeakModel gModel =  getGaussianPeakRangeIndex(xarr, yarr, -1, peakList.size()-1);
+        gModel.setMaxIntensity(max);
+        double peakHeight = gModel.getY();
+        double sigma = gModel.getSigma();
+        double area = getGaussianPeakArea(peakHeight, sigma);
+
+
+        gModel.setPeakArea(area);
+
+        // System.out.println( retentionTimeMap.get( peptide.getScanNumber()) );
+        //  System.out.println( retTime + " == " + tmpScanNumber );
+
+        Element peptideEle=LabelfreeChroUtil.createXmlChroPeptideTitle(peptide); //true is for full scan
+       peptideEle.setAttribute("rt", String.valueOf(queryResult.retTime));
+        conf.setCalcSamAvgMass(sampleDist.getAvgMass());
+        peptideEle.setAttribute("lightStartMass", String.valueOf(sampleDist.getStartMass()));
+        peptideEle.setAttribute("lightAvgMass", String.valueOf(conf.getCalcSamAvgMass()));
+
+        //String fileName = peptide.getFileName().substring(0, peptide.getFileName().indexOf(".")+1) + "ms1";
+
+        //  SpecRange range = null;
+
+;
+
+        peptideEle.setAttribute("peak_sigma", String.valueOf(gModel.getSigma()));
+        peptideEle.setAttribute("peak_x", String.valueOf(gModel.getX()));
+        peptideEle.setAttribute("peak_y", String.valueOf(gModel.getY()));
+    /*    peptideEle.setAttribute("start_scan", String.valueOf((int)Double.parseDouble(tmpStrArr[1])));
+        peptideEle.setAttribute("end_scan", String.valueOf((int)Double.parseDouble(tmpStrArr[2])));
+        peptideEle.setAttribute("start_rt", String.valueOf(Double.parseDouble(tmpStrArr[3])));
+        peptideEle.setAttribute("end_rt", String.valueOf(Double.parseDouble(tmpStrArr[4])));*/
+        peptideEle.setAttribute("peak_area", String.valueOf(gModel.getPeakArea()));
+/*
+        peptideEle.setAttribute("peak_sigmaIonInjectionCorrection", String.valueOf(gModel.getSigmaIonInjectCorrection()));
+        peptideEle.setAttribute("peak_xIonInjectionCorrection",String.valueOf(gModel.getxIonInjectionCorrection()));
+        peptideEle.setAttribute("peak_yIonInjectionCorrection", String.valueOf(gModel.getyIonInjectionCorrection()));
+        peptideEle.setAttribute("peak_areaIonInjectionCorrection",String.valueOf(gModel.getPeakAreaIonInjectionCorrection()));
+        peptideEle.setAttribute("peak_detected",String.valueOf(gModel.isPeakDetected()));
+
+*/
+
+        Element gaussianPeaksEle = new Element("peaks");
+        gaussianPeaksEle.setText(gModel.getGaussianPeakString());
+        //peptideEle.addContent(chro);
+        peptideEle.addContent(gaussianPeaksEle);
+
+        return peptideEle;
+    }
 
 
 
