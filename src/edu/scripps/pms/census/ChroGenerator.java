@@ -3751,10 +3751,10 @@ public class ChroGenerator {
                         msFile = fname + ".ms1";
 
                         iFileMs1 = ms1Map.get( fname + "." + "ms1");
-                        //System.out.println(">>looking for "+iFileMs1.getFileName());
+                       // System.out.println(">>looking for "+fname);
                         if (iFileMs1 == null) {
-                            //     System.out.println(">> "+this.filePath + "/../../spectra/" + fname + "." + "ms1");
-                            iFileMs1 = ms1Map.get(fname + "." + "ms1");
+                        //    System.out.println(">> "+this.filePath + "/../../spectra/" + fname + "." + "ms1");
+                            iFileMs1 = ms1Map.get(this.filePath + "/../../spectra/" +fname + "." + "ms1");
                             //        System.out.println(">>looking for "+iFileMs1.getFileName());
                             //     // msFile = this.filePath + "/../../spectra/" + ms2FileName + "." + "ms1";
                         }
@@ -7669,7 +7669,7 @@ System.exit(0);
                     }
 
                     //System.out.println( keyIndex, iFile, samIsoArr, refIsoArr, range) );
-                    String fileName = peptide.getFileName();
+                    String fileName = peptide.getFileName() +".ms2";
                     if(isHeavyFile(fileName, filePath))
                     {
                         fileName = fileName.substring(1);
@@ -8319,7 +8319,7 @@ System.exit(0);
             return false;
         }
 
-        String lightfile = path + "/" + file.substring(1) + ".ms2";
+        String lightfile = path + "/" + file.substring(1) ;
        // String lightfile = path + "/" + file.substring(1, file.length());
         File lf = new File(lightfile);
 
@@ -8338,7 +8338,7 @@ System.exit(0);
         }
 
         // String lightfile = path + "/" + file.substring(1, file.length());
-        String lightfile = path + "/" + file.split("\\.")[0] + ".ms2";
+        String lightfile = path + "/" + file.split("\\.")[0] ;
 
         File lf = new File(lightfile);
 
