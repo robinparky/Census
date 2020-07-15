@@ -6,9 +6,9 @@ TimsTOFIndex index = new TimsTOFIndex(ms2path);
 ```
 ms2path is path timstof ms2. It will either read index file or create new one if it does not exist
 ```
-int precursorId = index.getPrecurscorID(id);
+int parentID = index.getPrecurscorId(id);
 ```
-put in ms2 id to get precursorID. Precursor id will be used to access information from slqite
+put in ms2 id to get parent ID. Parent id will be used to access information from slqite
 
 
 ```
@@ -18,7 +18,7 @@ Create TimsTOFXICDB, with path to sqlite file
 
 
 ```
-TimstofQueryResult result = timsTOFXICDB.queryAndSumPrecursorID(precursorId)
+TimstofQueryResult result = timsTOFXICDB.queryAndSumParentId(parentID)
 List<Pair< Double,Double>> list = result.getSummedList();
 double rettime = result.retTime
 ```

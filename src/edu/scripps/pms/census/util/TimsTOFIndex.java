@@ -9,7 +9,7 @@ public class TimsTOFIndex {
     public final String ms2Path;
     public final String indexpath;
     public final static String SUFFIX = ".timsstofindex";
-    private Map<Integer,Integer> scan2PrecursorMap = new HashMap<>();
+    private Map<Integer,Integer> scan2ParentMap = new HashMap<>();
 
 
     public TimsTOFIndex(String path) throws IOException {
@@ -31,13 +31,13 @@ public class TimsTOFIndex {
         if(indexFile.exists())
         {
             System.out.println(">>>> IndexFile exists; reading exisitng index file");
-            scan2PrecursorMap = readIndex(indexpath);
+            scan2ParentMap = readIndex(indexpath);
         }
         else
         {
             System.out.println(">>>> IndexFile does not; reading ms2 file and writing index file");
-            scan2PrecursorMap = readMs2(ms2Path);
-            writeIndex(indexpath, scan2PrecursorMap);
+            scan2ParentMap = readMs2(ms2Path);
+            writeIndex(indexpath, scan2ParentMap);
         }
     }
 
@@ -91,13 +91,13 @@ public class TimsTOFIndex {
         bw.close();
     }
 
-    public Map<Integer, Integer> getScan2PrecursorMap() {
-        return scan2PrecursorMap;
+    public Map<Integer, Integer> getScan2ParentMap() {
+        return scan2ParentMap;
     }
 
-    public int getPrecurscorID(int ms2ScanNumber)
+    public int getParentId(int ms2ScanNumber)
     {
-        return scan2PrecursorMap.get(ms2ScanNumber);
+        return scan2ParentMap.get(ms2ScanNumber);
     }
 
 
