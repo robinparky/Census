@@ -6,7 +6,7 @@ TimsTOFIndex index = new TimsTOFIndex(ms2path);
 ```
 ms2path is path timstof ms2. It will either read index file or create new one if it does not exist
 ```
-int parentID = index.getParentid(id);
+int parentID = index.getParentId(id);
 ```
 put in ms2 id to get parent ID. Parent id will be used to access information from slqite
 
