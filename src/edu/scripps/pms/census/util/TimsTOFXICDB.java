@@ -2,6 +2,7 @@ package edu.scripps.pms.census.util;
 
 import edu.scripps.pms.util.sqlite.spectra.SpectraDB;
 import gnu.trove.TDoubleArrayList;
+import gnu.trove.TIntArrayList;
 import org.apache.commons.lang3.tuple.Pair;
 import org.apache.commons.lang3.tuple.Triple;
 import org.sqlite.SQLiteConfig;
@@ -41,7 +42,9 @@ public class TimsTOFXICDB implements Closeable {
     {
         private List<Triple<String, Double,Double>> initialResult;
         public final double retTime;
-        private List<Pair<Double,Double>> summedList = new ArrayList<>();
+        private List<Pair<Double,Double>> summedList = null;
+        private double peakArea = -1;
+
 
         public TimstofQueryResult(List<Triple<String, Double, Double>> initialResult, double retTime) {
             this.initialResult = initialResult;
@@ -49,26 +52,62 @@ public class TimsTOFXICDB implements Closeable {
         }
         private void sumPeaks()
         {
-            Map<String, Pair<Double,Double>> map = new HashMap<>();
-            for(Triple<String, Double, Double> r: initialResult)
+            if(summedList == null)
             {
-                Pair<Double,Double> p = map.get(r.getLeft());
-                if(p!=null)
+                Map<String, Pair<Double,Double>> map = new HashMap<>();
+                for(Triple<String, Double, Double> r: initialResult)
                 {
-                    map.put(r.getLeft(), Pair.of(r.getMiddle(), p.getRight() + r.getRight()));
+                    Pair<Double,Double> p = map.get(r.getLeft());
+                    if(p!=null)
+                    {
+                        map.put(r.getLeft(), Pair.of(r.getMiddle(), p.getRight() + r.getRight()));
+                    }
+                    else
+                    {
+                        map.put(r.getLeft(), Pair.of(r.getMiddle(), r.getRight()));
+                    }
                 }
-                else
+                summedList = new ArrayList<>();
+                for(Map.Entry<String, Pair<Double,Double>> entry: map.entrySet() )
                 {
-                    map.put(r.getLeft(), Pair.of(r.getMiddle(), r.getRight()));
+                    summedList.add(entry.getValue());
                 }
+                summedList.sort(Comparator.comparingDouble(Pair::getLeft));
             }
-            summedList = new ArrayList<>();
-            for(Map.Entry<String, Pair<Double,Double>> entry: map.entrySet() )
-            {
-                summedList.add(entry.getValue());
-            }
-            summedList.sort(Comparator.comparingDouble(Pair::getLeft));
+
         }
+
+        public double getGaussianPeakArea()
+        {
+            if(peakArea<0)
+            {
+                sumPeaks();
+
+                TDoubleArrayList xarrayList = new TDoubleArrayList();
+                TDoubleArrayList yarrayList = new TDoubleArrayList();
+                double max = Double.MIN_VALUE;
+                double sum = 0;
+                for(Pair< Double,Double> r: summedList)
+                {
+                    xarrayList.add(r.getLeft());
+                    yarrayList.add(r.getRight());
+                    if(r.getRight()> max)
+                        max = r.getRight();
+                    sum+=r.getRight();
+                    //System.out.println(r.getLeft()+"\t"+r.getRight());
+                }
+                double [] xarr = xarrayList.toNativeArray();
+                double [] yarr = yarrayList.toNativeArray();
+                GaussianPeakModel model =  getGaussianPeakRangeIndex(xarr, yarr, -1, summedList.size()-1);
+                model.setMaxIntensity(max);
+                double peakHeight = model.getY();
+                double sigma = model.getSigma();
+                peakArea = GaussianPeakModel.getGaussianPeakArea(peakHeight, sigma);
+            }
+            return peakArea;
+
+        }
+
 
         public List<Pair<Double, Double>> getSummedList() {
             return summedList;
@@ -128,6 +167,18 @@ public class TimsTOFXICDB implements Closeable {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+    }
+
+    public static double getPeakAreaEstimate(List<Pair<Double,Double>> pairList)
+    {
+        TDoubleArrayList xList = new TDoubleArrayList();
+        TDoubleArrayList yList = new TDoubleArrayList();
+        for(Pair<Double,Double> pair: pairList)
+        {
+            xList.add(pair.getLeft().doubleValue());
+            yList.add(pair.getRight().doubleValue());
+        }
+        return getPeakAreaEstimate(xList.toNativeArray(), yList.toNativeArray());
     }
 
     public static double getPeakAreaEstimate(double [] xarr, double[] yarr)
