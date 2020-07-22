@@ -1524,6 +1524,7 @@ public class CalcUtil {
 
     double[] correctIntArr = new double[massList.size()];
     double[] intSumArr = new double[massList.size()];
+    double[] maxIntArr = new double[massList.size()];
 
     //  List<MZValues> mzList = new ArrayList<>();
     for (Iterator<ReportIon> itr = massList.iterator(); itr.hasNext(); ) {

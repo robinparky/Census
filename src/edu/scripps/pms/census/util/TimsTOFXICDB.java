@@ -2,7 +2,6 @@ package edu.scripps.pms.census.util;
 
 import edu.scripps.pms.util.sqlite.spectra.SpectraDB;
 import gnu.trove.TDoubleArrayList;
-import gnu.trove.TIntArrayList;
 import org.apache.commons.lang3.tuple.Pair;
 import org.apache.commons.lang3.tuple.Triple;
 import org.sqlite.SQLiteConfig;
@@ -115,7 +114,7 @@ public class TimsTOFXICDB implements Closeable {
     }
 
 
-    public TimstofQueryResult queryParentId(int id) throws SQLException {
+    public TimstofQueryResult queryPrecursorID(int id) throws SQLException {
         if(queryPrecursor == null)
         {
             queryPrecursor = conn.prepareStatement("select val.Time, val.Area, pre.Time as PrecTime, pre.Intensity" +
@@ -144,8 +143,8 @@ public class TimsTOFXICDB implements Closeable {
 
 
 
-    public TimstofQueryResult queryAndSumParentId(int id) throws SQLException {
-        TimstofQueryResult queryResult = queryParentId(id);
+    public TimstofQueryResult queryAndSumPrecursor(int id) throws SQLException {
+        TimstofQueryResult queryResult = queryPrecursorID(id);
         queryResult.sumPeaks();
         return queryResult;
     }
@@ -153,8 +152,8 @@ public class TimsTOFXICDB implements Closeable {
 
 
     public TimstofQueryResult queryAndSumMS2(int ms2id) throws SQLException {
-        int id = index.getParentId(ms2id);
-        return queryAndSumParentId(id);
+        int id = index.getPrecursorID(ms2id);
+        return queryAndSumPrecursor(id);
     }
 
     @Override
@@ -231,9 +230,9 @@ public class TimsTOFXICDB implements Closeable {
         String ms2path = args[1];
         int id = Integer.parseInt(args[2]);
         TimsTOFIndex index = new TimsTOFIndex(ms2path);
-        int precursorId = index.getParentId(id);
+        int precursorId = index.getPrecursorID(id);
         TimsTOFXICDB timsTOFXICDB = new TimsTOFXICDB(path);
-        List<Pair< Double,Double>> resutlt = timsTOFXICDB.queryAndSumParentId(precursorId).summedList;
+        List<Pair< Double,Double>> resutlt = timsTOFXICDB.queryAndSumPrecursor(precursorId).summedList;
         TDoubleArrayList xarrayList = new TDoubleArrayList();
         TDoubleArrayList yarrayList = new TDoubleArrayList();
         double max = Double.MIN_VALUE;

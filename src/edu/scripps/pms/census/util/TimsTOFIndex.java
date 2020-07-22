@@ -35,7 +35,7 @@ public class TimsTOFIndex {
         }
         else
         {
-            System.out.println(">>>> IndexFile does not; reading ms2 file and writing index file");
+            System.out.println(">>>> IndexFile does not exist; reading ms2 file and writing index file");
             scan2ParentMap = readMs2(ms2Path);
             writeIndex(indexpath, scan2ParentMap);
         }
@@ -53,7 +53,7 @@ public class TimsTOFIndex {
                 String [] arr = line.split("\t");
                 scanNumber = Integer.parseInt(arr[1]);
             }
-            else if(line.startsWith("I\tTIMSTOF_Parent_ID"))
+            else if(line.startsWith("I\tTIMSTOF_Precursor_ID"))
             {
                 String [] arr = line.split("\t");
                 int prec = Integer.parseInt(arr[2]);
@@ -95,7 +95,7 @@ public class TimsTOFIndex {
         return scan2ParentMap;
     }
 
-    public int getParentId(int ms2ScanNumber)
+    public int getPrecursorID(int ms2ScanNumber)
     {
         return scan2ParentMap.get(ms2ScanNumber);
     }

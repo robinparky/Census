@@ -52,11 +52,20 @@ public class DTASelectLFQUtil {
                index= new TimsTOFIndex(spectraFolder + File.separator+ fileName);
             }
 
-            int parentId = index.getParentId(scanNumber);
-            TimsTOFXICDB.TimstofQueryResult queryResult = timsTOFXICDB.queryAndSumParentId(parentId);
-            double peakArea = queryResult.getGaussianPeakArea();
-            double estimatedPeakArea = getPeakAreaEstimate(queryResult.getSummedList());
-            psmTimstoFPeakArea.put(psmStr, Pair.of(peakArea, estimatedPeakArea));
+            int parentId = index.getPrecursorID(scanNumber);
+            TimsTOFXICDB.TimstofQueryResult queryResult = timsTOFXICDB.queryAndSumPrecursor(parentId);
+            if(queryResult.getSummedList().size()>0)
+            {
+                double peakArea = queryResult.getGaussianPeakArea();
+                double estimatedPeakArea = getPeakAreaEstimate(queryResult.getSummedList());
+                psmTimstoFPeakArea.put(psmStr, Pair.of(peakArea, estimatedPeakArea));
+
+            }
+            else
+            {
+                psmTimstoFPeakArea.put(psmStr, Pair.of(0.0, 0.0));
+            }
+
 
             indexMap.put(fileName, index);
         }
