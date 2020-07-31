@@ -2835,7 +2835,7 @@ public class ChroGenerator {
                         msFile = fname + ".ms1";
 
                         iFileMs1 = htMs1.get(this.filePath + fname + "." + "ms1");
-                        //System.out.println(">>looking for "+iFileMs1.getFileName());
+                     //   System.out.println(">>looking for "+iFileMs1.getFileName());
                         if (iFileMs1 == null) {
                        //     System.out.println(">> "+this.filePath + "/../../spectra/" + fname + "." + "ms1");
                             iFileMs1 = htMs1.get(this.filePath + "/../../spectra/" + fname + "." + "ms1");
@@ -3751,9 +3751,9 @@ public class ChroGenerator {
                         msFile = fname + ".ms1";
 
                         iFileMs1 = ms1Map.get( fname + "." + "ms1");
-                       // System.out.println(">>looking for "+fname);
+                        //System.out.println(">>looking for "+fname);
                         if (iFileMs1 == null) {
-                        //    System.out.println(">> "+this.filePath + "/../../spectra/" + fname + "." + "ms1");
+                          //  System.out.println(">> "+this.filePath + "/../../spectra/" + fname + "." + "ms1");
                             iFileMs1 = ms1Map.get(this.filePath + "/../../spectra/" +fname + "." + "ms1");
                             //        System.out.println(">>looking for "+iFileMs1.getFileName());
                             //     // msFile = this.filePath + "/../../spectra/" + ms2FileName + "." + "ms1";
@@ -4170,7 +4170,12 @@ public class ChroGenerator {
 
                     rootEle.addContent(proteinEle);
                     aList.clear();
-                } else if (protein.getPeptideList().size() == 0 ){
+                }
+                else if (protein.getPeptideList().size() > 0 )
+                {
+                    aList.clear();
+                }
+                else if (protein.getPeptideList().size() == 0 ){
                     aList.add(protein);
                     //	    set.add(protein.getLocus());
                 }
