@@ -70,6 +70,7 @@ public class Configuration {
     private String filePath;
     private int resolution=0;
     private long startTime;
+    private boolean luciphorMode = false;
 
     private boolean isDataIndependent=false;
     private boolean isLabeling=true;
@@ -778,6 +779,12 @@ public class Configuration {
         Element paramEle = rootEle.getChild("params");
         Element qtypeEle = rootEle.getChild("quant_type");
         Element labelfreeEle = paramEle.getChild("labelfree");
+
+        Element luciphorMode = rootEle.getChild("luciphor_mode");
+        if(luciphorMode !=null)
+        {
+            this.luciphorMode = "true".equalsIgnoreCase(luciphorMode.getAttributeValue("readMode"));
+        }
 
 	this.sampleNum = rootEle.getChild("element_comp").getChildren("each_sample").size();
 	if(null != qtypeEle)
@@ -2625,5 +2632,10 @@ public class Configuration {
 
     public boolean isTimstofXicMode() {
         return isTimstofXicMode;
+    }
+
+
+    public boolean isLuciphorMode() {
+        return luciphorMode;
     }
 }

@@ -30,9 +30,8 @@ public class TimsTOFXICDB implements Closeable {
         String url = "jdbc:sqlite:" +path;
         SQLiteConfig config = SpectraDB.GetDefaultConfig();
         config.setReadOnly(true);
-        config.setTempStore(SQLiteConfig.TempStore.FILE);
+       // config.setTempStore(SQLiteConfig.TempStore.FILE);
         //config.setPageSize(100_000_000);
-        config.setCacheSize(-50_000);
         config.setJournalMode(SQLiteConfig.JournalMode.OFF);
         conn = DriverManager.getConnection(url,config.toProperties());
     }
@@ -110,6 +109,10 @@ public class TimsTOFXICDB implements Closeable {
 
         public List<Pair<Double, Double>> getSummedList() {
             return summedList;
+        }
+
+        public List<Triple<String, Double, Double>> getInitialResult() {
+            return initialResult;
         }
     }
 

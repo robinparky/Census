@@ -13,6 +13,7 @@ import edu.scripps.pms.census.conf.Configuration;
 import edu.scripps.pms.census.CensusConstants;
 import edu.scripps.pms.census.tools.IsotopeModel;
 import edu.scripps.pms.census.util.IsoData;
+import edu.scripps.pms.census.util.io.LuciphorReader;
 import org.json.simple.JSONObject;
 import edu.scripps.pms.census.util.LinearRegression;
 import rpark.statistics.model.GaussianPeakModel;
@@ -36,6 +37,7 @@ import rpark.statistics.model.GaussianPeakModel;
     private double samIntensity=-1;
     private double refIntensity;
     private double ionInjectionTimeNormIntensity;
+    private LuciphorReader.LuciphorPeptide luciphorPeptide  =null;
 
     private String spRank;
     private String spScore;
@@ -1465,6 +1467,14 @@ import rpark.statistics.model.GaussianPeakModel;
 
     public void setPtmIndexProtein(String ptmIndexProtein) {
         this.ptmIndexProtein = ptmIndexProtein;
+    }
+
+    public LuciphorReader.LuciphorPeptide getLuciphorPeptide() {
+        return luciphorPeptide;
+    }
+
+    public void setLuciphorPeptide(LuciphorReader.LuciphorPeptide luciphorPeptide) {
+        this.luciphorPeptide = luciphorPeptide;
     }
 }
 

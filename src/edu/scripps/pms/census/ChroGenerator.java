@@ -206,6 +206,7 @@ public class ChroGenerator {
         }
         String processFile = conf.getConfigFilePath() + File.separator + "progress.properties";
         CensusChroProgress censusChroProgress = new CensusChroProgress(processFile, groupCompletionProcess);
+        boolean luciphorPTMMode = conf.isLuciphorMode();
         for (String groupName : groupNameSet) {
             List<String> pathList = nonlabelFilenameGroupMap.get(groupName);
             if (pathList.size() > 0) {
@@ -215,8 +216,22 @@ public class ChroGenerator {
                     if (!eachPath.endsWith(File.separator)) {
                         eachPath += File.separator;
                     }
-
+                    Map<String, LuciphorReader.LuciphorPeptide> luciphorPeptideMap = null;
                     File tmpF = new File(eachPath + chroTmpFileName);
+                    if(luciphorPTMMode)
+                    {
+                        File luciphorFile = new File(eachPath + "luciphor_ptm_out.txt");
+                        if(!luciphorFile.exists())
+                        {
+                            luciphorFile = new File(eachPath + "/ptm/luciphor_ptm_out.txt");
+                        }
+                        if(luciphorFile.exists())
+                        {
+                            LuciphorReader reader = new LuciphorReader();
+                            luciphorPeptideMap =  reader.readLuciphorGetMap(luciphorFile.getAbsolutePath());
+
+                        }
+                    }
 
                     boolean isRead = false;
 
@@ -432,6 +447,14 @@ public class ChroGenerator {
                                          peptideEle = LabelfreeChroUtil.getPeptideDomElement(peptide, isoReader, spectraPath, origMs1FileHt,ms2ToMs1Map);
                                     }
                                     if (null != peptideEle) {
+                                        if(luciphorPeptideMap !=null)
+                                        {
+                                            LuciphorReader.LuciphorPeptide luciphorPeptide = luciphorPeptideMap.get(peptide.getFileNameWithScan());
+                                            if(luciphorPeptide!=null)
+                                            {
+                                                peptideEle.addContent(luciphorPeptide.generateElement());
+                                            }
+                                        }
                                         proteinEle.addContent(peptideEle);
                                     }
                                 } catch (IOException e) {

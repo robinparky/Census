@@ -40,11 +40,13 @@ public class DTASelectLFQUtil {
         TimsTOFXICDB timsTOFXICDB = new TimsTOFXICDB(sqlitePath);
         Map<String, TimsTOFIndex> indexMap = new HashMap<>();
         Map<String,  Pair<Double,Double>> psmTimstoFPeakArea = new HashMap<>();
+        int count =0;
         for(String psmStr: psmSet)
         {
             String [] arr = psmStr.split("\\.");
             String fileName = arr[0] +".ms2";
 
+            long start = System.currentTimeMillis();
             int scanNumber = Integer.parseInt(arr[1]);
             TimsTOFIndex index = indexMap.get(fileName);
             if(index == null)
@@ -54,17 +56,15 @@ public class DTASelectLFQUtil {
 
             int parentId = index.getPrecursorID(scanNumber);
             TimsTOFXICDB.TimstofQueryResult queryResult = timsTOFXICDB.queryAndSumPrecursor(parentId);
-            if(queryResult.getSummedList().size()>0)
-            {
                 double peakArea = queryResult.getGaussianPeakArea();
                 double estimatedPeakArea = getPeakAreaEstimate(queryResult.getSummedList());
                 psmTimstoFPeakArea.put(psmStr, Pair.of(peakArea, estimatedPeakArea));
+            long duration = System.currentTimeMillis() - start;
+            long projection = duration*(psmSet.size()-count)/1000;
+            System.out.print("<<>> "+count +"/" + psmSet.size() +"\t done: will finish in " + projection+ " seconds\r");
+            count++;
 
-            }
-            else
-            {
-                psmTimstoFPeakArea.put(psmStr, Pair.of(0.0, 0.0));
-            }
+
 
 
             indexMap.put(fileName, index);
