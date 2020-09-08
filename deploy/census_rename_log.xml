@@ -1525,8 +1525,8 @@
   <field class="edu.scripps.pms.census.CensusConstants" name="PROTON_MASS"/>
   <field class="edu.scripps.pms.census.CensusConstants" name="PROTEIN_COLUMNS"/>
   <method class="edu.scripps.pms.census.CensusConstants" name="java.lang.String[] getBasicColumn(int)"/>
-  <class name="edu.scripps.pms.census.CensusTest"/>
-  <method class="edu.scripps.pms.census.CensusTest" name="void main(java.lang.String[])"/>
+  <class name="edu.scripps.pms.census.test.CensusTest"/>
+  <method class="edu.scripps.pms.census.test.CensusTest" name="void main(java.lang.String[])"/>
   <class name="edu.scripps.pms.census.MergeDialog"/>
   <method class="edu.scripps.pms.census.MergeDialog" name="void main(java.lang.String[])"/>
   <class name="edu.scripps.pms.census.TestPanel"/>
@@ -5465,14 +5465,14 @@
   <method class="edu.scripps.pms.census.ExportDialog" name="void exportBtnActionPerformed(java.awt.event.ActionEvent)" map="B"/>
   <method class="edu.scripps.pms.census.ExportDialog" name="void discardANCheckActionPerformed(java.awt.event.ActionEvent)" map="C"/>
   <method class="edu.scripps.pms.census.ExportDialog" name="void noFilterCheckActionPerformed(java.awt.event.ActionEvent)" map="D"/>
-  <field class="edu.scripps.pms.census.CensusTest" name="elementFile" map="A"/>
-  <field class="edu.scripps.pms.census.CensusTest" name="twoDigitFormat" map="B"/>
-  <field class="edu.scripps.pms.census.CensusTest" name="conf" map="C"/>
-  <field class="edu.scripps.pms.census.CensusTest" name="filePath" map="D"/>
-  <field class="edu.scripps.pms.census.CensusTest" name="massTolerance" map="E"/>
-  <field class="edu.scripps.pms.census.CensusTest" name="PARAM_FILE" map="F"/>
-  <field class="edu.scripps.pms.census.CensusTest" name="MS2_FILE" map="G"/>
-  <field class="edu.scripps.pms.census.CensusTest" name="MS1_FILE" map="H"/>
+  <field class="edu.scripps.pms.census.test.CensusTest" name="elementFile" map="A"/>
+  <field class="edu.scripps.pms.census.test.CensusTest" name="twoDigitFormat" map="B"/>
+  <field class="edu.scripps.pms.census.test.CensusTest" name="conf" map="C"/>
+  <field class="edu.scripps.pms.census.test.CensusTest" name="filePath" map="D"/>
+  <field class="edu.scripps.pms.census.test.CensusTest" name="massTolerance" map="E"/>
+  <field class="edu.scripps.pms.census.test.CensusTest" name="PARAM_FILE" map="F"/>
+  <field class="edu.scripps.pms.census.test.CensusTest" name="MS2_FILE" map="G"/>
+  <field class="edu.scripps.pms.census.test.CensusTest" name="MS1_FILE" map="H"/>
   <class name="edu.scripps.pms.census.MergeDialog$6" map="6"/>
   <field class="edu.scripps.pms.census.MergeDialog$6" name="this$0" map="A"/>
   <method class="edu.scripps.pms.census.MergeDialog$6" name="void actionPerformed(java.awt.event.ActionEvent)" map="actionPerformed"/>

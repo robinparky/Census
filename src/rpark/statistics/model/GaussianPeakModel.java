@@ -127,7 +127,8 @@ public class GaussianPeakModel {
 
           //if(fwhm>y*2) peakArea = 0;
           //else
-            this.peakArea = this.y * this.sigma * SQRT_PI_60;
+           this.peakArea = getGaussianPeakArea(this.y, this.getSigma());
+          // this.peakArea = this.y * this.sigma * SQRT_PI_60;
           //System.out.println(">>>------" + y + " " + sigma + " " + peakArea);
         }
         return peakArea;
