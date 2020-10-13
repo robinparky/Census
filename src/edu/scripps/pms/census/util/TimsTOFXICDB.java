@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.sql.*;
 import java.util.*;
 
+import static edu.scripps.pms.util.PmsUtil.getMZFromPpm;
 import static rpark.statistics.GaussianFitting.getGaussianPeakRangeIndex;
 import static rpark.statistics.model.GaussianPeakModel.getGaussianPeakArea;
 
@@ -22,6 +23,8 @@ public class TimsTOFXICDB implements Closeable {
     private Map<Integer,Integer> ms2TimstofPrecursorMap = null;
     private Connection conn = null;
     private PreparedStatement queryPrecursor  =null;
+    private PreparedStatement queryPrecursorByRetTimePrcMassRanges  =null;
+
     private TimsTOFIndex index = null;
     public static final String DB_NAME = "precursor_xics.sqlite";
 
@@ -145,6 +148,52 @@ public class TimsTOFXICDB implements Closeable {
 
 
 
+    public TimstofQueryResult queryByRetTimePrcMassRanges(double retTime, double retTimeTolerance,
+                                                                   double prcMz, double ppmTol, int chargeState) throws SQLException {
+        if(queryPrecursorByRetTimePrcMassRanges == null)
+        {
+            queryPrecursorByRetTimePrcMassRanges = conn.prepareStatement(
+                    "select id from precursors Where Time BETWEEN ? and ? " +
+                            "AND MonoisotopicMz BETWEEN ? and ? and charge = ? order by intensity desc limit 1;  ");
+        }
+        double retTimeStart = retTime - retTimeTolerance;
+        double retTimeEnd = retTime + retTimeTolerance;
+        double prcTol = getMZFromPpm(prcMz, ppmTol);
+        double massStart = prcMz - prcTol;
+        double massEnd = prcMz + prcTol;
+
+        queryPrecursorByRetTimePrcMassRanges.setDouble(1, retTimeStart);
+        queryPrecursorByRetTimePrcMassRanges.setDouble(2, retTimeEnd);
+
+        queryPrecursorByRetTimePrcMassRanges.setDouble(3, massStart);
+        queryPrecursorByRetTimePrcMassRanges.setDouble(4, massEnd);
+
+        queryPrecursorByRetTimePrcMassRanges.setInt(5, chargeState);
+
+
+        ResultSet rs = queryPrecursorByRetTimePrcMassRanges.executeQuery();
+
+        int id = -1;
+        rs.next();
+        id = rs.getInt(1);
+        if(id!=-1)
+        {
+            return queryPrecursorID(id);
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+
+    public TimstofQueryResult queryAndSumByRetTimeMassRanges(double retTime, double retTimeTol, double mass, double ppmTol, int chargeState) throws SQLException {
+        TimstofQueryResult queryResult = queryByRetTimePrcMassRanges(retTime, retTimeTol, mass, ppmTol, chargeState);
+        if(queryResult != null )
+            queryResult.sumPeaks();
+        return queryResult;
+    }
+
 
     public TimstofQueryResult queryAndSumPrecursor(int id) throws SQLException {
         TimstofQueryResult queryResult = queryPrecursorID(id);
@@ -230,12 +279,21 @@ public class TimsTOFXICDB implements Closeable {
 
     public static void main(String [] args) throws SQLException, IOException {
         String path = args[0];
-        String ms2path = args[1];
-        int id = Integer.parseInt(args[2]);
-        TimsTOFIndex index = new TimsTOFIndex(ms2path);
-        int precursorId = index.getPrecursorID(id);
+        //String ms2path = args[1];
+        //int id = Integer.parseInt(args[2]);
+        double prcMass = Double.parseDouble(args[1]);
+        double retTime = Double.parseDouble(args[2]);
+        int cs = Integer.parseInt(args[3]);
+        //TimsTOFIndex index = new TimsTOFIndex(ms2path);
+        //int precursorId = index.getPrecursorID(id);
         TimsTOFXICDB timsTOFXICDB = new TimsTOFXICDB(path);
-        List<Pair< Double,Double>> resutlt = timsTOFXICDB.queryAndSumPrecursor(precursorId).summedList;
+        TimstofQueryResult result =timsTOFXICDB.queryAndSumByRetTimeMassRanges(retTime, 30.0, prcMass, 20, cs);
+        if(result== null)
+        {
+            System.out.println("no peak found!");
+            return;
+        }
+        List<Pair< Double,Double>> resutlt =result.summedList;
         TDoubleArrayList xarrayList = new TDoubleArrayList();
         TDoubleArrayList yarrayList = new TDoubleArrayList();
         double max = Double.MIN_VALUE;
